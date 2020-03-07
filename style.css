@@ -1,0 +1,187 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+.statisticsForm{   
+    box-sizing: border-box;
+    border: 1px solid black;
+    margin-left: 100px;
+    margin-top: 50px;
+    background: linear-gradient(rgb(252, 252, 252), rgb(187, 187, 187));  
+      padding:20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 20px;
+    z-index: 2;
+
+}
+
+
+.statisticsForm > div{
+    background-color: #f1f1f1;
+    padding: 20px;
+    margin-bottom: 20px;
+    display:flex;
+    border: 1.5px solid black;
+    border-radius: 10px;
+    box-shadow: 1px 2px 5px;
+}
+
+.statisticsForm > h1{
+    text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    padding: 0px;
+    margin-top: 0px;
+    z-index: 0;
+}
+
+.statisticsForm > div:hover{
+    background-color: #f1f1f16b;
+    padding: 20px;
+    margin-bottom: 20px;
+    display:flex;
+    border: 1.5px solid black;
+    border-radius: 10px;
+    box-shadow: 1px 2px 5px;
+
+}
+
+
+.dateForm{
+    flex:1;
+    background-color: #f1f1f16b;
+    padding: 20px;
+    margin-bottom: 20px;
+    display:flex;
+    border: 1.5px solid black;
+    border-radius: 10px;
+    box-shadow: 1px 2px 5px;
+    z-index: 2;
+
+}
+
+.nrTerrForm{
+    flex:1;
+}
+
+.nrDeathsForm{
+    flex:1;
+}
+
+.nrWoundedForm{
+    flex:1;
+}
+
+.successForm{
+    flex:1;
+}
+
+.knownForm{
+    flex:1;
+}
+
+.damageForm{
+    flex:1;
+}
+
+.attackTypeForm{
+    flex:1;
+}
+
+.targetTypeForm{
+    flex:1;
+}
+
+.weaponTypeForm{
+    flex:1;
+}
+
+.regionForm{
+    flex:1;
+}
+
+.countryForm{
+    flex:1;
+}
+
+
+
+.firstRow1{
+
+}
+
+.firstRow2{
+}
+
+.secondRow{
+}
+
+.thirdRow{
+}
+
+.fourthRow{
+}
+
+#dateInput{
+    height: 20px;
+
+}
+
+#nrWoundedInput{
+    width:30px;
+    height: 20px;
+
+}
+
+#nrTerrInput{
+    width:30px;
+    height: 20px;
+}
+
+#nrDeathsInput{
+    width:30px;
+    height: 20px;
+}
+
+.videoContainer{
+   /* margin-left: 100px;*/
+    position: absolute;
+    opacity: 25%;
+    overflow:hidden;
+}
+
+.submitForm{
+    display: flex;
+    margin-top: 50px;
+}
+
+#submitButton{
+    flex:1;
+    height:50px;
+    border: 1.5px solid black;
+    border-radius: 10px;
+    box-shadow: 1px 2px 5px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    z-index: 2;
+
+}
+
+#submitButton:hover{
+    flex:1;
+    height:50px;
+
+    border: 1.5px solid black;
+    border-radius: 10px;
+    box-shadow: 2px 3px 5px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #dfdfdf;
+
+    cursor: pointer;
+}
+
