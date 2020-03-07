@@ -1,65 +1,221 @@
-generateWeapons()
-generateAttacks()
-generateTargets()
-generateRegions()
-generateCountries()
+// Main js file for the project
 
-function generateWeapons(){
+let mainContent; // when the page is loades, this will get a reference to the HTML element containing the main content of the web app
+
+// ------------------------------------------------------ Templates ----------------------------------------------------------
+
+let homePage = `
+    <section id="home">
+        Home Page
+    </section>
+`;
+
+let statisticsPage = `
+<div class='statisticsForm'>
+    <!-- <section class='videoContainer'>
+     <video autoplay muted loop id="myVideo">
+         <source src="soldiers.mp4" type="video/mp4">
+     </video>
+ </section>-->
+
+    <h1>Terrorism record search</h1>
+
+    <div class='firstRow1'>
+        <div class='dateForm'>
+            <label for='dateInput'><b>Date Interval:</b></label>
+            <input type='date' id='dateInput'></input>
+            <span>-</span>
+            <input type='date' id='dateInput'></input>
+        </div>
+    </div>
+    <div class='firstRow2'>
+        <div class='nrTerrForm'>
+            <label for='nrTerrInput'><b>Number of terrorists:</b></label>
+            <input type='text' id='nrTerrInput'></input>
+            <span>-</span>
+            <input type='text' id='nrTerrInput'></input>
+        </div>
+        <div class='nrDeathsForm'>
+            <label for='nrDeathsInput'><b>Number of deaths:</b></label>
+            <input type='text' id='nrDeathsInput'></input>
+            <span>-</span>
+            <input type='text' id='nrDeathsInput'></input>
+        </div>
+        <div class='nrWoundedForm'>
+            <label for='nrWoundedInput'><b>Number of wounded:</b></label>
+            <input type='text' id='nrWoundedInput'></input>
+            <span>-</span>
+            <input type='text' id='nrWoundedInput'></input>
+        </div>
+    </div>
+
+    <div class='secondRow'>
+        <div class='attackTypeForm'>
+            <!-- Attack list is generated in actions.js-->
+        </div>
+        <div class='targetTypeForm'>
+            <!-- Target list is generated in actions.js-->
+        </div>
+        <div class='weaponTypeForm'>
+            <!-- Weapon list is generated in actions.js-->
+        </div>
+        <div class='damageForm'>
+            <label><b>Amount of damage made</b></label>
+            <br>
+            <input type='radio' id='minorDamage' name='amountDamage'>Minor damages</input>
+            <br>
+            <input type='radio' id='majorDamage' name='amountDamage'>Major damages</input>
+            <br>
+            <input type='radio' id='catastrophicDamage' name='amountDamage'>Catastrophic damages</input>
+            <br>
+            <input type='radio' id='unknownDamage' name='amountDamage'>Unknown damages</input>
+        </div>
+    </div>
+
+    <div class='thirdRow'>
+        <div class='regionForm'>
+            <!-- Region list is generated in actions.js-->
+        </div>
+        <div class='countryForm'>
+            <!-- Country list is generated in actions.js-->
+        </div>
+    </div>
+
+    <div class='fourthRow'>
+        <div class='successForm'>
+            <label for='succesInput'><b>Successfull attack</b></label>
+            <input type='checkbox' id='succesInput'></input>
+        </div>
+        <div class='knownForm'>
+            <label for='knownInput'><b>It is known who attacked</b></label>
+            <input type='checkbox' id='knownInput'></input>
+        </div>
+    </div>
+    <section class='submitForm'>
+        <input type='button' value='Submit' id='submitButton'> </input>
+    </section>
+</div>
+`;
+
+let mapPage = `
+    <section id="map">
+        Map Page
+    </section>
+`;
+
+// ---------------------------------------------------- Routing -------------------------------------------------------------
+// The routing system was implementing having the following tutorial as a starting point 
+// https://medium.com/@bryanmanuele/how-i-implemented-my-own-spa-routing-system-in-vanilla-js-49942e3c4573
+
+class routeInfo {
+    constructor(template, callback) {
+        this.template = template;
+        this.callback = callback;
+    }
+}
+
+let routes = {}
+
+routes['/'] = new routeInfo(homePage, () => {
+    console.log('Home page entered');
+});
+
+routes['/statistics'] = new routeInfo(statisticsPage, () => {
+    generateWeapons()
+    generateAttacks()
+    generateTargets()
+    generateRegions()
+    generateCountries()    
+});
+
+routes['/map'] = new routeInfo(mapPage, () => {
+    console.log('Map page entered');
+});
+
+function updateMainContent(pathName) {
+    mainContent.innerHTML = routes[pathName].template;
+    routes[pathName].callback();
+}
+
+function navigate(pathName) {
+    window.history.pushState({},
+        pathName,
+        window.location.origin + pathName
+    );
+    updateMainContent(pathName);
+}
+
+function setContent() {
+    mainContent = document.querySelector('#content');
+    if (!(window.location.pathname in routes)) {
+        window.location.pathname = '/';
+    }
+    updateMainContent(window.location.pathname);
+}
+
+window.onpopstate = () => {
+    updateMainContent(window.location.pathname);
+}
+
+document.addEventListener('DOMContentLoaded', setContent);
+
+// ----------------------------------------------- Statistics form ----------------------------------------------------------
+
+function generateWeapons() {
     let weaponForm = document.querySelector('.weaponTypeForm')
     let weaponFormTitle = document.createElement('label')
     let weaponList = ['Weapon1', 'Weapon2', 'Weapon3', 'Weapon4', 'Weapon5', 'Weapon6', 'Weapon7', 'Weapon8', 'Weapon9']
     weaponFormTitle.innerHTML = `<b>Weapon Type</b>`
     weaponFormTitle.innerHTML = weaponFormTitle.innerHTML + `<br>`
     let index = 0;
-    for(index=0; index<weaponList.length; index++)
+    for (index = 0; index < weaponList.length; index++)
         weaponFormTitle.innerHTML = weaponFormTitle.innerHTML + ` <input type='radio'>${weaponList[index]}</input> <br>`
     weaponForm.appendChild(weaponFormTitle)
 }
 
-
-function generateAttacks(){
+function generateAttacks() {
     let weaponForm = document.querySelector('.attackTypeForm')
     let weaponFormTitle = document.createElement('label')
-    let weaponList = ['Attack1', 'Attack2', 'Attack3', 'Attack4', 'Attack5', 'Attack6', 'Attack7','Attack8','Attack9']
+    let weaponList = ['Attack1', 'Attack2', 'Attack3', 'Attack4', 'Attack5', 'Attack6', 'Attack7', 'Attack8', 'Attack9']
     weaponFormTitle.innerHTML = `<b>Attack Type</b>`
     weaponFormTitle.innerHTML = weaponFormTitle.innerHTML + `<br>`
     let index = 0;
-    for(index=0; index<weaponList.length; index++)
+    for (index = 0; index < weaponList.length; index++)
         weaponFormTitle.innerHTML = weaponFormTitle.innerHTML + ` <input type='radio'>${weaponList[index]}</input> <br>`
     weaponForm.appendChild(weaponFormTitle)
 }
 
-
-function generateTargets(){
+function generateTargets() {
     let weaponForm = document.querySelector('.targetTypeForm')
     let weaponFormTitle = document.createElement('label')
-    let weaponList = ['Target1', 'Target2', 'Target3', 'Target4', 'Target5', 'Target6','Target7','Target8','Target9']
+    let weaponList = ['Target1', 'Target2', 'Target3', 'Target4', 'Target5', 'Target6', 'Target7', 'Target8', 'Target9']
     weaponFormTitle.innerHTML = `<b>Who was the target</b>`
     weaponFormTitle.innerHTML = weaponFormTitle.innerHTML + `<br>`
     let index = 0;
-    for(index=0; index<weaponList.length; index++)
+    for (index = 0; index < weaponList.length; index++)
         weaponFormTitle.innerHTML = weaponFormTitle.innerHTML + ` <input type='radio'>${weaponList[index]}</input> <br>`
     weaponForm.appendChild(weaponFormTitle)
 }
 
-function generateRegions(){
+function generateRegions() {
     let regionForm = document.querySelector('.regionForm')
     let regionFormTitle = document.createElement('label')
     let regionOptionChoose = document.createElement('datalist');
     regionOptionChoose.setAttribute('id', 'allRegions')
     let regionList = ['Central America & Caribbean', 'Eastern Europe', 'Middle East & North Africa', 'North America', 'South America', 'Southeast Asia',
-                        'Sub-Saharan Africa','Western Europe']
+        'Sub-Saharan Africa', 'Western Europe'
+    ]
     regionFormTitle.innerHTML = regionFormTitle.innerHTML + `<b>Region of the attack</b> <br>
                                                             <input list='allRegions'>`
     let index = 0;
-    for(index=0; index<regionList.length; index++)
-      regionOptionChoose.innerHTML = regionOptionChoose.innerHTML + `<option value='${regionList[index]}'>`
+    for (index = 0; index < regionList.length; index++)
+        regionOptionChoose.innerHTML = regionOptionChoose.innerHTML + `<option value='${regionList[index]}'>`
     regionFormTitle.innerHTML = regionFormTitle.innerHTML + '</datalist>'
     regionFormTitle.appendChild(regionOptionChoose)
     regionForm.appendChild(regionFormTitle)
 }
 
-function generateCountries(){
+function generateCountries() {
     let regionForm = document.querySelector('.countryForm')
     let regionFormTitle = document.createElement('label')
     let regionOptionChoose = document.createElement('datalist');
@@ -318,8 +474,8 @@ function generateCountries(){
     regionFormTitle.innerHTML = regionFormTitle.innerHTML + `<b>Country</b> <br>
                                                             <input list='allCountries'>`
     let index = 0;
-    for(index=0; index<regionList.length; index++)
-      regionOptionChoose.innerHTML = regionOptionChoose.innerHTML + `<option value='${regionList[index]}'>`
+    for (index = 0; index < regionList.length; index++)
+        regionOptionChoose.innerHTML = regionOptionChoose.innerHTML + `<option value='${regionList[index]}'>`
     regionFormTitle.innerHTML = regionFormTitle.innerHTML + '</datalist>'
     regionFormTitle.appendChild(regionOptionChoose)
     regionForm.appendChild(regionFormTitle)

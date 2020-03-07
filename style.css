@@ -1,35 +1,155 @@
-*{
+/************** GENERAL *****************/
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
+    font-family: 'Roboto', sans-serif;
+
     overflow-x: hidden;
 }
 
-.statisticsForm{   
-    box-sizing: border-box;
-    border: 1px solid black;
-    margin-left: 100px;
-    margin-top: 50px;
-    background: linear-gradient(rgb(252, 252, 252), rgb(187, 187, 187));  
-      padding:20px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 20px;
-    z-index: 2;
+/************** Main components positioning ***************/
 
+body {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 100%;
+    height: 100vh;
 }
 
+aside {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 
-.statisticsForm > div{
+    width: 160px;
+    height: 100%;
+
+    color: #EEE;
+    background-color: #222831;
+}
+
+aside .title {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 60px;
+
+    font-size: 40px;
+    font-weight: 500;
+}
+
+aside .options {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 100%;
+    height: calc(100% - 60px);
+}
+
+aside .options .option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    height: 60px;
+
+    font-size: 24px;
+}
+
+aside .options .option .icon {
+    width: 14%;
+    margin-left: 6px;
+}
+
+aside .options .option .text {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    width: 82%;
+    margin-right: 6px;
+}
+
+aside .options .option:hover {
+
+    cursor: pointer;
+    background-color: #343d4b;
+}
+
+.main-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: calc(100% - 160px);
+    height: 100%;
+}
+
+.main-wrapper header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+
+    width: 100%;
+    height: 60px;
+
+    color: #EEE;
+    background-color: #393e46;
+}
+
+.main-wrapper main {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 100%;
+    height: calc(100% - 60px);
+
+    background-color: #EEEEEE;
+}
+
+/************** Statistics form ***************/
+
+.statisticsForm {
+    width: 100%;
+    height: 100%;
+
+    box-sizing: border-box;
+    border: 1px solid black;
+    background: linear-gradient(rgb(252, 252, 252), rgb(187, 187, 187));
+    padding: 20px;
+    font-size: 20px;
+    z-index: 2;
+}
+
+.statisticsForm>div {
     background-color: #f1f1f1;
     padding: 20px;
     margin-bottom: 20px;
-    display:flex;
+    display: flex;
     border: 1.5px solid black;
     border-radius: 10px;
     box-shadow: 1px 2px 5px;
 }
 
-.statisticsForm > h1{
+.statisticsForm>h1 {
     text-align: center;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     padding: 0px;
@@ -37,11 +157,11 @@
     z-index: 0;
 }
 
-.statisticsForm > div:hover{
+.statisticsForm>div:hover {
     background-color: #f1f1f16b;
     padding: 20px;
     margin-bottom: 20px;
-    display:flex;
+    display: flex;
     border: 1.5px solid black;
     border-radius: 10px;
     box-shadow: 1px 2px 5px;
@@ -49,12 +169,12 @@
 }
 
 
-.dateForm{
-    flex:1;
+.dateForm {
+    flex: 1;
     background-color: #f1f1f16b;
     padding: 20px;
     margin-bottom: 20px;
-    display:flex;
+    display: flex;
     border: 1.5px solid black;
     border-radius: 10px;
     box-shadow: 1px 2px 5px;
@@ -62,104 +182,98 @@
 
 }
 
-.nrTerrForm{
-    flex:1;
+.nrTerrForm {
+    flex: 1;
 }
 
-.nrDeathsForm{
-    flex:1;
+.nrDeathsForm {
+    flex: 1;
 }
 
-.nrWoundedForm{
-    flex:1;
+.nrWoundedForm {
+    flex: 1;
 }
 
-.successForm{
-    flex:1;
+.successForm {
+    flex: 1;
 }
 
-.knownForm{
-    flex:1;
+.knownForm {
+    flex: 1;
 }
 
-.damageForm{
-    flex:1;
+.damageForm {
+    flex: 1;
 }
 
-.attackTypeForm{
-    flex:1;
+.attackTypeForm {
+    flex: 1;
 }
 
-.targetTypeForm{
-    flex:1;
+.targetTypeForm {
+    flex: 1;
 }
 
-.weaponTypeForm{
-    flex:1;
+.weaponTypeForm {
+    flex: 1;
 }
 
-.regionForm{
-    flex:1;
+.regionForm {
+    flex: 1;
 }
 
-.countryForm{
-    flex:1;
+.countryForm {
+    flex: 1;
 }
 
 
 
-.firstRow1{
+.firstRow1 {}
 
-}
+.firstRow2 {}
 
-.firstRow2{
-}
+.secondRow {}
 
-.secondRow{
-}
+.thirdRow {}
 
-.thirdRow{
-}
+.fourthRow {}
 
-.fourthRow{
-}
-
-#dateInput{
+#dateInput {
     height: 20px;
 
 }
 
-#nrWoundedInput{
-    width:30px;
+#nrWoundedInput {
+    width: 30px;
     height: 20px;
 
 }
 
-#nrTerrInput{
-    width:30px;
+#nrTerrInput {
+    width: 30px;
     height: 20px;
 }
 
-#nrDeathsInput{
-    width:30px;
+#nrDeathsInput {
+    width: 30px;
     height: 20px;
 }
 
-.videoContainer{
-   /* margin-left: 100px;*/
+.videoContainer {
+    /* margin-left: 100px;*/
     position: absolute;
     opacity: 25%;
-    overflow:hidden;
+    overflow: hidden;
 }
 
-.submitForm{
+.submitForm {
     display: flex;
     margin-top: 50px;
 }
 
-#submitButton{
-    flex:1;
-    height:50px;
+#submitButton {
+    flex: 1;
+    height: 50px;
     border: 1.5px solid black;
     border-radius: 10px;
     box-shadow: 1px 2px 5px;
@@ -170,9 +284,9 @@
 
 }
 
-#submitButton:hover{
-    flex:1;
-    height:50px;
+#submitButton:hover {
+    flex: 1;
+    height: 50px;
 
     border: 1.5px solid black;
     border-radius: 10px;
@@ -184,4 +298,3 @@
 
     cursor: pointer;
 }
-
