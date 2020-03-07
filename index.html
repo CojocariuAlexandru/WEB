@@ -1,11 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TeVi</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+
 <body>
-    Test
+    <aside>
+        <div class="title">
+            TeVi
+        </div>
+        <div class="options">
+            <div class="option" onclick="navigate('/home')">
+                <span class="icon">
+                    <i class="fa fa-home"></i>
+                </span>
+                <span class="text">
+                    Home
+                </span>
+            </div>
+            <div class="option" onclick="navigate('/statistics')">
+                <span class="icon">
+                    <i class="fa fa-pie-chart"></i>
+                </span>
+                <span class="text">
+                    Statistics
+                </span>
+            </div>
+            <div class="option" onclick="navigate('/map')">
+                <span class="icon">
+                    <i class="fa fa-map-marker"></i>
+                </span>
+                <span class="text">
+                    Map
+                </span>
+            </div>
+        </div>
+    </aside>
+
+    <div class="main-wrapper">
+        <header>
+            Username
+        </header>
+
+        <main id="content">
+
+        </main>
+    </div>
+
+    <script type="text/javascript" src="app.js"></script>
 </body>
 </html>
