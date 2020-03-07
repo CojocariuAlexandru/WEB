@@ -2,6 +2,24 @@
 
 let mainContent; // when the page is loades, this will get a reference to the HTML element containing the main content of the web app
 
+// ------------------------------------------------------ Application models -------------------------------------------------
+
+class Attack {
+    constructor(id, latitude, langitude) {
+        this.id = id;
+        this.latitude = latitude;
+        this.langitude = langitude;
+    }
+}
+
+// ------------------------------------------------------ Fake database ------------------------------------------------------
+
+let attacks = [];
+
+attacks.push(new Attack(1, 18.456792, -69.9512));
+attacks.push(new Attack(2, 19.37189, -99.0866));
+attacks.push(new Attack(3, 15.4786, -120.5997));
+
 // ------------------------------------------------------ Templates ----------------------------------------------------------
 
 let homePage = `
@@ -98,19 +116,37 @@ let statisticsPage = `
 `;
 
 let mapPage = `
-    <section id="map">
-        Map Page
-    </section>
+    <div id="mapDiv"></div>
 `;
+
+let attacksPage = `
+    <div>
+        <input type="text" id="searchAttackButton">
+        <button onclick="searchAttack()">Search</button>
+    </div>
+`;
+
+var currentAttack;
+let attackPage;
+
+function populateAttackPage() {
+    attackPage =
+        `<div>
+    ${currentAttack.latitude}, ${currentAttack.longitude}
+    </div>
+    `;
+}
 
 // ---------------------------------------------------- Routing -------------------------------------------------------------
 // The routing system was implementing having the following tutorial as a starting point 
 // https://medium.com/@bryanmanuele/how-i-implemented-my-own-spa-routing-system-in-vanilla-js-49942e3c4573
 
 class routeInfo {
-    constructor(template, callback) {
+    constructor(template, callback, parameter, parameterCallback) {
         this.template = template;
         this.callback = callback;
+        this.parameter = parameter;
+        this.parameterCallback = parameterCallback;
     }
 }
 
@@ -125,16 +161,53 @@ routes['/statistics'] = new routeInfo(statisticsPage, () => {
     generateAttacks()
     generateTargets()
     generateRegions()
-    generateCountries()    
+    generateCountries()
 });
 
+let map;
+
 routes['/map'] = new routeInfo(mapPage, () => {
-    console.log('Map page entered');
+    let el = document.querySelector("#mapDiv");
+    map = new google.maps.Map(el, {
+        center: {
+            lat: -34.397,
+            lng: 150.644
+        },
+        zoom: 8
+    });
+});
+
+routes['/attacks'] = new routeInfo(attacksPage, () => {
+    console.log('Attacks page entered');
+}, ':id', (id) => {
+    let found = false;
+    for (let i = 0; i < attacks.length; ++i) {
+        if (attacks[i].id == id) {
+            console.log(attacks[i]);
+            currentAttack = attacks[i];
+            found = true;
+        }
+    }
+    if (found) {
+        populateAttackPage();
+    }
+    return attackPage;
 });
 
 function updateMainContent(pathName) {
-    mainContent.innerHTML = routes[pathName].template;
-    routes[pathName].callback();
+    if (pathName.lastIndexOf('/') == -1 || pathName.lastIndexOf('/') == 0) {
+        mainContent.innerHTML = routes[pathName].template;
+        routes[pathName].callback();
+    } else {
+        param = pathName.substr(pathName.lastIndexOf('/') + 1);
+        path = pathName.substr(0, pathName.lastIndexOf('/'));
+
+        if (path in routes) {
+            mainContent.innerHTML = routes[path].parameterCallback(param);
+        } else {
+            updateMainContent('/');
+        }
+    }
 }
 
 function navigate(pathName) {
@@ -479,4 +552,11 @@ function generateCountries() {
     regionFormTitle.innerHTML = regionFormTitle.innerHTML + '</datalist>'
     regionFormTitle.appendChild(regionOptionChoose)
     regionForm.appendChild(regionFormTitle)
+}
+
+// -------------------------------------------------- Attacks page --------------------------------------------------
+
+function searchAttack() {
+    let attackInput = document.querySelector('#searchAttackButton');
+    navigate('/attacks/'+attackInput.value);
 }
