@@ -1,0 +1,281 @@
+
+  *{
+    font-size: 10px;
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h2{
+    display: block;
+    font-size: 30px;
+    margin-bottom: 50px;
+}
+h3{
+    font-size: 20px;
+}
+span{
+    margin:20px;
+}
+ul{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+
+p{
+    font-size: 16px;
+    text-align: justify;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+
+body{
+    display: block;
+
+    margin-top: 60px;
+}
+
+.grid-container {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas: "login login login art art art" "about about about about about about" "col-1 col-1 col-2 col-2 col-3 col-3" "links links links links contact contact";
+  }
+  
+  .login { grid-area: login; }
+  
+  .art { grid-area: art; }
+  
+  .about { grid-area: about; }
+  
+  .col-1 { grid-area: col-1; }
+  
+  .col-2 { grid-area: col-2; }
+  
+  .col-3 { grid-area: col-3; }
+  
+  .links { grid-area: links; }
+  
+  .contact { grid-area: contact; }
+
+
+.nav{
+    display: flex;
+    position: fixed;
+    top:0px;
+    left: 0px;
+    min-height: 60px;
+    background-color:#222831;
+    width: 100%;
+    z-index: 100;
+}
+
+header{
+    position: relative;
+    display: block;
+
+    
+
+}
+header h3{
+    display: inline;
+    font-size: 30px;
+    padding: 10px 10px ;
+    margin-right: auto;
+}
+
+header ul{
+    list-style: none;
+    display:flex;
+    justify-content: flex-end;
+}
+
+
+
+header ul li a{
+    display: block;
+    font-size: 20px;
+    line-height: 1;
+    padding: 20px 25px ;
+    text-decoration: none;
+    color: black;
+    background-color: transparent;
+    transition:color .3s linear,
+        background-color .3s linear;
+    
+}
+
+header ul li a:visited{
+    color: black
+}
+header ul li a:hover{
+    color: white;
+    background-color: black;
+}
+
+.grid-container > div{
+    display: flex;
+    align-items: center;
+}
+
+/* LOGIN */
+
+.login{
+    height: calc(100vh - 60px);
+    position: relative;
+}
+
+.login .widget{
+    text-align: center;
+    margin: auto auto;
+    min-width: 60%;
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 20px;
+    background-color: rgba(216, 191, 216, 0.315);
+}
+
+.login .widget-login{
+
+}
+
+.login .widget-sign-up{
+    display:none;
+}
+
+.login .widget label{
+    display:block;
+    text-align: left;
+    font-size:18px;
+    margin-top: 20px;
+}
+.login .widget input:not([type='submit']){
+    display:block;
+    background-color:transparent;
+    border-style: none;
+    border-bottom: 1px solid black;
+    padding: 5px;
+    width: 100%;
+
+}
+
+.login .widget input:focus:not([type='submit']){
+    border-bottom: 1px solid white;
+
+}
+.login .widget input[type='submit']{
+    display:block;
+    margin: 20px 0 0 0;
+    background-color:red;
+    padding: 5px;
+    width: 100%;
+    border-style: solid ;
+    border-radius: 5px;
+    font-size: 20px;
+}
+.login .widget input:focus{
+    box-shadow: none;
+    outline-offset: 0;
+    outline:none;
+    outline-color: transparent;
+}
+.login .widget label i{
+    display: inline-block;
+    margin: 5px;
+}
+.login .background{
+    margin:0;
+    height: 100%;
+    width: 200%;
+    z-index: -1;
+    position: absolute;
+    top:0;
+    left:0;
+    background-image: url("img/background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* ART */
+
+.art img{
+    max-width: 80%;
+}
+
+/* ABOUT */
+.grid-container .about{
+    max-height: 100%;
+    display: block;
+}
+.about h2{
+    margin: 50px 50px 20px 40px;
+}
+.about p{
+    padding: 10px 50px;
+}
+
+/* col-1 col-2 col-3*/
+.col-1, .col-2, .col-3{
+    flex-direction: column;
+    margin: 20px;
+}
+.col-1 img, .col-2 img, .col-3 img{
+    max-width: 100%;
+}
+
+.col-1 p, .col-2 p, .col-3 p{
+    padding: 10px;
+}
+
+
+/* FOOTER */
+
+/* LINKS */
+
+.links{
+    background-color: black;
+    color: rgb(73, 70, 70);
+    padding: 30px 50px;
+}
+
+.links ul{
+    margin-top: 10px;
+    list-style: none;
+}
+.links ul a{
+    color:rgb(114, 108, 108);
+    font-size: 16px;
+}
+
+/* CONTACT */
+.grid-container .links, .grid-container .contact{
+    flex-direction: column;
+    align-items: initial;
+}
+
+.contact {
+   
+    position: relative;
+}
+
+.contact h3{
+    padding: 20px 50px;
+}
+.contact i{
+    position: absolute;
+    bottom:30px;
+    left:5px;
+
+}
+.contact ul{
+    margin-left: 40px;
+}
+
+.contact ul li {
+    font-size: 15px;
+}
