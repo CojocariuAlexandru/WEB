@@ -22,7 +22,7 @@ let statisticsPage = `
 
     <div class='firstRow1'>
         <div class='dateForm'>
-            <label for='dateInput'><b>Date Interval:</b></label>
+            <label for='dateInput' id='textDateInterval'><b>Date Interval:</b></label>
             <input type='date' id='dateInput'></input>
             <span>-</span>
             <input type='date' id='dateInput'></input>

@@ -168,17 +168,12 @@ aside .options .option:hover {
 
 
 .dateForm {
-    flex: 1;
-    background-color: #f1f1f16b;
-    padding: 20px;
-    margin-bottom: 20px;
-    display: flex;
-    border: 1.5px solid black;
-    border-radius: 10px;
-    box-shadow: 1px 2px 5px;
-    z-index: 2;
-
+    flex: 1;    
+    margin-left: 10px;
+ 
 }
+
+
 
 .nrTerrForm {
     flex: 1;
@@ -241,20 +236,66 @@ aside .options .option:hover {
 
 }
 
+/*Animation on elements inspired by https://www.w3schools.com/css/css3_animations.asp */
+
+.statisticsForm > div > div > input:hover{
+    animation-name: slightColorChangeInput;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: forwards;
+    cursor: pointer;
+}
+
+.statisticsForm > div > div > label:hover{
+    animation-name: slightColorChange;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: forwards;
+    cursor: pointer;
+}
+
+h1:hover{
+    animation-name: animationHeader;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: forwards;
+}
+
+
+@keyframes slightColorChange{
+    from{color: black;}
+    to{color: gray;}
+}
+
+@keyframes slightColorChangeInput{
+    from{color: black;}
+    to{
+        background-color: rgba(115, 172, 224, 0.2);
+        back
+    }
+}
+@keyframes animationHeader{
+    from{margin-t: 0px;}
+    to{margin-top:8px;}
+}
+
 #nrWoundedInput {
     width: 30px;
     height: 20px;
+    border: 2px solid gray;
+    border-radius: 5px;
 
 }
 
 #nrTerrInput {
     width: 30px;
     height: 20px;
+    border: 2px solid gray;
+    border-radius: 5px;
 }
 
 #nrDeathsInput {
     width: 30px;
     height: 20px;
+    border: 2px solid gray;
+    border-radius: 5px;
 }
 
 .videoContainer {
@@ -267,6 +308,7 @@ aside .options .option:hover {
 .submitForm {
     display: flex;
     margin-top: 50px;
+    margin-bottom: 20px;
 }
 
 #submitButton {
@@ -294,4 +336,9 @@ aside .options .option:hover {
     background-color: #dfdfdf;
 
     cursor: pointer;
+}
+
+#dateInput{
+    border: 2px solid gray;
+    border-radius: 5px;
 }
