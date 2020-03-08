@@ -220,9 +220,6 @@ function navigate(pathName) {
 
 function setContent() {
     mainContent = document.querySelector('#content');
-    if (!(window.location.pathname in routes)) {
-        window.location.pathname = '/';
-    }
     updateMainContent(window.location.pathname);
 }
 
