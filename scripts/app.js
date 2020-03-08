@@ -34,13 +34,13 @@ let statisticsPage = `
      <video autoplay muted loop id="myVideo">
          <source src="soldiers.mp4" type="video/mp4">
      </video>
- </section>-->
+ </section> -->
 
     <h1>Terrorism record search</h1>
 
     <div class='firstRow1'>
         <div class='dateForm'>
-            <label for='dateInput'><b>Date Interval:</b></label>
+            <label for='dateInput' id='textDateInterval'><b>Date Interval:</b></label>
             <input type='date' id='dateInput'></input>
             <span>-</span>
             <input type='date' id='dateInput'></input>
