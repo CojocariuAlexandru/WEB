@@ -16,7 +16,7 @@ let statisticsPage = `
      <video autoplay muted loop id="myVideo">
          <source src="soldiers.mp4" type="video/mp4">
      </video>
- </section>-->
+ </section> -->
 
     <h1>Terrorism record search</h1>
 
