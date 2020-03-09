@@ -1,6 +1,7 @@
 // Main js file for the project
 
-let mainContent; // when the page is loades, this will get a reference to the HTML element containing the main content of the web app
+let rootForContent; // when the page is loaded, this will get a reference to the HTML element containing the root of the web app
+let mainContent; // when the page is loaded, this will get a reference to the HTML element containing the main content of the web app
 
 // ------------------------------------------------------ Application models -------------------------------------------------
 
@@ -261,16 +262,38 @@ function navigate(pathName) {
     updateMainContent(pathName);
 }
 
-function setContent() {
-    mainContent = document.querySelector('#content');
-    updateMainContent(window.location.pathname);
+function initPage() {
+    rootForContent = document.querySelector('#root');
+    if (userIsLoggedIn()){
+        setWebAppTemplateAsSite();
+    } else {
+        setPresentationTemplateAsSite();
+    }
+    //updateMainContent(window.location.pathname);
 }
 
 window.onpopstate = () => {
     updateMainContent(window.location.pathname);
 }
 
-document.addEventListener('DOMContentLoaded', setContent);
+document.addEventListener('DOMContentLoaded', initPage);
+
+function userLogin(){
+    setWebAppTemplateAsSite();
+}
+
+function userIsLoggedIn(){
+    return false;
+}
+
+function setPresentationTemplateAsSite(){
+    rootForContent.innerHTML = presentationSiteTemplate;
+}
+
+function setWebAppTemplateAsSite(){
+    rootForContent.innerHTML = webAppTemplate;
+    mainContent = document.querySelector('#content');
+}
 
 // ----------------------------------------------- Statistics form ----------------------------------------------------------
 
@@ -600,3 +623,184 @@ function searchAttack() {
     let attackInput = document.querySelector('#searchAttackButton');
     navigate('/attacks/' + attackInput.value);
 }
+
+
+//***************************************************Pages Templates*******************************************************/
+
+let presentationSiteTemplate = `
+<header>
+    <div class="nav">
+        <img src="img/icon.png" alt="icon">
+        <h3>
+            TeVi
+        </h3>
+        <ul>
+            <li><a href="">Login</a></li>
+            <li><a href="">SignUp</a></li>
+            <li><a href="">About</a></li>
+            <li><a href="">Contact</a></li>
+        </ul>
+    </div>
+</header>
+
+<div class="grid-container">
+    <div class="login">
+        <span class="background"></span>>
+        <div class="widget-login widget">
+
+            <h2 class="title">Login</h2>
+
+            <form>
+                <label for="username"><i class="fa fa-user-circle-o" style="font-size:24px"></i>Username:</label>
+                <input type="text" id="username" name="username">
+                <label for="pwd"><i class="fa fa-eye-slash" style="font-size:24px"></i>Password:</label>
+                <input type="password" id="pwd" name="pwd">
+                <input type="submit" value="Sign In" (click)="userLogin()">
+            </form>
+            <p>Not a member?</p><a href="">SignUp now</a>
+
+        </div>
+        <div class="widget-sign-up widget">
+
+            <h2 class="title">Sign Up</h2>
+
+            <form>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username">
+                <label for="pwd">Password:</label>
+                <input type="password" id="pwd" name="pwd">
+                <label for="rpwd">Password again:</label>
+                <input type="repeatpassword" id="rpwd" name="rpwd">
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+    <div class="art">
+        <!-- <img src="img/img2.svg" alt="imagine">  -->
+    </div>
+    <div class="about">
+        <h2 class="title">
+                Abous us
+            </h2>
+        <div class='about-body'>
+            <p>
+                <span></span> We devised a Web application for visualizing and creating statistics based on terrorist attacks in the last 50 years. It features a registration system for users, statistics generated based on custom options and a map visualizer. The app uses and processes hundred of thousands of terrorist attack records.
+            </p>
+            <p> <span></span>Having the records of terrorist attacks requested, the application is able to generate all kinds of statistics, from piecharts showing the most preferate countries as targets for attacks, to histograms and representations that can depict the success rate of the attack, the amplitude of damages made and so on. The user can get custom statistics based on a completion of a form. Based on the given input, by the user, the application is able to make specific queries to the database.
+            </p>
+        </div>
+
+    </div>
+    <div class="col-1">
+        <img src="img/image.png" alt="">
+        <p><span></span> These powerful illustrations can be really handy for understanding any patterns involving terrorist attacks, and can be featured on thematic presentations.
+        </p>
+    </div>
+    <div class="col-2">
+        <img src="img/image.png" alt="">
+        <p><span></span>Another feature is the world map, modified such that it illustrates the kind of attacks requested by the user. The exact locations of the attacks will be pin-pointed based on this geographic coordinates.
+        </p>
+
+    </div>
+    <div class="col-3">
+        <img src="img/image.png" alt="">
+        <p><span></span> Any graphic element generated (map or statistics) can be externally exported to the formats: png, jpg. The attacks with all the information included can be exported in csv format.
+        </p>
+
+    </div>
+
+    <div class="us">
+        <h2 class="title">
+                Abous us
+            </h2>
+        <div class='us-body'>
+            <p>
+                <span></span> We devised a Web application for visualizing and creating statistics based on terrorist attacks in the last 50 years. It features a registration system for users, statistics generated based on custom options and a map visualizer. The app uses and processes hundred of thousands of terrorist attack records.
+            </p>
+        </div>
+
+    </div>
+    <div class="profil1">
+        <span class="background1"></span>
+        <img src="img/image.png" alt="">
+        <p><span></span>What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an u</p>
+    </div>
+    <div class="profil2">
+        <img src="img/image.png" alt="">
+        <p><span></span>What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an u</p>
+
+    </div>
+    <div class="profil3">
+        <img src="img/image.png" alt="">
+        <p><span></span>What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an u</p>
+
+    </div>
+
+    <div class="links">
+        <h3>Links:</h3>
+        <ul>
+            <li><a href="">Data base</a></li>
+            <li><a href="">dwadwa</a></li>
+            <li><a href="">dwadwa</a></li>
+        </ul>
+    </div>
+    <div class="contact">
+        <h3>Contact:</h3>
+        <i class="fa fa-graduation-cap" style="font-size:24px"></i>
+        <ul>
+            <li>ramona.albert@info.uaic.ro</li>
+            <li>ramona.albert@info.uaic.ro</li>
+            <li>ramona.albert@info.uaic.ro</li>
+        </ul>
+    </div>
+</div>
+`;
+
+let webAppTemplate = `
+<aside>
+    <div class="title">
+        TeVi
+    </div>
+    <div class="options">
+        <div class="option" onclick="navigate('/home')">
+            <span class="icon">
+                    <i class="fa fa-home"></i>
+                </span>
+            <span class="text">
+                    Home
+                </span>
+        </div>
+        <div class="option" onclick="navigate('/statistics')">
+            <span class="icon">
+                    <i class="fa fa-pie-chart"></i>
+                </span>
+            <span class="text">
+                    Statistics
+                </span>
+        </div>
+        <div class="option" onclick="navigate('/map')">
+            <span class="icon">
+                    <i class="fa fa-map-marker"></i>
+                </span>
+            <span class="text">
+                    Map
+                </span>
+        </div>
+        <div class="option" onclick="navigate('/attacks')">
+            <span class="icon">
+                    <i class="fa fa-fighter-jet"></i>
+                </span>
+            <span class="text">
+                    Attacks
+                </span>
+        </div>
+    </div>
+</aside>
+
+<div class="main-wrapper">
+    <header id="usernameContainer">
+    </header>
+    <main id="content">
+    </main>
+</div>
+`;

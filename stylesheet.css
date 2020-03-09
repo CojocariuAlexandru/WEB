@@ -1,0 +1,416 @@
+
+  *{
+    font-size: 10px;
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h2{
+    display: block;
+    font-size: 30px;
+    margin-bottom: 50px;
+}
+h3{
+    font-size: 20px;
+}
+span{
+    margin:20px;
+}
+ul{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+
+p{
+    font-size: 16px;
+    text-align: justify;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+
+body{
+    display: block;
+    background-color: #eeeeee;
+    margin-top: 60px;
+}
+
+.grid-container {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto auto auto auto;
+    grid-template-areas: "login login login art art art" 
+    "about about about about about about" 
+    "col-1 col-1 col-2 col-2 col-3 col-3" 
+    "us us us us us us"
+    "profil1 profil1 profil2 profil2 profil3 profil3"
+    "links links links links contact contact";
+  }
+  
+  .login { grid-area: login; }
+  
+  .art { grid-area: art; }
+  
+  .about { grid-area: about; }
+  
+  .col-1 { grid-area: col-1; }
+  
+  .col-2 { grid-area: col-2; }
+  
+  .col-3 { grid-area: col-3; }
+
+  .us {grid-area: us;}
+
+  .profil1 {grid-area: profil1;}
+
+  .profil2 {grid-area: profil2;}
+
+  .profil3 {grid-area: profil3;}
+  
+  .links { grid-area: links; }
+  
+  .contact { grid-area: contact; }
+
+
+.nav{
+    display: flex;
+    position: fixed;
+    top:0px;
+    left: 0px;
+    min-height: 60px;
+    background-color:#035e63;
+    box-shadow: 2px 5px 15px 10px #035e63;
+    width: 100%;
+    z-index: 100;
+}
+
+.nav img{
+    height: 60px;
+}
+
+header{
+    position: relative;
+    display: block;
+
+    
+
+}
+header h3{
+    display: inline;
+    font-size: 30px;
+    padding: 10px 10px ;
+    margin-top: 10px;
+    margin-right: auto;
+    color: #eeeeee;
+}
+
+header ul{
+    list-style: none;
+    display:flex;
+    justify-content: flex-end;
+}
+
+
+
+header ul li a{
+    display: block;
+    font-size: 20px;
+    line-height: 1;
+    padding: 20px 25px ;
+    text-decoration: none;
+    color: #eeeeee;
+    background-color: transparent;
+    transition:color .3s linear,
+        background-color .3s linear;
+    border-left: dashed #eeeeee 1.5px;
+    
+}
+
+header ul li a:visited{
+    color: #eeeeee
+}
+header ul li a:hover{
+    color: white;
+    background-color: #175053;
+    box-shadow: #175053 2px 0 5px 10px;
+}
+
+.grid-container > div{
+    display: flex;
+    align-items: center;
+}
+
+/* LOGIN */
+
+.login{
+    height: calc(100vh - 60px);
+    position: relative;
+}
+
+.login h2{
+    color: #eeeeee;
+    margin-top: 10px;
+}
+
+.login .widget{
+    text-align: center;
+    margin: auto auto;
+    min-width: 60%;
+    /* border: 2px solid #00adb5; */
+    box-shadow: #044e52 20px 20px 50px 10px;
+    border-radius: 20px;
+    padding: 20px;
+    background-color:#00acb567;
+}
+
+.login .widget-login{
+
+}
+
+.login .widget-sign-up{
+    display:none;
+}
+
+.login .widget label{
+    display:block;
+    text-align: left;
+    font-size:18px;
+    margin-top: 20px;
+    color: #eeeeee;
+}
+.login .widget input:not([type='submit']){
+    display:block;
+    background-color:transparent;
+    border-style: none;
+    border-bottom: 1px solid black;
+    padding: 5px;
+    width: 100%;
+    transition:border-color .6s linear
+
+}
+
+.login .widget input:focus:not([type='submit']){
+    border-bottom: 1px solid white;
+    
+
+}
+
+
+.login .widget input:hover:not([type='submit']){
+    border-bottom: 1px solid white;
+    /* background-color:#0662796e ; */
+
+}
+
+.login .widget input[type='submit']{
+    display:block;
+    margin: 40px auto 20px auto;
+    padding: 5px;
+    width: 50%;
+    border-style: solid;
+    border-radius: 30px;
+    font-size: 20px;
+    transition:color .3s linear,
+    background-color .3s linear;
+    color: white;
+    background-color: #175053;
+    box-shadow: #175053 2px 0 5px 10px;
+    
+}
+.login .widget input:hover[type='submit']{
+    opacity: 0.8;
+    cursor: pointer;
+    background-color: #eeeeee;
+    color:  #175053;
+   
+}
+.login .widget input:focus{
+    box-shadow: none;
+    outline-offset: 0;
+    outline:none;
+    outline-color: transparent;
+}
+.login .widget label i{
+    display: inline-block;
+    margin: 5px;
+}
+.login .widget p{
+    text-align: center;
+    color:#eeeeee;
+    opacity: 0.3;
+    margin:0 auto 0 auto;
+}
+.login .widget a{
+    
+    color: #eeeeee;
+    font-size: 15px;
+}
+
+.login .background{
+    margin:0;
+    height: 100%;
+    width: 200%;
+    z-index: -1;
+    position: absolute;
+    top:0;
+    left:0;
+    background-image: url("img/background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* ART */
+
+.art img{
+    max-width: 80%;
+}
+
+/* ABOUT */
+.grid-container .about, .grid-container .us{
+    max-height: 100%;
+    display: block;
+    background-color: #eeeeee;
+}
+.about h2, .us h2{
+    display: inline-flex;
+    margin: 50px 50px 20px 60px;
+    padding: 0 10px 0 10px;
+    border-radius: 30px;
+    color:#eeeeee;
+    background-color: #175053;
+    box-shadow: #175053 2px 0 5px 10px;
+}
+.about p, .us p{
+    
+    border-style: solid 2px black;
+    margin-bottom: 8px;
+
+}
+.about .about-body, .col-1 p, .col-2 p, .col-3 p,.us .us-body, .profil1 p, .profil2 p, .profil3 p{
+    padding: 10px 10px;
+    margin:30px 20px;
+    border-radius: 10px;
+    background-color:  #1750531e;
+}
+
+.about img, .us img{
+    float: right;
+    max-height: 100%;
+    margin-left: 30px;
+}
+
+/* col-1 col-2 col-3*/
+.col-1, .col-2, .col-3, .profil1, .profil2, .profil3{
+    flex-direction: column;
+    margin: 20px;
+}
+.col-1 img, .col-2 img, .col-3 img, .profil1 img, .profil2 img, .profil3 img {
+    max-width: 100%;
+}
+
+.col-1 p, .col-2 p, .col-3 p, .profil1 p, .profil2 p, .profil3 p{
+    padding: 10px;
+    margin: 20px 0;
+}
+
+/* US */
+.grid-container .us{
+
+}
+.us h2{
+  
+}
+.us p{
+
+}
+.us .us-body, .profil1 p, .profil2 p, .profil3 p{
+
+}
+
+.us img{
+}
+/* Profiles */
+
+.profil1{
+    position: relative;
+}
+.profil1 .background1 {
+    margin:0;
+    height: calc(100% + 40px);
+    width: calc(300% + 120px);
+    z-index: -1;
+    position:absolute;
+    top:-20px;
+    left:-20px;
+    background-image: url("img/background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.profil1, .profil2, .profil3{
+    
+}
+.profil1 img, .profil2 img, .profil3 img{
+  
+}
+
+.profil1 p, .profil2 p, .profil3 p{
+    background-color:#00acb567;
+    font-style: italic;
+   color: #eeeeee;
+}
+
+
+
+/* FOOTER */
+
+/* LINKS */
+
+.links{
+    background-color: black;
+    color: rgb(73, 70, 70);
+    padding: 30px 50px;
+}
+
+.links ul{
+    margin-top: 10px;
+    list-style: none;
+}
+.links ul a{
+    color:rgb(114, 108, 108);
+    font-size: 16px;
+}
+
+/* CONTACT */
+.grid-container .links, .grid-container .contact{
+    flex-direction: column;
+    align-items: initial;
+}
+
+.contact {
+   
+    position: relative;
+}
+
+.contact h3{
+    padding: 20px 50px;
+}
+.contact i{
+    position: absolute;
+    bottom:30px;
+    left:5px;
+
+}
+.contact ul{
+    margin-left: 40px;
+}
+
+.contact ul li {
+    font-size: 15px;
+}
