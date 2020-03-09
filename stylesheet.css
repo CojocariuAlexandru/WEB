@@ -190,7 +190,9 @@ header ul li a:hover{
     border-bottom: 1px solid black;
     padding: 5px;
     width: 100%;
-    transition:border-color .6s linear
+    transition:border-color .6s linear;
+    font-size:16px;
+    color:#eeeeee;
 
 }
 
@@ -307,10 +309,11 @@ header ul li a:hover{
 /* col-1 col-2 col-3*/
 .col-1, .col-2, .col-3, .profil1, .profil2, .profil3{
     flex-direction: column;
-    margin: 20px;
+    padding: 20px;
 }
 .col-1 img, .col-2 img, .col-3 img, .profil1 img, .profil2 img, .profil3 img {
     max-width: 100%;
+    min-height: 250px;
 }
 
 .col-1 p, .col-2 p, .col-3 p, .profil1 p, .profil2 p, .profil3 p{
@@ -320,13 +323,12 @@ header ul li a:hover{
 
 /* US */
 .grid-container .us{
-
+    border-top: dashed 2px #175053;
 }
 .us h2{
   
 }
 .us p{
-
 }
 .us .us-body, .profil1 p, .profil2 p, .profil3 p{
 
@@ -341,8 +343,8 @@ header ul li a:hover{
 }
 .profil1 .background1 {
     margin:0;
-    height: calc(100% + 40px);
-    width: calc(300% + 120px);
+    height: calc(100% + 20px);
+    width: calc(300% + 25px);
     z-index: -1;
     position:absolute;
     top:-20px;
@@ -354,16 +356,26 @@ header ul li a:hover{
 
 
 .profil1, .profil2, .profil3{
+    border-right: dashed 2px #00acb567;
     
 }
+.profil1 i, .profil2 i, .profil3 i{
+    color: #eeeeee;
+    font-size: 20px;
+    margin-left: 10px;
+}
+
 .profil1 img, .profil2 img, .profil3 img{
-  
+  max-width: 50%;
+  min-height: 50px;
 }
 
 .profil1 p, .profil2 p, .profil3 p{
     background-color:#00acb567;
     font-style: italic;
    color: #eeeeee;
+   text-align: center;
+   max-width: 300px;
 }
 
 
@@ -373,18 +385,34 @@ header ul li a:hover{
 /* LINKS */
 
 .links{
-    background-color: black;
-    color: rgb(73, 70, 70);
+    background-color:#035e63;
     padding: 30px 50px;
+    border-top: #eeeeee 2px dashed;
 }
 
 .links ul{
+    margin-left: 30px;
     margin-top: 10px;
     list-style: none;
 }
+.links ul li{
+    margin:5px;
+}
 .links ul a{
-    color:rgb(114, 108, 108);
+    color: #eeeeee;
     font-size: 16px;
+}
+
+.links ul a:hover{
+    opacity: 0.6;    
+}
+.links ul i{
+    color: #eeeeee;
+    font-size: 20px;
+    margin-right: 10px;
+}
+.links h3{
+    color:#eeeeee;
 }
 
 /* CONTACT */
@@ -394,17 +422,20 @@ header ul li a:hover{
 }
 
 .contact {
-   
+   border-top: 2px dashed #175053;
     position: relative;
 }
 
 .contact h3{
     padding: 20px 50px;
+    color:#035e63;
 }
 .contact i{
     position: absolute;
-    bottom:30px;
-    left:5px;
+    top:20px;
+    right:20px;
+    font-size:50px;
+    color:#175053
 
 }
 .contact ul{
@@ -413,4 +444,252 @@ header ul li a:hover{
 
 .contact ul li {
     font-size: 15px;
+}
+.contact .fa-briefcase{
+    font-size: 30px;
+    top:100px;
+}
+.contact .number{
+    font-size: 16px;
+    font-style: italic;
+}
+
+.contact .adress {
+    margin-top:20px;
+    font-size: 10px;
+    margin-bottom: 20px;
+    margin-right: 60px;
+}
+
+/* MEDIA */
+
+
+
+
+@media only screen and (max-width: 1100px) {
+    .grid-container {
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: auto auto auto auto auto auto;
+        grid-template-areas: "login login login login login login" 
+        "about about about about about about" 
+        "col-1 col-1 col-2 col-2 col-3 col-3" 
+        "us us us us us us"
+        "profil1 profil1 profil2 profil2 profil3 profil3"
+        "links links links links contact contact";
+      }
+      .col-1 img, .col-2 img, .col-3 img{
+        max-width: 100%;
+        min-height: 200px;
+    }
+    .login .background{
+        width: 100%;
+    }
+
+
+}
+
+@media only screen and (max-width: 955px) {
+       
+    .mail{
+        display: none;
+    }
+    .profil1 p, .profil2 p, .profil3 p{
+    font-size:14px;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+       
+    .about p, .us p{
+        font-size:14px;
+    }
+    .col-1 img, .col-2 img, .col-3 img{
+        max-width: 100%;
+        min-height: 150px;
+    }
+    .col-1 p, .col-2 p, .col-3 p{
+        font-size:14px;
+        text-align: center;
+    }
+}
+@media only screen and (max-width: 650px) {
+    .grid-container {
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: auto auto auto auto auto auto auto auto auto auto;
+        grid-template-areas: "login login login login login login" 
+        "about about about about about about" 
+
+        "col-1 col-1 col-1 col-1 col-1 col-1" 
+        "col-2 col-2 col-2 col-2 col-2 col-2" 
+        "col-3 col-3 col-3 col-3 col-3 col-3" 
+
+        "us us us us us us"
+        "profil1 profil1 profil1 profil1 profil1 profil1"
+        "profil2 profil2 profil2 profil2 profil2 profil2"
+        "profil3 profil3 profil3 profil3 profil3 profil3"
+
+        "links links links links contact contact";
+      }
+    .profil1 .background1{
+        width: calc(100% + 20px) ;
+        height: calc( 300% + 70px);
+    }
+    .profil1, .profil2, .profil3 {
+        border:none;
+    }
+    .mail{
+        display: inline;
+    }
+    header ul li a{
+        font-size: 16px;
+        padding: 16px 20px ; 
+    }
+
+
+    .profil1 p, .profil2 p, .profil3 p{
+        font-size:16px;
+        }
+     .col-1 p, .col-2 p, .col-3 p{
+            font-size:16px;
+            text-align: justify;
+        }
+     .col-1, .col-2, .col-3{
+            margin: 0 0px ;
+            padding: 40px 50px;
+            border-top:dashed 2px #175053;
+        }
+    .col-1 img, .col-2 img, .col-3 img{
+            max-width: 70%;
+        }
+    .about p, .us p{
+        font-size:16px;
+    }
+    .contact .number{
+        font-size:14px;
+        margin-left: 10px;
+    }
+}
+
+@media only screen and (max-width: 565px){
+    .contact ul {
+        margin-left: 20px;
+    }
+    .contact i {
+        font-size:30px;
+    }
+}
+
+@media only screen and (max-width: 520px){
+    .grid-container {
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: auto auto auto auto auto auto auto auto auto auto;
+        grid-template-areas: "login login login login login login" 
+        "about about about about about about" 
+
+        "col-1 col-1 col-1 col-1 col-1 col-1" 
+        "col-2 col-2 col-2 col-2 col-2 col-2" 
+        "col-3 col-3 col-3 col-3 col-3 col-3" 
+
+        "us us us us us us"
+        "profil1 profil1 profil1 profil1 profil1 profil1"
+        "profil2 profil2 profil2 profil2 profil2 profil2"
+        "profil3 profil3 profil3 profil3 profil3 profil3"
+
+        "links links links contact contact contact";
+      }
+      .links{
+          padding-left: 20px;
+          padding-right: 20px;
+      }
+      .links ul{
+          padding-left: 0;
+          margin-left: 5px;
+      }
+      .links ul a{
+        color: #eeeeee;
+        font-size: 12px;
+    }
+    
+    .links ul i{
+        color: #eeeeee;
+        font-size: 16px;
+        margin-right: 10px;
+    }
+    .login .widget-login, .login .widget-sign-up{
+        min-width: 80%;
+    }
+    #signup{
+        display:none;
+    }
+}
+
+@media only screen and (max-width: 430px){
+    header ul li a{
+        font-size: 16px;
+        padding: 16px 10px ; 
+    }
+
+}
+
+@media only screen and (max-width: 360px){
+    #about{
+        display:none;
+    }
+    .col-1, .col-2, .col-3{
+        padding: 20px;
+    }
+    .col-1 img, .col-2 img, .col-3 img{
+        max-width: 90%;
+    }
+    .col-1 p, .col-2 p, .col-3 p, .us p, .about p{
+        font-size:14px
+    }
+
+    .contact h3, .links h3{
+        font-size:14px;
+    }
+    .fa-briefcase{
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 346px){
+    .profil1 .background1{
+        height: calc( 300% + 20px);
+    }
+}
+@media only screen and (max-width: 322px){
+    .profil1 .background1{
+        height: calc( 300% + 20px);
+    }
+    .contact .number{
+        font-size:12px;
+    }
+    #adresa{
+        display: none;
+    }
+    #icon{
+        left:60px;
+    }
+}
+@media only screen and (max-width: 303px){
+    .profil1 .background1{
+        height: calc( 300% + 45px);
+    }
+}
+@media only screen and (max-width: 302px){
+    .profil1 .background1{
+        height: calc( 300% + 70px);
+    }
+}
+@media only screen and (max-width: 284px){
+    .profil1 .background1{
+        height: calc( 300% + 92px);
+    }
 }
