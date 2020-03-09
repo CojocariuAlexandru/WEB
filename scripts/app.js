@@ -120,53 +120,59 @@ let mapPage = `
 `;
 
 let attacksPage = `
-    <div>
-        <input type="text" id="searchAttackButton">
-        <button onclick="searchAttack()">Search</button>
+    <div id="attacksPage">
+        <div class="searchAnAttack">
+            <div>
+                View detailed information about an attack
+            </div>
+            <div class="searchZone">
+                <div class="inputZone">
+                    <label for="searchAttackButton">Attack id</label>
+                    <input type="text" id="searchAttackButton">
+                </div>
+            <button onclick="searchAttack()">Search</button>
+            </div>
+        </div>
+        <div class="mostInterestingAttacks">
+            The most interesting attacks
+        </div>
     </div>
 `;
-
-var currentAttack;
-let attackPage;
-
-function populateAttackPage() {
-    attackPage =
-        `<div>
-    ${currentAttack.latitude}, ${currentAttack.longitude}
-    </div>
-    `;
-}
 
 // ---------------------------------------------------- Routing -------------------------------------------------------------
 // The routing system was implementing having the following tutorial as a starting point 
 // https://medium.com/@bryanmanuele/how-i-implemented-my-own-spa-routing-system-in-vanilla-js-49942e3c4573
 
-class routeInfo {
-    constructor(template, callback, parameter, parameterCallback) {
-        this.template = template;
-        this.callback = callback;
-        this.parameter = parameter;
-        this.parameterCallback = parameterCallback;
+class route {
+    constructor(url) {
+        this.url = url;
+        this.children = [];
     }
 }
 
-let routes = {}
+let root = new route('');
 
-routes['/'] = new routeInfo(homePage, () => {
-    console.log('Home page entered');
-});
+let homeRoute = new route('home');
+homeRoute.template = homePage;
+homeRoute.afterCallback = () => {
+    console.log('Entered home');
+};
+root.children.push(homeRoute);
 
-routes['/statistics'] = new routeInfo(statisticsPage, () => {
-    generateWeapons()
-    generateAttacks()
-    generateTargets()
-    generateRegions()
-    generateCountries()
-});
+let statisticsRoute = new route('statistics');
+statisticsRoute.template = statisticsPage;
+statisticsRoute.afterCallback = () => {
+    generateWeapons();
+    generateAttacks();
+    generateTargets();
+    generateRegions();
+    generateCountries();
+}
+root.children.push(statisticsRoute);
 
-let map;
-
-routes['/map'] = new routeInfo(mapPage, () => {
+let mapRoute = new route('map');
+mapRoute.template = mapPage;
+mapRoute.afterCallback = () => {
     let el = document.querySelector("#mapDiv");
     map = new google.maps.Map(el, {
         center: {
@@ -175,38 +181,75 @@ routes['/map'] = new routeInfo(mapPage, () => {
         },
         zoom: 8
     });
-});
+}
+root.children.push(mapRoute);
 
-routes['/attacks'] = new routeInfo(attacksPage, () => {
-    console.log('Attacks page entered');
-}, ':id', (id) => {
+let thatAttackRoute = new route(':id');
+thatAttackRoute.processCallback = function (arg) {
+    this.beforeCallback(arg);
+}
+thatAttackRoute.beforeCallback = function (id) {
     let found = false;
+    let currentAttack;
     for (let i = 0; i < attacks.length; ++i) {
         if (attacks[i].id == id) {
-            console.log(attacks[i]);
             currentAttack = attacks[i];
             found = true;
         }
     }
-    if (found) {
-        populateAttackPage();
+    if (!found) {
+        mainContent.innerHTML = 'Error';
+        return;
     }
-    return attackPage;
-});
+    mainContent.innerHTML = this.templateCallback(currentAttack);
+}
+thatAttackRoute.templateCallback = function (attack) {
+    return `
+                <div> Test </div>
+            `;
+}
+
+let attacksRoute = new route('attacks');
+attacksRoute.template = attacksPage;
+attacksRoute.afterCallback = () => {
+    console.log('Attacks page entered');
+}
+attacksRoute.children.push(thatAttackRoute);
+root.children.push(attacksRoute);
+
+function updateMainContentRecursive(node, pathParts, index) {
+    // Leaf route with parameter
+    if (node.url && node.url[0] == ':' && index == pathParts.length) {
+        node.processCallback(pathParts[index - 1]);
+        return false;
+    }
+    // Leaf route with no parameter
+    if (index == pathParts.length) {
+        mainContent.innerHTML = node.template;
+        node.afterCallback();
+        return false;
+    }
+    if (node.children != null) {
+        for (let i = 0; i < node.children.length; ++i) {
+            if (node.children[i].url === pathParts[index] || node.children[i].url[0] == ':') {
+                return updateMainContentRecursive(node.children[i], pathParts, index + 1);
+            }
+        }
+    }
+    // No match, redirect
+    return true;
+}
 
 function updateMainContent(pathName) {
-    if (pathName.lastIndexOf('/') == -1 || pathName.lastIndexOf('/') == 0) {
-        mainContent.innerHTML = routes[pathName].template;
-        routes[pathName].callback();
+    let pathParts = pathName.split('/');
+    let redirect = false;
+    if (pathParts[0] === root.url) {
+        redirect = updateMainContentRecursive(root, pathParts, 1);
     } else {
-        param = pathName.substr(pathName.lastIndexOf('/') + 1);
-        path = pathName.substr(0, pathName.lastIndexOf('/'));
-
-        if (path in routes) {
-            mainContent.innerHTML = routes[path].parameterCallback(param);
-        } else {
-            updateMainContent('/');
-        }
+        redirect = true;
+    }
+    if (redirect) {
+        navigate(root.url + '/home');
     }
 }
 
@@ -555,5 +598,5 @@ function generateCountries() {
 
 function searchAttack() {
     let attackInput = document.querySelector('#searchAttackButton');
-    navigate('/attacks/'+attackInput.value);
+    navigate('/attacks/' + attackInput.value);
 }

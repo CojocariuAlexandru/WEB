@@ -169,9 +169,9 @@ aside .options .option:hover {
 
 
 .dateForm {
-    flex: 1;    
+    flex: 1;
     margin-left: 10px;
- 
+
 }
 
 
@@ -220,18 +220,6 @@ aside .options .option:hover {
     flex: 1;
 }
 
-
-
-.firstRow1 {}
-
-.firstRow2 {}
-
-.secondRow {}
-
-.thirdRow {}
-
-.fourthRow {}
-
 #dateInput {
     height: 20px;
 
@@ -239,42 +227,58 @@ aside .options .option:hover {
 
 /*Animation on elements inspired by https://www.w3schools.com/css/css3_animations.asp */
 
-.statisticsForm > div > div > input:hover{
+.statisticsForm>div>div>input:hover {
     animation-name: slightColorChangeInput;
     animation-duration: 1s;
     -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
     cursor: pointer;
 }
 
-.statisticsForm > div > div > label:hover{
+.statisticsForm>div>div>label:hover {
     animation-name: slightColorChange;
     animation-duration: 1s;
     -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
     cursor: pointer;
 }
 
-h1:hover{
+h1:hover {
     animation-name: animationHeader;
     animation-duration: 1s;
     -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
 }
 
 
-@keyframes slightColorChange{
-    from{color: black;}
-    to{color: gray;}
-}
+@keyframes slightColorChange {
+    from {
+        color: black;
+    }
 
-@keyframes slightColorChangeInput{
-    from{color: black;}
-    to{
-        background-color: rgba(115, 172, 224, 0.2);
-        back
+    to {
+        color: gray;
     }
 }
-@keyframes animationHeader{
-    from{margin-t: 0px;}
-    to{margin-top:8px;}
+
+@keyframes slightColorChangeInput {
+    from {
+        color: black;
+    }
+
+    to {
+        background-color: rgba(115, 172, 224, 0.2);
+    }
+}
+
+@keyframes animationHeader {
+    from {
+        margin-t: 0px;
+    }
+
+    to {
+        margin-top: 8px;
+    }
 }
 
 #nrWoundedInput {
@@ -321,7 +325,6 @@ h1:hover{
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 20px;
     font-weight: bold;
-]
 }
 
 #submitButton:hover {
@@ -347,7 +350,64 @@ h1:hover{
     background-color: transparent;
 }
 
-#dateInput{
+#dateInput {
     border: 2px solid gray;
     border-radius: 5px;
+}
+
+/**************************************** Attacks Section *******************************************/
+
+#attacksPage {
+    width: 100%;
+    height: 100%;
+
+    font-size: 28px;
+}
+
+#attacksPage .searchAnAttack,
+#attacksPage .mostInterestingAttacks {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 100%;
+}
+
+#attacksPage .mostInterestingAttacks {
+    margin-top: 20px;
+}
+
+#attacksPage .searchAnAttack .searchZone {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    font-size: 22px;
+}
+
+#attacksPage .searchAnAttack input,
+#attacksPage .searchAnAttack button {
+    font-size: 22px;
+}
+
+#attacksPage .searchAnAttack .inputZone {
+    margin-top: 12px;
+}
+
+#attacksPage .searchAnAttack button {
+    margin-top: 12px;
+
+    height: 36px;
+    width: 100px;
+    border: 1.5px solid black;
+    border-radius: 10px;
+    box-shadow: 1px 2px 5px;
+}
+
+#attacksPage .searchAnAttack button:hover {
+    box-shadow: 2px 3px 5px;
+    background-color: #dfdfdf;
+    cursor: pointer;
 }
