@@ -207,9 +207,68 @@ thatAttackRoute.beforeCallback = function (id) {
     }
     mainContent.innerHTML = this.templateCallback(currentAttack);
 }
+
 thatAttackRoute.templateCallback = function (attack) {
     return `
-                <div> Test </div>
+                <div class='thatAttackGrid'>
+                    <div class='attackHeader'>
+                        <h1>Terrorist attack #ID description</h1>
+                        <h3>Region, Subregion - YYYY/MM/DD</h3>
+                    </div>
+                    <div class='attackAbout'>
+                        <h4> About </h4>
+                        <ul>
+                            <li>Country: Romania</li>
+                            <li>Region: Vaslui</li>
+                            <li>Number of terrorists: 100</li>
+                            <li>Number of kills: 10</li>
+                            <li>Number of wounded: 10</li>
+                            <li>Succesful attack: NO</li>
+                            <li>Known attackers: YES</li>
+                            <li>Weapons used: ciomag, sticla de tuica</li>
+                        </ul>
+                    </div>
+                    
+                    <div class='mapAttack'>
+                        <img src='/img/worldMap.png' alt='WorldMap'>
+                    </div>
+                    
+                    <div class='attackDetailTitle1'>
+                        <h3>Motive</h3>
+                    </div>
+                    <div class='attackDetailTitle2'>
+                        <h3>Weapon details</h3>
+                    </div>
+                    <div class='attackDetailTitle3'>
+                        <h3>Ransom</h3>
+                    </div>
+                    
+
+                    <div class='attackDetailText1'>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+                    </div>
+                    
+                    <div class='attackDetailText2'>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+                    </div>
+
+                    <div class='attackDetailText3'>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+                     </div>
+
+                     <div class='attackOtherDetailsHeading'>
+                        <h2>Other details</h2>
+                    </div>
+
+                    <div class='attackOtherDetails'>
+                         <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+                         </p>
+                     </div>
+
+                     <footer class='byKaggle'>
+                        <p> powered by Kaggle </p>
+                     </footer>
+                </div>
             `;
 }
 
