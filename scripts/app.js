@@ -297,6 +297,53 @@ function setWebAppTemplateAsSite(){
     mainContent = document.querySelector('#content');
 }
 
+let login = true;
+
+function changeLogin(){
+    if (login){
+        return;
+    }
+    switchLoginSignup();
+}
+
+function changeSignUp(){
+    if (!login){
+        return;
+    }
+    switchLoginSignup();
+}
+
+function switchLoginSignup(){
+    let loginComponent = document.querySelector('#login-component');
+    let signupComponent = document.querySelector('#sign-up-component');
+    if (login){
+        loginComponent.style.display = 'none';
+        signupComponent.style.display = 'block';
+        login = false;
+    } else {
+        loginComponent.style.display = 'block';
+        signupComponent.style.display = 'none';
+        login = true;
+    }
+}
+
+function signUp(){
+    let username = 'random';
+    let pwd = 'parola';
+
+    let users = JSON.parse(localStorage.getItem('users'));
+    console.log(users);
+    if (users == null){
+        users = [];
+    }
+    users.push({
+        'username':username,
+        'password':pwd
+    });
+    localStorage.setItem('users', JSON.stringify(users));
+    switchLoginSignup();
+}
+
 // ----------------------------------------------- Statistics form ----------------------------------------------------------
 
 function generateWeapons() {
@@ -352,6 +399,218 @@ function generateRegions() {
     regionFormTitle.appendChild(regionOptionChoose)
     regionForm.appendChild(regionFormTitle)
 }
+
+
+// -------------------------------------------------- Attacks page --------------------------------------------------
+
+function searchAttack() {
+    let attackInput = document.querySelector('#searchAttackButton');
+    navigate('/attacks/' + attackInput.value);
+}
+
+
+//***************************************************Pages Templates*******************************************************/
+
+let presentationSiteTemplate = `
+<header>
+    <div class="nav">
+        <img src="img/icon.png" alt="icon">
+        <h3>
+            TeVi
+        </h3>
+        <ul>
+            <li><a onclick="changeLogin()">Login</a></li>
+            <li id="signup" onclick="changeSignUp()"><a>SignUp</a></li>
+            <li id="about"><a href="">About</a></li>
+            <li><a href="">Contact</a></li>
+        </ul>
+    </div>
+</header>
+
+<div class="grid-container">
+    <div class="login">
+        <span class="background"></span>>
+        <div class="widget-login widget" id="login-component">
+
+            <h2 class="title">Login</h2>
+
+            <form>
+                <label for="username"><i class="fa fa-user-circle-o" style="font-size:24px"></i>Username:</label>
+                <input type="text" id="username" name="username">
+                <label for="pwd"><i class="fa fa-eye-slash" style="font-size:24px"></i>Password:</label>
+                <input type="password" id="pwd" name="pwd">
+                <input type="button" value="Sign In" onclick="userLogin()">
+            </form>
+            <p>Not a member?</p><a onclick="changeSignUp()">SignUp now</a>
+
+        </div>
+        <div class="widget-sign-up widget" id="sign-up-component">
+
+            <h2 class="title">Sign Up</h2>
+
+            <form>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username">
+                <label for="pwd">Password:</label>
+                <input type="password" id="pwd" name="pwd">
+                <label for="rpwd">Password again:</label>
+                <input type="repeatpassword" id="rpwd" name="rpwd">
+                <input type="button" value="Submit" onclick="signUp()">
+            </form>
+        </div>
+    </div>
+    <div class="art">
+        <!-- <img src="img/img2.svg" alt="imagine">  -->
+    </div>
+    <div class="about">
+        <h2 class="title">
+                Abous us
+            </h2>
+        <div class='about-body'>
+            <p>
+                <span></span> We devised a Web application for visualizing and creating statistics based on terrorist attacks in the last 50 years. It features a registration system for users, statistics generated based on custom options and a map visualizer. The app uses and processes hundred of thousands of terrorist attack records.
+            </p>
+            <p> <span></span>Having the records of terrorist attacks requested, the application is able to generate all kinds of statistics, from piecharts showing the most preferate countries as targets for attacks, to histograms and representations that can depict the success rate of the attack, the amplitude of damages made and so on. The user can get custom statistics based on a completion of a form. Based on the given input, by the user, the application is able to make specific queries to the database.
+            </p>
+        </div>
+
+    </div>
+    <div class="col-1">
+        <img src="img/image2.png" alt="">
+        <p><span></span> These powerful illustrations can be really handy for understanding any patterns involving terrorist attacks, and can be featured on thematic presentations.
+        </p>
+    </div>
+    <div class="col-2">
+        <img src="img/image.png" alt="">
+        <p><span></span>Another feature is the world map, modified such that it illustrates the kind of attacks requested by the user. The exact locations of the attacks will be pin-pointed based on this geographic coordinates.
+        </p>
+
+    </div>
+    <div class="col-3">
+        <img src="img/image3.png" alt="">
+        <p><span></span> Any graphic element generated (map or statistics) can be externally exported to the formats: png, jpg. The attacks with all the information included can be exported in csv format.
+        </p>
+
+    </div>
+
+    <div class="us">
+        <h2 class="title">
+                Our team
+            </h2>
+        <div class='us-body'>
+            <p>
+                <span></span> We are the best team eveeer! Three students at FII.
+
+            </p>
+        </div>
+
+    </div>
+    <div class="profil1">
+        <span class="background1"></span>
+        <img src="img/ramo.png" alt="">
+        <p>“Creativity Is Intelligence Having Fun.”
+        </p>
+        <p>Ramona Albert
+            <a href="https://www.facebook.com/albert.ramona">
+                <i class="fa fa-facebook-square"></i>
+            </a>
+            <a class="mail" href="mailto:albert.ramona99@gmail.com">
+                <i class="fa fa-envelope"></i>
+            </a>
+        </p>
+    </div>
+    <div class="profil2">
+        <img src="img/olo.png" alt="Oloieri Alexandru">
+        <p>"Push yourself, because no one else is going to do it for you."
+        </p>
+        <p>Oloieri Alexandru
+            <a href="https://www.facebook.com/alexandru.oloieri.3">
+                <i class="fa fa-facebook-square"></i>
+            </a>
+            <a class="mail" href="mailto:alexoloieri2014@gmail.com">
+                <i class="fa fa-envelope"></i>
+            </a>
+        </p>
+
+    </div>
+    <div class="profil3">
+        <img src="img/alex.png" alt="">
+        <p>"Do not be overheard complaining. Not even to yourself."</p>
+        <p>Cojocariu Alexandru
+            <a href="https://www.facebook.com/profile.php?id=100014694300615">
+                <i class="fa fa-facebook-square"></i>
+            </a>
+            <a class="mail" href="mailto:cojocariualexandru1@gmail.com">
+                <i class="fa fa-envelope"></i>
+            </a>
+        </p>
+    </div>
+
+    <div class="links">
+        <h3>Links:</h3>
+        <ul>
+            <li><i class="fa fa-database"></i> <a href="https://www.kaggle.com/START-UMD/gtd">Data base</a></li>
+            <li><i class="fa fa-desktop"></i> <a href="https://www.info.uaic.ro/">Faculty of Computer Science</a></li>
+        </ul>
+    </div>
+    <div class="contact">
+        <h3>Contact:</h3>
+        <ul>
+            <li><i id="icon" class="fa fa-briefcase"></i><span class="number">+40 232 201090</span></li>
+            <li id="adresa" class="adress"><i class="fa fa-mobile"></i>Faculty of Computer Science, General Berthelor Street, nr. 16, IAŞI, Postal Code 700483, ROMANIA</li>
+        </ul>
+    </div>
+</div>
+`;
+
+let webAppTemplate = `
+<aside>
+    <div class="title">
+        TeVi
+    </div>
+    <div class="options">
+        <div class="option" onclick="navigate('/home')">
+            <span class="icon">
+                    <i class="fa fa-home"></i>
+                </span>
+            <span class="text">
+                    Home
+                </span>
+        </div>
+        <div class="option" onclick="navigate('/statistics')">
+            <span class="icon">
+                    <i class="fa fa-pie-chart"></i>
+                </span>
+            <span class="text">
+                    Statistics
+                </span>
+        </div>
+        <div class="option" onclick="navigate('/map')">
+            <span class="icon">
+                    <i class="fa fa-map-marker"></i>
+                </span>
+            <span class="text">
+                    Map
+                </span>
+        </div>
+        <div class="option" onclick="navigate('/attacks')">
+            <span class="icon">
+                    <i class="fa fa-fighter-jet"></i>
+                </span>
+            <span class="text">
+                    Attacks
+                </span>
+        </div>
+    </div>
+</aside>
+
+<div class="main-wrapper">
+    <header id="usernameContainer">
+    </header>
+    <main id="content">
+    </main>
+</div>
+`;
 
 function generateCountries() {
     let regionForm = document.querySelector('.countryForm')
@@ -618,214 +877,3 @@ function generateCountries() {
     regionFormTitle.appendChild(regionOptionChoose)
     regionForm.appendChild(regionFormTitle)
 }
-
-// -------------------------------------------------- Attacks page --------------------------------------------------
-
-function searchAttack() {
-    let attackInput = document.querySelector('#searchAttackButton');
-    navigate('/attacks/' + attackInput.value);
-}
-
-
-//***************************************************Pages Templates*******************************************************/
-
-let presentationSiteTemplate = `
-<header>
-    <div class="nav">
-        <img src="img/icon.png" alt="icon">
-        <h3>
-            TeVi
-        </h3>
-        <ul>
-            <li><a href="">Login</a></li>
-            <li id="signup"><a href="">SignUp</a></li>
-            <li id="about"><a href="">About</a></li>
-            <li><a href="">Contact</a></li>
-        </ul>
-    </div>
-</header>
-
-<div class="grid-container">
-    <div class="login">
-        <span class="background"></span>>
-        <div class="widget-login widget">
-
-            <h2 class="title">Login</h2>
-
-            <form>
-                <label for="username"><i class="fa fa-user-circle-o" style="font-size:24px"></i>Username:</label>
-                <input type="text" id="username" name="username">
-                <label for="pwd"><i class="fa fa-eye-slash" style="font-size:24px"></i>Password:</label>
-                <input type="password" id="pwd" name="pwd">
-                <input type="submit" value="Sign In">
-            </form>
-            <p>Not a member?</p><a href="">SignUp now</a>
-
-        </div>
-        <div class="widget-sign-up widget">
-
-            <h2 class="title">Sign Up</h2>
-
-            <form>
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username">
-                <label for="pwd">Password:</label>
-                <input type="password" id="pwd" name="pwd">
-                <label for="rpwd">Password again:</label>
-                <input type="repeatpassword" id="rpwd" name="rpwd">
-                <input type="submit" value="Submit">
-            </form>
-        </div>
-    </div>
-    <div class="art">
-        <!-- <img src="img/img2.svg" alt="imagine">  -->
-    </div>
-    <div class="about">
-        <h2 class="title">
-                Abous us
-            </h2>
-        <div class='about-body'>
-            <p>
-                <span></span> We devised a Web application for visualizing and creating statistics based on terrorist attacks in the last 50 years. It features a registration system for users, statistics generated based on custom options and a map visualizer. The app uses and processes hundred of thousands of terrorist attack records.
-            </p>
-            <p> <span></span>Having the records of terrorist attacks requested, the application is able to generate all kinds of statistics, from piecharts showing the most preferate countries as targets for attacks, to histograms and representations that can depict the success rate of the attack, the amplitude of damages made and so on. The user can get custom statistics based on a completion of a form. Based on the given input, by the user, the application is able to make specific queries to the database.
-            </p>
-        </div>
-
-    </div>
-    <div class="col-1">
-        <img src="img/image2.png" alt="">
-        <p><span></span> These powerful illustrations can be really handy for understanding any patterns involving terrorist attacks, and can be featured on thematic presentations.
-        </p>
-    </div>
-    <div class="col-2">
-        <img src="img/image.png" alt="">
-        <p><span></span>Another feature is the world map, modified such that it illustrates the kind of attacks requested by the user. The exact locations of the attacks will be pin-pointed based on this geographic coordinates.
-        </p>
-
-    </div>
-    <div class="col-3">
-        <img src="img/image3.png" alt="">
-        <p><span></span> Any graphic element generated (map or statistics) can be externally exported to the formats: png, jpg. The attacks with all the information included can be exported in csv format.
-        </p>
-
-    </div>
-
-    <div class="us">
-        <h2 class="title">
-                Our team
-            </h2>
-        <div class='us-body'>
-            <p>
-                <span></span> We are the best team eveeer! Three students at FII.
-
-            </p>
-        </div>
-
-    </div>
-    <div class="profil1">
-        <span class="background1"></span>
-        <img src="img/ramo.png" alt="">
-        <p>“Creativity Is Intelligence Having Fun.”
-        </p>
-        <p>Ramona Albert
-            <a href="https://www.facebook.com/albert.ramona">
-                <i class="fa fa-facebook-square"></i>
-            </a>
-            <a class="mail" href="mailto:albert.ramona99@gmail.com">
-                <i class="fa fa-envelope"></i>
-            </a>
-        </p>
-    </div>
-    <div class="profil2">
-        <img src="img/olo.png" alt="Oloieri Alexandru">
-        <p>"Push yourself, because no one else is going to do it for you."
-        </p>
-        <p>Oloieri Alexandru
-            <a href="https://www.facebook.com/alexandru.oloieri.3">
-                <i class="fa fa-facebook-square"></i>
-            </a>
-            <a class="mail" href="mailto:alexoloieri2014@gmail.com">
-                <i class="fa fa-envelope"></i>
-            </a>
-        </p>
-
-    </div>
-    <div class="profil3">
-        <img src="img/alex.png" alt="">
-        <p>"Do not be overheard complaining. Not even to yourself."</p>
-        <p>Cojocariu Alexandru
-            <a href="https://www.facebook.com/profile.php?id=100014694300615">
-                <i class="fa fa-facebook-square"></i>
-            </a>
-            <a class="mail" href="mailto:cojocariualexandru1@gmail.com">
-                <i class="fa fa-envelope"></i>
-            </a>
-        </p>
-    </div>
-
-    <div class="links">
-        <h3>Links:</h3>
-        <ul>
-            <li><i class="fa fa-database"></i> <a href="https://www.kaggle.com/START-UMD/gtd">Data base</a></li>
-            <li><i class="fa fa-desktop"></i> <a href="https://www.info.uaic.ro/">Faculty of Computer Science</a></li>
-        </ul>
-    </div>
-    <div class="contact">
-        <h3>Contact:</h3>
-        <ul>
-            <li><i id="icon" class="fa fa-briefcase"></i><span class="number">+40 232 201090</span></li>
-            <li id="adresa" class="adress"><i class="fa fa-mobile"></i>Faculty of Computer Science, General Berthelor Street, nr. 16, IAŞI, Postal Code 700483, ROMANIA</li>
-        </ul>
-    </div>
-</div>
-`;
-
-let webAppTemplate = `
-<aside>
-    <div class="title">
-        TeVi
-    </div>
-    <div class="options">
-        <div class="option" onclick="navigate('/home')">
-            <span class="icon">
-                    <i class="fa fa-home"></i>
-                </span>
-            <span class="text">
-                    Home
-                </span>
-        </div>
-        <div class="option" onclick="navigate('/statistics')">
-            <span class="icon">
-                    <i class="fa fa-pie-chart"></i>
-                </span>
-            <span class="text">
-                    Statistics
-                </span>
-        </div>
-        <div class="option" onclick="navigate('/map')">
-            <span class="icon">
-                    <i class="fa fa-map-marker"></i>
-                </span>
-            <span class="text">
-                    Map
-                </span>
-        </div>
-        <div class="option" onclick="navigate('/attacks')">
-            <span class="icon">
-                    <i class="fa fa-fighter-jet"></i>
-                </span>
-            <span class="text">
-                    Attacks
-                </span>
-        </div>
-    </div>
-</aside>
-
-<div class="main-wrapper">
-    <header id="usernameContainer">
-    </header>
-    <main id="content">
-    </main>
-</div>
-`;

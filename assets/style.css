@@ -218,7 +218,7 @@ body .presentation .grid-container {
     color: #eeeeee;
 }
 
-.presentation .login .widget input:not([type='submit']) {
+.presentation .login .widget input:not([type='button']) {
     display: block;
     background-color: transparent;
     border-style: none;
@@ -230,16 +230,16 @@ body .presentation .grid-container {
     color: #eeeeee;
 }
 
-.presentation .login .widget input:focus:not([type='submit']) {
+.presentation .login .widget input:focus:not([type='button']) {
     border-bottom: 1px solid white;
 }
 
-.presentation .login .widget input:hover:not([type='submit']) {
+.presentation .login .widget input:hover:not([type='button']) {
     border-bottom: 1px solid white;
     /* background-color:#0662796e ; */
 }
 
-.presentation .login .widget input[type='submit'] {
+.presentation .login .widget input[type='button'] {
     display: block;
     margin: 40px auto 20px auto;
     padding: 5px;
@@ -254,7 +254,7 @@ body .presentation .grid-container {
     box-shadow: #175053 2px 0 5px 10px;
 }
 
-.presentation .login .widget input:hover[type='submit'] {
+.presentation .login .widget input:hover[type='button'] {
     opacity: 0.8;
     cursor: pointer;
     background-color: #eeeeee;
@@ -817,7 +817,7 @@ body .presentation .grid-container {
 /************** WEB APP ***********************************/
 /**********************************************************/
 
-.web-app body {
+.root .web-app {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
