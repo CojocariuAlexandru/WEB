@@ -19,17 +19,46 @@ a {
     text-decoration: none;
 }
 
+.presentation{
+    width: 100%;
+    height: 100%;
+}
+
 /**********************************************************/
 /************** PRESENTATION SITE *************************/
 /**********************************************************/
 
+body{
+    background-color: #eeeeee;
+}
+
 body .presentation {
     display: block;
-    background-color: #eeeeee;
     margin-top: 60px;
 }
 
-body .grid-container {
+.presentation h2 {
+    display: block;
+    font-size: 30px;
+    margin-bottom: 50px;
+}
+
+.presentation h3 {
+    font-size: 20px;
+}
+
+.presentation span {
+    margin: 20px;
+}
+
+.presentation p {
+    font-size: 16px;
+    text-align: justify;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+body .presentation .grid-container {
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -90,13 +119,6 @@ body .grid-container {
     grid-area: contact;
 }
 
-.presentation p {
-    font-size: 16px;
-    text-align: justify;
-    line-height: 1.5;
-    margin-bottom: 16px;
-}
-
 .presentation .nav {
     display: flex;
     position: fixed;
@@ -128,20 +150,6 @@ body .grid-container {
     border-left: dashed #eeeeee 1.5px;
 }
 
-.presentation h2 {
-    display: block;
-    font-size: 30px;
-    margin-bottom: 50px;
-}
-
-.presentation h3 {
-    font-size: 20px;
-}
-
-.presentation span {
-    margin: 20px;
-}
-
 .presentation .nav img {
     height: 60px;
 }
@@ -156,6 +164,7 @@ body .grid-container {
     font-size: 30px;
     padding: 10px 10px;
     margin-right: auto;
+    margin-top: 10px;
     color: #eeeeee;
 }
 
@@ -176,17 +185,17 @@ body .grid-container {
 
 /************** Login *************************************/
 
-.login {
+.presentation .login {
     height: calc(100vh - 60px);
     position: relative;
 }
 
-.login h2 {
+.presentation .login h2 {
     color: #eeeeee;
     margin-top: 10px;
 }
 
-.login .widget {
+.presentation .login .widget {
     text-align: center;
     margin: auto auto;
     min-width: 60%;
@@ -197,11 +206,11 @@ body .grid-container {
     background-color: #00acb567;
 }
 
-.login .widget-sign-up {
+.presentation .login .widget-sign-up {
     display: none;
 }
 
-.login .widget label {
+.presentation .login .widget label {
     display: block;
     text-align: left;
     font-size: 18px;
@@ -209,7 +218,7 @@ body .grid-container {
     color: #eeeeee;
 }
 
-.login .widget input:not([type='submit']) {
+.presentation .login .widget input:not([type='submit']) {
     display: block;
     background-color: transparent;
     border-style: none;
@@ -221,16 +230,16 @@ body .grid-container {
     color: #eeeeee;
 }
 
-.login .widget input:focus:not([type='submit']) {
+.presentation .login .widget input:focus:not([type='submit']) {
     border-bottom: 1px solid white;
 }
 
-.login .widget input:hover:not([type='submit']) {
+.presentation .login .widget input:hover:not([type='submit']) {
     border-bottom: 1px solid white;
     /* background-color:#0662796e ; */
 }
 
-.login .widget input[type='submit'] {
+.presentation .login .widget input[type='submit'] {
     display: block;
     margin: 40px auto 20px auto;
     padding: 5px;
@@ -245,33 +254,33 @@ body .grid-container {
     box-shadow: #175053 2px 0 5px 10px;
 }
 
-.login .widget input:hover[type='submit'] {
+.presentation .login .widget input:hover[type='submit'] {
     opacity: 0.8;
     cursor: pointer;
     background-color: #eeeeee;
     color: #175053;
 }
 
-.login .widget input:focus {
+.presentation .login .widget input:focus {
     box-shadow: none;
     outline-offset: 0;
     outline: none;
     outline-color: transparent;
 }
 
-.login .widget label i {
+.presentation .login .widget label i {
     display: inline-block;
     margin: 5px;
 }
 
-.login .widget p {
+.presentation .login .widget p {
     text-align: center;
     color: #eeeeee;
     opacity: 0.3;
     margin: 0 auto 0 auto;
 }
 
-.login .widget a {
+.presentation .login .widget a {
     color: #eeeeee;
     font-size: 15px;
 }
@@ -284,28 +293,28 @@ body .grid-container {
     position: absolute;
     top: 0;
     left: 0;
-    background-image: url("img/background.png");
+    background-image: url("/img/background.png");
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 /************** ART ***************************************/
 
-.art img {
+.presentation .art img {
     max-width: 80%;
 }
 
 /************** ABOUT *************************************/
 
-.grid-container .about,
-.grid-container .us {
+.presentation .grid-container .about,
+.presentation .grid-container .us {
     max-height: 100%;
     display: block;
     background-color: #eeeeee;
 }
 
-.about h2,
-.us h2 {
+.presentation .about h2,
+.presentation .us h2 {
     display: inline-flex;
     margin: 50px 50px 20px 60px;
     padding: 0 10px 0 10px;
@@ -315,8 +324,8 @@ body .grid-container {
     box-shadow: #175053 2px 0 5px 10px;
 }
 
-.about p,
-.us p {
+.presentation .about p,
+.presentation .us p {
     border-style: solid 2px black;
     margin-bottom: 8px;
 }
@@ -375,7 +384,7 @@ body .grid-container {
 
 /************** US ***************************************/
 
-.grid-container .us {
+.presentation .grid-container .us {
     border-top: dashed 2px #175053;
 }
 
@@ -393,7 +402,7 @@ body .grid-container {
     position: absolute;
     top: -20px;
     left: -20px;
-    background-image: url("img/background.png");
+    background-image: url("/img/background.png");
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -433,59 +442,59 @@ body .grid-container {
 
 /************** LINKS *************************************/
 
-.links {
+.presentation .links {
     background-color: #035e63;
     padding: 30px 50px;
     border-top: #eeeeee 2px dashed;
 }
 
-.links ul {
+.presentation .links ul {
     margin-left: 30px;
     margin-top: 10px;
     list-style: none;
 }
 
-.links ul li {
+.presentation .links ul li {
     margin: 5px;
 }
 
-.links ul a {
+.presentation .links ul a {
     color: #eeeeee;
     font-size: 16px;
 }
 
-.links ul a:hover {
+.presentation .links ul a:hover {
     opacity: 0.6;
 }
 
-.links ul i {
+.presentation .links ul i {
     color: #eeeeee;
     font-size: 20px;
     margin-right: 10px;
 }
 
-.links h3 {
+.presentation .links h3 {
     color: #eeeeee;
 }
 
 /************** CONTACT ***********************************/
-.grid-container .links,
-.grid-container .contact {
+.presentation .grid-container .links,
+.presentation .grid-container .contact {
     flex-direction: column;
     align-items: initial;
 }
 
-.contact {
+.presentation .contact {
     border-top: 2px dashed #175053;
     position: relative;
 }
 
-.contact h3 {
+.presentation .contact h3 {
     padding: 20px 50px;
     color: #035e63;
 }
 
-.contact i {
+.presentation .contact i {
     position: absolute;
     top: 20px;
     right: 20px;
@@ -493,25 +502,25 @@ body .grid-container {
     color: #175053
 }
 
-.contact ul {
+.presentation .contact ul {
     margin-left: 40px;
 }
 
-.contact ul li {
+.presentation .contact ul li {
     font-size: 15px;
 }
 
-.contact .fa-briefcase {
+.presentation .contact .fa-briefcase {
     font-size: 30px;
     top: 100px;
 }
 
-.contact .number {
+.presentation .contact .number {
     font-size: 16px;
     font-style: italic;
 }
 
-.contact .adress {
+.presentation .contact .adress {
     margin-top: 20px;
     font-size: 10px;
     margin-bottom: 20px;
