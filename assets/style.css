@@ -952,6 +952,8 @@ body .web-app {
     height: calc(100% - 60px);
 
     background-color: #EEEEEE;
+
+    overflow-y: auto;
 }
 
 /***************** HOME**********************************************/
@@ -1302,6 +1304,8 @@ h1:hover {
             "attackOtherDetails attackOtherDetails attackOtherDetails attackOtherDetails attackOtherDetails attackOtherDetails"
             "byKaggle byKaggle byKaggle byKaggle byKaggle byKaggle"
             ;
+
+    overflow-y: scroll;
 }
 
 .attackHeader{
@@ -1327,14 +1331,14 @@ h1:hover {
     padding:10px;
 }
 
-.mapAttack{
-    display: flex;
-    grid-area: mapAttack;
-    height: 200px;
-    margin-left:10px;
-    margin-bottom: 26px;
+#mapAttack{
+    /* display: flex; */
+    /* grid-area: mapAttack; */
+    height: 240px;
+    width: 200%;
+    /* margin-left:10px; */
+    /* margin-bottom: 26px; */
 }
-
 
 .attackDetailTitle1{
     display: flex;
@@ -1344,7 +1348,6 @@ h1:hover {
     background-color: silver;
     border-radius: 20px;
     padding:6px;
-
 }
 
 .attackDetailTitle2{
@@ -1356,7 +1359,6 @@ h1:hover {
     background-color: silver;
     border-radius: 20px;
     padding:6px;
-
 }
 
 .attackDetailTitle3{
@@ -1419,7 +1421,6 @@ h1:hover {
     align-items: center;
     justify-content: center;
     color:crimson;
-
 }
 
 .attackOtherDetails{
@@ -1432,11 +1433,4 @@ h1:hover {
     background-color: silver;
     border-radius: 10px;
     padding:6px;
-
-}
-
-.byKaggle{
-    display: flex;
-    grid-area: byKaggle;
-    background-color: #345f61;
 }
