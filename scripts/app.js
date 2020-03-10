@@ -288,10 +288,12 @@ function userIsLoggedIn(){
 
 function setPresentationTemplateAsSite(){
     rootForContent.innerHTML = presentationSiteTemplate;
+    rootForContent.className = "root presentation";
 }
 
 function setWebAppTemplateAsSite(){
     rootForContent.innerHTML = webAppTemplate;
+    rootForContent.className = "root webapp";
     mainContent = document.querySelector('#content');
 }
 
@@ -636,8 +638,8 @@ let presentationSiteTemplate = `
         </h3>
         <ul>
             <li><a href="">Login</a></li>
-            <li><a href="">SignUp</a></li>
-            <li><a href="">About</a></li>
+            <li id="signup"><a href="">SignUp</a></li>
+            <li id="about"><a href="">About</a></li>
             <li><a href="">Contact</a></li>
         </ul>
     </div>
@@ -655,7 +657,7 @@ let presentationSiteTemplate = `
                 <input type="text" id="username" name="username">
                 <label for="pwd"><i class="fa fa-eye-slash" style="font-size:24px"></i>Password:</label>
                 <input type="password" id="pwd" name="pwd">
-                <input type="submit" value="Sign In" (click)="userLogin()">
+                <input type="submit" value="Sign In">
             </form>
             <p>Not a member?</p><a href="">SignUp now</a>
 
@@ -692,7 +694,7 @@ let presentationSiteTemplate = `
 
     </div>
     <div class="col-1">
-        <img src="img/image.png" alt="">
+        <img src="img/image2.png" alt="">
         <p><span></span> These powerful illustrations can be really handy for understanding any patterns involving terrorist attacks, and can be featured on thematic presentations.
         </p>
     </div>
@@ -703,7 +705,7 @@ let presentationSiteTemplate = `
 
     </div>
     <div class="col-3">
-        <img src="img/image.png" alt="">
+        <img src="img/image3.png" alt="">
         <p><span></span> Any graphic element generated (map or statistics) can be externally exported to the formats: png, jpg. The attacks with all the information included can be exported in csv format.
         </p>
 
@@ -711,46 +713,69 @@ let presentationSiteTemplate = `
 
     <div class="us">
         <h2 class="title">
-                Abous us
+                Our team
             </h2>
         <div class='us-body'>
             <p>
-                <span></span> We devised a Web application for visualizing and creating statistics based on terrorist attacks in the last 50 years. It features a registration system for users, statistics generated based on custom options and a map visualizer. The app uses and processes hundred of thousands of terrorist attack records.
+                <span></span> We are the best team eveeer! Three students at FII.
+
             </p>
         </div>
 
     </div>
     <div class="profil1">
         <span class="background1"></span>
-        <img src="img/image.png" alt="">
-        <p><span></span>What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an u</p>
+        <img src="img/ramo.png" alt="">
+        <p>“Creativity Is Intelligence Having Fun.”
+        </p>
+        <p>Ramona Albert
+            <a href="https://www.facebook.com/albert.ramona">
+                <i class="fa fa-facebook-square"></i>
+            </a>
+            <a class="mail" href="mailto:albert.ramona99@gmail.com">
+                <i class="fa fa-envelope"></i>
+            </a>
+        </p>
     </div>
     <div class="profil2">
-        <img src="img/image.png" alt="">
-        <p><span></span>What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an u</p>
+        <img src="img/olo.png" alt="Oloieri Alexandru">
+        <p>"Push yourself, because no one else is going to do it for you."
+        </p>
+        <p>Oloieri Alexandru
+            <a href="https://www.facebook.com/alexandru.oloieri.3">
+                <i class="fa fa-facebook-square"></i>
+            </a>
+            <a class="mail" href="mailto:alexoloieri2014@gmail.com">
+                <i class="fa fa-envelope"></i>
+            </a>
+        </p>
 
     </div>
     <div class="profil3">
-        <img src="img/image.png" alt="">
-        <p><span></span>What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an u</p>
-
+        <img src="img/alex.png" alt="">
+        <p>"Do not be overheard complaining. Not even to yourself."</p>
+        <p>Cojocariu Alexandru
+            <a href="https://www.facebook.com/profile.php?id=100014694300615">
+                <i class="fa fa-facebook-square"></i>
+            </a>
+            <a class="mail" href="mailto:cojocariualexandru1@gmail.com">
+                <i class="fa fa-envelope"></i>
+            </a>
+        </p>
     </div>
 
     <div class="links">
         <h3>Links:</h3>
         <ul>
-            <li><a href="">Data base</a></li>
-            <li><a href="">dwadwa</a></li>
-            <li><a href="">dwadwa</a></li>
+            <li><i class="fa fa-database"></i> <a href="https://www.kaggle.com/START-UMD/gtd">Data base</a></li>
+            <li><i class="fa fa-desktop"></i> <a href="https://www.info.uaic.ro/">Faculty of Computer Science</a></li>
         </ul>
     </div>
     <div class="contact">
         <h3>Contact:</h3>
-        <i class="fa fa-graduation-cap" style="font-size:24px"></i>
         <ul>
-            <li>ramona.albert@info.uaic.ro</li>
-            <li>ramona.albert@info.uaic.ro</li>
-            <li>ramona.albert@info.uaic.ro</li>
+            <li><i id="icon" class="fa fa-briefcase"></i><span class="number">+40 232 201090</span></li>
+            <li id="adresa" class="adress"><i class="fa fa-mobile"></i>Faculty of Computer Science, General Berthelor Street, nr. 16, IAŞI, Postal Code 700483, ROMANIA</li>
         </ul>
     </div>
 </div>
