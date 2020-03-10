@@ -24,12 +24,32 @@ attacks.push(new Attack(3, 15.4786, -120.5997));
 // ------------------------------------------------------ Templates ----------------------------------------------------------
 
 let homePage = `
-    <section id="home">    
-        <div class="left">
+<section id="home">
+    <div class="left-container" onclick="navigate('/statistics')">
+        <img src="/img/web-app-home-plot.png">
+        <div class="description">
+            <span class="title">
+                Detailed statistics about attacks
+            </span>
+            <span class="text">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                Sit saepe quidem, aspernatur quis earum cum cupiditate consectetur? Perferendis, 
+            </span>
         </div>
-        <div class="right">
+    </div>
+    <div class="right-container" onclick="navigate('/map')">
+        <img src="/img/web-app-home-map.png">
+        <div class="description">
+            <span class="title">
+                Exact location on the map
+            </span>
+            <span class="text">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                Sit saepe quidem, aspernatur quis earum cum cupiditate consectetur? Perferendis, 
+            </span>
         </div>
-    </section>
+    </div>
+</section>
 `;
 
 let statisticsPage = `
@@ -404,14 +424,12 @@ function generateRegions() {
     regionForm.appendChild(regionFormTitle)
 }
 
-
 // -------------------------------------------------- Attacks page --------------------------------------------------
 
 function searchAttack() {
     let attackInput = document.querySelector('#searchAttackButton');
     navigate('/attacks/' + attackInput.value);
 }
-
 
 //***************************************************Pages Templates*******************************************************/
 
@@ -880,4 +898,4 @@ function generateCountries() {
     regionFormTitle.innerHTML = regionFormTitle.innerHTML + '</datalist>'
     regionFormTitle.appendChild(regionOptionChoose)
     regionForm.appendChild(regionFormTitle)
-}
+} 
