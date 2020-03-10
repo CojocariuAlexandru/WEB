@@ -889,10 +889,28 @@ body .web-app {
 .web-app aside .options .option .text {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
 
-    width: 82%;
+    width: 60%;
     margin-right: 6px;
+}
+
+.web-app aside .options .option:hover{
+    animation-name: asideMoveRight;
+    animation-duration: 2s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+@keyframes asideMoveRight {
+    from {
+        
+        width: 100%;
+    }
+
+    to {
+        width: 80%;
+    }
 }
 
 .web-app aside .options .option:hover {
@@ -1007,9 +1025,9 @@ body .web-app {
     padding: 20px;
     margin-bottom: 20px;
     display: flex;
-    border: 1.5px solid black;
-    border-radius: 10px;
-    box-shadow: 1px 2px 5px;
+    /*border: 1.5px solid black;*/
+    border-radius: 14px;
+    /*box-shadow: 1px 2px 5px;*/
 }
 
 .web-app .statisticsForm>h1 {
@@ -1267,4 +1285,158 @@ h1:hover {
     box-shadow: 2px 3px 5px;
     background-color: #dfdfdf;
     cursor: pointer;
+}
+
+/**************************************** One attack *******************************************/
+.thatAttackGrid{
+    margin:20px 0 0 0px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto auto auto auto auto;
+    grid-template-areas: "attackHeader attackHeader attackHeader attackHeader attackHeader attackHeader"
+            "attackAbout attackAbout attackAbout attackAbout mapAttack mapAttack" 
+            "attackDetailTitle1 attackDetailTitle1 attackDetailTitle2 attackDetailTitle2 attackDetailTitle3 attackDetailTitle3"
+            "attackDetailText1 attackDetailText1 attackDetailText2 attackDetailText2 attackDetailText3 attackDetailText3"
+            "attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading"
+            "attackOtherDetails attackOtherDetails attackOtherDetails attackOtherDetails attackOtherDetails attackOtherDetails"
+            "byKaggle byKaggle byKaggle byKaggle byKaggle byKaggle"
+            ;
+}
+
+.attackHeader{
+    display:flex;   
+    flex-direction: column;
+    grid-area: attackHeader;
+    align-items: center;
+    justify-content: center;
+    color:crimson;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin-bottom: 20px;
+}
+
+.attackAbout{
+    display: flex;
+    grid-area: attackAbout;
+    flex-direction: column;
+    text-align: left;
+    margin-left: 10px;
+    margin-bottom: 26px;
+    background-color: silver;
+    border-radius: 10px;
+    padding:10px;
+}
+
+.mapAttack{
+    display: flex;
+    grid-area: mapAttack;
+    height: 200px;
+    margin-left:10px;
+    margin-bottom: 26px;
+}
+
+
+.attackDetailTitle1{
+    display: flex;
+    grid-area: attackDetailTitle1;
+    margin-left: 10px;
+    margin-right: 20px;
+    background-color: silver;
+    border-radius: 20px;
+    padding:6px;
+
+}
+
+.attackDetailTitle2{
+    display: flex;
+    grid-area: attackDetailTitle2;
+    margin-left: 10px;
+    margin-right: 20px;
+
+    background-color: silver;
+    border-radius: 20px;
+    padding:6px;
+
+}
+
+.attackDetailTitle3{
+    display: flex;
+    grid-area: attackDetailTitle3;
+    margin-left: 10px;
+    margin-right: 20px;
+
+    background-color: silver;
+    border-radius: 20px;
+    padding:6px;
+
+}
+
+
+.attackDetailText1{
+    display: flex;
+    grid-area: attackDetailText1;
+    
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-right: 20px;
+
+    background-color: silver;
+    border-radius: 10px;
+    padding:6px;
+
+}
+
+.attackDetailText2{
+    display: flex;
+    grid-area: attackDetailText2;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-right: 20px;
+
+    background-color: silver;
+    border-radius: 10px;
+    padding:6px;
+
+}
+
+.attackDetailText3{
+    display: flex;
+    grid-area: attackDetailText3;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-right: 20px;
+
+    background-color: silver;
+    border-radius: 10px;
+    padding:6px;
+
+}
+
+.attackOtherDetailsHeading{
+    display: flex;
+    grid-area: attackOtherDetailsHeading;
+    margin-top: 30px;
+    align-items: center;
+    justify-content: center;
+    color:crimson;
+
+}
+
+.attackOtherDetails{
+    display: flex;
+    grid-area: attackOtherDetails;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    background-color: silver;
+    border-radius: 10px;
+    padding:6px;
+
+}
+
+.byKaggle{
+    display: flex;
+    grid-area: byKaggle;
+    background-color: #345f61;
 }
