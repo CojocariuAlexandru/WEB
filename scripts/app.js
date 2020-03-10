@@ -167,6 +167,8 @@ let attacksPage = `
 // The routing system was implementing having the following tutorial as a starting point 
 // https://medium.com/@bryanmanuele/how-i-implemented-my-own-spa-routing-system-in-vanilla-js-49942e3c4573
 
+let webapp;
+
 class route {
     constructor(url) {
         this.url = url;
@@ -288,7 +290,7 @@ thatAttackRoute.templateCallback = function (attack) {
             `;
 }
 
-thatAttackRoute.afterCallback = function() {
+thatAttackRoute.afterCallback = function () {
     let attackAttack = document.querySelector('#mapAttack');
     map = new google.maps.Map(attackAttack, {
         center: {
@@ -338,7 +340,7 @@ function updateMainContent(pathName) {
     } else {
         redirect = true;
     }
-    if (redirect) {
+    if (redirect && webapp) {
         navigate(root.url + '/home');
     }
 }
@@ -353,10 +355,14 @@ function navigate(pathName) {
 
 function initPage() {
     rootForContent = document.querySelector('#root');
-    if (userIsLoggedIn()){
+    if (userIsLoggedIn()) {
         setWebAppTemplateAsSite();
-        navigate(root.url+'/home');
+        navigate(window.location.pathname);
     } else {
+        window.history.pushState({},
+            '/presentation',
+            window.location.origin + '/presentation'
+        );
         setPresentationTemplateAsSite();
     }
 }
@@ -367,71 +373,156 @@ window.onpopstate = () => {
 
 document.addEventListener('DOMContentLoaded', initPage);
 
-function userLogin(){
-    setWebAppTemplateAsSite();
-    navigate(root.url+'/home');
-}
-
-function userIsLoggedIn(){
-    return true;
-}
-
-function setPresentationTemplateAsSite(){
-    rootForContent.innerHTML = presentationSiteTemplate;
-    rootForContent.className = "root presentation";
-}
-
-function setWebAppTemplateAsSite(){
-    rootForContent.innerHTML = webAppTemplate;
-    rootForContent.className = "root web-app";
-    mainContent = document.querySelector('#content');
-}
+//---------------------------------------------------------- LOGIN/REGISTER LOGIC -----------------------------------------------
 
 let login = true;
 
-function changeLogin(){
-    if (login){
+function changeLogin() {
+    if (login) {
         return;
     }
     switchLoginSignup();
 }
 
-function changeSignUp(){
-    if (!login){
+function changeSignUp() {
+    if (!login) {
         return;
     }
     switchLoginSignup();
 }
 
-function switchLoginSignup(){
+function userLogin() {
+    let username = document.querySelector('#login-username').value;
+    let pwd = document.querySelector('#login-pwd').value;
+
+    if (userLoginCheckCredentials(username, pwd)) {
+        userLoginClearFields();
+        userLoginRememberCredentials(username);
+        setWebAppTemplateAsSite();
+        navigate(root.url+'/home');    
+    } else {
+        console.log('Error message');
+    }
+}
+
+function userLoginClearFields() {
+    document.querySelector('#login-username').value = '';
+    document.querySelector('#login-pwd').value = '';
+}
+
+function userLoginRememberCredentials(username){
+    localStorage.setItem('username', username)
+}
+
+function userLoginCheckCredentials(username, pwd) {
+    let users = JSON.parse(localStorage.getItem('users'));
+    for (let i = 0; i < users.length; ++i) {
+        if (users[i]['username'] === username && users[i]['password'] === pwd) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function userLogout() {
+    userLogoutRemoveCredentials();
+    window.history.pushState({},
+        '/presentation',
+        window.location.origin + '/presentation'
+    );
+    setPresentationTemplateAsSite();
+}
+
+function userLogoutRemoveCredentials(){
+    localStorage.removeItem('username');
+}
+
+function userIsLoggedIn() {
+    let user = localStorage.getItem('username');
+    if (user == null){
+        return false;
+    }
+    return true;
+}
+
+function setPresentationTemplateAsSite() {
+    webapp = false;
+    rootForContent.innerHTML = presentationSiteTemplate;
+    rootForContent.className = "root presentation";
+    setPresentationTemplateAsSiteInit();
+}
+
+function setPresentationTemplateAsSiteInit(){
+    document.querySelector('#login-pwd').addEventListener('keyup', (e) => {
+        if (e.code === 'Enter'){
+            userLogin();
+        }
+    });
+
+    document.querySelector('#register-rpwd').addEventListener('keyup', (e) => {
+        if (e.code === 'Enter'){
+            signUp();
+        }
+    })
+}
+
+function setWebAppTemplateAsSite() {
+    webapp = true;
+    rootForContent.innerHTML = webAppTemplate;
+    rootForContent.className = "root web-app";
+    mainContent = document.querySelector('#content');
+    setWebAppTemplateAsSiteInit();
+}
+
+function setWebAppTemplateAsSiteInit() {
+    let username = localStorage.getItem('username');
+    let usernameContainer = document.querySelector('#web-app-username');
+    usernameContainer.innerHTML = username;
+}
+
+function switchLoginSignup() {
     let loginComponent = document.querySelector('#login-component');
     let signupComponent = document.querySelector('#sign-up-component');
-    if (login){
+    if (login) {
         loginComponent.style.display = 'none';
         signupComponent.style.display = 'block';
-        login = false;
     } else {
         loginComponent.style.display = 'block';
         signupComponent.style.display = 'none';
-        login = true;
+    }
+    login = !login;
+}
+
+function signUp() {
+    let username = document.querySelector('#register-username').value;
+    let pwd = document.querySelector('#register-pwd').value;
+    let rpwd = document.querySelector('#register-rpwd').value;
+
+    if (pwd != rpwd) {
+        console.log('The passwords don\'t match');
+    } else {
+        signUpAddUser(username, pwd);
+        signUpClearFields();
+        switchLoginSignup();
     }
 }
 
-function signUp(){
-    let username = 'random';
-    let pwd = 'parola';
-
+function signUpAddUser(username, pwd) {
     let users = JSON.parse(localStorage.getItem('users'));
-    console.log(users);
-    if (users == null){
+    if (users == null) {
         users = [];
     }
     users.push({
-        'username':username,
-        'password':pwd
+        'username': username,
+        'password': pwd
     });
     localStorage.setItem('users', JSON.stringify(users));
-    switchLoginSignup();
+}
+
+function signUpClearFields(){
+    document.querySelector('#register-username').value = '';
+    document.querySelector('#register-pwd').value = '';
+    document.querySelector('#register-rpwd').value = '';
 }
 
 // ----------------------------------------------- Statistics form ----------------------------------------------------------
@@ -523,10 +614,10 @@ let presentationSiteTemplate = `
             <h2 class="title">Login</h2>
 
             <form>
-                <label for="username"><i class="fa fa-user-circle-o" style="font-size:24px"></i>Username:</label>
-                <input type="text" id="username" name="username">
-                <label for="pwd"><i class="fa fa-eye-slash" style="font-size:24px"></i>Password:</label>
-                <input type="password" id="pwd" name="pwd">
+                <label for="login-username"><i class="fa fa-user-circle-o" style="font-size:24px"></i>Username:</label>
+                <input type="text" id="login-username" name="username">
+                <label for="login-pwd"><i class="fa fa-eye-slash" style="font-size:24px"></i>Password:</label>
+                <input type="password" id="login-pwd" name="pwd">
                 <input type="button" value="Sign In" onclick="userLogin()">
             </form>
             <p>Not a member?</p><a onclick="changeSignUp()">SignUp now</a>
@@ -537,12 +628,12 @@ let presentationSiteTemplate = `
             <h2 class="title">Sign Up</h2>
 
             <form>
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username">
-                <label for="pwd">Password:</label>
-                <input type="password" id="pwd" name="pwd">
-                <label for="rpwd">Password again:</label>
-                <input type="repeatpassword" id="rpwd" name="rpwd">
+                <label for="register-username">Username:</label>
+                <input type="text" id="register-username" name="username">
+                <label for="register-pwd">Password:</label>
+                <input type="password" id="register-pwd" name="pwd">
+                <label for="register-rpwd">Password again:</label>
+                <input type="password" id="register-rpwd" name="rpwd">
                 <input type="button" value="Submit" onclick="signUp()">
             </form>
         </div>
@@ -693,7 +784,15 @@ let webAppTemplate = `
 </aside>
 
 <div class="main-wrapper">
-    <header id="usernameContainer">
+    <header>
+        <div class="user">
+            <div class="icon">
+            <i class="fa fa-user-circle-o"></i>
+            </div>
+            <div class="username" id="web-app-username"></div>
+        </div>
+        <div class="vertical-line"></div>
+        <div class="logout-button" onclick="userLogout()">Logout</div>
     </header>
     <main id="content">
     </main>
@@ -964,4 +1063,4 @@ function generateCountries() {
     regionFormTitle.innerHTML = regionFormTitle.innerHTML + '</datalist>'
     regionFormTitle.appendChild(regionOptionChoose)
     regionForm.appendChild(regionFormTitle)
-} 
+}
