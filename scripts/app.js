@@ -24,8 +24,11 @@ attacks.push(new Attack(3, 15.4786, -120.5997));
 // ------------------------------------------------------ Templates ----------------------------------------------------------
 
 let homePage = `
-    <section id="home">
-        Home Page
+    <section id="home">    
+        <div class="left">
+        </div>
+        <div class="right">
+        </div>
     </section>
 `;
 
@@ -266,10 +269,10 @@ function initPage() {
     rootForContent = document.querySelector('#root');
     if (userIsLoggedIn()){
         setWebAppTemplateAsSite();
+        navigate(root.url+'/home');
     } else {
         setPresentationTemplateAsSite();
     }
-    //updateMainContent(window.location.pathname);
 }
 
 window.onpopstate = () => {
@@ -280,10 +283,11 @@ document.addEventListener('DOMContentLoaded', initPage);
 
 function userLogin(){
     setWebAppTemplateAsSite();
+    navigate(root.url+'/home');
 }
 
 function userIsLoggedIn(){
-    return false;
+    return true;
 }
 
 function setPresentationTemplateAsSite(){
@@ -293,7 +297,7 @@ function setPresentationTemplateAsSite(){
 
 function setWebAppTemplateAsSite(){
     rootForContent.innerHTML = webAppTemplate;
-    rootForContent.className = "root webapp";
+    rootForContent.className = "root web-app";
     mainContent = document.querySelector('#content');
 }
 
