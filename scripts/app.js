@@ -25,7 +25,7 @@ attacks.push(new Attack(3, 15.4786, -120.5997));
 
 let homePage = `
 <section id="home">
-    <div class="left-container" onclick="navigate('/statistics')">
+    <div class="left-container" onclick="navigateRoot('/statistics')">
         <img src="/img/web-app-home-plot.png">
         <div class="description">
             <span class="title">
@@ -37,7 +37,7 @@ let homePage = `
             </span>
         </div>
     </div>
-    <div class="right-container" onclick="navigate('/map')">
+    <div class="right-container" onclick="navigateRoot('/map')">
         <img src="/img/web-app-home-map.png">
         <div class="description">
             <span class="title">
@@ -54,12 +54,6 @@ let homePage = `
 
 let statisticsPage = `
 <div class='statisticsForm'>
-    <!-- <section class='videoContainer'>
-     <video autoplay muted loop id="myVideo">
-         <source src="soldiers.mp4" type="video/mp4">
-     </video>
- </section> -->
-
     <h1>Terrorism record search</h1>
 
     <div class='firstRow1'>
@@ -177,6 +171,7 @@ class route {
 }
 
 let root = new route('');
+let rootAdd = 0;
 
 let homeRoute = new route('home');
 homeRoute.template = homePage;
@@ -265,7 +260,6 @@ thatAttackRoute.templateCallback = function (attack) {
                         <h3>Ransom</h3>
                     </div>
                     
-
                     <div class='attackDetailText1'>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
                     </div>
@@ -335,14 +329,28 @@ function updateMainContentRecursive(node, pathParts, index) {
 function updateMainContent(pathName) {
     let pathParts = pathName.split('/');
     let redirect = false;
-    if (pathParts[0] === root.url) {
-        redirect = updateMainContentRecursive(root, pathParts, 1);
+    
+    let toMatch = getPathToMatch();
+
+    if (pathParts[0+rootAdd] === toMatch) {
+        redirect = updateMainContentRecursive(root, pathParts, 1+rootAdd);
     } else {
         redirect = true;
     }
     if (redirect && webapp) {
-        navigate(root.url + '/home');
+        navigateRoot('/home');
     }
+}
+
+function getPathToMatch(){
+    let toMatch;
+    let lastSlashIndex = root.url.lastIndexOf('/');
+    if (lastSlashIndex == -1){
+        toMatch = '';
+    } else {
+        toMatch = root.url.substr(lastSlashIndex+1);
+    }
+    return toMatch;
 }
 
 function navigate(pathName) {
@@ -353,6 +361,10 @@ function navigate(pathName) {
     updateMainContent(pathName);
 }
 
+function navigateRoot(pathName){
+    navigate(root.url + pathName);
+}
+
 function initPage() {
     rootForContent = document.querySelector('#root');
     if (userIsLoggedIn()) {
@@ -360,8 +372,8 @@ function initPage() {
         navigate(window.location.pathname);
     } else {
         window.history.pushState({},
-            '/presentation',
-            window.location.origin + '/presentation'
+            root.url + '/presentation',
+            window.location.origin + root.url + '/presentation'
         );
         setPresentationTemplateAsSite();
     }
@@ -399,7 +411,7 @@ function userLogin() {
         userLoginClearFields();
         userLoginRememberCredentials(username);
         setWebAppTemplateAsSite();
-        navigate(root.url+'/home');    
+        navigateRoot('/home');    
     } else {
         console.log('Error message');
     }
@@ -416,9 +428,11 @@ function userLoginRememberCredentials(username){
 
 function userLoginCheckCredentials(username, pwd) {
     let users = JSON.parse(localStorage.getItem('users'));
-    for (let i = 0; i < users.length; ++i) {
-        if (users[i]['username'] === username && users[i]['password'] === pwd) {
-            return true;
+    if (users){
+        for (let i = 0; i < users.length; ++i) {
+            if (users[i]['username'] === username && users[i]['password'] === pwd) {
+                return true;
+            }
         }
     }
     return false;
@@ -427,8 +441,8 @@ function userLoginCheckCredentials(username, pwd) {
 function userLogout() {
     userLogoutRemoveCredentials();
     window.history.pushState({},
-        '/presentation',
-        window.location.origin + '/presentation'
+        root.url + '/presentation',
+        window.location.origin + root.url + '/presentation'
     );
     setPresentationTemplateAsSite();
 }
@@ -585,7 +599,7 @@ function generateRegions() {
 
 function searchAttack() {
     let attackInput = document.querySelector('#searchAttackButton');
-    navigate('/attacks/' + attackInput.value);
+    navigateRoot('/attacks/' + attackInput.value);
 }
 
 //***************************************************Pages Templates*******************************************************/
@@ -593,7 +607,7 @@ function searchAttack() {
 let presentationSiteTemplate = `
 <header>
     <div class="nav">
-        <img src="img/icon.png" alt="icon">
+        <img src="/img/icon.png" alt="icon">
         <h3>
             TeVi
         </h3>
@@ -655,21 +669,20 @@ let presentationSiteTemplate = `
 
     </div>
     <div class="col-1">
-        <img src="img/image2.png" alt="">
+        <img src="/img/image2.png" alt="">
         <p><span></span> These powerful illustrations can be really handy for understanding any patterns involving terrorist attacks, and can be featured on thematic presentations.
         </p>
     </div>
     <div class="col-2">
-        <img src="img/image.png" alt="">
+        <img src="/img/image.png" alt="">
         <p><span></span>Another feature is the world map, modified such that it illustrates the kind of attacks requested by the user. The exact locations of the attacks will be pin-pointed based on this geographic coordinates.
         </p>
 
     </div>
     <div class="col-3">
-        <img src="img/image3.png" alt="">
+        <img src="/img/image3.png" alt="">
         <p><span></span> Any graphic element generated (map or statistics) can be externally exported to the formats: png, jpg. The attacks with all the information included can be exported in csv format.
         </p>
-
     </div>
 
     <div class="us">
@@ -679,14 +692,13 @@ let presentationSiteTemplate = `
         <div class='us-body'>
             <p>
                 <span></span> We are the best team eveeer! Three students at FII.
-
             </p>
         </div>
 
     </div>
     <div class="profil1">
         <span class="background1"></span>
-        <img src="img/ramo.png" alt="">
+        <img src="/img/ramo.png" alt="">
         <p>“Creativity Is Intelligence Having Fun.”
         </p>
         <p>Ramona Albert
@@ -699,7 +711,7 @@ let presentationSiteTemplate = `
         </p>
     </div>
     <div class="profil2">
-        <img src="img/olo.png" alt="Oloieri Alexandru">
+        <img src="/img/olo.png" alt="Oloieri Alexandru">
         <p>"Push yourself, because no one else is going to do it for you."
         </p>
         <p>Oloieri Alexandru
@@ -713,7 +725,7 @@ let presentationSiteTemplate = `
 
     </div>
     <div class="profil3">
-        <img src="img/alex.png" alt="">
+        <img src="/img/alex.png" alt="">
         <p>"Do not be overheard complaining. Not even to yourself."</p>
         <p>Cojocariu Alexandru
             <a href="https://www.facebook.com/profile.php?id=100014694300615">
@@ -748,7 +760,7 @@ let webAppTemplate = `
         TeVi
     </div>
     <div class="options">
-        <div class="option" onclick="navigate('/home')">
+        <div class="option" onclick="navigateRoot('/home')">
             <span class="icon">
                     <i class="fa fa-home"></i>
                 </span>
@@ -756,7 +768,7 @@ let webAppTemplate = `
                     Home
                 </span>
         </div>
-        <div class="option" onclick="navigate('/statistics')">
+        <div class="option" onclick="navigateRoot('/statistics')">
             <span class="icon">
                     <i class="fa fa-pie-chart"></i>
                 </span>
@@ -764,7 +776,7 @@ let webAppTemplate = `
                     Statistics
                 </span>
         </div>
-        <div class="option" onclick="navigate('/map')">
+        <div class="option" onclick="navigateRoot('/map')">
             <span class="icon">
                     <i class="fa fa-map-marker"></i>
                 </span>
@@ -772,7 +784,7 @@ let webAppTemplate = `
                     Map
                 </span>
         </div>
-        <div class="option" onclick="navigate('/attacks')">
+        <div class="option" onclick="navigateRoot('/attacks')">
             <span class="icon">
                     <i class="fa fa-fighter-jet"></i>
                 </span>
