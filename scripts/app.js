@@ -127,7 +127,7 @@ let statisticsPage = `
             <input type='checkbox' id='knownInput'></input>
         </div>
     </div>
-    <section class='submitForm'>
+    <section class='submitForm' onclick="navigateRoot('/statisticsDrawings')">
         <input type='button' value='Submit' id='submitButton'> </input>
     </section>
 </div>
@@ -157,6 +157,10 @@ let attacksPage = `
     </div>
 `;
 
+let statisticsDrawingsPage = `
+    <p>statistics page</p>
+`;
+
 // ---------------------------------------------------- Routing -------------------------------------------------------------
 // The routing system was implementing having the following tutorial as a starting point 
 // https://medium.com/@bryanmanuele/how-i-implemented-my-own-spa-routing-system-in-vanilla-js-49942e3c4573
@@ -172,6 +176,10 @@ class route {
 
 let root = new route('');
 let rootAdd = 0;
+
+let statisticsDrawingsRoute = new route('statisticsDrawings');
+statisticsDrawingsRoute.template = statisticsDrawingsPage;
+root.children.push(statisticsDrawingsRoute);
 
 let homeRoute = new route('home');
 homeRoute.template = homePage;

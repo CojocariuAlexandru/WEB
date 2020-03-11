@@ -1353,7 +1353,7 @@ h1:hover {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: auto auto auto auto auto auto auto;
     grid-template-areas: "attackHeader attackHeader attackHeader attackHeader attackHeader attackHeader"
-            "attackAbout attackAbout attackAbout attackAbout mapAttack mapAttack" 
+            "attackAbout attackAbout attackAbout mapAttack mapAttack mapAttack" 
             "attackDetailTitle1 attackDetailTitle1 attackDetailTitle2 attackDetailTitle2 attackDetailTitle3 attackDetailTitle3"
             "attackDetailText1 attackDetailText1 attackDetailText2 attackDetailText2 attackDetailText3 attackDetailText3"
             "attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading"
@@ -1391,9 +1391,9 @@ h1:hover {
     /* display: flex; */
     /* grid-area: mapAttack; */
     height: 240px;
-    width: 200%;
-    /* margin-left:10px; */
-    /* margin-bottom: 26px; */
+    width: 295%;
+    margin-left:10px;
+    margin-bottom: 26px;
 }
 
 .attackDetailTitle1{
