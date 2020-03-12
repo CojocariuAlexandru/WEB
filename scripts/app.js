@@ -40,11 +40,12 @@ let presentationSitePage = readPage('presentation');
 let webAppTemplate = readPage('web-app');
 let homePage = readPage('web-app-home.html');
 let statisticsPage = readPage('web-app-statistics');
+let statisticsDrawingsPage = readPage('web-app-statistics-drawings');
 let mapPage = readPage('web-app-map');
 let attacksPage = readPage('web-app-attacks');
 let attackIdPage = readPage('web-app-id-attack');
 
-// ------------------------------------------------------- Routing -----------------------------------------------------------
+// ---------------------------------------------------- Routing -------------------------------------------------------------
 // The routing system was implementing having the following tutorial as a starting point 
 // https://medium.com/@bryanmanuele/how-i-implemented-my-own-spa-routing-system-in-vanilla-js-49942e3c4573
 
@@ -71,6 +72,12 @@ let statisticsRoute = new Route('statistics', true);
 statisticsRoute.template = statisticsPage;
 statisticsRoute.afterCallback = statisticsPageInit;
 root.children.push(statisticsRoute);
+
+//*** Statistics drawings route */
+let statisticsDrawingsRoute = new Route('statistics-drawings', true);
+statisticsDrawingsRoute.template = statisticsDrawingsPage;
+statisticsDrawingsRoute.afterCallback = statisticsDrawingsPageInit;
+root.children.push(statisticsDrawingsRoute);
 
 //*** Map route */
 let mapRoute = new Route('map', true);
@@ -239,6 +246,12 @@ function statisticsPageInit() {
     generateTargets();
     generateRegions();
     generateCountries();
+}
+
+// ------------------------------------------------------- Statistics drawings page ------------------------------------------
+
+function statisticsDrawingsPageInit() {
+
 }
 
 // ------------------------------------------------------- Map page ----------------------------------------------------------
