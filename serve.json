@@ -1,6 +1,10 @@
 {
   "rewrites": [{
-    "source": "/**",
+    "source": "app/**",
     "destination": "/index.html"
+  }],
+  "redirects": [{
+    "source": "/",
+    "destination": "/app"
   }]
 }

@@ -1,0 +1,140 @@
+.thatAttackGrid{
+    margin:20px 0 0 0px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto auto auto auto auto;
+    grid-template-areas: "attackHeader attackHeader attackHeader attackHeader attackHeader attackHeader"
+            "attackAbout attackAbout attackAbout attackAbout mapAttack mapAttack" 
+            "attackDetailTitle1 attackDetailTitle1 attackDetailTitle2 attackDetailTitle2 attackDetailTitle3 attackDetailTitle3"
+            "attackDetailText1 attackDetailText1 attackDetailText2 attackDetailText2 attackDetailText3 attackDetailText3"
+            "attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading"
+            "attackOtherDetails attackOtherDetails attackOtherDetails attackOtherDetails attackOtherDetails attackOtherDetails"
+            "byKaggle byKaggle byKaggle byKaggle byKaggle byKaggle"
+            ;
+
+    overflow-y: scroll;
+}
+
+.attackHeader{
+    display:flex;   
+    flex-direction: column;
+    grid-area: attackHeader;
+    align-items: center;
+    justify-content: center;
+    color:crimson;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin-bottom: 20px;
+}
+
+.attackAbout{
+    display: flex;
+    grid-area: attackAbout;
+    flex-direction: column;
+    text-align: left;
+    margin-left: 10px;
+    margin-bottom: 26px;
+    background-color: silver;
+    border-radius: 10px;
+    padding:10px;
+}
+
+#mapAttack{
+    height: 240px;
+    width: 200%;
+}
+
+.attackDetailTitle1{
+    display: flex;
+    grid-area: attackDetailTitle1;
+    margin-left: 10px;
+    margin-right: 20px;
+    background-color: silver;
+    border-radius: 20px;
+    padding:6px;
+}
+
+.attackDetailTitle2{
+    display: flex;
+    grid-area: attackDetailTitle2;
+    margin-left: 10px;
+    margin-right: 20px;
+
+    background-color: silver;
+    border-radius: 20px;
+    padding:6px;
+}
+
+.attackDetailTitle3{
+    display: flex;
+    grid-area: attackDetailTitle3;
+    margin-left: 10px;
+    margin-right: 20px;
+
+    background-color: silver;
+    border-radius: 20px;
+    padding:6px;
+
+}
+
+
+.attackDetailText1{
+    display: flex;
+    grid-area: attackDetailText1;
+    
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-right: 20px;
+
+    background-color: silver;
+    border-radius: 10px;
+    padding:6px;
+
+}
+
+.attackDetailText2{
+    display: flex;
+    grid-area: attackDetailText2;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-right: 20px;
+
+    background-color: silver;
+    border-radius: 10px;
+    padding:6px;
+
+}
+
+.attackDetailText3{
+    display: flex;
+    grid-area: attackDetailText3;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-right: 20px;
+
+    background-color: silver;
+    border-radius: 10px;
+    padding:6px;
+
+}
+
+.attackOtherDetailsHeading{
+    display: flex;
+    grid-area: attackOtherDetailsHeading;
+    margin-top: 30px;
+    align-items: center;
+    justify-content: center;
+    color:crimson;
+}
+
+.attackOtherDetails{
+    display: flex;
+    grid-area: attackOtherDetails;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    background-color: silver;
+    border-radius: 10px;
+    padding:6px;
+}

@@ -1,0 +1,786 @@
+body .presentation {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+    margin-top: 60px;
+
+    font-size: 10px;
+}
+
+.presentation h2 {
+    display: block;
+    font-size: 30px;
+    margin-bottom: 50px;
+}
+
+.presentation h3 {
+    font-size: 20px;
+}
+
+.presentation span {
+    margin: 20px;
+}
+
+.presentation p {
+    font-size: 16px;
+    text-align: justify;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+body .presentation .grid-container {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto auto auto auto;
+    grid-template-areas: "login login login art art art"
+        "about about about about about about"
+        "col-1 col-1 col-2 col-2 col-3 col-3"
+        "us us us us us us"
+        "profil1 profil1 profil2 profil2 profil3 profil3"
+        "links links links links contact contact";
+}
+
+.presentation .login {
+    grid-area: login;
+}
+
+.presentation .art {
+    grid-area: art;
+}
+
+.presentation .about {
+    grid-area: about;
+}
+
+.presentation .col-1 {
+    grid-area: col-1;
+}
+
+.presentation .col-2 {
+    grid-area: col-2;
+}
+
+.presentation .col-3 {
+    grid-area: col-3;
+}
+
+.presentation .us {
+    grid-area: us;
+}
+
+.presentation .profil1 {
+    grid-area: profil1;
+}
+
+.presentation .profil2 {
+    grid-area: profil2;
+}
+
+.presentation .profil3 {
+    grid-area: profil3;
+}
+
+.presentation .links {
+    grid-area: links;
+}
+
+.presentation .contact {
+    grid-area: contact;
+}
+
+.presentation .nav {
+    display: flex;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    min-height: 60px;
+    background-color: #035e63;
+    box-shadow: 2px 5px 15px 10px #035e63;
+    width: 100%;
+    z-index: 100;
+}
+
+.presentation header ul {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.presentation header ul li a {
+    display: block;
+    font-size: 20px;
+    line-height: 1;
+    padding: 20px 25px;
+    text-decoration: none;
+    color: #eeeeee;
+    background-color: transparent;
+    transition: color .3s linear,
+        background-color .3s linear;
+    border-left: dashed #eeeeee 1.5px;
+}
+
+.presentation .nav img {
+    height: 60px;
+}
+
+.presentation header {
+    position: relative;
+    display: block;
+}
+
+.presentation header h3 {
+    display: inline;
+    font-size: 30px;
+    padding: 10px 10px;
+    margin-right: auto;
+    margin-top: 10px;
+    color: #eeeeee;
+}
+
+.presentation header ul li a:visited {
+    color: #eeeeee
+}
+
+.presentation header ul li a:hover {
+    color: white;
+    background-color: #175053;
+    box-shadow: #175053 2px 0 5px 10px;
+}
+
+.presentation .grid-container>div {
+    display: flex;
+    align-items: center;
+}
+
+/************** Login *************************************/
+
+.presentation .login {
+    height: calc(100vh - 60px);
+    position: relative;
+}
+
+.presentation .login h2 {
+    color: #eeeeee;
+    margin-top: 10px;
+}
+
+.presentation .login .widget {
+    text-align: center;
+    margin: auto auto;
+    min-width: 60%;
+    /* border: 2px solid #00adb5; */
+    box-shadow: #044e52 20px 20px 50px 10px;
+    border-radius: 20px;
+    padding: 20px;
+    background-color: #00acb567;
+}
+
+.presentation .login .widget-sign-up {
+    display: none;
+}
+
+.presentation .login .widget label {
+    display: block;
+    text-align: left;
+    font-size: 18px;
+    margin-top: 20px;
+    color: #eeeeee;
+}
+
+.presentation .login .widget input:not([type='button']) {
+    display: block;
+    background-color: transparent;
+    border-style: none;
+    border-bottom: 1px solid black;
+    padding: 5px;
+    width: 100%;
+    transition: border-color .6s linear;
+    font-size: 16px;
+    color: #eeeeee;
+}
+
+.presentation .login .widget input:focus:not([type='button']) {
+    border-bottom: 1px solid white;
+}
+
+.presentation .login .widget input:hover:not([type='button']) {
+    border-bottom: 1px solid white;
+    /* background-color:#0662796e ; */
+}
+
+.presentation .login .widget input[type='button'] {
+    display: block;
+    margin: 40px auto 20px auto;
+    padding: 5px;
+    width: 50%;
+    border-style: solid;
+    border-radius: 30px;
+    font-size: 20px;
+    transition: color .3s linear,
+        background-color .3s linear;
+    color: white;
+    background-color: #175053;
+    box-shadow: #175053 2px 0 5px 10px;
+}
+
+.presentation .login .widget input:hover[type='button'] {
+    opacity: 0.8;
+    cursor: pointer;
+    background-color: #eeeeee;
+    color: #175053;
+}
+
+.presentation .login .widget input:focus {
+    box-shadow: none;
+    outline-offset: 0;
+    outline: none;
+    outline-color: transparent;
+}
+
+.presentation .login .widget label i {
+    display: inline-block;
+    margin: 5px;
+}
+
+.presentation .login .widget p {
+    text-align: center;
+    color: #eeeeee;
+    opacity: 0.3;
+    margin: 0 auto 0 auto;
+}
+
+.presentation .login .widget a {
+    color: #eeeeee;
+    font-size: 15px;
+}
+
+.presentation .login .background {
+    margin: 0;
+    height: 100%;
+    width: 200%;
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url("/img/background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/************** ART ***************************************/
+
+.presentation .art img {
+    max-width: 80%;
+}
+
+/************** ABOUT *************************************/
+
+.presentation .grid-container .about,
+.presentation .grid-container .us {
+    max-height: 100%;
+    display: block;
+    background-color: #eeeeee;
+}
+
+.presentation .about h2,
+.presentation .us h2 {
+    display: inline-flex;
+    margin: 50px 50px 20px 60px;
+    padding: 0 10px 0 10px;
+    border-radius: 30px;
+    color: #eeeeee;
+    background-color: #175053;
+    box-shadow: #175053 2px 0 5px 10px;
+}
+
+.presentation .about p,
+.presentation .us p {
+    border-style: solid 2px black;
+    margin-bottom: 8px;
+}
+
+.presentation .about .about-body,
+.presentation .col-1 p,
+.presentation .col-2 p,
+.presentation .col-3 p,
+.presentation .us .us-body,
+.presentation .profil1 p,
+.presentation .profil2 p,
+.presentation .profil3 p {
+    padding: 10px 10px;
+    margin: 30px 20px;
+    border-radius: 10px;
+    background-color: #1750531e;
+}
+
+.presentation .about img,
+.presentation .us img {
+    float: right;
+    max-height: 100%;
+    margin-left: 30px;
+}
+
+/* col-1 col-2 col-3*/
+.presentation .col-1,
+.presentation .col-2,
+.presentation .col-3,
+.presentation .profil1,
+.presentation .profil2,
+.presentation .profil3 {
+    flex-direction: column;
+    padding: 20px;
+}
+
+.presentation .col-1 img,
+.presentation .col-2 img,
+.presentation .col-3 img,
+.presentation .profil1 img,
+.presentation .profil2 img,
+.presentation .profil3 img {
+    max-width: 100%;
+    min-height: 250px;
+}
+
+.presentation .col-1 p,
+.presentation .col-2 p,
+.presentation .col-3 p,
+.presentation .profil1 p,
+.presentation .profil2 p,
+.presentation .profil3 p {
+    padding: 10px;
+    margin: 20px 0;
+}
+
+/************** US ***************************************/
+
+.presentation .grid-container .us {
+    border-top: dashed 2px #175053;
+}
+
+/************** PROFILES **********************************/
+
+.presentation .profil1 {
+    position: relative;
+}
+
+.presentation .profil1 .background1 {
+    margin: 0;
+    height: calc(100% + 20px);
+    width: calc(300% + 25px);
+    z-index: -1;
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    background-image: url("/img/background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.presentation .profil1,
+.presentation .profil2,
+.presentation .profil3 {
+    border-right: dashed 2px #00acb567;
+}
+
+.presentation .profil1 i,
+.presentation .profil2 i,
+.presentation .profil3 i {
+    color: #eeeeee;
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+.presentation .profil1 img,
+.presentation .profil2 img,
+.presentation .profil3 img {
+    max-width: 50%;
+    min-height: 50px;
+}
+
+.presentation .profil1 p,
+.presentation .profil2 p,
+.presentation .profil3 p {
+    background-color: #00acb567;
+    font-style: italic;
+    color: #eeeeee;
+    text-align: center;
+    max-width: 300px;
+}
+
+/************** FOOTER ************************************/
+
+/************** LINKS *************************************/
+
+.presentation .links {
+    background-color: #035e63;
+    padding: 30px 50px;
+    border-top: #eeeeee 2px dashed;
+}
+
+.presentation .links ul {
+    margin-left: 30px;
+    margin-top: 10px;
+    list-style: none;
+}
+
+.presentation .links ul li {
+    margin: 5px;
+}
+
+.presentation .links ul a {
+    color: #eeeeee;
+    font-size: 16px;
+}
+
+.presentation .links ul a:hover {
+    opacity: 0.6;
+}
+
+.presentation .links ul i {
+    color: #eeeeee;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.presentation .links h3 {
+    color: #eeeeee;
+}
+
+/************** CONTACT ***********************************/
+.presentation .grid-container .links,
+.presentation .grid-container .contact {
+    flex-direction: column;
+    align-items: initial;
+}
+
+.presentation .contact {
+    border-top: 2px dashed #175053;
+    position: relative;
+}
+
+.presentation .contact h3 {
+    padding: 20px 50px;
+    color: #035e63;
+}
+
+.presentation .contact i {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 50px;
+    color: #175053
+}
+
+.presentation .contact ul {
+    margin-left: 40px;
+}
+
+.presentation .contact ul li {
+    font-size: 15px;
+}
+
+.presentation .contact .fa-briefcase {
+    font-size: 30px;
+    top: 100px;
+}
+
+.presentation .contact .number {
+    font-size: 16px;
+    font-style: italic;
+}
+
+.presentation .contact .adress {
+    margin-top: 20px;
+    font-size: 10px;
+    margin-bottom: 20px;
+    margin-right: 60px;
+}
+
+/************** MEDIA QUERIES *****************************/
+
+@media only screen and (max-width: 1100px) {
+    body .presentation .grid-container {
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: auto auto auto auto auto auto;
+        grid-template-areas: "login login login login login login"
+            "about about about about about about"
+            "col-1 col-1 col-2 col-2 col-3 col-3"
+            "us us us us us us"
+            "profil1 profil1 profil2 profil2 profil3 profil3"
+            "links links links links contact contact";
+    }
+
+    .presentation .col-1 img,
+    .presentation .col-2 img,
+    .presentation .col-3 img {
+        max-width: 100%;
+        min-height: 200px;
+    }
+
+    .presentation .login .background {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 955px) {
+    .presentation .mail {
+        display: none;
+    }
+
+    .presentation .profil1 p,
+    .presentation .profil2 p,
+    .presentation .profil3 p {
+        font-size: 14px;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+
+    .presentation .about p,
+    .presentation .us p {
+        font-size: 14px;
+    }
+
+    .presentation .col-1 img,
+    .presentation .col-2 img,
+    .presentation .col-3 img {
+        max-width: 100%;
+        min-height: 150px;
+    }
+
+    .presentation .col-1 p,
+    .presentation .col-2 p,
+    .presentation .col-3 p {
+        font-size: 14px;
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    body .presentation .grid-container {
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: auto auto auto auto auto auto auto auto auto auto;
+        grid-template-areas: "login login login login login login"
+            "about about about about about about"
+
+            "col-1 col-1 col-1 col-1 col-1 col-1"
+            "col-2 col-2 col-2 col-2 col-2 col-2"
+            "col-3 col-3 col-3 col-3 col-3 col-3"
+
+            "us us us us us us"
+            "profil1 profil1 profil1 profil1 profil1 profil1"
+            "profil2 profil2 profil2 profil2 profil2 profil2"
+            "profil3 profil3 profil3 profil3 profil3 profil3"
+
+            "links links links links contact contact";
+    }
+
+    .presentation .profil1 .background1 {
+        width: calc(100% + 20px);
+        height: calc(300% + 70px);
+    }
+
+    .presentation .profil1,
+    .presentation .profil2,
+    .presentation .profil3 {
+        border: none;
+    }
+
+    .presentation .mail {
+        display: inline;
+    }
+
+    .presentation header ul li a {
+        font-size: 16px;
+        padding: 16px 20px;
+    }
+
+    .presentation .profil1 p,
+    .presentation .profil2 p,
+    .presentation .profil3 p {
+        font-size: 16px;
+    }
+
+    .presentation .col-1 p,
+    .presentation .col-2 p,
+    .presentation .col-3 p {
+        font-size: 16px;
+        text-align: justify;
+    }
+
+    .presentation .col-1,
+    .presentation .col-2,
+    .presentation .col-3 {
+        margin: 0 0px;
+        padding: 40px 50px;
+        border-top: dashed 2px #175053;
+    }
+
+    .presentation .col-1 img,
+    .presentation .col-2 img,
+    .presentation .col-3 img {
+        max-width: 70%;
+    }
+
+    .presentation .about p,
+    .presentation .us p {
+        font-size: 16px;
+    }
+
+    .presentation .contact .number {
+        font-size: 14px;
+        margin-left: 10px;
+    }
+}
+
+@media only screen and (max-width: 565px) {
+    .presentation .contact ul {
+        margin-left: 20px;
+    }
+
+    .presentation .contact i {
+        font-size: 30px;
+    }
+}
+
+@media only screen and (max-width: 520px) {
+    body .presentation .grid-container {
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: auto auto auto auto auto auto auto auto auto auto;
+        grid-template-areas: "login login login login login login"
+            "about about about about about about"
+
+            "col-1 col-1 col-1 col-1 col-1 col-1"
+            "col-2 col-2 col-2 col-2 col-2 col-2"
+            "col-3 col-3 col-3 col-3 col-3 col-3"
+
+            "us us us us us us"
+            "profil1 profil1 profil1 profil1 profil1 profil1"
+            "profil2 profil2 profil2 profil2 profil2 profil2"
+            "profil3 profil3 profil3 profil3 profil3 profil3"
+
+            "links links links contact contact contact";
+    }
+
+    .presentation .links {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .presentation .links ul {
+        padding-left: 0;
+        margin-left: 5px;
+    }
+
+    .presentation .links ul a {
+        color: #eeeeee;
+        font-size: 12px;
+    }
+
+    .presentation .links ul i {
+        color: #eeeeee;
+        font-size: 16px;
+        margin-right: 10px;
+    }
+
+    .presentation .login .widget-login,
+    .presentation .login .widget-sign-up {
+        min-width: 80%;
+    }
+
+    .presentation #signup {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 430px) {
+    .presentation header ul li a {
+        font-size: 16px;
+        padding: 16px 10px;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+    .presentation #about {
+        display: none;
+    }
+
+    .presentation .col-1,
+    .presentation .col-2,
+    .presentation .col-3 {
+        padding: 20px;
+    }
+
+    .presentation .col-1 img,
+    .presentation .col-2 img,
+    .presentation .col-3 img {
+        max-width: 90%;
+    }
+
+    .presentation .col-1 p,
+    .presentation .col-2 p,
+    .presentation .col-3 p,
+    .presentation .us p,
+    .presentation .about p {
+        font-size: 14px
+    }
+
+    .presentation .contact h3,
+    .presentation .links h3 {
+        font-size: 14px;
+    }
+
+    .presentation .fa-briefcase {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 346px) {
+    .presentation .profil1 .background1 {
+        height: calc(300% + 20px);
+    }
+}
+
+@media only screen and (max-width: 322px) {
+    .presentation .profil1 .background1 {
+        height: calc(300% + 20px);
+    }
+
+    .presentation .contact .number {
+        font-size: 12px;
+    }
+
+    .presentation #adresa {
+        display: none;
+    }
+
+    .presentation #icon {
+        left: 60px;
+    }
+}
+
+@media only screen and (max-width: 303px) {
+    .presentation .profil1 .background1 {
+        height: calc(300% + 45px);
+    }
+}
+
+@media only screen and (max-width: 302px) {
+    .presentation .profil1 .background1 {
+        height: calc(300% + 70px);
+    }
+}
+
+@media only screen and (max-width: 284px) {
+    .presentation .profil1 .background1 {
+        height: calc(300% + 92px);
+    }
+}
