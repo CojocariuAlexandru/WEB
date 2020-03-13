@@ -47,17 +47,35 @@
         margin-top:20px;
         font-size:15px;
     }
+    #mapAttack{
+        padding-left: 0;
+        margin-left: 0;
+        min-height: 300px;
+        max-width: 80%;
+    
+    }
 }
 
-@media screen and (max-width:600px){
+@media screen and (max-width:610px){
     .attackHeader{
         font-size:14px;
         text-align: center;
     }
-    .attackAbout, .attackDetailText1, .attackDetailText2, .attackDetailText3, .attackOtherDetails{
-        font-size: 12px;
+    .attackAbout ul li div span, .attackDetailText1, .attackDetailText2, .attackDetailText3, .attackOtherDetails{
+        font-size: 16px;
     }
 }
+@media screen and (max-width:340px){
+    .attackHeader{
+        font-size:14px;
+        text-align: center;
+    }
+    .attackAbout ul li div span, .attackDetailText1, .attackDetailText2, .attackDetailText3, .attackOtherDetails{
+        font-size: 12px;
+    }
+   
+}
+
 
 
 .attackHeader{
@@ -66,121 +84,137 @@
     grid-area: attackHeader;
     align-items: center;
     justify-content: center;
-    color:crimson;
+    color: #065e61;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     margin-bottom: 20px;
 }
 
+.attackAbout h4{
+    display: inline;
+    color:#065e61;
+    font-size: 22px;
+    text-align: center;
+}
+.attackAbout ul{
+    margin-top: 20px;
+    color: #064244;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.attackAbout ul li{
+    border-bottom: 1px dashed;
+    padding: 4px;
+    display: flex;
+    transition: linear 0.3s background-color;
+}
+.attackAbout ul li div{
+    flex:auto; 
+    /* flex 1 1 auto */
+}
+.attackAbout ul li .key {
+    text-align: left;
+    font-weight: bold;
+}
+.attackAbout ul li .value{
+    text-align: right;
+    font-weight: normal;
+}
+
+
+.attackAbout ul li:hover{
+    background-color: #0a919627;
+}
+.attackAbout ul span{
+    text-align: left;
+    margin-top: 20px;
+    color: #07595c;
+    font-size: 18px;
+}
 .attackAbout{
     display: flex;
     grid-area: attackAbout;
     flex-direction: column;
-    text-align: left;
-    margin-left: 10px;
-    margin-bottom: 26px;
-    background-color: silver;
+    margin: 0 40px 16px 40px;
+    background-color: #07737721;
     border-radius: 10px;
-    padding:10px;
+    padding:20px 40px;
 }
 
 #mapAttack{
-    height: 240px;
-    width: 295%;
-    margin-left: 10px;
-    margin-bottom: 26px;
+    text-align: center;
+    height: auto;
+    width: 256%;
+    margin: 0 40px 20px 40px;
+    border-radius: 10px;
+    border: dashed 1px #065e61;
+    box-shadow: #065e61 4px 4px 10px ;
+
 }
 
 .attackDetailTitle1{
-    display: flex;
     grid-area: attackDetailTitle1;
-    margin-left: 10px;
-    margin-right: 20px;
-    background-color: silver;
-    border-radius: 20px;
-    padding:6px;
 }
 
 .attackDetailTitle2{
-    display: flex;
     grid-area: attackDetailTitle2;
-    margin-left: 10px;
-    margin-right: 20px;
-
-    background-color: silver;
-    border-radius: 20px;
-    padding:6px;
 }
 
 .attackDetailTitle3{
-    display: flex;
     grid-area: attackDetailTitle3;
-    margin-left: 10px;
-    margin-right: 20px;
+}
+.attackDetailTitle1, .attackDetailTitle2, .attackDetailTitle3{
+    text-align: center;
+    border-top: #064244 2px dashed;
+    margin: 20px 0 20px 0 ;
+    padding: 40px 0 0 0 ;
 
-    background-color: silver;
+}
+
+.attackDetailTitle1 h3, .attackDetailTitle2 h3, .attackDetailTitle3 h3{
+    display: inline;
+    font-size: 22px;
+    text-align: center;
+    color:#eee;
+    background-color: #0c6568;
     border-radius: 20px;
-    padding:6px;
-
+    padding:6px 10px;
 }
 
 
 .attackDetailText1{
-    display: flex;
     grid-area: attackDetailText1;
-    
-    margin-left: 10px;
-    margin-top: 10px;
-    margin-right: 20px;
-
-    background-color: silver;
-    border-radius: 10px;
-    padding:6px;
-
 }
 
 .attackDetailText2{
-    display: flex;
     grid-area: attackDetailText2;
-    margin-left: 10px;
-    margin-top: 10px;
-    margin-right: 20px;
-
-    background-color: silver;
-    border-radius: 10px;
-    padding:6px;
-
 }
 
 .attackDetailText3{
-    display: flex;
     grid-area: attackDetailText3;
-    margin-left: 10px;
-    margin-top: 10px;
-    margin-right: 20px;
+}
 
-    background-color: silver;
+.attackDetailText1, .attackDetailText2, .attackDetailText3, 
+.attackOtherDetails p{  
+    margin: 20px 30px 20px 30px;
+    background-color: #065e6121;
     border-radius: 10px;
-    padding:6px;
-
+    padding:16px;
+    text-align: justify;
+    font-size: 16px;
 }
 
 .attackOtherDetailsHeading{
     display: flex;
     grid-area: attackOtherDetailsHeading;
     margin-top: 30px;
+    padding-top: 20px;
     align-items: center;
     justify-content: center;
-    color:crimson;
+    color:#064244;
+    border-top: 2px dashed #065e61;
 }
 
 .attackOtherDetails{
-    display: flex;
     grid-area: attackOtherDetails;
-    margin-top: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-bottom: 20px;
-    background-color: silver;
-    border-radius: 10px;
-    padding:6px;
 }
