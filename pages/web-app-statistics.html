@@ -1,78 +1,73 @@
-<div class='statisticsForm'>
-    <h1>Terrorism record search</h1>
+<div class='statisticsFormGrid'>
+        <div class='statisticsFormHeading'>
+            <h1>Terrorism record search</h1>
+        </div>
 
-    <div class='firstRow1'>
-        <div class='dateForm'>
-            <label for='dateInput' id='textDateInterval'><b>Date Interval:</b></label>
-            <input type='date' id='dateInput'></input>
-            <span>-</span>
-            <input type='date' id='dateInput'></input>
+        <div class='firstRow1'>
+            <div class='dateForm'>
+                <label for='dateInput' id='textDateInterval'><b>Date Interval:</b></label>
+                <input type='date' id='dateInput'></input>
+                <span>-</span>
+                <input type='date' id='dateInput'></input>
+            </div>
         </div>
-    </div>
-    <div class='firstRow2'>
-        <div class='nrTerrForm'>
-            <label for='nrTerrInput'><b>Number of terrorists:</b></label>
-            <input type='text' id='nrTerrInput'></input>
-            <span>-</span>
-            <input type='text' id='nrTerrInput'></input>
+        <div class='firstRow2'>
+            <div class='nrTerrForm'>
+                <label for='nrTerrInput'><b>Number of terrorists:</b></label>
+                <input type='text' id='nrTerrInput'></input>
+                <span>-</span>
+                <input type='text' id='nrTerrInput'></input>
+            </div>
+            <div class='nrDeathsForm'>
+                <label for='nrDeathsInput'><b>Number of deaths:</b></label>
+                <input type='text' id='nrDeathsInput'></input>
+                <span>-</span>
+                <input type='text' id='nrDeathsInput'></input>
+            </div>
+            <div class='nrWoundedForm'>
+                <label for='nrWoundedInput'><b>Number of wounded:</b></label>
+                <input type='text' id='nrWoundedInput'></input>
+                <span>-</span>
+                <input type='text' id='nrWoundedInput'></input>
+            </div>
         </div>
-        <div class='nrDeathsForm'>
-            <label for='nrDeathsInput'><b>Number of deaths:</b></label>
-            <input type='text' id='nrDeathsInput'></input>
-            <span>-</span>
-            <input type='text' id='nrDeathsInput'></input>
-        </div>
-        <div class='nrWoundedForm'>
-            <label for='nrWoundedInput'><b>Number of wounded:</b></label>
-            <input type='text' id='nrWoundedInput'></input>
-            <span>-</span>
-            <input type='text' id='nrWoundedInput'></input>
-        </div>
-    </div>
 
-    <div class='secondRow'>
-        <div class='attackTypeForm'>
-            <!-- Attack list is generated in actions.js-->
-        </div>
-        <div class='targetTypeForm'>
-            <!-- Target list is generated in actions.js-->
-        </div>
-        <div class='weaponTypeForm'>
-            <!-- Weapon list is generated in actions.js-->
-        </div>
-        <div class='damageForm'>
-            <label><b>Amount of damage made</b></label>
-            <br>
-            <input type='radio' id='minorDamage' name='amountDamage'>Minor damages</input>
-            <br>
-            <input type='radio' id='majorDamage' name='amountDamage'>Major damages</input>
-            <br>
-            <input type='radio' id='catastrophicDamage' name='amountDamage'>Catastrophic damages</input>
-            <br>
-            <input type='radio' id='unknownDamage' name='amountDamage'>Unknown damages</input>
-        </div>
-    </div>
+            <div class='attackTypeForm'>
+                <!-- Attack list is generated in js-->
+            </div>
+            <div class='targetTypeForm'>
+                <!-- Target list is generated in js-->
+            </div>
+            <div class='weaponTypeForm'>
+                <!-- Weapon list is generated in js-->
+            </div>
+            <div class='damageForm'>
+                <label><b>Amount of damage made</b></label>
+                <br>
+                <input type='radio' id='minorDamage' name='amountDamage'>Minor damages</input>
+                <input type='radio' id='majorDamage' name='amountDamage'>Major damages</input>
+                <input type='radio' id='catastrophicDamage' name='amountDamage'>Catastrophic damages</input>
+                <input type='radio' id='unknownDamage' name='amountDamage'>Unknown damages</input>
+            </div>
 
-    <div class='thirdRow'>
-        <div class='regionForm'>
-            <!-- Region list is generated in actions.js-->
-        </div>
-        <div class='countryForm'>
-            <!-- Country list is generated in actions.js-->
-        </div>
-    </div>
+            <div class='regionForm'>
+                <!-- Region list is generated in actions.js-->
+            </div>
+            <div class='countryForm'>
+                <!-- Country list is generated in actions.js-->
+            </div>
 
-    <div class='fourthRow'>
-        <div class='successForm'>
-            <label for='succesInput'><b>Successfull attack</b></label>
-            <input type='checkbox' id='succesInput'></input>
+        <div class='fourthRow'>
+            <div class='successForm'>
+                <label for='succesInput'><b>Successfull attack</b></label>
+                <input type='checkbox' id='succesInput'></input>
+            </div>
+            <div class='knownForm'>
+                <label for='knownInput'><b>It is known who attacked</b></label>
+                <input type='checkbox' id='knownInput'></input>
+            </div>
         </div>
-        <div class='knownForm'>
-            <label for='knownInput'><b>It is known who attacked</b></label>
-            <input type='checkbox' id='knownInput'></input>
-        </div>
-    </div>
-    <section class='submitForm' onclick="navigateRoot('/statistics-drawings')">
-        <input type='button' value='Submit' id='submitButton'> </input>
-    </section>
+        <section class='submitForm' onclick="navigateRoot('/statistics-drawings')">
+            <input type='button' value='Submit' id='submitButton'> </input>
+        </section>
 </div>
