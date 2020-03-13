@@ -20,6 +20,11 @@
     border: dashed 2px #eee;
 }
 
+#home .left-container img,
+#home .right-container img{
+    max-width: 92%;
+}
+
 #home .description{
     display: flex;
     flex-direction: column;
@@ -44,4 +49,19 @@
     cursor: pointer;
     border: dashed 2px #00acb567;
     border-radius: 16px;
+}
+
+@media only screen and (max-width: 900px) {
+    #home{
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    #home .left-container,
+    #home .right-container{
+        width: 96%;
+        height: auto;
+
+        margin-top: 12px;
+    }
 }

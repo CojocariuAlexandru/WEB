@@ -1,53 +1,61 @@
-<aside>
-    <div class="title">
-        TeVi
-    </div>
-    <div class="options">
-        <div class="option" onclick="navigateRoot('/home')">
-            <span class="icon">
+<aside id="web-app-sidebar">
+    <div id="sidebar">
+        <div class="title">
+            TeVi
+        </div>
+        <div class="options">
+            <div class="option" onclick="navigateRootSidebar('/home')">
+                <span class="icon">
                     <i class="fa fa-home"></i>
                 </span>
-            <span class="text">
+                <span class="text">
                     Home
                 </span>
-        </div>
-        <div class="option" onclick="navigateRoot('/statistics')">
-            <span class="icon">
+            </div>
+            <div class="option" onclick="navigateRootSidebar('/statistics')">
+                <span class="icon">
                     <i class="fa fa-pie-chart"></i>
                 </span>
-            <span class="text">
+                <span class="text">
                     Statistics
                 </span>
-        </div>
-        <div class="option" onclick="navigateRoot('/map')">
-            <span class="icon">
+            </div>
+            <div class="option" onclick="navigateRootSidebar('/map')">
+                <span class="icon">
                     <i class="fa fa-map-marker"></i>
                 </span>
-            <span class="text">
+                <span class="text">
                     Map
                 </span>
-        </div>
-        <div class="option" onclick="navigateRoot('/attacks')">
-            <span class="icon">
+            </div>
+            <div class="option" onclick="navigateRootSidebar('/attacks')">
+                <span class="icon">
                     <i class="fa fa-fighter-jet"></i>
                 </span>
-            <span class="text">
+                <span class="text">
                     Attacks
                 </span>
+            </div>
         </div>
     </div>
+    <div id="grey-part" onclick="toggleSidebar()"></div>
 </aside>
 
 <div class="main-wrapper">
     <header>
-        <div class="user">
-            <div class="icon">
-            <i class="fa fa-user-circle-o"></i>
-            </div>
-            <div class="username" id="web-app-username"></div>
+        <div class="sidebar-toggle-button">
+            <i class="fa fa-bars" onclick="toggleSidebar()"></i>
         </div>
-        <div class="vertical-line"></div>
-        <div class="logout-button" onclick="userLogout()">Logout</div>
+        <div class="right-part">
+            <div class="user">
+                <div class="icon">
+                    <i class="fa fa-user-circle-o"></i>
+                </div>
+                <div class="username" id="web-app-username"></div>
+            </div>
+            <div class="vertical-line"></div>
+            <div class="logout-button" onclick="userLogout()">Logout</div>
+        </div>
     </header>
     <main id="content">
     </main>
