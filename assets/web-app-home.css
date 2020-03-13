@@ -18,30 +18,54 @@
     height: 88%;
 
     border: dashed 2px #eee;
+    border-radius:15px;
+    transition: color 0.5s linear, border 0.5s linear;
 }
 
 #home .description{
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    padding: 0 16px 32px 16px;
     width: 92%;
 }
 
 #home .description .title{
     font-size: 24px;
     font-weight: 500;
+    text-align: center;
+    margin:10px;
 }
 
 #home .description .text{
-    margin-top: 8px;
-
+    margin-top: 16px;
     font-size: 18px;
+    text-align: justify;
 }
+#home .left-container img, 
+#home .right-container img{
+    max-width:80%;
+}
+
 
 #home .left-container:hover,
 #home .right-container:hover{
     cursor: pointer;
     border: dashed 2px #00acb567;
     border-radius: 16px;
+    color:#065e61;
+
+}
+
+@media only screen and (max-width:900px){
+    #home{
+        flex-direction : column;
+        justify-content: flex-start;
+    }
+    #home .left-container,
+    #home .right-container{
+        width: 80%;
+        height: auto;
+        margin-top:12px;
+    }
 }
