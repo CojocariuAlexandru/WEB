@@ -1,20 +1,64 @@
-.thatAttackGrid{
-    margin:20px 0 0 0px;
+@media screen and (min-width:800px){
+    .thatAttackGrid{
+        margin:20px 0 0 0px;
 
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: auto auto auto auto auto auto auto;
-    grid-template-areas: "attackHeader attackHeader attackHeader attackHeader attackHeader attackHeader"
-            "attackAbout attackAbout attackAbout mapAttack mapAttack mapAttack" 
-            "attackDetailTitle1 attackDetailTitle1 attackDetailTitle2 attackDetailTitle2 attackDetailTitle3 attackDetailTitle3"
-            "attackDetailText1 attackDetailText1 attackDetailText2 attackDetailText2 attackDetailText3 attackDetailText3"
-            "attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading"
-            "attackOtherDetails attackOtherDetails attackOtherDetails attackOtherDetails attackOtherDetails attackOtherDetails"
-            "byKaggle byKaggle byKaggle byKaggle byKaggle byKaggle"
-            ;
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-rows: auto auto auto auto auto auto auto;
+        grid-template-areas: "attackHeader attackHeader attackHeader attackHeader attackHeader attackHeader"
+                "attackAbout attackAbout attackAbout mapAttack mapAttack mapAttack" 
+                "attackDetailTitle1 attackDetailTitle1 attackDetailTitle2 attackDetailTitle2 attackDetailTitle3 attackDetailTitle3"
+                "attackDetailText1 attackDetailText1 attackDetailText2 attackDetailText2 attackDetailText3 attackDetailText3"
+        "attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading"
+                "attackOtherDetails attackOtherDetails attackOtherDetails attackOtherDetails attackOtherDetails attackOtherDetails"
+                "byKaggle byKaggle byKaggle byKaggle byKaggle byKaggle"
+                ;
 
-    overflow-y: scroll;
+        overflow-y: scroll;
+    }
 }
+
+@media screen and (max-width:799px){
+    .thatAttackGrid{
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-template-areas:
+            "attackHeader"
+            "attackAbout"
+            "mapAttack" 
+            "attackDetailTitle1"
+            "attackDetailText1"  
+            "attackDetailTitle2"
+            "attackDetailText2" 
+            "attackDetailTitle3"
+            "attackDetailText3"
+            "attackOtherDetailsHeading"
+            "attackOtherDetails"
+            "byKaggle"
+            ;
+        overflow-y: scroll;
+    }
+
+    .attackDetailText1, .attackDetailText2, .attackDetailText3{
+        margin-bottom: 30px;
+    }
+    .attackHeader{
+        margin-top:20px;
+        font-size:15px;
+    }
+}
+
+@media screen and (max-width:600px){
+    .attackHeader{
+        font-size:14px;
+        text-align: center;
+    }
+    .attackAbout, .attackDetailText1, .attackDetailText2, .attackDetailText3, .attackOtherDetails{
+        font-size: 12px;
+    }
+}
+
 
 .attackHeader{
     display:flex;   

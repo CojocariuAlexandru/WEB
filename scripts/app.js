@@ -309,4 +309,43 @@ function attackIdPageInit() {
         },
         zoom: 8
     });
+
+    let attackData = document.querySelector('#terroristsData');
+    if(parseInt(attackData.innerHTML) > 99){
+        attackData.style.color = "red";
+        }
+        else{
+            attackData.style.color="green";
+        }
+    attackData = document.querySelector('#killsData');
+    if(parseInt(attackData.innerHTML) > 9){
+            attackData.style.color = "red";
+            }
+            else{
+                attackData.style.color="green";
+            }
+
+    attackData = document.querySelector('#woundedData');
+    if(parseInt(attackData.innerHTML) > 50){
+        attackData.style.color = "red";
+        }
+        else{
+            attackData.style.color="green";
+        }
+
+    attackData = document.querySelector('#succesfulAttack');
+    if(attackData.innerHTML.localeCompare("NO") == 0){
+        attackData.style.color = "red";
+        }
+        else{
+            attackData.style.color="green";
+        }
+
+    attackData = document.querySelector('#knownAttackers');
+    if(attackData.innerHTML.localeCompare("NO") == 0){
+        attackData.style.color = "red";
+        }
+        else{
+            attackData.style.color="green";
+        }
 }
