@@ -177,6 +177,11 @@ function navigateRoot(pathName) {
     navigate(root.url + pathName);
 }
 
+function navigateRootSidebar(pathName) {
+    navigateRoot(pathName);
+    toggleSidebar();
+}
+
 function initPage() {
     rootForContent = document.querySelector('#root');
     if (userIsLoggedIn()) {
@@ -231,6 +236,44 @@ function setWebAppTemplateAsSiteInit() {
 }
 
 document.addEventListener('DOMContentLoaded', initPage);
+window.addEventListener("resize", handleResize);
+
+// ------------------------------------------------------- Web app ----------------------------------------------------------
+
+function toggleSidebar() {
+    if (getPageWidth() > 520) {
+        return;
+    }
+    let sidebar = document.querySelector('#web-app-sidebar');
+    if (sidebar.style.display === 'flex') {
+        sidebar.removeAttribute('style');
+    } else {
+        sidebar.style.display = 'flex';
+        sidebar.style.width = '100%';
+        let h1 = getPageHeight(), h2 = document.querySelector('.main-wrapper').getBoundingClientRect().height;
+        let h = (h1 > h2 ? h1 : h2);
+        sidebar.style.height = h + 'px';
+    }
+}
+
+function handleResize() {
+    if (!webapp){
+        return;
+    }
+    if (getPageWidth() > 520) {
+        let sidebar = document.querySelector('#web-app-sidebar');
+        sidebar.removeAttribute('style');
+    }
+}
+
+// https://stackoverflow.com/questions/3437786/get-the-size-of-the-screen-current-web-page-and-browser-window
+function getPageWidth() {
+    return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+}
+
+function getPageHeight() {
+    return window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+}
 
 // ------------------------------------------------------- Home page --------------------------------------------------------
 
@@ -270,7 +313,7 @@ function mapPageInit() {
 // ------------------------------------------------------- Attacks page ------------------------------------------------------
 
 function attacksPageInit() {
-    
+
 }
 
 function searchAttack() {
@@ -311,41 +354,36 @@ function attackIdPageInit() {
     });
 
     let attackData = document.querySelector('#terroristsData');
-    if(parseInt(attackData.innerHTML) > 99){
+    if (parseInt(attackData.innerHTML) > 99) {
         attackData.style.color = "red";
-        }
-        else{
-            attackData.style.color="green";
-        }
+    } else {
+        attackData.style.color = "green";
+    }
     attackData = document.querySelector('#killsData');
-    if(parseInt(attackData.innerHTML) > 9){
-            attackData.style.color = "red";
-            }
-            else{
-                attackData.style.color="green";
-            }
+    if (parseInt(attackData.innerHTML) > 9) {
+        attackData.style.color = "red";
+    } else {
+        attackData.style.color = "green";
+    }
 
     attackData = document.querySelector('#woundedData');
-    if(parseInt(attackData.innerHTML) > 50){
+    if (parseInt(attackData.innerHTML) > 50) {
         attackData.style.color = "red";
-        }
-        else{
-            attackData.style.color="green";
-        }
+    } else {
+        attackData.style.color = "green";
+    }
 
     attackData = document.querySelector('#succesfulAttack');
-    if(attackData.innerHTML.localeCompare("NO") == 0){
+    if (attackData.innerHTML.localeCompare("NO") == 0) {
         attackData.style.color = "red";
-        }
-        else{
-            attackData.style.color="green";
-        }
+    } else {
+        attackData.style.color = "green";
+    }
 
     attackData = document.querySelector('#knownAttackers');
-    if(attackData.innerHTML.localeCompare("NO") == 0){
+    if (attackData.innerHTML.localeCompare("NO") == 0) {
         attackData.style.color = "red";
-        }
-        else{
-            attackData.style.color="green";
-        }
+    } else {
+        attackData.style.color = "green";
+    }
 }
