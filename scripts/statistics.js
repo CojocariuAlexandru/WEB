@@ -1,7 +1,7 @@
 function generateWeapons() {
     let weaponForm = document.querySelector('.weaponTypeForm')
     let weaponFormTitle = document.createElement('label')
-    let weaponList = ['Weapon1', 'Weapon2', 'Weapon3', 'Weapon4', 'Weapon5', 'Weapon6', 'Weapon7', 'Weapon8', 'Weapon9']
+    let weaponList = ['Biological', 'Chemical', 'Vehicles', 'Explosives', 'Firearms', 'Weapon6', 'Weapon7', 'Weapon8', 'Unknown']
     weaponFormTitle.innerHTML = `<b>Weapon Type</b>`
     weaponFormTitle.innerHTML = weaponFormTitle.innerHTML + `<br>`
     let index = 0;

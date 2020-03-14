@@ -1,28 +1,92 @@
-.web-app .statisticsForm {
-    width: 100%;
-    height: 100%;
 
+@media screen and (max-width:2000px), screen and (min-width:1000px){
+.web-app .statisticsFormGrid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas: "statisticsFormHeading statisticsFormHeading statisticsFormHeading statisticsFormHeading"
+                            "firstRow1 firstRow1 firstRow1 firstRow1"
+                            "firstRow2 firstRow2 firstRow2 firstRow2"
+                            "attackTypeForm targetTypeForm weaponTypeForm damageForm"
+                            "regionForm regionForm countryForm countryForm"
+                            "fourthRow fourthRow fourthRow fourthRow"
+                            "submitForm submitForm submitForm submitForm";
     box-sizing: border-box;
     border: 1px solid black;
     background: linear-gradient(rgb(130, 136, 146), rgb(252, 252, 252));
     padding: 20px;
     font-size: 20px;
-    z-index: 2;
+    width: 100%;
 
-    overflow-x: hidden;
+
+    overflow-y: scroll;
+}
+}
+@media screen and (max-width:999px), screen and (min-width:600px){
+    .web-app .statisticsFormGrid{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: auto auto auto auto;
+        grid-template-areas: "statisticsFormHeading statisticsFormHeading statisticsFormHeading statisticsFormHeading"
+                                "firstRow1 firstRow1 firstRow1 firstRow1"
+                                "firstRow2 firstRow2 firstRow2 firstRow2"
+                                "attackTypeForm attackTypeForm targetTypeForm targetTypeForm"
+                                "weaponTypeForm weaponTypeForm damageForm damageForm"
+                                "regionForm regionForm countryForm countryForm"
+                                "fourthRow fourthRow fourthRow fourthRow"
+                                "submitForm submitForm submitForm submitForm";
+        box-sizing: border-box;
+        border: 1px solid black;
+        background: linear-gradient(rgb(130, 136, 146), rgb(252, 252, 252));
+        padding: 20px;
+        font-size: 20px;
+        width: 100%;
+    
+    
+        overflow-y: scroll;
+    }
+}
+@media screen and (max-width:599px){
+    .web-app .statisticsFormGrid{
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-template-areas: "statisticsFormHeading"
+                                "firstRow1"
+                                "firstRow2"
+                                "attackTypeForm"
+                                "targetTypeForm"
+                                "weaponTypeForm"
+                                "damageForm"
+                                "regionForm"
+                                "countryForm"
+                                "fourthRow"
+                                "submitForm";
+        box-sizing: border-box;
+        border: 1px solid black;
+        background: linear-gradient(rgb(130, 136, 146), rgb(252, 252, 252));
+        padding: 10px;
+        font-size: 12px;
+        width: 100%;
+    
+    
+        overflow-y: scroll;
+    }
 }
 
-.statisticsForm>div {
+.statisticsFormGrid>div {
     background-color: #f1f1f1;
     padding: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     display: flex;
-    /*border: 1.5px solid black;*/
+    flex-direction: column;
+    align-items: center;
+    border: 1.5px solid black;
     border-radius: 14px;
     /*box-shadow: 1px 2px 5px;*/
 }
 
-.web-app .statisticsForm>h1 {
+.web-app .statisticsFormGrid>h1 {
     text-align: center;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     padding: 0px;
@@ -30,22 +94,61 @@
     margin-bottom: 10px;
 }
 
-.statisticsForm>div:hover {
+.statisticsFormGrid>div:hover {
     background-color: #f1f1f16b;
     padding: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     display: flex;
     border: 1.5px solid black;
-    border-radius: 10px;
+    border-radius: 14px;
     box-shadow: 2px 4px 16px;
 }
 
-.dateForm {
-    flex: 1;
+.statisticsFormHeading{
+    grid-area:statisticsFormHeading;
+}
+.firstRow1{
+    grid-area:firstRow1;
+}
+.firstRow2{
+    grid-area:firstRow2;
+}
+.attackTypeForm{
+    grid-area:attackTypeForm;
+}
+.weaponTypeForm{
+    grid-area:weaponTypeForm;
+}
+.targetTypeForm{
+    grid-area:targetTypeForm;
+}
+.damageForm{
+    grid-area:damageForm;
+}
+.attackTypeForm, .weaponTypeForm, .targetTypeForm, .damageForm{
     margin-left: 10px;
+    margin-right: 10px;
+}
+.regionForm{
+    grid-area:regionForm;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.countryForm{
+    grid-area:countryForm;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.fourthRow{
+    grid-area:fourthRow;
+}
+.submitForm{
+    grid-area:submitForm;
 }
 
-.countryForm,
+
+.dateForm,
+.countryForm
 .regionForm,
 .weaponTypeForm,
 .targetTypeForm,
@@ -56,7 +159,11 @@
 .nrWoundedForm,
 .nrTerrForm,
 .nrDeathsForm {
-    flex: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+.nrTerrForm{
 }
 
 #dateInput {
@@ -65,7 +172,7 @@
 
 /*Animation on elements inspired by https://www.w3schools.com/css/css3_animations.asp */
 
-.statisticsForm>div>div>input:hover {
+.statisticsFormGrid>div>div>input:hover {
     animation-name: slightColorChangeInput;
     animation-duration: 1s;
     -webkit-animation-fill-mode: forwards;
@@ -73,7 +180,7 @@
     cursor: pointer;
 }
 
-.statisticsForm>div>div>label:hover {
+.statisticsFormGrid>div>div>label:hover {
     animation-name: slightColorChange;
     animation-duration: 1s;
     -webkit-animation-fill-mode: forwards;
@@ -169,4 +276,108 @@ h1:hover {
     background-color: #dfdfdf;
 
     cursor: pointer;
+}
+
+
+/**************** List of attacks ***************s*/
+
+.listOfAttacks{
+    width: 100%;
+}
+
+.listHeading{
+    text-align: center;
+    margin-top:20px;
+    margin-bottom:20px;
+}
+
+.recordList{
+    display:flex;
+    flex-direction: column;
+}
+
+.particularRecord, .headingRecordList{
+    display:flex;
+    border: 1px solid black;
+    background-color: lightblue;
+    margin-left:20px;
+    margin-right:20px;
+    padding:4px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    
+}
+
+.particularRecord:hover{
+    /*https://stackoverflow.com/questions/1625681/dynamically-change-color-to-lighter-or-darker-by-percentage-css-javascript*/
+    filter:brightness(110%);
+}
+
+.headingRecordList{
+    border: 2px solid black;
+    background-color: floralwhite;
+}
+
+
+.dateID, .locationID, .attackID{
+    display: flex;
+    flex:1;
+    align-items: center;
+}
+
+.attackID{
+    margin-right: 10px;
+}
+
+.otherLists{
+    margin-top:20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.sortList{
+    display:flex;
+    background-color: rgb(121, 141, 209);
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 40px;
+    padding: 10px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    align-items: center;
+    height:90px;
+}
+
+#searchText{
+    display: flex;
+    flex:3;
+    margin-right: 20px;
+    height:50px;
+    font-size:20px;
+}
+
+#advancedSearch{
+    display: flex;
+    flex:2;
+    height:50px;
+    background-color: rgb(42, 38, 92);
+    align-items: center;
+    cursor: pointer;
+}
+#advancedSearch:active .advancedFields{
+    display:block;
+    position: relative;
+}
+
+#plusSearch{
+    margin-right: 30px;
+    margin-left: 30px;
+}
+
+#advancedSearchText{
+    color:white;
+}
+
+.advancedFields{
+    display:none;
+    position:absolute;
+    z-index:1;
 }
