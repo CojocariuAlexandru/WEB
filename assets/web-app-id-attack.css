@@ -6,10 +6,10 @@
         grid-template-columns: repeat(6, 1fr);
         grid-template-rows: auto auto auto auto auto auto auto;
         grid-template-areas: "attackHeader attackHeader attackHeader attackHeader attackHeader attackHeader"
-                "attackAbout attackAbout attackAbout mapAttack mapAttack mapAttack" 
+                "attackAbout attackAbout attackAbout mapAttack1 mapAttack1 mapAttack1" 
                 "attackDetailTitle1 attackDetailTitle1 attackDetailTitle2 attackDetailTitle2 attackDetailTitle3 attackDetailTitle3"
                 "attackDetailText1 attackDetailText1 attackDetailText2 attackDetailText2 attackDetailText3 attackDetailText3"
-        "attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading"
+                "attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading"
                 "attackOtherDetails attackOtherDetails attackOtherDetails attackOtherDetails attackOtherDetails attackOtherDetails"
                 "byKaggle byKaggle byKaggle byKaggle byKaggle byKaggle"
                 ;
@@ -26,7 +26,7 @@
         grid-template-areas:
             "attackHeader"
             "attackAbout"
-            "mapAttack" 
+            "mapAttack1" 
             "attackDetailTitle1"
             "attackDetailText1"  
             "attackDetailTitle2"
@@ -47,12 +47,16 @@
         margin-top:20px;
         font-size:15px;
     }
-    #mapAttack{
+    /* #mapAttack{
         padding-left: 0;
         margin-left: 0;
         min-height: 300px;
         max-width: 80%;
     
+    } */
+    .mapAttack1{
+        width: 100%;
+        min-height: 300px;
     }
 }
 
@@ -141,10 +145,14 @@
     padding:20px 40px;
 }
 
+.mapAttack1{
+    grid-area: mapAttack1;
+}
+
 #mapAttack{
     text-align: center;
     height: auto;
-    width: 256%;
+    width: calc(100% - 80px);
     margin: 0 40px 20px 40px;
     border-radius: 10px;
     border: dashed 1px #065e61;
