@@ -348,10 +348,10 @@ function attackIdPageInit() {
     let attackAttack = document.querySelector('#mapAttack');
     map = new google.maps.Map(attackAttack, {
         center: {
-            lat: -34.397,
-            lng: 150.644
+            lat: 45.9852129,
+            lng: 24.6859225
         },
-        zoom: 8
+        zoom:8
     });
 
     let attackData = document.querySelector('#terroristsData');

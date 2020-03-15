@@ -13,7 +13,7 @@
                             "submitForm submitForm submitForm submitForm";
     box-sizing: border-box;
     border: 1px solid black;
-    background: linear-gradient(rgb(130, 136, 146), rgb(252, 252, 252));
+    background:#eee;
     padding: 20px;
     font-size: 20px;
     width: 100%;
@@ -24,9 +24,6 @@
 }
 @media screen and (max-width:999px), screen and (min-width:600px){
     .web-app .statisticsFormGrid{
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-template-rows: auto auto auto auto;
         grid-template-areas: "statisticsFormHeading statisticsFormHeading statisticsFormHeading statisticsFormHeading"
                                 "firstRow1 firstRow1 firstRow1 firstRow1"
                                 "firstRow2 firstRow2 firstRow2 firstRow2"
@@ -35,15 +32,6 @@
                                 "regionForm regionForm countryForm countryForm"
                                 "fourthRow fourthRow fourthRow fourthRow"
                                 "submitForm submitForm submitForm submitForm";
-        box-sizing: border-box;
-        border: 1px solid black;
-        background: linear-gradient(rgb(130, 136, 146), rgb(252, 252, 252));
-        padding: 20px;
-        font-size: 20px;
-        width: 100%;
-    
-    
-        overflow-y: scroll;
     }
 }
 @media screen and (max-width:599px){
@@ -64,7 +52,6 @@
                                 "submitForm";
         box-sizing: border-box;
         border: 1px solid black;
-        background: linear-gradient(rgb(130, 136, 146), rgb(252, 252, 252));
         padding: 10px;
         font-size: 12px;
         width: 100%;
@@ -73,35 +60,64 @@
         overflow-y: scroll;
     }
 }
+.dataForm1{
+    background:#fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)  97% 50% no-repeat ;
+  }
+input.dataForm1, .firstRow2 input {
+    border: 1px solid #097a75;
+    border-radius: 16px;
+    background-color:#eee;
+    box-shadow: inset 0 3px 6px rgba(0,0,0,0.1);
+    width: 160px;
+    padding: 16px 10px;
+    text-align: center;
+  }
+  .firstRow2 input {
+    padding: 10px 10px;
+  }
 
-.statisticsFormGrid>div {
-    background-color: #f1f1f1;
+.dataForm1::-webkit-inner-spin-button { display: none; }
+.dataForm1::-webkit-calendar-picker-indicator { background: transparent;}
+.dataForm1::-webkit-calendar-picker-indicator { opacity: 0;}
+
+.statisticsFormGrid >div:not( .statisticsFormHeading) {
+    background-color: #eee;
+    color:#065e61;
     padding: 20px;
     margin-bottom: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1.5px solid black;
-    border-radius: 14px;
+
+    border: dashed 2px #065e6141;
+    border-radius:15px;
+    transition: color 0.5s linear, border 0.5s linear, background-color 0.5s linear;
+
+
     /*box-shadow: 1px 2px 5px;*/
 }
 
-.web-app .statisticsFormGrid>h1 {
+.web-app .statisticsFormGrid{
+   padding: 10px 50px;
+}
+
+.web-app .statisticsFormGrid h1 {
     text-align: center;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     padding: 0px;
+    color: #065e61;
     margin-top: 0px;
     margin-bottom: 10px;
 }
 
-.statisticsFormGrid>div:hover {
+.statisticsFormGrid>div:not(.statisticsFormHeading):hover {
     background-color: #f1f1f16b;
     padding: 20px;
     margin-bottom: 40px;
     display: flex;
-    border: 1.5px solid black;
-    border-radius: 14px;
-    box-shadow: 2px 4px 16px;
+    border: dashed 2px #065e61;
+    background-color: #065e6109;
+    /* box-shadow: 1px 2px 4px; */
 }
 
 .statisticsFormHeading{
@@ -109,12 +125,30 @@
 }
 .firstRow1{
     grid-area:firstRow1;
+    margin:0 10px;
 }
 .firstRow2{
     grid-area:firstRow2;
+    margin:0 10px;
 }
 .attackTypeForm{
     grid-area:attackTypeForm;
+}
+
+
+.attackTypeForm div, .targetTypeForm div, .weaponTypeForm div, .damageForm div div{
+    display: flex;
+    flex-wrap:wrap;
+    padding:0 0 10px 26px;
+}
+.attackTypeForm .input1, .targetTypeForm .input1, .weaponTypeForm .input1{
+    width: 50%;
+}
+.damageForm div{
+    text-align:center;
+}
+.damageForm .input1{
+    width: 100%;
 }
 .weaponTypeForm{
     grid-area:weaponTypeForm;
@@ -129,6 +163,29 @@
     margin-left: 10px;
     margin-right: 10px;
 }
+.attackTypeForm h3, .weaponTypeForm h3, .targetTypeForm h3, .damageForm h3, .regionForm h3, .countryForm h3{
+    color:#eee;
+    font-size:22px;
+    background-color: #065e61;
+    display: inline;
+    margin: 10px 20px 30px 20px;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.fourthRow div{
+    padding:10px;
+    margin:20px;
+    font-size:30px;
+    font-weight: bold;
+}
+#label1{
+    font-size:30px;
+    font-weight: bold;
+}
+
+
+
 .regionForm{
     grid-area:regionForm;
     margin-left: 10px;
@@ -141,6 +198,8 @@
 }
 .fourthRow{
     grid-area:fourthRow;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 .submitForm{
     grid-area:submitForm;
@@ -171,7 +230,7 @@
 }
 
 /*Animation on elements inspired by https://www.w3schools.com/css/css3_animations.asp */
-
+/* 
 .statisticsFormGrid>div>div>input:hover {
     animation-name: slightColorChangeInput;
     animation-duration: 1s;
@@ -223,6 +282,57 @@ h1:hover {
     to {
         margin-top: 8px;
     }
+} */
+.label {
+    margin: auto;
+    padding: 50px;
+    background: #484848;
+  }
+
+  input[type="checkbox"] { display: none; }
+
+  input[type="checkbox"] + label {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 20px;
+    font: 14px/20px 'Open Sans', Arial, sans-serif;
+    color:#065e61;
+    cursor: pointer;
+  }
+  
+  input[type="checkbox"] + label:last-child { margin-bottom: 0; }
+  
+  input[type="checkbox"] + label:before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #065e61;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: .6;
+    transition: all .12s, border-color .08s;
+  }
+  
+  input[type="checkbox"]:checked + label:before {
+    width: 10px;
+    top: -5px;
+    left: 5px;
+    border-radius: 0;
+    opacity: 1;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+  #nrWoundedInput:focus, #nrTerrInput:focus, #nrDeathsInput:focus {
+    box-shadow: none;
+    outline-offset: 0;
+    outline: none;
+    outline-color: transparent;
 }
 
 #nrWoundedInput {
@@ -248,22 +358,74 @@ h1:hover {
 
 .submitForm {
     display: flex;
-    margin-top: 50px;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
 }
 
-#submitButton {
-    flex: 1;
+
+
+#submitButton{
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border:none;
+    font-size: large;
+    color:#065e61;
+    z-index: 100;
+    transition: color 0.3s linear;
+}
+
+#submitButton2{
+    color:#065e61;
+    font-size: 16px;
+    border: 2px solid #065e61;
+    border-radius: 20px;
+    width: 300px;
     height: 50px;
-    border: 1.5px solid black;
-    border-radius: 10px;
-    box-shadow: 1px 2px 5px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 20px;
-    font-weight: bold;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    transition:all 0.5s;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+#submitButton2 span {
+    position: absolute;
+    width: 25%;
+    height: 100%;
+    background-color:#065e61;
+    transform: translateY(56px);
+/*   Le duce mai jos */
+    border-radius: 100px;
+    transition: 0.5s;
+    z-index: -1;
 }
 
 #submitButton:hover {
+    color:#eee;
+}
+
+#submitButton2:hover span {
+    transform: translateY(0) scale(2);
+}
+#submitButton2 #span1 {
+    transition-delay: 0;
+      left:0;
+}
+#submitButton2 #span2 {
+    transition-delay: 0.2s;
+      left: 25%;
+}
+#submitButton2 #span3{
+     transition-delay: 0.4s;
+      left: 50%;
+}
+#submitButton2 #span4 {
+     transition-delay: 0.6s;
+      left: 75%;
+}
+
+/* #submitButton:hover {
     flex: 1;
     height: 50px;
 
@@ -276,7 +438,7 @@ h1:hover {
     background-color: #dfdfdf;
 
     cursor: pointer;
-}
+} */
 
 
 /**************** List of attacks ***************s*/

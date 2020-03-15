@@ -1,52 +1,69 @@
 function generateWeapons() {
     let weaponForm = document.querySelector('.weaponTypeForm')
-    let weaponFormTitle = document.createElement('label')
-    let weaponList = ['Biological', 'Chemical', 'Vehicles', 'Explosives', 'Firearms', 'Weapon6', 'Weapon7', 'Weapon8', 'Unknown']
-    weaponFormTitle.innerHTML = `<b>Weapon Type</b>`
-    weaponFormTitle.innerHTML = weaponFormTitle.innerHTML + `<br>`
+    let weaponFormHeader = document.createElement('h3');
+    weaponFormHeader.innerHTML = 'Weapon Type';
+    weaponForm.appendChild(weaponFormHeader)
+
+    let weaponFormTitle = document.createElement('div')
+    let weaponList = ['Biological', 'Chemical', 'Vehicles', 'Explosives', 'Firearms', 'Weapon6', 'Weapon7', 'Unknown']
+    weaponFormTitle.innerHTML = ``
     let index = 0;
     for (index = 0; index < weaponList.length; index++)
-        weaponFormTitle.innerHTML = weaponFormTitle.innerHTML + ` <input type='radio'>${weaponList[index]}</input> <br>`
+        weaponFormTitle.innerHTML =weaponFormTitle.innerHTML+`<div class="input1"><input type="checkbox" id="weapon-box-`+index+`">`
+        +`<label for="weapon-box-`+index+  `">${weaponList[index]}</label></div>`;
     weaponForm.appendChild(weaponFormTitle)
 }
 
 function generateAttacks() {
     let weaponForm = document.querySelector('.attackTypeForm')
-    let weaponFormTitle = document.createElement('label')
-    let weaponList = ['Attack1', 'Attack2', 'Attack3', 'Attack4', 'Attack5', 'Attack6', 'Attack7', 'Attack8', 'Attack9']
-    weaponFormTitle.innerHTML = `<b>Attack Type</b>`
-    weaponFormTitle.innerHTML = weaponFormTitle.innerHTML + `<br>`
+    let weaponFormHeader = document.createElement('h3');
+    weaponFormHeader.innerHTML = 'Attack Type';
+    weaponForm.appendChild(weaponFormHeader)
+
+    let weaponFormTitle = document.createElement('div')
+    let weaponList = ['Attack1', 'Attack2', 'Attack3', 'Attack4', 'Attack5', 'Attack6', 'Attack7', 'Attack8']
+    weaponFormTitle.innerHTML = ``
     let index = 0;
     for (index = 0; index < weaponList.length; index++)
-        weaponFormTitle.innerHTML = weaponFormTitle.innerHTML + ` <input type='radio'>${weaponList[index]}</input> <br>`
+        weaponFormTitle.innerHTML =weaponFormTitle.innerHTML+`<div class="input1"><input type="checkbox" id="attack-box-`+index+`">`
+        +`<label for="attack-box-`+index+  `">${weaponList[index]}</label></div>`;
     weaponForm.appendChild(weaponFormTitle)
 }
 
 function generateTargets() {
     let weaponForm = document.querySelector('.targetTypeForm')
-    let weaponFormTitle = document.createElement('label')
-    let weaponList = ['Target1', 'Target2', 'Target3', 'Target4', 'Target5', 'Target6', 'Target7', 'Target8', 'Target9']
-    weaponFormTitle.innerHTML = `<b>Who was the target</b>`
-    weaponFormTitle.innerHTML = weaponFormTitle.innerHTML + `<br>`
+    let weaponFormHeader = document.createElement('h3');
+    weaponFormHeader.innerHTML = 'Target Type';
+    weaponForm.appendChild(weaponFormHeader)
+
+    let weaponFormTitle = document.createElement('div')
+    let weaponList = ['Target1', 'Target2', 'Target3', 'Target4', 'Target5', 'Target6', 'Target7', 'Target8']
+    weaponFormTitle.innerHTML = ``
     let index = 0;
     for (index = 0; index < weaponList.length; index++)
-        weaponFormTitle.innerHTML = weaponFormTitle.innerHTML + ` <input type='radio'>${weaponList[index]}</input> <br>`
+        weaponFormTitle.innerHTML =weaponFormTitle.innerHTML+`<div class="input1"><input type="checkbox" id="target-box-`+index+`">`
+        +`<label for="target-box-`+index+  `">${weaponList[index]}</label></div>`;
     weaponForm.appendChild(weaponFormTitle)
 }
 
 function generateRegions() {
     let regionForm = document.querySelector('.regionForm')
-    let regionFormTitle = document.createElement('label')
+    
+    let weaponFormHeader = document.createElement('h3');
+    weaponFormHeader.innerHTML = 'Region of the attack';
+    regionForm.appendChild(weaponFormHeader)
+
+    let regionFormTitle = document.createElement('div')
     let regionOptionChoose = document.createElement('datalist');
     regionOptionChoose.setAttribute('id', 'allRegions')
     let regionList = ['Central America & Caribbean', 'Eastern Europe', 'Middle East & North Africa', 'North America', 'South America', 'Southeast Asia',
         'Sub-Saharan Africa', 'Western Europe'
     ]
-    regionFormTitle.innerHTML = regionFormTitle.innerHTML + `<b>Region of the attack</b> <br>
-                                                            <input list='allRegions'>`
+    regionFormTitle.innerHTML = regionFormTitle.innerHTML + `<input list='allRegions'>`
     let index = 0;
     for (index = 0; index < regionList.length; index++)
-        regionOptionChoose.innerHTML = regionOptionChoose.innerHTML + `<option value='${regionList[index]}'>`
+        regionOptionChoose.innerHTML = regionOptionChoose.innerHTML + `<option value=${regionList[index]}>`
+
     regionFormTitle.innerHTML = regionFormTitle.innerHTML + '</datalist>'
     regionFormTitle.appendChild(regionOptionChoose)
     regionForm.appendChild(regionFormTitle)
@@ -54,7 +71,12 @@ function generateRegions() {
 
 function generateCountries() {
     let regionForm = document.querySelector('.countryForm')
-    let regionFormTitle = document.createElement('label')
+
+    let weaponFormHeader = document.createElement('h3');
+    weaponFormHeader.innerHTML = 'Country';
+    regionForm.appendChild(weaponFormHeader)
+
+    let regionFormTitle = document.createElement('div')
     let regionOptionChoose = document.createElement('datalist');
     regionOptionChoose.setAttribute('id', 'allCountries')
     let regionList = [
@@ -308,11 +330,11 @@ function generateCountries() {
         "Zimbabwe",
         "Åland Islands"
     ];
-    regionFormTitle.innerHTML = regionFormTitle.innerHTML + `<b>Country</b> <br>
-                                                            <input list='allCountries'>`
+    regionFormTitle.innerHTML = regionFormTitle.innerHTML + `<input list='allCountries'>`
     let index = 0;
     for (index = 0; index < regionList.length; index++)
-        regionOptionChoose.innerHTML = regionOptionChoose.innerHTML + `<option value='${regionList[index]}'>`
+        regionOptionChoose.innerHTML = regionOptionChoose.innerHTML +
+         `<option value='${regionList[index]}'>`
     regionFormTitle.innerHTML = regionFormTitle.innerHTML + '</datalist>'
     regionFormTitle.appendChild(regionOptionChoose)
     regionForm.appendChild(regionFormTitle)

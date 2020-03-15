@@ -7,30 +7,38 @@
         <div class='firstRow1'>
             <div class='dateForm'>
                 <label for='dateInput' id='textDateInterval'><b>Date Interval:</b></label>
-                <input type='date' id='dateInput'></input>
+                <input class='dataForm1'type='date' id='dateInput'></input>
                 <span>-</span>
-                <input type='date' id='dateInput'></input>
+                <input class='dataForm1'type='date' id='dateInput'></input>
             </div>
         </div>
         <div class='firstRow2'>
-            <div class='nrTerrForm'>
-                <label for='nrTerrInput'><b>Number of terrorists:</b></label>
-                <input type='text' id='nrTerrInput'></input>
-                <span>-</span>
-                <input type='text' id='nrTerrInput'></input>
-            </div>
-            <div class='nrDeathsForm'>
-                <label for='nrDeathsInput'><b>Number of deaths:</b></label>
-                <input type='text' id='nrDeathsInput'></input>
-                <span>-</span>
-                <input type='text' id='nrDeathsInput'></input>
-            </div>
-            <div class='nrWoundedForm'>
-                <label for='nrWoundedInput'><b>Number of wounded:</b></label>
-                <input type='text' id='nrWoundedInput'></input>
-                <span>-</span>
-                <input type='text' id='nrWoundedInput'></input>
-            </div>
+            <ul>
+                <li>
+                    <div class='nrTerrForm'>
+                        <label for='nrTerrInput'><b>Number of terrorists:</b></label>
+                        <input type='text' id='nrTerrInput'></input>
+                        <span>-</span>
+                        <input type='text' id='nrTerrInput'></input>
+                    </div>
+                </li>
+                <li>
+                    <div class='nrDeathsForm'>
+                        <label for='nrDeathsInput'><b>Number of deaths:</b></label>
+                        <input type='text' id='nrDeathsInput'></input>
+                        <span>-</span>
+                        <input type='text' id='nrDeathsInput'></input>
+                    </div>
+                </li>
+                <li>
+                    <div class='nrWoundedForm'>
+                        <label for='nrWoundedInput'><b>Number of wounded:</b></label>
+                        <input type='text' id='nrWoundedInput'></input>
+                        <span>-</span>
+                        <input type='text' id='nrWoundedInput'></input>
+                    </div>
+                </li>
+            </ul>
         </div>
 
             <div class='attackTypeForm'>
@@ -43,12 +51,29 @@
                 <!-- Weapon list is generated in js-->
             </div>
             <div class='damageForm'>
-                <label><b>Amount of damage made</b></label>
-                <br>
-                <input type='radio' id='minorDamage' name='amountDamage'>Minor damages</input>
-                <input type='radio' id='majorDamage' name='amountDamage'>Major damages</input>
-                <input type='radio' id='catastrophicDamage' name='amountDamage'>Catastrophic damages</input>
-                <input type='radio' id='unknownDamage' name='amountDamage'>Unknown damages</input>
+                <h3>Amount of damage</h3>
+                <div>
+                
+                <div class="input1">
+                    <input type='checkbox' id='minorDamage'>
+                    <label for="minorDamage">Minor Damage</label>
+                </div>
+                
+                <div class="input1">
+                    <input type='checkbox' id='majorDamage'>
+                    <label for="majorDamage">Major Damage</label>
+                </div>
+
+                <div class="input1">
+                     <input type='checkbox' id='catastrophicDamage'>
+                     <label for="catastrophicDamage">Catastrophic damages</label>
+                </div>
+
+                <div class="input1">
+                     <input type='checkbox' id='unknownDamage'>
+                     <label for="unknownDamage">Unknown damages</label>
+                </div>
+                </div>
             </div>
 
             <div class='regionForm'>
@@ -59,16 +84,25 @@
             </div>
 
         <div class='fourthRow'>
-            <div class='successForm'>
-                <label for='succesInput'><b>Successfull attack</b></label>
+            <div class='input1'>
                 <input type='checkbox' id='succesInput'></input>
+                <label for='succesInput' id='label1'>Successfull attack</label>
             </div>
-            <div class='knownForm'>
-                <label for='knownInput'><b>It is known who attacked</b></label>
+            <div class='input1'>
                 <input type='checkbox' id='knownInput'></input>
+                <label for='knownInput' id='label1'>It is known who attacked</label>
             </div>
         </div>
+
+
+
         <section class='submitForm' onclick="navigateRoot('/statistics-drawings')">
-            <input type='button' value='Submit' id='submitButton'> </input>
+            <div id='submitButton2'>
+                <input type='button' value='Submit' id='submitButton'>
+                <span id='span1'></span>
+                <span id='span2'></span>
+                <span id='span3'></span>
+                <span id='span4'></span>
+            </div>
         </section>
 </div>
