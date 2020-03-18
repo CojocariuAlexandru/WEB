@@ -7,10 +7,30 @@ let webapp; // boolean flag, true = display the web app, false = display the pre
 // ------------------------------------------------------ Application models -------------------------------------------------
 
 class Attack {
-    constructor(id, latitude, langitude) {
+    constructor(id, country, region, numberOfTerrorists, numberOfKills, numberOfWounded, successfullAttack, knownAttackers, weaponsUsed,
+        motive, weaponDetails, ransom, otherDetails, latitude, longitude) {
         this.id = id;
+        this.country = country;
+        this.region = region;
+        this.numberOfTerrorists = numberOfTerrorists;
+        this.numberOfKills = numberOfKills;
+        this.numberOfWounded = numberOfWounded;
+        this.successfullAttack = successfullAttack;
+        this.knownAttackers = knownAttackers;
+        this.weaponsUsed = weaponsUsed;
+        this.motive = motive;
+        this.weaponDetails = weaponDetails;
+        this.ransom = ransom;
+        this.otherDetails = otherDetails;
         this.latitude = latitude;
-        this.langitude = langitude;
+        this.longitude = longitude;
+    }
+}
+
+class ReplaceObject {
+    constructor(label, value) {
+        this.label = label;
+        this.value = value;
     }
 }
 
@@ -18,9 +38,8 @@ class Attack {
 
 let attacks = [];
 
-attacks.push(new Attack(1, 18.456792, -69.9512));
-attacks.push(new Attack(2, 19.37189, -99.0866));
-attacks.push(new Attack(3, 15.4786, -120.5997));
+attacks.push(new Attack(1, 'United States', 'New York City', 5, 1384, 8190, 'YES', 'YES', 'Vehicle (not to include vehicle-borne explosives, i.e., car or truck bombs)', 'Unknown', 'The attackers reportedly gained control of the plane using sharp objects resembling knives or other sharpened metal objects. The attackers turned the airplane into a missile when flying it into the North Tower of the World Trade Center Complex. The airplane\'s jet fuel ignited the building and resulted in a massive fire that contributed to the collapse of the North Tower. Mace may have also been used in subduing the passengers and crew members.', 'The crash resulted in the destruction of an American Airlines Boeing 767 aircraft. All personal belongings stowed on the plane were destroyed as well. Also destroyed was the North Tower of the World Trade Center complex in New York City, which collapsed as a result of the impact and subsequent fire. The building\'s collapse undoubtedly damaged the foundation of nearby buildings, though the South Tower had already fallen. Businesses located in the North Tower suffered massive economic losses. Air travel was restricted or prevented in the United States for several months following the attacks. Total losses to the United States Airline industry are unknown, but extremely high. Several major United States airlines were nearly bankrupted in the aftermath of the attacks. The attacks had a negative impact on the U.S. and world economy.', 'This attack was one of four related incidents (cf. 200109110004-07). Three people including two attendants, Karen Martin and Barbara Arestegui, were stabbed or had their throats slashed by the hijackers. American Airlines Flight 11 departed from Boston\'s Logan International Airport at 7:59 am local time. The 9/11 Commission estimated that the hijacking began at 8:14 am. Since the aircraft crashed into the North Tower at 8:46 am, the hijacking lasted 32 minutes. Details on the number of people wounded in the attacks are very difficult to confirm The numbers reported in the GTD are conservative estimates for immediate casualties, first responders, and residents, based on documentation for the September 11th Victims Compensation Fund (VCF).', 40.697132, -73.931351));
+attacks.push(new Attack(2, 'Romania', 'Vaslui', 78, 10, 10, 'NO', 'YES', 10, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatisi architecto beatae vitae dicta sunt explicabo. Nemo enim  ad minima veniam, quis nostrum exercitationem ullam corporis  suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?', 41.124, -51.02));
 
 // ------------------------------------------------------- Templating -------------------------------------------------------
 
@@ -44,6 +63,33 @@ let statisticsDrawingsPage = readPage('web-app-statistics-drawings');
 let mapPage = readPage('web-app-map');
 let attacksPage = readPage('web-app-attacks');
 let attackIdPage = readPage('web-app-id-attack');
+
+function buildArrayOfReplaceObjectsFromObject(obj) {
+    let result = [];
+    Object.keys(obj).forEach(function (key) {
+        result.push(new ReplaceObject(key, obj[key]));
+    });
+    return result;
+}
+
+function buildViewReplaceLabel(template, label, replaceValue) {
+    let searchedLabel = '@{{' + label + '}}';
+
+    return template.replace(searchedLabel, replaceValue);
+}
+
+function buildView(template, replaceObjects) {
+    for (const replaceObject of replaceObjects) {
+        console.log(replaceObject);
+        template = buildViewReplaceLabel(template, replaceObject.label, replaceObject.value);
+    }
+    return template;
+}
+
+function buildViewFromObject(template, objectToIntegrate) {
+    let replaceObjectsArr = buildArrayOfReplaceObjectsFromObject(objectToIntegrate);
+    return buildView(template, replaceObjectsArr);
+}
 
 // ---------------------------------------------------- Routing -------------------------------------------------------------
 // The routing system was implementing having the following tutorial as a starting point 
@@ -88,8 +134,10 @@ root.children.push(mapRoute);
 //*** Attack/id route */
 let thatAttackRoute = new Route(':id', true);
 thatAttackRoute.processCallback = function (arg) {
-    this.beforeCallback(arg);
-    this.afterCallback();
+    let attack = this.beforeCallback(arg);
+    if (attack != null) {
+        this.afterCallback(attack);
+    }
 }
 thatAttackRoute.beforeCallback = attackIdPageBefore;
 thatAttackRoute.templateCallback = attackIdPageTemplate;
@@ -250,14 +298,15 @@ function toggleSidebar() {
     } else {
         sidebar.style.display = 'flex';
         sidebar.style.width = '100%';
-        let h1 = getPageHeight(), h2 = document.querySelector('.main-wrapper').getBoundingClientRect().height;
+        let h1 = getPageHeight(),
+            h2 = document.querySelector('.main-wrapper').getBoundingClientRect().height;
         let h = (h1 > h2 ? h1 : h2);
         sidebar.style.height = h + 'px';
     }
 }
 
 function handleResize() {
-    if (!webapp){
+    if (!webapp) {
         return;
     }
     if (getPageWidth() > 520) {
@@ -335,23 +384,25 @@ function attackIdPageBefore(id) {
     }
     if (!found) {
         mainContent.innerHTML = 'Error';
-        return;
+        return null;
     }
     mainContent.innerHTML = this.templateCallback(currentAttack);
+    return currentAttack;
 }
 
-function attackIdPageTemplate() {
-    return attackIdPage;
+function attackIdPageTemplate(attack) {
+    console.log(attack);
+    return buildViewFromObject(attackIdPage, attack);
 }
 
-function attackIdPageInit() {
+function attackIdPageInit(attack) {
     let attackAttack = document.querySelector('#mapAttack');
     map = new google.maps.Map(attackAttack, {
         center: {
-            lat: 45.9852129,
-            lng: 24.6859225
+            lat: attack.latitude,
+            lng: attack.longitude
         },
-        zoom:8
+        zoom: 8
     });
 
     let attackData = document.querySelector('#terroristsData');
@@ -389,11 +440,10 @@ function attackIdPageInit() {
     }
 }
 
-
-
 /***********Attack list **********************/
 var numberOfRecords = 10;
-function generateRecords(){
+
+function generateRecords() {
     let attackListHead = document.querySelector('.recordList');
     let particularRecord = document.createElement('table');
     attackListHead.appendChild(particularRecord);
@@ -406,7 +456,7 @@ function generateRecords(){
                                         <th class='dateID'>Date</th>
                                 `;
     attackListHead.appendChild(particularRecord);
-    for(let i=0; i<numberOfRecords; i++){
+    for (let i = 0; i < numberOfRecords; i++) {
         particularRecord = document.createElement('tr');
         particularRecord.setAttribute('class', 'particularRecord');
         particularRecord.innerHTML = `
@@ -414,25 +464,24 @@ function generateRecords(){
                                     <td class='locationID'>Country, Region</td>
                                     <td class='dateID'>YYYY/MM/DD</td>
                                     `;
-        if(i % 2 == 1){
+        if (i % 2 == 1) {
             particularRecord.style.backgroundColor = 'peachpuff';
         }
         attackListHead.appendChild(particularRecord);
     }
 }
 
-function generateOtherLists(){
+function generateOtherLists() {
     let attackListHead = document.querySelector('.otherLists');
     let otherAttackList = document.createElement('footer');
     let listText = "<p class = 'numberList'> << ";
-    for(let i=0; i*20 <= numberOfRecords; i++){
-        if(i*20 + 20 <= numberOfRecords){
-        listText = listText + `${i+1}, `;
-    }
-    else{
-        listText = listText + `${i+1} >> </p> `;
+    for (let i = 0; i * 20 <= numberOfRecords; i++) {
+        if (i * 20 + 20 <= numberOfRecords) {
+            listText = listText + `${i+1}, `;
+        } else {
+            listText = listText + `${i+1} >> </p> `;
 
-    }
+        }
     }
     otherAttackList.innerHTML = listText;
     attackListHead.appendChild(otherAttackList);

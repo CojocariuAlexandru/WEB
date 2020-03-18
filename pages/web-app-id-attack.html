@@ -1,6 +1,6 @@
 <div class='thatAttackGrid'>
     <div class='attackHeader'>
-        <h1>Terrorist attack #ID description</h1>
+        <h1>Terrorist attack @{{id}} description</h1>
         <h3>Region, Subregion - YYYY/MM/DD</h3>
     </div>
     <div class='attackAbout'>
@@ -8,35 +8,35 @@
         <ul>
             <li>
                 <div class="key"><span> Country:</span></div>
-                <div class="value"> <span id='countryData'>Romania</span> </div>
+                <div class="value"> <span id='countryData'>@{{country}}</span> </div>
             </li>
             <li>
                 <div class="key"><span>  Region:</span></div>
-                <div class="value"> <span id='regionData'>Vaslui</span> </div>
+                <div class="value"> <span id='regionData'>@{{region}}</span> </div>
             </li>
             <li>
                 <div class="key"><span>  Number of terrorists: </span></div>
-                <div class="value"><span id='terroristsData'>78</span></div>
+                <div class="value"><span id='terroristsData'>@{{numberOfTerrorists}}</span></div>
             </li>
             <li>
                 <div class="key"><span> Number of kills: </span></div>
-                <div class="value"> <span id='killsData'>10</span></div>
+                <div class="value"> <span id='killsData'>@{{numberOfKills}}</span></div>
             </li>
             <li>
                 <div class="key"><span>  Number of wounded: </span></div>
-                <div class="value"><span id='woundedData'>10</span></div>
+                <div class="value"><span id='woundedData'>@{{numberOfWounded}}</span></div>
             </li>
             <li>
                 <div class="key"><span>  Succesful attack:</span></div>
-                <div class="value"> <span id='succesfulAttack'>NO</span></div>
+                <div class="value"> <span id='succesfulAttack'>@{{successfullAttack}}</span></div>
             </li>
             <li>
                 <div class="key"><span> Known attackers: </span></div>
-                <div class="value"> <span id='knownAttackers'>YES</span></div>
+                <div class="value"> <span id='knownAttackers'>@{{knownAttackers}}</span></div>
             </li>
             <li>
                  <div class="key"><span>  Weapons used:</span></div>
-                <div class="value"><span >10</span></div>
+                <div class="value"><span >@{{weaponsUsed}}</span></div>
            </li>
         </ul>
     </div>
@@ -62,15 +62,15 @@
     </div>
     
     <div class='attackDetailText1'>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+        <p>@{{motive}}</p>
     </div>
     
     <div class='attackDetailText2'>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+        <p>@{{weaponDetails}}</p>
     </div>
 
     <div class='attackDetailText3'>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+        <p>@{{ransom}}</p>
      </div>
 
      <div class='attackOtherDetailsHeading'>
@@ -78,21 +78,6 @@
     </div>
 
     <div class='attackOtherDetails'>
-         <p>Sed ut perspiciatis unde omnis iste natus error sit
-              voluptatem accusantium doloremque laudantium, totam
-               rem aperiam, eaque ipsa quae ab illo inventore veritatis
-               i architecto beatae vitae dicta sunt explicabo. Nemo enim 
- 
-                 ad minima veniam, quis nostrum exercitationem ullam corporis 
-                 suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
-         </p>
-         <p>Sed ut perspiciatis unde omnis iste natus error sit
-            voluptatem accusantium doloremque laudantium, totam
-             rem aperiam, eaque ipsa quae ab illo inventore veritatis
-             i architecto beatae vitae dicta sunt explicabo. Nemo enim 
-
-               ad minima veniam, quis nostrum exercitationem ullam corporis 
-               suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
-       </p>
+         <p>@{{otherDetails}}</p>
      </div>
 </div>

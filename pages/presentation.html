@@ -5,15 +5,15 @@
             TeVi
         </h3>
         <ul>
-            <li><a onclick="changeLogin()">Login</a></li>
-            <li id="signup" onclick="changeSignUp()"><a>SignUp</a></li>
-            <li id="about"><a href="">About</a></li>
-            <li><a href="">Contact</a></li>
+            <li><a onclick="changeLogin()" href="#login-signup">Login</a></li>
+            <li id="signup" onclick="changeSignUp()"><a href="#login-signup">SignUp</a></li>
+            <li id="about"><a href="#about-us">About</a></li>
+            <li><a href="#contact-info">Contact</a></li>
         </ul>
     </div>
 </header>
 
-<div class="grid-container">
+<div class="grid-container" id="login-signup">
     <div class="login">
         <span class="background"></span>>
         <div class="widget-login widget" id="login-component">
@@ -48,7 +48,7 @@
     <div class="art">
         <!-- <img src="img/img2.svg" alt="imagine">  -->
     </div>
-    <div class="about">
+    <div class="about" id="about-us">
         <h2 class="title">
                 Abous us
             </h2>
@@ -137,7 +137,7 @@
             <li><i class="fa fa-desktop"></i> <a href="https://www.info.uaic.ro/">Faculty of Computer Science</a></li>
         </ul>
     </div>
-    <div class="contact">
+    <div class="contact" id="contact-info">
         <h3>Contact:</h3>
         <ul>
             <li><i id="icon" class="fa fa-briefcase"></i><span class="number">+40 232 201090</span></li>
