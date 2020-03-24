@@ -62,6 +62,7 @@ let presentationSitePage = readPage('presentation');
 let webAppTemplate = readPage('web-app');
 let homePage = readPage('web-app-home.html');
 let statisticsPage = readPage('web-app-statistics');
+let statisticsResultsPage = readPage('web-app-statistics-result');
 let statisticsDrawingsPage = readPage('web-app-statistics-drawings');
 let mapPage = readPage('web-app-map');
 let attacksPage = readPage('web-app-attacks');
@@ -121,6 +122,11 @@ let statisticsRoute = new Route('statistics', true);
 statisticsRoute.template = statisticsPage;
 statisticsRoute.afterCallback = statisticsPageInit;
 root.children.push(statisticsRoute);
+
+let statisticsResultsRoute = new Route('statistics-results', true);
+statisticsResultsRoute.template = statisticsResultsPage;
+statisticsResultsRoute.afterCallback = statisticsResultsPageInit;
+root.children.push(statisticsResultsRoute);
 
 //*** Statistics drawings route */
 let statisticsDrawingsRoute = new Route('statistics-drawings', true);
@@ -344,6 +350,12 @@ function statisticsPageInit() {
     sliderFunction()
 }
 
+// ------------------------------------------------------- Statistics results page -------------------------------------------
+
+function statisticsResultsPageInit() {
+    console.log('here');
+}
+
 // ------------------------------------------------------- Statistics drawings page ------------------------------------------
 
 function statisticsDrawingsPageInit() {
@@ -396,7 +408,6 @@ function attackIdPageBefore(id) {
 }
 
 function attackIdPageTemplate(attack) {
-    console.log(attack);
     return buildViewFromObject(attackIdPage, attack);
 }
 
@@ -411,9 +422,11 @@ function attackIdPageInit(attack) {
     });
 
     document.getElementById("ripple-loader-id").style.left = `calc(50% + 5px * ${latitude-countryLatitude})`;
-    document.getElementById("ripple-loader-id").style.top = `calc(50% + 5px * ${longitude-countryLongitude})`;  
+    document.getElementById("ripple-loader-id").style.top = `calc(50% + 5px * ${longitude-countryLongitude})`;
 
-    map.setOptions({draggable: false});
+    map.setOptions({
+        draggable: false
+    });
     let attackData = document.querySelector('#terroristsData');
     if (parseInt(attackData.innerHTML) > 99) {
         attackData.style.color = "red";
