@@ -3,9 +3,13 @@ body .presentation {
     height: 100%;
 
     display: block;
-    margin-top: 60px;
 
     font-size: 10px;
+}
+
+body .presentation #empty {
+    height: 60px;
+    width: 100%;
 }
 
 .presentation h2 {
@@ -264,7 +268,7 @@ body .presentation .grid-container {
     position: absolute;
     top: 0;
     left: 0;
-    background-image: url("/img/background.png");
+    background-image: url("/img/background.webp");
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -373,7 +377,7 @@ body .presentation .grid-container {
     position: absolute;
     top: -20px;
     left: -20px;
-    background-image: url("/img/background.png");
+    background-image: url("/img/background.webp");
     background-repeat: no-repeat;
     background-size: cover;
 }

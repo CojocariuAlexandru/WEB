@@ -30,7 +30,7 @@ body .web-app {
     height: 100%;
 
     color: #EEE;
-    background-image: url("/img/home-background.png");
+    background-image: url("/img/home-background.webp");
     background-repeat: no-repeat;
     background-size: cover;
 }

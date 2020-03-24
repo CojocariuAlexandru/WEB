@@ -1,0 +1,12 @@
+country country
+region_txt region
+latitude latitude
+longitude longitude
+attacktype1_txt attack_type
+motive motive
+nperps terrorists_count
+nkill kills_count
+nwound wounded_count
+success success
+weaptype1_txt weapon_type
+weapdetail weapon_details

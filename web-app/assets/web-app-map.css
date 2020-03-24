@@ -1,0 +1,28 @@
+.map-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    height: 100%;
+    width: 100%;
+
+    overflow-y: scroll;
+}
+
+#mapDiv {
+    width: 72%;
+    height: 84%;
+
+    background-color: transparent;
+
+    margin-right: 12px;
+
+    border: 1px dotted black;
+    border-radius: 15px;
+}
+
+#dateInput {
+    border: 2px solid gray;
+    border-radius: 5px;
+}
