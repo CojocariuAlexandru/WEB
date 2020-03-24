@@ -1,5 +1,7 @@
 # TeVi
 This is our project for "Web technologies" course.
+## Live Demo
+http://tevi.xyz/app
 ## Faculty
 Faculty of Computer Science Iași, "Alexandru Ioan Cuza" University
 ## Members/Contributors
