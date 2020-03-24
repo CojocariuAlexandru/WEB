@@ -339,3 +339,101 @@ function generateCountries() {
     regionFormTitle.appendChild(regionOptionChoose)
     regionForm.appendChild(regionFormTitle)
 }
+
+
+
+function sliderFunction() {
+
+    let mySlider = document.getElementById("rangeTerr");
+    let output = document.getElementById("numberTerr");
+
+    output.innerHTML = mySlider.value;
+    mySlider.oninput = function(){
+    output.innerHTML = this.value;
+    }
+
+    let mySlider1 = document.getElementById("rangeDeaths");
+    let output1 = document.getElementById("numberDeaths");
+
+    output1.innerHTML = mySlider1.value;
+    mySlider1.oninput = function(){
+    output1.innerHTML = this.value;
+    }
+
+    let mySlider2 = document.getElementById("rangeWound");
+    let output2 = document.getElementById("numberWound");
+
+    output2.innerHTML = mySlider2.value;
+    mySlider2.oninput = function(){
+    output2.innerHTML = this.value;
+    }
+
+
+}
+// w3 schools load bars
+function move() {
+    var elem = document.getElementById("myBar");   
+    var width = 0;
+
+    var elem2 = document.getElementById("myBar2");   
+    var elem2_2 = document.getElementById("myBar2-2");
+    var elem2_3 = document.getElementById("myBar2-3");
+
+    elem2.style.width = 0 + '%';
+    elem2_2.style.width = 0 + '%';
+    elem2_3.style.width = 0 + '%';
+    
+    var width2 = 0;
+    var width2_2 = 20;
+    var width2_3 = 60;
+    // elem2_2.style.left = width2_2 + '%';
+    //   elem2_3.style.left = width3_3 + '%';
+      
+
+    var id = setInterval(frame, 20);
+    function frame() {
+      if (width >= 80) {
+        clearInterval(id);
+      } else {
+        width++; 
+        elem.style.width = width + '%'; 
+        elem.innerHTML = `<p>` + width * 1  + '% </p>';
+      }
+    }
+
+   
+    var id2 = setInterval(frame2, 20);
+    function frame2() {
+      if (width2<20){
+        width2++; 
+        elem2.style.width = width2 + '%'; 
+        elem2.innerHTML = `<p>` + width2 * 1  + '% &#8595 </p>';
+      }
+      else if (width2_2<60){
+        width2_2++; 
+        elem2_2.style.width = (width2_2-20) + '%'; 
+        elem2_2.innerHTML = `<p>` + (width2_2 * 1 - 20) + '% </p>';
+      }
+      else if (width2_3<100){
+        width2_3++; 
+        elem2_3.style.width = (width2_3-60) + '%'; 
+        elem2_3.innerHTML = `<p>` + (width2_3 * 1 - 60)  + '%  &#8593;</p>';
+      }else {
+        clearInterval(id2);
+      } 
+    }
+
+    var elem3 = document.getElementById("myBar3");   
+    var width3 = 0;
+    var id3 = setInterval(frame3, 20);
+    function frame3() {
+      if (width3 >= 100) {
+        clearInterval(id3);
+      } else {
+        width3++; 
+        elem3.style.width = width3 + '%'; 
+        elem3.innerHTML = `<p>` + width3 * 1  + '% </p>';
+      }
+    }
+  }
+

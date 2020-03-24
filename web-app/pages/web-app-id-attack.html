@@ -1,83 +1,123 @@
-<div class='thatAttackGrid'>
-    <div class='attackHeader'>
-        <h1>Terrorist attack @{{id}} description</h1>
-        <h3>Region, Subregion - YYYY/MM/DD</h3>
+<div class="grid-container">
+    <div class="title-stat">
+        <h2>Statistics result</h2>
     </div>
-    <div class='attackAbout'>
-        <h4> About </h4>
+    <div class="fields">
+        <div class="container-fields">
+            <ul>
+                <li>Date interval</li>
+                <li>Region</li>
+                <li>Country</li>
+                <li>Max number of terrorrists</li>
+                <li>Max number od deaths</li>
+                <li>Max number of wounded</li>
+                <li>Attack type</li>
+                <li>Target type</li>
+                <li>Weapon type</li>
+                <li>Amount of damage</li>
+                <li>Successful attack</li>
+                <li>It is known who attacked</li>
+            </ul>
+
+        </div>
+    </div>
+    <div class="values">
+        <div class="container-values">
+            <ul>
+                <li>10/10/2020 - 11/10/2020</li>
+                <li>Region</li>
+                <li>Country</li>
+                <li>100</li>
+                <li>1000</li>
+                <li>100</li>
+                <li>Attack type</li>
+                <li>Target type</li>
+                <li>Weapon type</li>
+                <li>Amount of damage</li>
+                <li>Successful attack</li>
+                <li>It is known who attacked</li>
+            </ul>
+
+        </div>
+    </div>
+    <div class="details-1">
+        <h3>Most frequently attacked</h3>
         <ul>
-            <li>
-                <div class="key"><span> Country:</span></div>
-                <div class="value"> <span id='countryData'>@{{country}}</span> </div>
-            </li>
-            <li>
-                <div class="key"><span>  Region:</span></div>
-                <div class="value"> <span id='regionData'>@{{region}}</span> </div>
-            </li>
-            <li>
-                <div class="key"><span>  Number of terrorists: </span></div>
-                <div class="value"><span id='terroristsData'>@{{numberOfTerrorists}}</span></div>
-            </li>
-            <li>
-                <div class="key"><span> Number of kills: </span></div>
-                <div class="value"> <span id='killsData'>@{{numberOfKills}}</span></div>
-            </li>
-            <li>
-                <div class="key"><span>  Number of wounded: </span></div>
-                <div class="value"><span id='woundedData'>@{{numberOfWounded}}</span></div>
-            </li>
-            <li>
-                <div class="key"><span>  Succesful attack:</span></div>
-                <div class="value"> <span id='succesfulAttack'>@{{successfullAttack}}</span></div>
-            </li>
-            <li>
-                <div class="key"><span> Known attackers: </span></div>
-                <div class="value"> <span id='knownAttackers'>@{{knownAttackers}}</span></div>
-            </li>
-            <li>
-                 <div class="key"><span>  Weapons used:</span></div>
-                <div class="value"><span >@{{weaponsUsed}}</span></div>
-           </li>
+            <li>Romania</li>
+            <li>Iran</li>
+            <li>Italy</li>
+            <li>Romania</li>
+            <li>Iran</li>
+            <li>Italy</li>
+            <li>Romania</li>
         </ul>
     </div>
-    
-    <div class='mapAttack1'>
-        <div id='mapAttack'>
-            
+    <div class="pie-1">
+        <div id="piechart"></div>
+    </div>
+    <div class="attack-rate">
+        <h3>Attack-rate</h3>
+        <div class="attack-bar-border">
+            <div id="myBar" class="attack-bar"><p>0%</p></div>
         </div>
-        <div class="ripple-loader">
-            <div></div>
-            <div></div>
-          </div>
+    </div>
+    <div class="damage-made">
+        <h3>Damage-made</h3>
+        <div class="damage-bar-border">
+            <div id="myBar2" class="damage-bar"><p>0%</p></div>
+            <div id="myBar2-2" class="damage-bar-2"><p>0%</p></div>
+            <div id="myBar2-3" class="damage-bar-3"><p>0%</p></div>
+        </div>
+    </div>
+    <div class="extended24">
+        <h3>Rate extented over 24h</h3>
+        <div class="extended-bar-border">
+            <div id="myBar3" class="extended-bar"><p>0%</p></div>
+        </div>
+        <div id='button-container'>
+            <button class="button-get-all" onclick="move()">Get rates</button> 
+            <span id='span1'></span>
+            <span id='span2'></span>
+            <span id='span3'></span>
+            <span id='span4'></span>
+        </div>
     </div>
     
-    <div class='attackDetailTitle1'>
-        <h3>Motive</h3>
+    <div class="pie-2"></div>
+    <div class="details-2">
+        <h3>Most frequently used attack</h3>
+        <ul>
+            <li>Type1</li>
+            <li>Type2</li>
+            <li>Italy</li>
+        </ul>
     </div>
-    <div class='attackDetailTitle2'>
-        <h3>Weapon details</h3>
-    </div>
-    <div class='attackDetailTitle3'>
-        <h3>Ransom</h3>
-    </div>
-    
-    <div class='attackDetailText1'>
-        <p>@{{motive}}</p>
-    </div>
-    
-    <div class='attackDetailText2'>
-        <p>@{{weaponDetails}}</p>
-    </div>
-
-    <div class='attackDetailText3'>
-        <p>@{{ransom}}</p>
-     </div>
-
-     <div class='attackOtherDetailsHeading'>
-        <h2>Other details</h2>
+    <div class="pie-3"></div>
+    <div class="details-3">
+        <h3>Most frequently targets</h3>
+        <ul>
+            <li>Trump</li>
+            <li>America</li>
+            <li>Trump</li>
+        </ul>
     </div>
 
-    <div class='attackOtherDetails'>
-         <p>@{{otherDetails}}</p>
-     </div>
-</div>
+    <div class="world-map">
+        <p style="text-align: center;">Aicii va fi o statistica pe ani, o functie</p>
+    </div>
+
+
+    <div class="button-1">
+        <a href="" class="button-link1">SVG</a>
+    </div>
+    <div class="button-2">
+        <a href="" class="button-link2">PNG</a>
+    </div>
+    <div class="button-3">
+        <a href="" class="button-link3">CSV</a>
+    </div>
+    <div class="view-table">
+        <p> Check the attacks that we use to generate your statistics :) <a href="">here</a> </p>
+    </div>
+  </div>
+ 

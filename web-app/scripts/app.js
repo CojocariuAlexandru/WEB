@@ -8,7 +8,7 @@ let webapp; // boolean flag, true = display the web app, false = display the pre
 
 class Attack {
     constructor(id, country, region, numberOfTerrorists, numberOfKills, numberOfWounded, successfullAttack, knownAttackers, weaponsUsed,
-        motive, weaponDetails, ransom, otherDetails, latitude, longitude) {
+        motive, weaponDetails, ransom, otherDetails, latitude, longitude, countryLatitude, countryLongitude) {
         this.id = id;
         this.country = country;
         this.region = region;
@@ -24,6 +24,9 @@ class Attack {
         this.otherDetails = otherDetails;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.countryLatitude = countryLatitude;
+        this.countryLongitude = countryLongitude;
+
     }
 }
 
@@ -38,7 +41,7 @@ class ReplaceObject {
 
 let attacks = [];
 
-attacks.push(new Attack(1, 'United States', 'New York City', 5, 1384, 8190, 'YES', 'YES', 'Vehicle (not to include vehicle-borne explosives, i.e., car or truck bombs)', 'Unknown', 'The attackers reportedly gained control of the plane using sharp objects resembling knives or other sharpened metal objects. The attackers turned the airplane into a missile when flying it into the North Tower of the World Trade Center Complex. The airplane\'s jet fuel ignited the building and resulted in a massive fire that contributed to the collapse of the North Tower. Mace may have also been used in subduing the passengers and crew members.', 'The crash resulted in the destruction of an American Airlines Boeing 767 aircraft. All personal belongings stowed on the plane were destroyed as well. Also destroyed was the North Tower of the World Trade Center complex in New York City, which collapsed as a result of the impact and subsequent fire. The building\'s collapse undoubtedly damaged the foundation of nearby buildings, though the South Tower had already fallen. Businesses located in the North Tower suffered massive economic losses. Air travel was restricted or prevented in the United States for several months following the attacks. Total losses to the United States Airline industry are unknown, but extremely high. Several major United States airlines were nearly bankrupted in the aftermath of the attacks. The attacks had a negative impact on the U.S. and world economy.', 'This attack was one of four related incidents (cf. 200109110004-07). Three people including two attendants, Karen Martin and Barbara Arestegui, were stabbed or had their throats slashed by the hijackers. American Airlines Flight 11 departed from Boston\'s Logan International Airport at 7:59 am local time. The 9/11 Commission estimated that the hijacking began at 8:14 am. Since the aircraft crashed into the North Tower at 8:46 am, the hijacking lasted 32 minutes. Details on the number of people wounded in the attacks are very difficult to confirm The numbers reported in the GTD are conservative estimates for immediate casualties, first responders, and residents, based on documentation for the September 11th Victims Compensation Fund (VCF).', 40.697132, -73.931351));
+attacks.push(new Attack(1, 'United States', 'New York City', 5, 1384, 8190, 'YES', 'YES', 'Vehicle (not to include vehicle-borne explosives, i.e., car or truck bombs)', 'Unknown', 'The attackers reportedly gained control of the plane using sharp objects resembling knives or other sharpened metal objects. The attackers turned the airplane into a missile when flying it into the North Tower of the World Trade Center Complex. The airplane\'s jet fuel ignited the building and resulted in a massive fire that contributed to the collapse of the North Tower. Mace may have also been used in subduing the passengers and crew members.', 'The crash resulted in the destruction of an American Airlines Boeing 767 aircraft. All personal belongings stowed on the plane were destroyed as well. Also destroyed was the North Tower of the World Trade Center complex in New York City, which collapsed as a result of the impact and subsequent fire. The building\'s collapse undoubtedly damaged the foundation of nearby buildings, though the South Tower had already fallen. Businesses located in the North Tower suffered massive economic losses. Air travel was restricted or prevented in the United States for several months following the attacks. Total losses to the United States Airline industry are unknown, but extremely high. Several major United States airlines were nearly bankrupted in the aftermath of the attacks. The attacks had a negative impact on the U.S. and world economy.', 'This attack was one of four related incidents (cf. 200109110004-07). Three people including two attendants, Karen Martin and Barbara Arestegui, were stabbed or had their throats slashed by the hijackers. American Airlines Flight 11 departed from Boston\'s Logan International Airport at 7:59 am local time. The 9/11 Commission estimated that the hijacking began at 8:14 am. Since the aircraft crashed into the North Tower at 8:46 am, the hijacking lasted 32 minutes. Details on the number of people wounded in the attacks are very difficult to confirm The numbers reported in the GTD are conservative estimates for immediate casualties, first responders, and residents, based on documentation for the September 11th Victims Compensation Fund (VCF).', 40.597132, -73.831351, 40.730610, -73.935242));
 attacks.push(new Attack(2, 'Romania', 'Vaslui', 78, 10, 10, 'NO', 'YES', 10, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatisi architecto beatae vitae dicta sunt explicabo. Nemo enim  ad minima veniam, quis nostrum exercitationem ullam corporis  suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?', 41.124, -51.02));
 
 // ------------------------------------------------------- Templating -------------------------------------------------------
@@ -338,6 +341,7 @@ function statisticsPageInit() {
     generateTargets();
     generateRegions();
     generateCountries();
+    sliderFunction()
 }
 
 // ------------------------------------------------------- Statistics drawings page ------------------------------------------
@@ -400,12 +404,16 @@ function attackIdPageInit(attack) {
     let attackAttack = document.querySelector('#mapAttack');
     map = new google.maps.Map(attackAttack, {
         center: {
-            lat: attack.latitude,
-            lng: attack.longitude
+            lat: attack.countryLatitude,
+            lng: attack.countryLongitude
         },
         zoom: 8
     });
 
+    document.getElementById("ripple-loader-id").style.left = `calc(50% + 5px * ${latitude-countryLatitude})`;
+    document.getElementById("ripple-loader-id").style.top = `calc(50% + 5px * ${longitude-countryLongitude})`;  
+
+    map.setOptions({draggable: false});
     let attackData = document.querySelector('#terroristsData');
     if (parseInt(attackData.innerHTML) > 99) {
         attackData.style.color = "red";
@@ -446,17 +454,18 @@ var numberOfRecords = 10;
 
 function generateRecords() {
     let attackListHead = document.querySelector('.recordList');
-    let particularRecord = document.createElement('table');
-    attackListHead.appendChild(particularRecord);
+    let table = document.createElement('table');
+    table.setAttribute('class', 'attacksTable');
+    attackListHead.appendChild(table);
 
-    particularRecord = document.createElement('tr');
+    let particularRecord = document.createElement('tr');
     particularRecord.setAttribute('class', 'headingRecordList');
     particularRecord.innerHTML = `
                                         <th class='attackID'>ID</th> 
-                                        <th class='locationID'>Location<th> 
+                                        <th class='locationID'>Location</th> 
                                         <th class='dateID'>Date</th>
                                 `;
-    attackListHead.appendChild(particularRecord);
+    table.appendChild(particularRecord);
     for (let i = 0; i < numberOfRecords; i++) {
         particularRecord = document.createElement('tr');
         particularRecord.setAttribute('class', 'particularRecord');
@@ -466,9 +475,9 @@ function generateRecords() {
                                     <td class='dateID'>YYYY/MM/DD</td>
                                     `;
         if (i % 2 == 1) {
-            particularRecord.style.backgroundColor = 'peachpuff';
+            particularRecord.style.backgroundColor = '#222831';
         }
-        attackListHead.appendChild(particularRecord);
+        table.appendChild(particularRecord);
     }
 }
 

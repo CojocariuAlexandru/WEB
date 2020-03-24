@@ -79,6 +79,25 @@ input.dataForm1, .firstRow2 input {
 .dataForm1::-webkit-inner-spin-button { display: none; }
 .dataForm1::-webkit-calendar-picker-indicator { background: transparent;}
 .dataForm1::-webkit-calendar-picker-indicator { opacity: 0;}
+/* GLOBAL */
+.dateForm,
+.countryForm
+.regionForm,
+.weaponTypeForm,
+.targetTypeForm,
+.attackTypeForm,
+.damageForm,
+.knownForm,
+.successForm,
+.nrWoundedForm,
+.nrTerrForm,
+.nrDeathsForm {
+    align-items: center;
+    justify-content: center;
+}
+*:focus {
+    outline: none;
+}
 
 .statisticsFormGrid >div:not( .statisticsFormHeading) {
     background-color: #eee;
@@ -120,21 +139,107 @@ input.dataForm1, .firstRow2 input {
     /* box-shadow: 1px 2px 4px; */
 }
 
+/*  HEADING  */
+
 .statisticsFormHeading{
     grid-area:statisticsFormHeading;
 }
+
+/* FIRST ROW 1 */
 .firstRow1{
     grid-area:firstRow1;
     margin:0 10px;
 }
+
+/* FIRST ROW 2 */
 .firstRow2{
     grid-area:firstRow2;
     margin:0 10px;
 }
+.firstRow2 ul, .slideContainer{
+    width:100%;
+}
+.nrTerrForm{
+    margin: 5px 0;
+}
+
+/* https://www.youtube.com/watch?v=BrpiNUf2XCk */
+#rangeTerr.slider, #rangeDeaths.slider,  #rangeWound.slider{
+    -webkit-appearance: none;
+    background:linear-gradient(90deg,#097a746c 20%, #b955557a );
+    width: 60%;
+    height: 30px;
+    transition: opacity 0.2s;
+    margin-top: 10px;
+    margin-left: 30px;
+    position: relative;
+ 
+}
+.slideContainer div{
+    display: inline-block;
+    position: relative;
+    width: 15%;
+    padding-left: 20px;
+}
+.slideContainer div span{
+    position: absolute;
+    left:100px;
+    bottom:5px;
+    font-weight: bold;
+}
+
+#rangeTerr.slider::before, #rangeDeaths.slider::before, #rangeWound.slider::before{
+    content:"0";
+    color: #065e61;
+    position: absolute;
+    font-size: 16px;
+    bottom: 4px;
+    left:-20px;
+}
+#rangeTerr.slider::after, #rangeDeaths.slider::after, #rangeWound.slider::after{
+    content:"1000";
+    color: #065e61;
+    position: absolute;
+    font-size: 16px;
+    bottom: 4px;
+    right:-42px;
+}
+#rangeDeaths.slider::after{
+    content:"2000";
+}
+#rangeWound.slider::after{
+    content:"4000";
+}
+
+#rangeTerr.slider::-webkit-slider-thumb, 
+#rangeDeaths.slider::-webkit-slider-thumb, 
+#rangeWound.slider::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    appearance: none;
+    height: 26px;
+    width:26px;
+    border-radius: 16px;
+    background:#065e61;
+}
+/* Work in Mozilla Firefox browser */
+#rangeTerr.slider::-moz-range-thumb, 
+#rangeDeaths.slider::-moz-range-thumb, 
+#rangeWound.slider::-moz-range-thumb{
+    height: 26px;
+    width:26px;
+    border-radius: 16px;
+    background:#065e61;
+}
+
+
+
+
+
+/* ATTACK TYPE FORM */
+
 .attackTypeForm{
     grid-area:attackTypeForm;
 }
-
 
 .attackTypeForm div, .targetTypeForm div, .weaponTypeForm div, .damageForm div div{
     display: flex;
@@ -143,21 +248,6 @@ input.dataForm1, .firstRow2 input {
 }
 .attackTypeForm .input1, .targetTypeForm .input1, .weaponTypeForm .input1{
     width: 50%;
-}
-.damageForm div{
-    text-align:center;
-}
-.damageForm .input1{
-    width: 100%;
-}
-.weaponTypeForm{
-    grid-area:weaponTypeForm;
-}
-.targetTypeForm{
-    grid-area:targetTypeForm;
-}
-.damageForm{
-    grid-area:damageForm;
 }
 .attackTypeForm, .weaponTypeForm, .targetTypeForm, .damageForm{
     margin-left: 10px;
@@ -173,6 +263,33 @@ input.dataForm1, .firstRow2 input {
     border-radius: 15px;
 }
 
+
+/* DAMAGE FORM */
+
+.damageForm{
+    grid-area:damageForm;
+}
+.damageForm div{
+    text-align:center;
+}
+.damageForm .input1{
+    width: 100%;
+}
+/* WEAPON FORM */
+.weaponTypeForm{
+    grid-area:weaponTypeForm;
+}
+.targetTypeForm{
+    grid-area:targetTypeForm;
+}
+
+/* FOURTH ROW */
+.fourthRow{
+    grid-area:fourthRow;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
 .fourthRow div{
     padding:10px;
     margin:20px;
@@ -185,176 +302,70 @@ input.dataForm1, .firstRow2 input {
 }
 
 
-
+/* REGION FORM */
 .regionForm{
     grid-area:regionForm;
     margin-left: 10px;
     margin-right: 10px;
 }
+/* COUNTRY FORM */
 .countryForm{
     grid-area:countryForm;
     margin-left: 10px;
     margin-right: 10px;
 }
-.fourthRow{
-    grid-area:fourthRow;
-    margin-left: 10px;
-    margin-right: 10px;
-}
+
+/* SUBMIT FORM */
 .submitForm{
     grid-area:submitForm;
 }
 
 
-.dateForm,
-.countryForm
-.regionForm,
-.weaponTypeForm,
-.targetTypeForm,
-.attackTypeForm,
-.damageForm,
-.knownForm,
-.successForm,
-.nrWoundedForm,
-.nrTerrForm,
-.nrDeathsForm {
-    align-items: center;
-    justify-content: center;
-}
-
-.nrTerrForm{
-}
-
 #dateInput {
     height: 20px;
 }
 
-/*Animation on elements inspired by https://www.w3schools.com/css/css3_animations.asp */
-/* 
-.statisticsFormGrid>div>div>input:hover {
-    animation-name: slightColorChangeInput;
-    animation-duration: 1s;
-    -webkit-animation-fill-mode: forwards;
-    animation-fill-mode: forwards;
-    cursor: pointer;
-}
 
-.statisticsFormGrid>div>div>label:hover {
-    animation-name: slightColorChange;
-    animation-duration: 1s;
-    -webkit-animation-fill-mode: forwards;
-    animation-fill-mode: forwards;
-    cursor: pointer;
-}
+  /* CHECKBOX */
 
-h1:hover {
-    animation-name: animationHeader;
-    animation-duration: 1s;
-    -webkit-animation-fill-mode: forwards;
-    animation-fill-mode: forwards;
-}
 
-@keyframes slightColorChange {
-    from {
-        color: black;
-    }
-
-    to {
-        color: gray;
-    }
-}
-
-@keyframes slightColorChangeInput {
-    from {
-        color: black;
-    }
-
-    to {
-        background-color: rgba(115, 172, 224, 0.2);
-    }
-}
-
-@keyframes animationHeader {
-    from {
-        margin-t: 0px;
-    }
-
-    to {
-        margin-top: 8px;
-    }
-} */
-.label {
-    margin: auto;
-    padding: 50px;
-    background: #484848;
-  }
-
+  /* Inspired by a tutorial */
   input[type="checkbox"] { display: none; }
 
   input[type="checkbox"] + label {
     display: block;
+    border-radius: 0px;
     position: relative;
     padding-left: 35px;
-    margin-bottom: 20px;
-    font: 14px/20px 'Open Sans', Arial, sans-serif;
+    margin-bottom: 0;
     color:#065e61;
     cursor: pointer;
   }
   
-  input[type="checkbox"] + label:last-child { margin-bottom: 0; }
   
-  input[type="checkbox"] + label:before {
+  input[type="checkbox"] + label::before { /*label immediately after*/
     content: '';
-    display: block;
     width: 20px;
     height: 20px;
-    border: 1px solid #065e61;
+    border: 1.5px solid #065e61;
     position: absolute;
     left: 0;
     top: 0;
-    opacity: .6;
-    transition: all .12s, border-color .08s;
+    transition: all .15s, border-color .1s;
   }
   
-  input[type="checkbox"]:checked + label:before {
-    width: 10px;
+  input[type="checkbox"]:checked + label::before {
+    width: 10px; /*decrease width to make a rectangle*/
+    height: 20px; 
     top: -5px;
     left: 5px;
-    border-radius: 0;
-    opacity: 1;
     border-top-color: transparent;
     border-left-color: transparent;
-    -webkit-transform: rotate(45deg);
     transform: rotate(45deg);
   }
 
-  #nrWoundedInput:focus, #nrTerrInput:focus, #nrDeathsInput:focus {
-    box-shadow: none;
-    outline-offset: 0;
-    outline: none;
-    outline-color: transparent;
-}
+/* SUBMIT FORM */
 
-#nrWoundedInput {
-    width: 30px;
-    height: 20px;
-    border: 2px solid gray;
-    border-radius: 5px;
-}
-
-#nrTerrInput {
-    width: 30px;
-    height: 20px;
-    border: 2px solid gray;
-    border-radius: 5px;
-}
-
-#nrDeathsInput {
-    width: 30px;
-    height: 20px;
-    border: 2px solid gray;
-    border-radius: 5px;
-}
 
 .submitForm {
     display: flex;
@@ -371,6 +382,7 @@ h1:hover {
     font-size: large;
     color:#065e61;
     z-index: 100;
+    cursor: pointer;
     transition: color 0.3s linear;
 }
 
@@ -425,26 +437,20 @@ h1:hover {
       left: 75%;
 }
 
-/* #submitButton:hover {
-    flex: 1;
-    height: 50px;
-
-    border: 1.5px solid black;
-    border-radius: 10px;
-    box-shadow: 2px 3px 5px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 20px;
-    font-weight: bold;
-    background-color: #dfdfdf;
-
-    cursor: pointer;
-} */
 
 
-/**************** List of attacks ***************s*/
+
+
+
+
+/* !!!!!!!!!!!!!!!! CSS SEPARAT!!!!!!!!!!!!! */
+/**************** List of attacks ****************/
 
 .listOfAttacks{
     width: 100%;
+}
+h1{
+    color:#222831;
 }
 
 .listHeading{
@@ -452,21 +458,29 @@ h1:hover {
     margin-top:20px;
     margin-bottom:20px;
 }
+table.attacksTable{
+    /* border-collapse: collapse; */
+    border-radius: 20px;
+    overflow: hidden;
+    border: 2px solid #0763669a;
+}
 
 .recordList{
     display:flex;
     flex-direction: column;
 }
+div.recordList{
+    border-radius: 20px;
+    margin: 0 50px;
+}
 
 .particularRecord, .headingRecordList{
     display:flex;
-    border: 1px solid black;
-    background-color: lightblue;
-    margin-left:20px;
-    margin-right:20px;
-    padding:4px;
+    background-color:#393e46;
+
+    padding:8px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    
+    color:#eee;
 }
 
 .particularRecord:hover{
@@ -475,15 +489,20 @@ h1:hover {
 }
 
 .headingRecordList{
-    border: 2px solid black;
-    background-color: floralwhite;
+    
+    color:#eee;
+    font-size: 26px;
+    background-color: #076064c9;
+    
 }
+
 
 
 .dateID, .locationID, .attackID{
     display: flex;
     flex:1;
     align-items: center;
+    text-align: center;
 }
 
 .attackID{
@@ -498,10 +517,9 @@ h1:hover {
 
 .sortList{
     display:flex;
-    background-color: rgb(121, 141, 209);
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-bottom: 40px;
+    background-color:#393e46;
+    margin: 0 50px 40px 50px;
+    border-radius: 16px;;
     padding: 10px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     align-items: center;
@@ -511,18 +529,35 @@ h1:hover {
 #searchText{
     display: flex;
     flex:3;
-    margin-right: 20px;
+    margin: 0 20px;
     height:50px;
     font-size:20px;
+    border-radius: 40px;
+}
+
+input#searchText{
+    padding: 0 30px;
+    color:#065e61;
 }
 
 #advancedSearch{
     display: flex;
     flex:2;
     height:50px;
-    background-color: rgb(42, 38, 92);
+    background-color: #0abfc594;
+    border-radius: 30px;
+    border: #eee dashed 2px;
     align-items: center;
+    margin:0 20px;
     cursor: pointer;
+    
+    transition: all .2s;
+}
+
+#advancedSearch:hover{
+    background-color: #065e61;
+    font-size:22px;
+    padding-left: 30px;
 }
 #advancedSearch:active .advancedFields{
     display:block;
@@ -535,8 +570,10 @@ h1:hover {
 }
 
 #advancedSearchText{
-    color:white;
+    color:#eee;
+    font-size:22px;
 }
+
 
 .advancedFields{
     display:none;

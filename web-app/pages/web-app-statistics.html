@@ -16,26 +16,30 @@
         <ul>
             <li>
                 <div class='nrTerrForm'>
-                    <label for='nrTerrInput'><b>Number of terrorists:</b></label>
-                    <input type='text' id='nrTerrInput'></input>
-                    <span>-</span>
-                    <input type='text' id='nrTerrInput'></input>
+                    <div class="slideContainer">
+                        <label for='rangeTerr'><h4>Max number of terrorists:</h4></label>
+                        <input type="range" min="0" max="1000" value="500" class="slider" id="rangeTerr">
+                        <div><span id="numberTerr"> ana</span></div>
+                    </div>
+                    
                 </div>
             </li>
             <li>
                 <div class='nrDeathsForm'>
-                    <label for='nrDeathsInput'><b>Number of deaths:</b></label>
-                    <input type='text' id='nrDeathsInput'></input>
-                    <span>-</span>
-                    <input type='text' id='nrDeathsInput'></input>
+                    <div class="slideContainer">
+                        <label for='rangeDeaths'><h4>Max number of deaths:</h4></label>
+                        <input type="range" min="0" max="2000" value="1000" class="slider" id="rangeDeaths" >
+                        <div><span id="numberDeaths"> ana</span></div>
+                    </div>
                 </div>
             </li>
             <li>
                 <div class='nrWoundedForm'>
-                    <label for='nrWoundedInput'><b>Number of wounded:</b></label>
-                    <input type='text' id='nrWoundedInput'></input>
-                    <span>-</span>
-                    <input type='text' id='nrWoundedInput'></input>
+                    <div class="slideContainer">
+                        <label for='rangeWound'><h4>Max number of wounded:</h4></label>
+                        <input type="range" min="0" max="4000" value="2000" class="slider" id="rangeWound" >
+                        <div><span id="numberWound"> ana</span></div>
+                    </div>
                 </div>
             </li>
         </ul>
