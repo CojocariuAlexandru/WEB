@@ -1,4 +1,4 @@
-country country
+country_txt country
 region_txt region
 latitude latitude
 longitude longitude
