@@ -353,7 +353,9 @@ function statisticsPageInit() {
 // ------------------------------------------------------- Statistics results page -------------------------------------------
 
 function statisticsResultsPageInit() {
-    console.log('here');
+    addPiechart();
+    addPiechart2();
+    addPiechart3();
 }
 
 // ------------------------------------------------------- Statistics drawings page ------------------------------------------

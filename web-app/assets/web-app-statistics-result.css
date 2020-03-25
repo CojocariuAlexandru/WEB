@@ -26,7 +26,7 @@
 
 .details-1 { grid-area: details-1; }
 
-.pie-1 { grid-area: pie-1; }
+.pie-1 { grid-area: pie-1;}
 
 .attack-rate { grid-area: attack-rate; }
 
@@ -53,7 +53,7 @@
 /* TITLE-STAT */
 .title-stat h2{
     font-size:30px;
-    color:#065e61;
+    color:#063d61;
     padding: 30px 20px;
     width: 100%;
 }
