@@ -78,7 +78,7 @@ with open(csvFileName, mode='r') as attacks_file:
     line_count = 0
     for row in csv_reader:
         if line_count > 0:
-            values = (row['country'], row['region_txt'], (0.0 if row['latitude'] == '' else float(row['latitude'])), (0.0 if row['longitude'] == '' else float(row['longitude'])), 
+            values = (row['country_txt'], row['region_txt'], (0.0 if row['latitude'] == '' else float(row['latitude'])), (0.0 if row['longitude'] == '' else float(row['longitude'])), 
                         row['attacktype1_txt'], row['motive'], (-1 if row['nperps'] == '' else int(float(row['nperps']))), (-1 if row['nkill'] == '' else int(float(row['nkill']))), 
                         (-1 if row['nwound'] == '' else int(float((row['nwound'])))), (False if row['success'] == '' else (True if (int(row['success']) == 1 ) else False)), row['weaptype1_txt'], row['weapdetail'])
             mycursor.execute(insertAttackQuery, values)
