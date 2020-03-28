@@ -1,5 +1,5 @@
 
-@media screen and (max-width:2000px), screen and (min-width:1000px){
+
 .web-app .statisticsFormGrid{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -7,7 +7,8 @@
     grid-template-areas: "statisticsFormHeading statisticsFormHeading statisticsFormHeading statisticsFormHeading"
                             "firstRow1 firstRow1 firstRow1 firstRow1"
                             "firstRow2 firstRow2 firstRow2 firstRow2"
-                            "attackTypeForm targetTypeForm weaponTypeForm damageForm"
+                            "attackTypeForm attackTypeForm targetTypeForm targetTypeForm"
+                            " weaponTypeForm weaponTypeForm damageForm damageForm"
                             "regionForm regionForm countryForm countryForm"
                             "fourthRow fourthRow fourthRow fourthRow"
                             "submitForm submitForm submitForm submitForm";
@@ -20,46 +21,9 @@
 
 
     overflow-y: scroll;
-}
-}
-@media screen and (max-width:999px), screen and (min-width:600px){
-    .web-app .statisticsFormGrid{
-        grid-template-areas: "statisticsFormHeading statisticsFormHeading statisticsFormHeading statisticsFormHeading"
-                                "firstRow1 firstRow1 firstRow1 firstRow1"
-                                "firstRow2 firstRow2 firstRow2 firstRow2"
-                                "attackTypeForm attackTypeForm targetTypeForm targetTypeForm"
-                                "weaponTypeForm weaponTypeForm damageForm damageForm"
-                                "regionForm regionForm countryForm countryForm"
-                                "fourthRow fourthRow fourthRow fourthRow"
-                                "submitForm submitForm submitForm submitForm";
     }
-}
-@media screen and (max-width:599px){
-    .web-app .statisticsFormGrid{
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
-        grid-template-areas: "statisticsFormHeading"
-                                "firstRow1"
-                                "firstRow2"
-                                "attackTypeForm"
-                                "targetTypeForm"
-                                "weaponTypeForm"
-                                "damageForm"
-                                "regionForm"
-                                "countryForm"
-                                "fourthRow"
-                                "submitForm";
-        box-sizing: border-box;
-        border: 1px solid black;
-        padding: 10px;
-        font-size: 12px;
-        width: 100%;
-    
-    
-        overflow-y: scroll;
-    }
-}
+
+
 .dataForm1{
     background:#fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)  97% 50% no-repeat ;
   }
@@ -93,7 +57,6 @@ input.dataForm1, .firstRow2 input {
 .nrTerrForm,
 .nrDeathsForm {
     align-items: center;
-    justify-content: center;
 }
 *:focus {
     outline: none;
@@ -241,7 +204,7 @@ input.dataForm1, .firstRow2 input {
     grid-area:attackTypeForm;
 }
 
-.attackTypeForm div, .targetTypeForm div, .weaponTypeForm div, .damageForm div div{
+.attackTypeForm div, .targetTypeForm div, .weaponTypeForm div, .damageForm div{
     display: flex;
     flex-wrap:wrap;
     padding:0 0 10px 26px;
@@ -261,6 +224,7 @@ input.dataForm1, .firstRow2 input {
     margin: 10px 20px 30px 20px;
     padding: 10px;
     border-radius: 15px;
+    text-align: center;
 }
 
 
@@ -391,7 +355,7 @@ input.dataForm1, .firstRow2 input {
     font-size: 16px;
     border: 2px solid #065e61;
     border-radius: 20px;
-    width: 300px;
+    width: 280px;
     height: 50px;
     text-align: center;
     position: relative;
@@ -580,3 +544,79 @@ input#searchText{
     position:absolute;
     z-index:1;
 }
+
+
+@media screen and (max-width:1200px){
+    .attackTypeForm div, .targetTypeForm div, .weaponTypeForm div{
+        flex-direction: column;
+        padding:0 0 10px 0;
+    }
+}
+
+@media screen and (max-width:999px){
+    .web-app .statisticsFormGrid{
+        grid-template-areas: "statisticsFormHeading statisticsFormHeading statisticsFormHeading statisticsFormHeading"
+                                "firstRow1 firstRow1 firstRow1 firstRow1"
+                                "firstRow2 firstRow2 firstRow2 firstRow2"
+                                "attackTypeForm attackTypeForm targetTypeForm targetTypeForm"
+                                "weaponTypeForm weaponTypeForm damageForm damageForm"
+                                "regionForm regionForm countryForm countryForm"
+                                "fourthRow fourthRow fourthRow fourthRow"
+                                "submitForm submitForm submitForm submitForm";
+    }
+    .attackTypeForm div, .targetTypeForm div, .weaponTypeForm div, .damageForm div{
+        font-size:16px;
+    }
+    .fourthRow #label1{
+        font-size:20px;
+    }
+    .attackTypeForm h3, .weaponTypeForm h3, .targetTypeForm h3, .damageForm h3, .regionForm h3, .countryForm h3 {
+
+        font-size:16px;
+    }
+    input.dataForm1, .firstRow2 input{
+        width:100px;
+    }
+    .slideContainer div span{
+        left:50px;
+    }
+    .dateForm label{
+        display: block;
+    } 
+}
+
+@media screen and (max-width:700px){
+    .web-app .statisticsFormGrid{
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto auto auto auto auto auto;
+        grid-template-areas: "statisticsFormHeading"
+                                "firstRow1"
+                                "firstRow2"
+                                "attackTypeForm"
+                                "targetTypeForm"
+                                "weaponTypeForm"
+                                "damageForm"
+                                "regionForm"
+                                "countryForm"
+                                "fourthRow"
+                                "submitForm";
+        box-sizing: border-box;
+        border: 1px solid black;
+        padding: 10px;
+        font-size: 12px;
+        width: 100%;
+    
+    
+        overflow-y: scroll;
+    }
+    .attackTypeForm div, .targetTypeForm div, .weaponTypeForm div{
+        flex-direction: row;
+    }
+    .fourthRow #label1{
+        font-size:16px;
+    }
+
+
+}
+
