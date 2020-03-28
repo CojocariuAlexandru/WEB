@@ -356,6 +356,7 @@ function statisticsResultsPageInit() {
     addPiechart();
     addPiechart2();
     addPiechart3();
+    addColumnChart();
 }
 
 // ------------------------------------------------------- Statistics drawings page ------------------------------------------
