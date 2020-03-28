@@ -21,7 +21,7 @@ class DatabaseConnector
                 $user,
                 $pass
             );
-        } catch (\PDOException $e) {
+        } catch (\PDOException $e) {   
             exit($e->getMessage());
         }
     }
