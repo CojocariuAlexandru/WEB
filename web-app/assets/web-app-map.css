@@ -1,28 +1,61 @@
-.map-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-
-    height: 100%;
+.web-app .mapPageGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto auto auto;
+    grid-template-areas: "mapVisualizationHeader mapVisualizationHeader"
+        "mapPageMap mapPageMap"
+        "mapPageDateInput mapPageDateInput"
+        "regionForm countryForm"
+        "mapPageView mapPageView";
+    box-sizing: border-box;
+    border: 1px solid black;
+    background: #eee;
+    font-size: 20px;
     width: 100%;
+    height: 100%;
 
     overflow-y: scroll;
 }
 
 #mapDiv {
-    width: 72%;
-    height: 84%;
-
+    grid-area: mapPageMap;
     background-color: transparent;
 
-    margin-right: 12px;
+    height: 600px;
 
     border: 1px dotted black;
     border-radius: 15px;
 }
 
-#dateInput {
-    border: 2px solid gray;
-    border-radius: 5px;
+.dateIntervalInput {
+    grid-area: mapPageDateInput;
+    margin: 0 10px;
+}
+
+.mapVisualizationHeader {
+    grid-area: mapVisualizationHeader;
+}
+
+.mapVisualizationHeader h1 {
+    width: 100%;
+}
+
+.mapPageViewButton {
+    grid-area: mapPageView;
+}
+
+@media screen and (max-width: 700px) {
+    .web-app .mapPageGrid {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto auto auto;
+        grid-template-areas: "mapVisualizationHeader"
+            "mapPageMap"
+            "mapPageDateInput"
+            "regionForm"
+            "countryForm"
+            "mapPageView";
+        background: #eee;
+        font-size: 12px;
+    }
 }

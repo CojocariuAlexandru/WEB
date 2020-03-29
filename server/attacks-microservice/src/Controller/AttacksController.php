@@ -21,7 +21,7 @@ class AttacksController
     {
         switch ($this->requestMethod) {
             case 'GET':
-                $response = $this->getFirst(100);
+                $response = $this->getFirst(1000);
                 break;
             case 'OPTIONS':
                 break;

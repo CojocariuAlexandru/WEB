@@ -30,9 +30,11 @@
 
 .attack-rate { grid-area: attack-rate; }
 
-.damage-made { grid-area: damage-made; }
+.damage-made { grid-area: damage-made;  }
 
-.extended24 { grid-area: extended24; }
+.extended24 { grid-area: extended24;
+  padding-bottom: 40px;
+  border-bottom: #054a4d dashed 2px; }
 
 .pie-2 { grid-area: pie-2; }
 
@@ -66,14 +68,12 @@
     padding: 22px;
     color: #eee;
     margin:0 0 0 60px;
-    /* opacity: 0.8; */
 }
 .values .container-values{
     margin: 0 60px 0 0;
     border-radius: 0 26px 26px 0;
     padding: 22px;
     color: #054a4d;
-    /* opacity: 0.8; */
     font-weight: bold;
     background: linear-gradient(90deg,#065e6142 30%, #065e618c 63%, #05494db7 92%);
 }
@@ -281,6 +281,12 @@
     margin: 40px auto;
     width: 80%;
 }
+.button-1{
+  margin-left:60px;
+}
+.button-3{
+  margin-right:60px;
+}
   
   .button-link1,   .button-link2,   .button-link3 {
     height: 40px;
@@ -301,3 +307,184 @@
       color:#054a4d;
     background-position: right center; 
   }
+
+
+
+/* COLUMN CHART */
+
+.world-map-element{
+  min-height: 400px;
+  width : calc(100% - 120px);
+  margin: 0 auto;
+  border: dashed 2px #16aeb6; 
+  padding:30px;
+  background-color: #393e46;
+  border-radius: 30px;
+  font-size:20px;
+}
+
+
+.view-table p{
+  margin: 30px 60px 60px 60px;
+  color: #054a4d;
+  font-size:22px;
+}
+
+.view-table a{
+  color: #16aeb6;
+}
+
+/* PIE CHARTS */
+
+.pie-1, .pie-2, .pie-3{
+  margin: 0 auto;
+  width:calc( 100% - 120px);
+}
+
+.pie-1, .pie-3{
+  margin-left: 60px;
+}
+.pie-2{
+  margin-right: 60px;
+}
+
+/* RESPONSIVE */
+
+@media only screen and (max-width: 1200px) {
+  .details-1 ul, .details-2 ul, .details-3 ul{
+    columns:1;
+    font-size:16px;
+  }
+  .details-1 h3, .details-2 h3, .details-3 h3{
+    font-size:18px;
+  }
+  .fields .container-fields{
+    font-size:18px;
+  }
+
+    .values .container-values{
+      font-size: 18px;
+
+    }
+
+}
+
+
+@media only screen and (max-width: 1000px) {
+  .grid-container {
+     grid-template-columns: fr fr fr fr fr fr;
+    grid-template-rows: 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto;
+    grid-template-areas: "title-stat title-stat title-stat title-stat title-stat title-stat"
+    "fields fields fields values values values" 
+    "details-1 details-1 details-1 details-1 details-1 details-1" 
+    "pie-1 pie-1 pie-1 pie-1 pie-1 pie-1"
+    "attack-rate attack-rate attack-rate attack-rate attack-rate attack-rate" 
+    "damage-made damage-made damage-made damage-made damage-made damage-made" 
+    "extended24 extended24 extended24 extended24 extended24 extended24" 
+    "details-2 details-2 details-2 details-2 details-2 details-2"
+    "pie-2 pie-2 pie-2 pie-2 pie-2 pie-2" 
+    "details-3 details-3 details-3 details-3 details-3 details-3" 
+    "pie-3 pie-3 pie-3 pie-3 pie-3 pie-3"
+    "world-map world-map world-map world-map world-map world-map" 
+    "button-1 button-1 button-2 button-2 button-3 button-3" 
+    "view-table view-table view-table view-table view-table view-table";
+  }
+  .details-1 ul, .details-2 ul, .details-3 ul{
+    display: none;
+  }
+  .details-1, .details-2, .details-3{
+    margin: 60px 60px 0 60px;
+    font-size: 20px;
+  }
+  .extended24{
+    margin-bottom: 0;
+  }
+  .pie-2{
+    border-bottom: dashed 2px #054a4d;
+  }
+  .button-1, .button-2, .button-3{
+    width:60%;
+  }
+
+}
+
+@media only screen and (max-width: 810px) {
+  .fields .container-fields{
+    font-size:12px;
+  }
+
+    .values .container-values{
+      font-size: 12px;
+    }
+    .details-1 h3, .details-2 h3, .details-3 h3{
+      font-size:14px;
+    }
+    .attack-rate h3,
+  .damage-made h3,
+  .extended24 h3{
+    font-size:16px;
+  }
+}
+
+@media only screen and (max-width: 660px) {
+  .grid-container {
+     grid-template-columns: fr fr fr fr fr fr;
+    grid-template-rows: 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto;
+    grid-template-areas: "title-stat title-stat title-stat title-stat title-stat title-stat"
+    "fields fields fields fields values values" 
+    "details-1 details-1 details-1 details-1 details-1 details-1" 
+    "pie-1 pie-1 pie-1 pie-1 pie-1 pie-1"
+    "attack-rate attack-rate attack-rate attack-rate attack-rate attack-rate" 
+    "damage-made damage-made damage-made damage-made damage-made damage-made" 
+    "extended24 extended24 extended24 extended24 extended24 extended24" 
+    "details-2 details-2 details-2 details-2 details-2 details-2"
+    "pie-2 pie-2 pie-2 pie-2 pie-2 pie-2" 
+    "details-3 details-3 details-3 details-3 details-3 details-3" 
+    "pie-3 pie-3 pie-3 pie-3 pie-3 pie-3"
+    "world-map world-map world-map world-map world-map world-map" 
+    "button-1 button-1 button-2 button-2 button-3 button-3" 
+    "view-table view-table view-table view-table view-table view-table";
+  }
+  .fields .container-fields{
+    display:none;
+  }
+  .values .container-values{
+    display:none;
+  }
+  .details-1, .details-2, .details-3{
+    margin: 20px;
+  }
+  .view-table p{
+    font-size:14px;
+  }
+  .world-map .world-map-element{
+    padding:10px;
+    width : calc(100% - 40px);
+
+  }
+  .button-1, .damage-bar-border, .attack-bar-border, .extended-bar-border{
+    margin-left:20px;
+  }
+  .button-3, .damage-bar-border, .attack-bar-border, .extended-bar-border{
+    margin-right: 20px;
+  }
+  .button-1, .button-2, .button-3{
+    width:80%;
+  }
+  .pie-1, .pie-3{
+    margin-left:20px;
+  }
+  .pie-2{
+    margin-right: 20px;
+  }
+  .pie-1, .pie-2, .pie-3{
+    margin: 0 auto;
+    width:calc( 100% - 40px);
+  }
+  .attack-bar, .damage-bar, .damage-bar-2, .damage-bar-3, .extended-bar{
+    font-size:14px;
+  }
+  .damage-bar-border, .attack-bar-border, .extended-bar-border{
+    width: calc(100% - 40px);
+  }
+}

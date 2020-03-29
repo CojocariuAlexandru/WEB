@@ -3,6 +3,7 @@
 let rootForContent; // when the page is loaded, this will get a reference to the HTML element containing the root of the website
 let mainContent; // when the page is loaded, this will get a reference to the HTML element containing the main content of the web app
 let webapp; // boolean flag, true = display the web app, false = display the presentation website
+let map;
 
 // ------------------------------------------------------ Application models -------------------------------------------------
 
@@ -80,32 +81,6 @@ function loadPage(pageName) {
         pages[pageName] = readPage(pageName);
     }
     return pages[pageName];
-}
-
-function buildArrayOfReplaceObjectsFromObject(obj) {
-    let result = [];
-    Object.keys(obj).forEach(function (key) {
-        result.push(new ReplaceObject(key, obj[key]));
-    });
-    return result;
-}
-
-function buildViewReplaceLabel(template, label, replaceValue) {
-    let searchedLabel = '@{{' + label + '}}';
-
-    return template.replace(searchedLabel, replaceValue);
-}
-
-function buildView(template, replaceObjects) {
-    for (const replaceObject of replaceObjects) {
-        template = buildViewReplaceLabel(template, replaceObject.label, replaceObject.value);
-    }
-    return template;
-}
-
-function buildViewFromObject(template, objectToIntegrate) {
-    let replaceObjectsArr = buildArrayOfReplaceObjectsFromObject(objectToIntegrate);
-    return buildView(template, replaceObjectsArr);
 }
 
 // ---------------------------------------------------- Routing -------------------------------------------------------------
@@ -385,6 +360,7 @@ function statisticsResultsPageInit() {
     addPiechart();
     addPiechart2();
     addPiechart3();
+    addColumnChart();
 }
 
 // ------------------------------------------------------- Statistics drawings page ------------------------------------------
@@ -400,35 +376,70 @@ function mapPageInit() {
     let el = document.querySelector("#mapDiv");
     map = new google.maps.Map(el, {
         center: {
-            lat: -34.397,
-            lng: 150.644
+            lat: 30,
+            lng: 0
         },
-        zoom: 8,
+        zoom: 2,
         styles: getMapNightModeStyle()
     });
     getRequest(
         (result) => {
             parsed = JSON.parse(result);
 
-            for (let i=0;i<parsed.length;++i){
-                let pos = {lat:parseInt(parsed[i].latitude), lng: parseInt(parsed[i].longitude)};
-            
+            for (let i = 0; i < parsed.length; ++i) {
+                let pos = {
+                    lat: parseInt(parsed[i].latitude),
+                    lng: parseInt(parsed[i].longitude)
+                };
+
                 let marker = new google.maps.Marker({
                     position: pos,
-                    map:map,
-                    title:parsed[i].country
+                    map: map,
+                    title: parsed[i].country
                 });
             }
         }, (error) => {
             console.log(error);
         }
     );
+    generateRegions();
+    generateCountries();
+
+    mapPageAddEventListeners();
+}
+
+function mapPageAddEventListeners() {
+    let countriesInput = document.querySelector('.countries-input');
+    if (countriesInput) {
+        countriesInput.addEventListener('change', mapPageCountrySelected)
+    }
+}
+
+function mapPageCountrySelected(event) {
+    let country = event.target.value;
+    let coordinates = getCountryCoordinates(country);
+    if (coordinates) {
+        let centerMap = new google.maps.LatLng(coordinates.lat, coordinates.lon);
+        map.panTo(centerMap);
+        map.setZoom(5);
+        mapPageScrollUp();
+    }
+}
+
+function sendMapVisualizationRequest() {
+    mapPageScrollUp();
+}
+
+function mapPageScrollUp() {
+    let mapPageTitle = document.querySelector('.mapVisualizationHeader');
+    if (mapPageTitle) {
+        mapPageTitle.scrollIntoView();
+    }
 }
 
 // ------------------------------------------------------- Attacks page ------------------------------------------------------
 
-function attacksPageInit() {
-}
+function attacksPageInit() {}
 
 function searchAttack() {
     let attackInput = document.querySelector('#searchAttackButton');
@@ -455,7 +466,8 @@ function attackIdPageBefore(route, id) {
 }
 
 function attackIdPageTemplate(templateName, attack) {
-    return buildViewFromObject(loadPage(templateName), attack);
+    let compiledTemplate = Handlebars.compile(loadPage(templateName));
+    return compiledTemplate(attack);
 }
 
 function attackIdPageInit(attack) {

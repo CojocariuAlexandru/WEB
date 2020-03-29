@@ -1,6 +1,34 @@
-<div class="map-wrapper">
+<div class="mapPageGrid">
+    <div class="mapVisualizationHeader">
+        <h1>Map Visualization</h1>
+    </div>
+
     <div id="mapDiv">
     </div>
-    <div class="map-form">
+
+    <div class='dateIntervalInput'>
+        <div class='dateForm'>
+            <label for='dateInput' id='textDateInterval'><b>Date Interval:</b></label>
+            <input class='dataForm1' type='date' id='dateInput'></input>
+            <span>-</span>
+            <input class='dataForm1' type='date' id='dateInput'></input>
+        </div>
     </div>
+
+    <div class='regionForm'>
+        <!-- Region list is generated in statistics.js-->
+    </div>
+    <div class='countryForm'>
+        <!-- Country list is generated in statistics.js-->
+    </div>
+
+    <section class='mapPageViewButton' onclick="sendMapVisualizationRequest()">
+        <div id='submitButton2'>
+            <input type='button' value='Submit' id='submitButton'>
+            <span id='span1'></span>
+            <span id='span2'></span>
+            <span id='span3'></span>
+            <span id='span4'></span>
+        </div>
+    </section>
 </div>
