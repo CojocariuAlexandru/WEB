@@ -3,6 +3,7 @@
 let rootForContent; // when the page is loaded, this will get a reference to the HTML element containing the root of the website
 let mainContent; // when the page is loaded, this will get a reference to the HTML element containing the main content of the web app
 let webapp; // boolean flag, true = display the web app, false = display the presentation website
+let map;
 
 // ------------------------------------------------------ Application models -------------------------------------------------
 
@@ -26,7 +27,6 @@ class Attack {
         this.longitude = longitude;
         this.countryLatitude = countryLatitude;
         this.countryLongitude = countryLongitude;
-
     }
 }
 
@@ -34,6 +34,22 @@ class ReplaceObject {
     constructor(label, value) {
         this.label = label;
         this.value = value;
+    }
+}
+
+// ------------------------------------------------------ API Requests -------------------------------------------------------
+
+function getRequest(okcallback, errcallback) {
+    let xmlhttp = new XMLHttpRequest();
+    let apiPath = "http://localhost:8001/api/attacks";
+    xmlhttp.open("GET", apiPath);
+    xmlhttp.send();
+    xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            okcallback(xmlhttp.responseText);
+        } else if (this.readyState == 4) {
+            errcallback(xmlhttp.responseText);
+        }
     }
 }
 
@@ -45,6 +61,8 @@ attacks.push(new Attack(1, 'United States', 'New York City', 5, 1384, 8190, 'YES
 attacks.push(new Attack(2, 'Romania', 'Vaslui', 78, 10, 10, 'NO', 'YES', 10, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatisi architecto beatae vitae dicta sunt explicabo. Nemo enim  ad minima veniam, quis nostrum exercitationem ullam corporis  suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?', 41.124, -51.02));
 
 // ------------------------------------------------------- Templating -------------------------------------------------------
+
+let pages = {};
 
 function readPage(pageName) {
     let result = null;
@@ -58,41 +76,11 @@ function readPage(pageName) {
     return result;
 }
 
-let presentationSitePage = readPage('presentation');
-let webAppTemplate = readPage('web-app');
-let homePage = readPage('web-app-home.html');
-let statisticsPage = readPage('web-app-statistics');
-let statisticsResultsPage = readPage('web-app-statistics-result');
-let statisticsDrawingsPage = readPage('web-app-statistics-drawings');
-let mapPage = readPage('web-app-map');
-let attacksPage = readPage('web-app-attacks');
-let attackIdPage = readPage('web-app-id-attack');
-
-function buildArrayOfReplaceObjectsFromObject(obj) {
-    let result = [];
-    Object.keys(obj).forEach(function (key) {
-        result.push(new ReplaceObject(key, obj[key]));
-    });
-    return result;
-}
-
-function buildViewReplaceLabel(template, label, replaceValue) {
-    let searchedLabel = '@{{' + label + '}}';
-
-    return template.replace(searchedLabel, replaceValue);
-}
-
-function buildView(template, replaceObjects) {
-    for (const replaceObject of replaceObjects) {
-        console.log(replaceObject);
-        template = buildViewReplaceLabel(template, replaceObject.label, replaceObject.value);
+function loadPage(pageName) {
+    if (!(pageName in pages)) {
+        pages[pageName] = readPage(pageName);
     }
-    return template;
-}
-
-function buildViewFromObject(template, objectToIntegrate) {
-    let replaceObjectsArr = buildArrayOfReplaceObjectsFromObject(objectToIntegrate);
-    return buildView(template, replaceObjectsArr);
+    return pages[pageName];
 }
 
 // ---------------------------------------------------- Routing -------------------------------------------------------------
@@ -113,48 +101,49 @@ let root = new Route('/app', false);
 
 //*** Home route */
 let homeRoute = new Route('home', true);
-homeRoute.template = homePage;
+homeRoute.template = 'web-app-home';
 homeRoute.afterCallback = homePageInit;
 root.children.push(homeRoute);
 
 //*** Statistics route */
 let statisticsRoute = new Route('statistics', true);
-statisticsRoute.template = statisticsPage;
+statisticsRoute.template = 'web-app-statistics';
 statisticsRoute.afterCallback = statisticsPageInit;
 root.children.push(statisticsRoute);
 
 let statisticsResultsRoute = new Route('statistics-results', true);
-statisticsResultsRoute.template = statisticsResultsPage;
+statisticsResultsRoute.template = 'web-app-statistics-result';
 statisticsResultsRoute.afterCallback = statisticsResultsPageInit;
 root.children.push(statisticsResultsRoute);
 
 //*** Statistics drawings route */
 let statisticsDrawingsRoute = new Route('statistics-drawings', true);
-statisticsDrawingsRoute.template = statisticsDrawingsPage;
+statisticsDrawingsRoute.template = 'web-app-statistics-drawings';
 statisticsDrawingsRoute.afterCallback = statisticsDrawingsPageInit;
 root.children.push(statisticsDrawingsRoute);
 
 //*** Map route */
 let mapRoute = new Route('map', true);
-mapRoute.template = mapPage;
+mapRoute.template = 'web-app-map';
 mapRoute.afterCallback = mapPageInit;
 root.children.push(mapRoute);
 
 //*** Attack/id route */
 let thatAttackRoute = new Route(':id', true);
-thatAttackRoute.processCallback = function (arg) {
-    let attack = this.beforeCallback(arg);
+thatAttackRoute.processCallback = function (node, arg) {
+    let attack = this.beforeCallback(node, arg);
     if (attack != null) {
         this.afterCallback(attack);
     }
 }
+thatAttackRoute.template = 'web-app-id-attack';
 thatAttackRoute.beforeCallback = attackIdPageBefore;
 thatAttackRoute.templateCallback = attackIdPageTemplate;
 thatAttackRoute.afterCallback = attackIdPageInit;
 
 //*** Attacks route */
 let attacksRoute = new Route('attacks', true);
-attacksRoute.template = attacksPage;
+attacksRoute.template = 'web-app-attacks';
 attacksRoute.afterCallback = attacksPageInit;
 attacksRoute.children.push(thatAttackRoute);
 root.children.push(attacksRoute);
@@ -164,12 +153,12 @@ root.children.push(attacksRoute);
 function updateMainContentRecursive(node, pathParts, index) {
     // Leaf route with parameter
     if (node.url && node.url[0] == ':' && index == pathParts.length && node.leaf === true) {
-        node.processCallback(pathParts[index - 1]);
+        node.processCallback(node, pathParts[index - 1]);
         return false;
     }
     // Leaf route with no parameter
     if (index == pathParts.length && node.leaf === true) {
-        mainContent.innerHTML = node.template;
+        mainContent.innerHTML = loadPage(node.template);
         node.afterCallback();
         return false;
     }
@@ -259,7 +248,7 @@ window.onpopstate = () => {
 
 function setPresentationTemplateAsSite() {
     webapp = false;
-    rootForContent.innerHTML = presentationSitePage;
+    rootForContent.innerHTML = loadPage('presentation');
     rootForContent.className = "root presentation";
     setPresentationTemplateAsSiteInit();
 }
@@ -280,7 +269,7 @@ function setPresentationTemplateAsSiteInit() {
 
 function setWebAppTemplateAsSite() {
     webapp = true;
-    rootForContent.innerHTML = webAppTemplate;
+    rootForContent.innerHTML = loadPage('web-app');
     rootForContent.className = "root web-app";
     mainContent = document.querySelector('#content');
     setWebAppTemplateAsSiteInit();
@@ -341,6 +330,21 @@ function homePageInit() {
 
 // ------------------------------------------------------- Statistics page ---------------------------------------------------
 
+function sendStatisticsRequest() {
+    let successInput = document.querySelector('#succesInput');
+
+    let filters = {
+        success: `${successInput.checked}`
+    };
+
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "http://localhost:8001/api/attacks", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(JSON.stringify(filters));
+
+    navigateRoot('/statistics-results');
+}
+
 function statisticsPageInit() {
     generateWeapons();
     generateAttacks();
@@ -372,19 +376,70 @@ function mapPageInit() {
     let el = document.querySelector("#mapDiv");
     map = new google.maps.Map(el, {
         center: {
-            lat: -34.397,
-            lng: 150.644
+            lat: 30,
+            lng: 0
         },
-        zoom: 8,
+        zoom: 2,
         styles: getMapNightModeStyle()
     });
+    getRequest(
+        (result) => {
+            parsed = JSON.parse(result);
+
+            for (let i = 0; i < parsed.length; ++i) {
+                let pos = {
+                    lat: parseInt(parsed[i].latitude),
+                    lng: parseInt(parsed[i].longitude)
+                };
+
+                let marker = new google.maps.Marker({
+                    position: pos,
+                    map: map,
+                    title: parsed[i].country
+                });
+            }
+        }, (error) => {
+            console.log(error);
+        }
+    );
+    generateRegions();
+    generateCountries();
+
+    mapPageAddEventListeners();
+}
+
+function mapPageAddEventListeners() {
+    let countriesInput = document.querySelector('.countries-input');
+    if (countriesInput) {
+        countriesInput.addEventListener('change', mapPageCountrySelected)
+    }
+}
+
+function mapPageCountrySelected(event) {
+    let country = event.target.value;
+    let coordinates = getCountryCoordinates(country);
+    if (coordinates) {
+        let centerMap = new google.maps.LatLng(coordinates.lat, coordinates.lon);
+        map.panTo(centerMap);
+        map.setZoom(5);
+        mapPageScrollUp();
+    }
+}
+
+function sendMapVisualizationRequest() {
+    mapPageScrollUp();
+}
+
+function mapPageScrollUp() {
+    let mapPageTitle = document.querySelector('.mapVisualizationHeader');
+    if (mapPageTitle) {
+        mapPageTitle.scrollIntoView();
+    }
 }
 
 // ------------------------------------------------------- Attacks page ------------------------------------------------------
 
-function attacksPageInit() {
-
-}
+function attacksPageInit() {}
 
 function searchAttack() {
     let attackInput = document.querySelector('#searchAttackButton');
@@ -393,7 +448,7 @@ function searchAttack() {
 
 // ------------------------------------------------------- Attack id page ----------------------------------------------------
 
-function attackIdPageBefore(id) {
+function attackIdPageBefore(route, id) {
     let found = false;
     let currentAttack;
     for (let i = 0; i < attacks.length; ++i) {
@@ -406,12 +461,13 @@ function attackIdPageBefore(id) {
         mainContent.innerHTML = 'Error';
         return null;
     }
-    mainContent.innerHTML = this.templateCallback(currentAttack);
+    mainContent.innerHTML = this.templateCallback(route.template, currentAttack);
     return currentAttack;
 }
 
-function attackIdPageTemplate(attack) {
-    return buildViewFromObject(attackIdPage, attack);
+function attackIdPageTemplate(templateName, attack) {
+    let compiledTemplate = Handlebars.compile(loadPage(templateName));
+    return compiledTemplate(attack);
 }
 
 function attackIdPageInit(attack) {

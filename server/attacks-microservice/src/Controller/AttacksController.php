@@ -21,12 +21,20 @@ class AttacksController
     {
         switch ($this->requestMethod) {
             case 'GET':
-                $response = $this->getFirst(100);
+                $response = $this->getFirst(1000);
                 break;
+            case 'OPTIONS':
+                break;
+            case 'POST':
+                echo ('It\'s working!');
         }
-        header($response['status_code_header']);
-        if ($response['body']) {
-            echo $response['body'];
+        if (isset($response['status_code_header'])){
+            header($response['status_code_header']);
+        }
+        if (isset($response['body'])){
+            if ($response['body']) {
+                echo $response['body'];
+            }
         }
     }
 
