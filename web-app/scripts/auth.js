@@ -62,7 +62,6 @@ function userLogoutRemoveCredentials() {
     localStorage.removeItem('username');
 }
 
-
 function switchLoginSignup() {
     let loginComponent = document.querySelector('#login-component');
     let signupComponent = document.querySelector('#sign-up-component');

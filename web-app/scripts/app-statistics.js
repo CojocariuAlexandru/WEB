@@ -1,3 +1,29 @@
+function statisticsPageInit(node) {
+    mainContent.innerHTML = loadPage(node.template);
+
+    generateWeapons();
+    generateAttacks();
+    generateTargets();
+    generateRegions();
+    generateCountries();
+    sliderFunction()
+}
+
+function sendStatisticsRequest() {
+    let successInput = document.querySelector('#succesInput');
+
+    let filters = {
+        success: `${successInput.checked}`
+    };
+
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "http://localhost:8001/api/attacks", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(JSON.stringify(filters));
+
+    navigateRoot('/statistics-results');
+}
+
 function generateWeapons() {
     let weaponForm = document.querySelector('.weaponTypeForm')
     let weaponFormHeader = document.createElement('h3');
