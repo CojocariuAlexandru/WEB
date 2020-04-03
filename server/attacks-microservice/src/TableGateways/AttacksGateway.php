@@ -26,4 +26,20 @@ class AttacksGateway
             exit($e->getMessage());
         }
     }
+
+    public function getPreview()
+    {
+        $statement = "
+            SELECT id, latitude, longitude, country, attack_type, kills_count, wounded_count 
+            FROM attacks
+            ORDER BY kills_count DESC
+            LIMIT 12;";
+        try {
+            $statement = $this->db->query($statement);
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            return $result;
+        } catch (\PDOException $e) {
+            exit($e->getMessage());
+        }
+    }
 }

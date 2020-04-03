@@ -1,52 +1,61 @@
-
-
-.web-app .statisticsFormGrid{
+.web-app .statisticsFormGrid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: auto auto auto auto;
     grid-template-areas: "statisticsFormHeading statisticsFormHeading statisticsFormHeading statisticsFormHeading"
-                            "firstRow1 firstRow1 firstRow1 firstRow1"
-                            "firstRow2 firstRow2 firstRow2 firstRow2"
-                            "attackTypeForm attackTypeForm targetTypeForm targetTypeForm"
-                            " weaponTypeForm weaponTypeForm damageForm damageForm"
-                            "regionForm regionForm countryForm countryForm"
-                            "fourthRow fourthRow fourthRow fourthRow"
-                            "submitForm submitForm submitForm submitForm";
+        "firstRow1 firstRow1 firstRow1 firstRow1"
+        "firstRow2 firstRow2 firstRow2 firstRow2"
+        "attackTypeForm attackTypeForm targetTypeForm targetTypeForm"
+        " weaponTypeForm weaponTypeForm damageForm damageForm"
+        "regionForm regionForm countryForm countryForm"
+        "fourthRow fourthRow fourthRow fourthRow"
+        "submitForm submitForm submitForm submitForm";
     box-sizing: border-box;
     border: 1px solid black;
-    background:#eee;
+    background: #eee;
     padding: 20px;
     font-size: 20px;
     width: 100%;
 
 
     overflow-y: scroll;
-    }
+}
 
 
-.dataForm1{
-    background:#fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)  97% 50% no-repeat ;
-  }
-input.dataForm1, .firstRow2 input {
+.dataForm1 {
+    background: #fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png) 97% 50% no-repeat;
+}
+
+input.dataForm1,
+.firstRow2 input {
     border: 1px solid #097a75;
     border-radius: 16px;
-    background-color:#eee;
-    box-shadow: inset 0 3px 6px rgba(0,0,0,0.1);
+    background-color: #eee;
+    box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
     width: 160px;
     padding: 16px 10px;
     text-align: center;
-  }
-  .firstRow2 input {
-    padding: 10px 10px;
-  }
+}
 
-.dataForm1::-webkit-inner-spin-button { display: none; }
-.dataForm1::-webkit-calendar-picker-indicator { background: transparent;}
-.dataForm1::-webkit-calendar-picker-indicator { opacity: 0;}
+.firstRow2 input {
+    padding: 10px 10px;
+}
+
+.dataForm1::-webkit-inner-spin-button {
+    display: none;
+}
+
+.dataForm1::-webkit-calendar-picker-indicator {
+    background: transparent;
+}
+
+.dataForm1::-webkit-calendar-picker-indicator {
+    opacity: 0;
+}
+
 /* GLOBAL */
 .dateForm,
-.countryForm
-.regionForm,
+.countryForm .regionForm,
 .weaponTypeForm,
 .targetTypeForm,
 .attackTypeForm,
@@ -58,14 +67,15 @@ input.dataForm1, .firstRow2 input {
 .nrDeathsForm {
     align-items: center;
 }
+
 *:focus {
     outline: none;
 }
 
-.statisticsFormGrid >div:not( .statisticsFormHeading),
+.statisticsFormGrid>div:not(.statisticsFormHeading),
 .mapPageGrid>div:not(.mapVisualizationHeader) {
     background-color: #eee;
-    color:#065e61;
+    color: #065e61;
     padding: 20px;
     margin-bottom: 40px;
     display: flex;
@@ -73,7 +83,7 @@ input.dataForm1, .firstRow2 input {
     align-items: center;
 
     border: dashed 2px #065e6141;
-    border-radius:15px;
+    border-radius: 15px;
     transition: color 0.5s linear, border 0.5s linear, background-color 0.5s linear;
 
 
@@ -81,12 +91,13 @@ input.dataForm1, .firstRow2 input {
 }
 
 .web-app .statisticsFormGrid,
-.web-app .mapPageGrid{
-   padding: 10px 50px;
+.web-app .mapPageGrid {
+    padding: 10px 50px;
 }
 
 .web-app .statisticsFormGrid h1,
-.web-app .mapPageGrid h1  {
+.web-app .mapPageGrid h1,
+#attacks-page .attacks-page-header h1 {
     text-align: center;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     padding: 0px;
@@ -108,94 +119,109 @@ input.dataForm1, .firstRow2 input {
 
 /*  HEADING  */
 
-.statisticsFormHeading{
-    grid-area:statisticsFormHeading;
+.statisticsFormHeading {
+    grid-area: statisticsFormHeading;
 }
 
 /* FIRST ROW 1 */
-.firstRow1{
-    grid-area:firstRow1;
-    margin:0 10px;
+.firstRow1 {
+    grid-area: firstRow1;
+    margin: 0 10px;
 }
 
 /* FIRST ROW 2 */
-.firstRow2{
-    grid-area:firstRow2;
-    margin:0 10px;
+.firstRow2 {
+    grid-area: firstRow2;
+    margin: 0 10px;
 }
-.firstRow2 ul, .slideContainer{
-    width:100%;
+
+.firstRow2 ul,
+.slideContainer {
+    width: 100%;
 }
-.nrTerrForm{
+
+.nrTerrForm {
     margin: 5px 0;
 }
 
 /* https://www.youtube.com/watch?v=BrpiNUf2XCk */
-#rangeTerr.slider, #rangeDeaths.slider,  #rangeWound.slider{
+#rangeTerr.slider,
+#rangeDeaths.slider,
+#rangeWound.slider {
     -webkit-appearance: none;
-    background:linear-gradient(90deg,#097a746c 20%, #b955557a );
+    background: linear-gradient(90deg, #097a746c 20%, #b955557a);
     width: 60%;
     height: 30px;
     transition: opacity 0.2s;
     margin-top: 10px;
     margin-left: 30px;
     position: relative;
- 
+
 }
-.slideContainer div{
+
+.slideContainer div {
     display: inline-block;
     position: relative;
     width: 15%;
     padding-left: 20px;
 }
-.slideContainer div span{
+
+.slideContainer div span {
     position: absolute;
-    left:100px;
-    bottom:5px;
+    left: 100px;
+    bottom: 5px;
     font-weight: bold;
 }
 
-#rangeTerr.slider::before, #rangeDeaths.slider::before, #rangeWound.slider::before{
-    content:"0";
+#rangeTerr.slider::before,
+#rangeDeaths.slider::before,
+#rangeWound.slider::before {
+    content: "0";
     color: #065e61;
     position: absolute;
     font-size: 16px;
     bottom: 4px;
-    left:-20px;
-}
-#rangeTerr.slider::after, #rangeDeaths.slider::after, #rangeWound.slider::after{
-    content:"1000";
-    color: #065e61;
-    position: absolute;
-    font-size: 16px;
-    bottom: 4px;
-    right:-42px;
-}
-#rangeDeaths.slider::after{
-    content:"2000";
-}
-#rangeWound.slider::after{
-    content:"4000";
+    left: -20px;
 }
 
-#rangeTerr.slider::-webkit-slider-thumb, 
-#rangeDeaths.slider::-webkit-slider-thumb, 
-#rangeWound.slider::-webkit-slider-thumb{
+#rangeTerr.slider::after,
+#rangeDeaths.slider::after,
+#rangeWound.slider::after {
+    content: "1000";
+    color: #065e61;
+    position: absolute;
+    font-size: 16px;
+    bottom: 4px;
+    right: -42px;
+}
+
+#rangeDeaths.slider::after {
+    content: "2000";
+}
+
+#rangeWound.slider::after {
+    content: "4000";
+}
+
+#rangeTerr.slider::-webkit-slider-thumb,
+#rangeDeaths.slider::-webkit-slider-thumb,
+#rangeWound.slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     height: 26px;
-    width:26px;
+    width: 26px;
     border-radius: 16px;
-    background:#065e61;
+    background: #065e61;
 }
+
 /* Work in Mozilla Firefox browser */
-#rangeTerr.slider::-moz-range-thumb, 
-#rangeDeaths.slider::-moz-range-thumb, 
-#rangeWound.slider::-moz-range-thumb{
+#rangeTerr.slider::-moz-range-thumb,
+#rangeDeaths.slider::-moz-range-thumb,
+#rangeWound.slider::-moz-range-thumb {
     height: 26px;
-    width:26px;
+    width: 26px;
     border-radius: 16px;
-    background:#065e61;
+    background: #065e61;
 }
 
 
@@ -204,25 +230,41 @@ input.dataForm1, .firstRow2 input {
 
 /* ATTACK TYPE FORM */
 
-.attackTypeForm{
-    grid-area:attackTypeForm;
+.attackTypeForm {
+    grid-area: attackTypeForm;
 }
 
-.attackTypeForm div, .targetTypeForm div, .weaponTypeForm div, .damageForm div{
+.attackTypeForm div,
+.targetTypeForm div,
+.weaponTypeForm div,
+.damageForm div {
     display: flex;
-    flex-wrap:wrap;
-    padding:0 0 10px 26px;
+    flex-wrap: wrap;
+    padding: 0 0 10px 26px;
 }
-.attackTypeForm .input1, .targetTypeForm .input1, .weaponTypeForm .input1{
+
+.attackTypeForm .input1,
+.targetTypeForm .input1,
+.weaponTypeForm .input1 {
     width: 50%;
 }
-.attackTypeForm, .weaponTypeForm, .targetTypeForm, .damageForm{
+
+.attackTypeForm,
+.weaponTypeForm,
+.targetTypeForm,
+.damageForm {
     margin-left: 10px;
     margin-right: 10px;
 }
-.attackTypeForm h3, .weaponTypeForm h3, .targetTypeForm h3, .damageForm h3, .regionForm h3, .countryForm h3{
-    color:#eee;
-    font-size:22px;
+
+.attackTypeForm h3,
+.weaponTypeForm h3,
+.targetTypeForm h3,
+.damageForm h3,
+.regionForm h3,
+.countryForm h3 {
+    color: #eee;
+    font-size: 22px;
     background-color: #065e61;
     display: inline;
     margin: 10px 20px 30px 20px;
@@ -234,58 +276,64 @@ input.dataForm1, .firstRow2 input {
 
 /* DAMAGE FORM */
 
-.damageForm{
-    grid-area:damageForm;
+.damageForm {
+    grid-area: damageForm;
 }
-.damageForm div{
-    text-align:center;
+
+.damageForm div {
+    text-align: center;
 }
-.damageForm .input1{
+
+.damageForm .input1 {
     width: 100%;
 }
+
 /* WEAPON FORM */
-.weaponTypeForm{
-    grid-area:weaponTypeForm;
+.weaponTypeForm {
+    grid-area: weaponTypeForm;
 }
-.targetTypeForm{
-    grid-area:targetTypeForm;
+
+.targetTypeForm {
+    grid-area: targetTypeForm;
 }
 
 /* FOURTH ROW */
-.fourthRow{
-    grid-area:fourthRow;
+.fourthRow {
+    grid-area: fourthRow;
     margin-left: 10px;
     margin-right: 10px;
 }
 
-.fourthRow div{
-    padding:10px;
-    margin:20px;
-    font-size:30px;
+.fourthRow div {
+    padding: 10px;
+    margin: 20px;
+    font-size: 30px;
     font-weight: bold;
 }
-#label1{
-    font-size:30px;
+
+#label1 {
+    font-size: 30px;
     font-weight: bold;
 }
 
 
 /* REGION FORM */
-.regionForm{
-    grid-area:regionForm;
+.regionForm {
+    grid-area: regionForm;
     margin-left: 10px;
     margin-right: 10px;
 }
+
 /* COUNTRY FORM */
-.countryForm{
-    grid-area:countryForm;
+.countryForm {
+    grid-area: countryForm;
     margin-left: 10px;
     margin-right: 10px;
 }
 
 /* SUBMIT FORM */
-.submitForm{
-    grid-area:submitForm;
+.submitForm {
+    grid-area: submitForm;
 }
 
 
@@ -294,24 +342,27 @@ input.dataForm1, .firstRow2 input {
 }
 
 
-  /* CHECKBOX */
+/* CHECKBOX */
 
 
-  /* Inspired by a tutorial */
-  input[type="checkbox"] { display: none; }
+/* Inspired by a tutorial */
+input[type="checkbox"] {
+    display: none;
+}
 
-  input[type="checkbox"] + label {
+input[type="checkbox"]+label {
     display: block;
     border-radius: 0px;
     position: relative;
     padding-left: 35px;
     margin-bottom: 0;
-    color:#065e61;
+    color: #065e61;
     cursor: pointer;
-  }
-  
-  
-  input[type="checkbox"] + label::before { /*label immediately after*/
+}
+
+
+input[type="checkbox"]+label::before {
+    /*label immediately after*/
     content: '';
     width: 20px;
     height: 20px;
@@ -320,17 +371,18 @@ input.dataForm1, .firstRow2 input {
     left: 0;
     top: 0;
     transition: all .15s, border-color .1s;
-  }
-  
-  input[type="checkbox"]:checked + label::before {
-    width: 10px; /*decrease width to make a rectangle*/
-    height: 20px; 
+}
+
+input[type="checkbox"]:checked+label::before {
+    width: 10px;
+    /*decrease width to make a rectangle*/
+    height: 20px;
     top: -5px;
     left: 5px;
     border-top-color: transparent;
     border-left-color: transparent;
     transform: rotate(45deg);
-  }
+}
 
 /* SUBMIT FORM */
 
@@ -342,20 +394,20 @@ input.dataForm1, .firstRow2 input {
 
 
 
-#submitButton{
+#submitButton {
     width: 100%;
     height: 100%;
     background-color: transparent;
-    border:none;
+    border: none;
     font-size: large;
-    color:#065e61;
+    color: #065e61;
     z-index: 100;
     cursor: pointer;
     transition: color 0.3s linear;
 }
 
-#submitButton2{
-    color:#065e61;
+#submitButton2 {
+    color: #065e61;
     font-size: 16px;
     border: 2px solid #065e61;
     border-radius: 20px;
@@ -364,7 +416,7 @@ input.dataForm1, .firstRow2 input {
     text-align: center;
     position: relative;
     z-index: 1;
-    transition:all 0.5s;
+    transition: all 0.5s;
     margin: 0 auto;
     overflow: hidden;
 }
@@ -373,36 +425,40 @@ input.dataForm1, .firstRow2 input {
     position: absolute;
     width: 25%;
     height: 100%;
-    background-color:#065e61;
+    background-color: #065e61;
     transform: translateY(56px);
-/*   Le duce mai jos */
+    /*   Le duce mai jos */
     border-radius: 100px;
     transition: 0.5s;
     z-index: -1;
 }
 
 #submitButton:hover {
-    color:#eee;
+    color: #eee;
 }
 
 #submitButton2:hover span {
     transform: translateY(0) scale(2);
 }
+
 #submitButton2 #span1 {
     transition-delay: 0;
-      left:0;
+    left: 0;
 }
+
 #submitButton2 #span2 {
     transition-delay: 0.2s;
-      left: 25%;
+    left: 25%;
 }
-#submitButton2 #span3{
-     transition-delay: 0.4s;
-      left: 50%;
+
+#submitButton2 #span3 {
+    transition-delay: 0.4s;
+    left: 50%;
 }
+
 #submitButton2 #span4 {
-     transition-delay: 0.6s;
-      left: 75%;
+    transition-delay: 0.6s;
+    left: 75%;
 }
 
 
@@ -414,210 +470,240 @@ input.dataForm1, .firstRow2 input {
 /* !!!!!!!!!!!!!!!! CSS SEPARAT!!!!!!!!!!!!! */
 /**************** List of attacks ****************/
 
-.listOfAttacks{
+.listOfAttacks {
     width: 100%;
 }
-h1{
-    color:#222831;
+
+h1 {
+    color: #222831;
 }
 
-.listHeading{
+.listHeading {
     text-align: center;
-    margin-top:20px;
-    margin-bottom:20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
-table.attacksTable{
+
+table.attacksTable {
     /* border-collapse: collapse; */
     border-radius: 20px;
     overflow: hidden;
     border: 2px solid #0763669a;
 }
 
-.recordList{
-    display:flex;
+.recordList {
+    display: flex;
     flex-direction: column;
 }
-div.recordList{
+
+div.recordList {
     border-radius: 20px;
     margin: 0 50px;
 }
 
-.particularRecord, .headingRecordList{
-    display:flex;
-    background-color:#393e46;
+.particularRecord,
+.headingRecordList {
+    display: flex;
+    background-color: #393e46;
 
-    padding:8px;
+    padding: 8px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    color:#eee;
+    color: #eee;
 }
 
-.particularRecord:hover{
+.particularRecord:hover {
     /*https://stackoverflow.com/questions/1625681/dynamically-change-color-to-lighter-or-darker-by-percentage-css-javascript*/
-    filter:brightness(110%);
+    filter: brightness(110%);
 }
 
-.headingRecordList{
-    
-    color:#eee;
+.headingRecordList {
+
+    color: #eee;
     font-size: 26px;
     background-color: #076064c9;
-    
+
 }
 
 
 
-.dateID, .locationID, .attackID{
+.dateID,
+.locationID,
+.attackID {
     display: flex;
-    flex:1;
+    flex: 1;
     align-items: center;
     text-align: center;
 }
 
-.attackID{
+.attackID {
     margin-right: 10px;
 }
 
-.otherLists{
-    margin-top:20px;
+.otherLists {
+    margin-top: 20px;
     margin-bottom: 20px;
     text-align: center;
 }
 
-.sortList{
-    display:flex;
-    background-color:#393e46;
+.sortList {
+    display: flex;
+    background-color: #393e46;
     margin: 0 50px 40px 50px;
-    border-radius: 16px;;
+    border-radius: 16px;
+    ;
     padding: 10px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     align-items: center;
-    height:90px;
+    height: 90px;
 }
 
-#searchText{
+#searchText {
     display: flex;
-    flex:3;
+    flex: 3;
     margin: 0 20px;
-    height:50px;
-    font-size:20px;
+    height: 50px;
+    font-size: 20px;
     border-radius: 40px;
 }
 
-input#searchText{
+input#searchText {
     padding: 0 30px;
-    color:#065e61;
+    color: #065e61;
 }
 
-#advancedSearch{
+#advancedSearch {
     display: flex;
-    flex:2;
-    height:50px;
+    flex: 2;
+    height: 50px;
     background-color: #0abfc594;
     border-radius: 30px;
     border: #eee dashed 2px;
     align-items: center;
-    margin:0 20px;
+    margin: 0 20px;
     cursor: pointer;
-    
+
     transition: all .2s;
 }
 
-#advancedSearch:hover{
+#advancedSearch:hover {
     background-color: #065e61;
-    font-size:22px;
+    font-size: 22px;
     padding-left: 30px;
 }
-#advancedSearch:active .advancedFields{
-    display:block;
+
+#advancedSearch:active .advancedFields {
+    display: block;
     position: relative;
 }
 
-#plusSearch{
+#plusSearch {
     margin-right: 30px;
     margin-left: 30px;
 }
 
-#advancedSearchText{
-    color:#eee;
-    font-size:22px;
+#advancedSearchText {
+    color: #eee;
+    font-size: 22px;
 }
 
 
-.advancedFields{
-    display:none;
-    position:absolute;
-    z-index:1;
+.advancedFields {
+    display: none;
+    position: absolute;
+    z-index: 1;
 }
 
 
-@media screen and (max-width:1200px){
-    .attackTypeForm div, .targetTypeForm div, .weaponTypeForm div{
+@media screen and (max-width:1200px) {
+
+    .attackTypeForm div,
+    .targetTypeForm div,
+    .weaponTypeForm div {
         flex-direction: column;
-        padding:0 0 10px 0;
+        padding: 0 0 10px 0;
     }
 }
 
-@media screen and (max-width:999px){
-    .web-app .statisticsFormGrid{
+@media screen and (max-width:999px) {
+    .web-app .statisticsFormGrid {
         grid-template-areas: "statisticsFormHeading statisticsFormHeading statisticsFormHeading statisticsFormHeading"
-                                "firstRow1 firstRow1 firstRow1 firstRow1"
-                                "firstRow2 firstRow2 firstRow2 firstRow2"
-                                "attackTypeForm attackTypeForm targetTypeForm targetTypeForm"
-                                "weaponTypeForm weaponTypeForm damageForm damageForm"
-                                "regionForm regionForm countryForm countryForm"
-                                "fourthRow fourthRow fourthRow fourthRow"
-                                "submitForm submitForm submitForm submitForm";
+            "firstRow1 firstRow1 firstRow1 firstRow1"
+            "firstRow2 firstRow2 firstRow2 firstRow2"
+            "attackTypeForm attackTypeForm targetTypeForm targetTypeForm"
+            "weaponTypeForm weaponTypeForm damageForm damageForm"
+            "regionForm regionForm countryForm countryForm"
+            "fourthRow fourthRow fourthRow fourthRow"
+            "submitForm submitForm submitForm submitForm";
     }
-    .attackTypeForm div, .targetTypeForm div, .weaponTypeForm div, .damageForm div{
-        font-size:16px;
-    }
-    .fourthRow #label1{
-        font-size:20px;
-    }
-    .attackTypeForm h3, .weaponTypeForm h3, .targetTypeForm h3, .damageForm h3, .regionForm h3, .countryForm h3 {
 
-        font-size:16px;
+    .attackTypeForm div,
+    .targetTypeForm div,
+    .weaponTypeForm div,
+    .damageForm div {
+        font-size: 16px;
     }
-    input.dataForm1, .firstRow2 input{
-        width:100px;
+
+    .fourthRow #label1 {
+        font-size: 20px;
     }
-    .slideContainer div span{
-        left:50px;
+
+    .attackTypeForm h3,
+    .weaponTypeForm h3,
+    .targetTypeForm h3,
+    .damageForm h3,
+    .regionForm h3,
+    .countryForm h3 {
+
+        font-size: 16px;
     }
-    .dateForm label{
+
+    input.dataForm1,
+    .firstRow2 input {
+        width: 100px;
+    }
+
+    .slideContainer div span {
+        left: 50px;
+    }
+
+    .dateForm label {
         display: block;
-    } 
+    }
 }
 
-@media screen and (max-width:700px){
-    .web-app .statisticsFormGrid{
+@media screen and (max-width:700px) {
+    .web-app .statisticsFormGrid {
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: auto auto auto auto auto auto auto auto auto;
         grid-template-areas: "statisticsFormHeading"
-                                "firstRow1"
-                                "firstRow2"
-                                "attackTypeForm"
-                                "targetTypeForm"
-                                "weaponTypeForm"
-                                "damageForm"
-                                "regionForm"
-                                "countryForm"
-                                "fourthRow"
-                                "submitForm";
+            "firstRow1"
+            "firstRow2"
+            "attackTypeForm"
+            "targetTypeForm"
+            "weaponTypeForm"
+            "damageForm"
+            "regionForm"
+            "countryForm"
+            "fourthRow"
+            "submitForm";
         box-sizing: border-box;
         border: 1px solid black;
         padding: 10px;
         font-size: 12px;
         width: 100%;
-    
-    
+
+
         overflow-y: scroll;
     }
-    .attackTypeForm div, .targetTypeForm div, .weaponTypeForm div{
+
+    .attackTypeForm div,
+    .targetTypeForm div,
+    .weaponTypeForm div {
         flex-direction: row;
     }
-    .fourthRow #label1{
-        font-size:16px;
+
+    .fourthRow #label1 {
+        font-size: 16px;
     }
 }

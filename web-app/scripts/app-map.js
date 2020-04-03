@@ -7,6 +7,7 @@ function mapPageInit(node) {
             lat: 30,
             lng: 0
         },
+        scrollwheel: false,
         zoom: 2,
         styles: getMapNightModeStyle()
     });
@@ -20,7 +21,7 @@ function mapPageInit(node) {
                 lng: parseInt(parsed[i].longitude)
             };
 
-            let marker = new google.maps.Marker({
+            new google.maps.Marker({
                 position: pos,
                 map: map,
                 title: parsed[i].country
