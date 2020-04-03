@@ -17,11 +17,15 @@ class AttacksController
         $this->attacksGateway = new AttacksGateway($db);
     }
 
-    public function processRequest()
+    public function processRequest($uri)
     {
         switch ($this->requestMethod) {
             case 'GET':
-                $response = $this->getFirst(1000);
+                if (sizeof($uri) > 3){
+                    $response = $this->getById($uri[3]);
+                } else {
+                    $response = $this->getFirst(1000);
+                }
                 break;
             case 'OPTIONS':
                 break;
@@ -45,4 +49,27 @@ class AttacksController
         $response['body'] = json_encode($result);
         return $response;
     }
+    
+    private function getById($id){
+        if (is_numeric($id) && intval($id)>=0 && intval($id)<=180000){
+            $result = $this->attacksGateway->getById($id);
+            $response['status_code_header'] = 'HTTP/1.1 200 OK';
+            $response['body'] = json_encode($result);
+        }else{
+
+            $response['status_code_header'] = 'HTTP/1.1 404 Not Found';
+            $response['body'] = json_encode("eroare");
+        }
+        return $response;
+
+        // $result = [ "country" => "test", "latitude" => 200, "longitude" => 100];
+        // if (strcmp($id, "gresit") == 0){
+        //     $response['status_code_header'] = 'HTTP/1.1 404 Not Found';
+        // } else {
+        //     $response['status_code_header'] = 'HTTP/1.1 200 OK';
+        // }
+        // $response['body'] = json_encode($result);
+        // return $response;
+    }
+
 }

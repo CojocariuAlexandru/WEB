@@ -8,26 +8,32 @@ let map;
 // ------------------------------------------------------ Application models -------------------------------------------------
 
 class Attack {
-    constructor(id, country, region, numberOfTerrorists, numberOfKills, numberOfWounded, successfullAttack, knownAttackers, weaponsUsed,
-        motive, weaponDetails, ransom, otherDetails, latitude, longitude, countryLatitude, countryLongitude) {
+    // constructor(id, country, region, numberOfTerrorists, numberOfKills, numberOfWounded, successfullAttack, knownAttackers, weaponsUsed,
+    //     motive, weaponDetails, ransom, otherDetails, latitude, longitude, countryLatitude, countryLongitude) {
+    //         this.id = id;
+    //         this.country = country;
+    //         this.region = region;
+    //     this.numberOfTerrorists = numberOfTerrorists;
+    //     this.numberOfKills = numberOfKills;
+    //     this.numberOfWounded = numberOfWounded;
+    //     this.successfullAttack = successfullAttack;
+    //     this.knownAttackers = knownAttackers;
+    //     this.weaponsUsed = weaponsUsed;
+    //     this.motive = motive;
+    //     this.weaponDetails = weaponDetails;
+    //     this.ransom = ransom;
+    //     this.otherDetails = otherDetails;
+    //     this.latitude = latitude;
+    //     this.longitude = longitude;
+    //     this.countryLatitude = countryLatitude;
+    //     this.countryLongitude = countryLongitude;
+    // }
+    constructor(id, country, region){
         this.id = id;
         this.country = country;
         this.region = region;
-        this.numberOfTerrorists = numberOfTerrorists;
-        this.numberOfKills = numberOfKills;
-        this.numberOfWounded = numberOfWounded;
-        this.successfullAttack = successfullAttack;
-        this.knownAttackers = knownAttackers;
-        this.weaponsUsed = weaponsUsed;
-        this.motive = motive;
-        this.weaponDetails = weaponDetails;
-        this.ransom = ransom;
-        this.otherDetails = otherDetails;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.countryLatitude = countryLatitude;
-        this.countryLongitude = countryLongitude;
     }
+
 }
 
 class ReplaceObject {
@@ -53,12 +59,13 @@ function getRequest(okcallback, errcallback) {
     }
 }
 
+
 // ------------------------------------------------------ Fake database ------------------------------------------------------
 
 let attacks = [];
 
-attacks.push(new Attack(1, 'United States', 'New York City', 5, 1384, 8190, 'YES', 'YES', 'Vehicle (not to include vehicle-borne explosives, i.e., car or truck bombs)', 'Unknown', 'The attackers reportedly gained control of the plane using sharp objects resembling knives or other sharpened metal objects. The attackers turned the airplane into a missile when flying it into the North Tower of the World Trade Center Complex. The airplane\'s jet fuel ignited the building and resulted in a massive fire that contributed to the collapse of the North Tower. Mace may have also been used in subduing the passengers and crew members.', 'The crash resulted in the destruction of an American Airlines Boeing 767 aircraft. All personal belongings stowed on the plane were destroyed as well. Also destroyed was the North Tower of the World Trade Center complex in New York City, which collapsed as a result of the impact and subsequent fire. The building\'s collapse undoubtedly damaged the foundation of nearby buildings, though the South Tower had already fallen. Businesses located in the North Tower suffered massive economic losses. Air travel was restricted or prevented in the United States for several months following the attacks. Total losses to the United States Airline industry are unknown, but extremely high. Several major United States airlines were nearly bankrupted in the aftermath of the attacks. The attacks had a negative impact on the U.S. and world economy.', 'This attack was one of four related incidents (cf. 200109110004-07). Three people including two attendants, Karen Martin and Barbara Arestegui, were stabbed or had their throats slashed by the hijackers. American Airlines Flight 11 departed from Boston\'s Logan International Airport at 7:59 am local time. The 9/11 Commission estimated that the hijacking began at 8:14 am. Since the aircraft crashed into the North Tower at 8:46 am, the hijacking lasted 32 minutes. Details on the number of people wounded in the attacks are very difficult to confirm The numbers reported in the GTD are conservative estimates for immediate casualties, first responders, and residents, based on documentation for the September 11th Victims Compensation Fund (VCF).', 40.597132, -73.831351, 40.730610, -73.935242));
-attacks.push(new Attack(2, 'Romania', 'Vaslui', 78, 10, 10, 'NO', 'YES', 10, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatisi architecto beatae vitae dicta sunt explicabo. Nemo enim  ad minima veniam, quis nostrum exercitationem ullam corporis  suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?', 41.124, -51.02));
+// attacks.push(new Attack(1, 'United States', 'New York City', 5, 1384, 8190, 'YES', 'YES', 'Vehicle (not to include vehicle-borne explosives, i.e., car or truck bombs)', 'Unknown', 'The attackers reportedly gained control of the plane using sharp objects resembling knives or other sharpened metal objects. The attackers turned the airplane into a missile when flying it into the North Tower of the World Trade Center Complex. The airplane\'s jet fuel ignited the building and resulted in a massive fire that contributed to the collapse of the North Tower. Mace may have also been used in subduing the passengers and crew members.', 'The crash resulted in the destruction of an American Airlines Boeing 767 aircraft. All personal belongings stowed on the plane were destroyed as well. Also destroyed was the North Tower of the World Trade Center complex in New York City, which collapsed as a result of the impact and subsequent fire. The building\'s collapse undoubtedly damaged the foundation of nearby buildings, though the South Tower had already fallen. Businesses located in the North Tower suffered massive economic losses. Air travel was restricted or prevented in the United States for several months following the attacks. Total losses to the United States Airline industry are unknown, but extremely high. Several major United States airlines were nearly bankrupted in the aftermath of the attacks. The attacks had a negative impact on the U.S. and world economy.', 'This attack was one of four related incidents (cf. 200109110004-07). Three people including two attendants, Karen Martin and Barbara Arestegui, were stabbed or had their throats slashed by the hijackers. American Airlines Flight 11 departed from Boston\'s Logan International Airport at 7:59 am local time. The 9/11 Commission estimated that the hijacking began at 8:14 am. Since the aircraft crashed into the North Tower at 8:46 am, the hijacking lasted 32 minutes. Details on the number of people wounded in the attacks are very difficult to confirm The numbers reported in the GTD are conservative estimates for immediate casualties, first responders, and residents, based on documentation for the September 11th Victims Compensation Fund (VCF).', 40.597132, -73.831351, 40.730610, -73.935242));
+// attacks.push(new Attack(2, 'Romania', 'Vaslui', 78, 10, 10, 'NO', 'YES', 10, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatisi architecto beatae vitae dicta sunt explicabo. Nemo enim  ad minima veniam, quis nostrum exercitationem ullam corporis  suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?', 41.124, -51.02));
 
 // ------------------------------------------------------- Templating -------------------------------------------------------
 
@@ -448,21 +455,25 @@ function searchAttack() {
 
 // ------------------------------------------------------- Attack id page ----------------------------------------------------
 
+
 function attackIdPageBefore(route, id) {
-    let found = false;
-    let currentAttack;
-    for (let i = 0; i < attacks.length; ++i) {
-        if (attacks[i].id == id) {
-            currentAttack = attacks[i];
-            found = true;
+    let xmlhttp = new XMLHttpRequest();
+    let apiPath = "http://localhost:8001/api/attacks/" + id;
+    xmlhttp.open("GET", apiPath);
+    xmlhttp.send();
+    xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            let attack = JSON.parse(xmlhttp.responseText);
+            let currentAttack = attack[0];
+            // attack1 = new Attack(currentAttack["id"], currentAttack["country"], currentAttack["region"]);
+            mainContent.innerHTML = attackIdPageTemplate(route.template, currentAttack);
+            attackIdPageInit(currentAttack);      
+        } else if (this.readyState == 4 && this.status == 404) {
+            mainContent.innerHTML= '<div class="attackDetailText2">  <p> Page not found! </p> </div>'
         }
+       
     }
-    if (!found) {
-        mainContent.innerHTML = 'Error';
-        return null;
-    }
-    mainContent.innerHTML = this.templateCallback(route.template, currentAttack);
-    return currentAttack;
+    return null;
 }
 
 function attackIdPageTemplate(templateName, attack) {
@@ -474,14 +485,14 @@ function attackIdPageInit(attack) {
     let attackAttack = document.querySelector('#mapAttack');
     map = new google.maps.Map(attackAttack, {
         center: {
-            lat: attack.countryLatitude,
-            lng: attack.countryLongitude
+            lat: parseFloat(attack["latitude"]),
+            lng: parseFloat(attack["longitude"])
         },
         zoom: 8
     });
 
-    document.getElementById("ripple-loader-id").style.left = `calc(50% + 5px * ${latitude-countryLatitude})`;
-    document.getElementById("ripple-loader-id").style.top = `calc(50% + 5px * ${longitude-countryLongitude})`;
+    document.getElementById("ripple-loader-id").style.left = `calc(50% - 32px)`;
+    document.getElementById("ripple-loader-id").style.top = `calc(50% - 32px)`;
 
     map.setOptions({
         draggable: false

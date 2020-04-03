@@ -26,4 +26,20 @@ class AttacksGateway
             exit($e->getMessage());
         }
     }
+    public function getById($id){
+        
+        $statement = "
+            SELECT * 
+            FROM attacks
+            WHERE id=". $id .";";
+        try {
+            $statement = $this->db->query($statement);
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            return $result;
+        } catch (\PDOException $e) {
+            exit($e->getMessage());
+        }
+    }
+
+
 }
