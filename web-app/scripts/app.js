@@ -41,8 +41,6 @@ window.onpopstate = () => {
 }
 
 function setPresentationTemplateAsSite() {
-    webapp = false;
-    rootForContent.className = "root presentation";
     if (pageIsLoaded('presentation')) {
         setPresentationTemplateAsSiteAsync();
     } else {
@@ -51,6 +49,8 @@ function setPresentationTemplateAsSite() {
 }
 
 function setPresentationTemplateAsSiteAsync() {
+    webapp = false;
+    rootForContent.className = "root presentation";
     rootForContent.innerHTML = loadPage('presentation');
     setPresentationTemplateAsSiteInit();
 }
@@ -69,8 +69,6 @@ function setPresentationTemplateAsSiteInit() {
 }
 
 function setWebAppTemplateAsSite() {
-    webapp = true;
-    rootForContent.className = "root web-app";
     if (pageIsLoaded('web-app')) {
         setWebAppTemplateAsSiteAsync();
     } else {
@@ -80,6 +78,8 @@ function setWebAppTemplateAsSite() {
 
 function setWebAppTemplateAsSiteAsync() {
     rootForContent.innerHTML = loadPage('web-app');
+    webapp = true;
+    rootForContent.className = "root web-app";
     mainContent = document.querySelector('#content');
     setWebAppTemplateAsSiteInit();
     navigate(window.location.pathname);

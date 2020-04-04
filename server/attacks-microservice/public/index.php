@@ -20,4 +20,4 @@ if ($uri[1] !== 'api' || $uri[2] !== 'attacks') {
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 
 $controller = new AttacksController($dbConnection, $requestMethod);
-$controller->processRequest();
+$controller->processRequest($uri);
