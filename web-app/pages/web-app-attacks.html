@@ -6,7 +6,7 @@
         <div class="attacks-page-search">
             <!-- The search button was taken from here: https://codepen.io/kristyjy/pen/zGOXYb -->
             <div class="search" id="search-wrapper">
-                <input type="text" class="search-box" />
+                <input type="text" id="attacks-search-button" class="search-box" />
                 <span class="search-button" onclick="toggleSearchButton()">
                     <span class="search-icon"></span>
                 </span>
@@ -15,7 +15,7 @@
     </div>
     <div class="attacks-page-cards">
         {{#each this}}
-        <div class="attacks-page-card">
+        <div class="attacks-page-card" onclick="navigateToAttackPage('{{id}}')">
             <div class="attacks-page-card-map-zone">
             </div>
             <div class="attacks-page-card-info-zone">

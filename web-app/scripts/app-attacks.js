@@ -1,3 +1,5 @@
+let attacksPageInput;
+
 function attacksPageInit(node) {
     mainContent.innerHTML = '';
 
@@ -7,9 +9,22 @@ function attacksPageInit(node) {
         let compiledTemplate = Handlebars.compile(loadPage(node.template));
         mainContent.innerHTML = compiledTemplate(attacks);
 
-        initMaps(attacks);
+        initAttacksPageEvents();
+        // initMaps(attacks);
     }, (error) => {
+        console.log(error);
+    });
+}
 
+function initAttacksPageEvents() {
+    attacksPageInput = document.querySelector('#attacks-search-button');
+
+    attacksPageInput.addEventListener('keyup', (e) => {
+        if (e.code === 'Enter') {
+            if (attacksPageInput.value) {
+                navigateToAttackPage(attacksPageInput.value);
+            }
+        }
     });
 }
 
@@ -31,8 +46,7 @@ function initMaps(attacks) {
             scrollwheel: false,
             draggable: false,
             disableDefaultUI: true,
-            zoom: 7,
-            styles: getMapNightModeStyle()
+            zoom: 7
         });
 
         new google.maps.Marker({
@@ -50,9 +64,17 @@ function searchAttack() {
 function toggleSearchButton() {
     let search = document.querySelector('#search-wrapper');
     if (search.className.includes("open")) {
-        search.className = "search";
+        if (attacksPageInput.value) {
+            navigateToAttackPage(attacksPageInput.value);
+        } else {
+            search.className = "search";
+        }
     } else {
         search.className = "search open";
         search.children[0].focus();
     }
+}
+
+function navigateToAttackPage(attackId) {
+    navigateRoot("/attacks/" + attackId);
 }
