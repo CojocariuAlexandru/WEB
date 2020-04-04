@@ -130,6 +130,10 @@ input.dataForm1, .firstRow2 input {
     margin: 5px 0;
 }
 
+#dateInputStart, #dateInputFinal {
+    height: 20px;
+}
+
 /* https://www.youtube.com/watch?v=BrpiNUf2XCk */
 #rangeTerr.slider, #rangeDeaths.slider,  #rangeWound.slider{
     -webkit-appearance: none;

@@ -10,18 +10,64 @@ function statisticsPageInit(node) {
 }
 
 function sendStatisticsRequest() {
-  let successInput = document.querySelector('#succesInput');
+    let dateStartInput       = document.querySelector('#dateInputStart');
+    let dateFinalInput       = document.querySelector('#dateInputFinal');
+    let successInput         = document.querySelector('#succesInput');
+    let knownInput           = document.querySelector('#knownInput');
+    let terroristNumberInput = document.querySelector('#rangeTerr');
+    let deathsNumberInput    = document.querySelector('#rangeDeaths');
+    let woundedNumberInput   = document.querySelector('#rangeWound');
+    let weaponFormInput      = document.querySelector('#weaponForm');
+    let attackFormInput      = document.querySelector('#attacksForm');
+    let targetFormInput      = document.querySelector('#targetForm');
+    let damageFormInput      = document.querySelector('#damageForm');
+    let regionFormInput      = document.querySelector('#allRegionsInput');
+    let countryFormInput     = document.querySelector('#allCountriesInput');
 
-  let filters = {
-    success: `${successInput.checked}`
-  };
 
-  let xhttp = new XMLHttpRequest();
-  xhttp.open("POST", "http://localhost:8001/api/attacks", true);
-  xhttp.setRequestHeader("Content-type", "application/json");
-  xhttp.send(JSON.stringify(filters));
+    let weaponsChecked = [];
+    let attacksChecked = [];
+    let targetsChecked = [];
+    let damagesChecked = [];
+    let index;
+    for(index=0; index<weaponFormInput.children.length;index++){
+      weaponsChecked.push(weaponFormInput.children[index].children[0].checked);
+    }
+    for(index=0; index<attackFormInput.children.length;index++){
+      attacksChecked.push(attackFormInput.children[index].children[0].checked);
+    }
+    for(index=0; index<targetFormInput.children.length;index++){
+      targetsChecked.push(targetFormInput.children[index].children[0].checked);
+    }
+    for(index=0; index<damageFormInput.children.length;index++){
+      damagesChecked.push(damageFormInput.children[index].children[0].checked);
+    }
 
-  navigateRoot('/statistics-results');
+
+    let filters = {
+        dateStart:       `${dateStartInput.value}`,
+        dateFinal:       `${dateFinalInput.value}`,
+        terroristNumber: `${terroristNumberInput.value}`,
+        deathsNumber:    `${deathsNumberInput.value}`,
+        woundNumber:     `${woundedNumberInput.value}`,
+        weaponsUsed:     `${weaponsChecked}`,
+        attacksUsed:     `${attacksChecked}`,
+        tagets:          `${targetsChecked}`,
+        damages:         `${damagesChecked}`,
+        region:          `${regionFormInput.value}`,
+        country:         `${countryFormInput.value}`,
+        success:         `${successInput.checked}`,
+        knownAttacker:   `${knownInput.checked}`
+    };
+    console.log(filters);
+
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "http://localhost:8001/api/attacks", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(JSON.stringify(filters));
+
+    navigateRoot('/statistics-results');
+
 }
 
 function generateWeapons() {
@@ -31,12 +77,13 @@ function generateWeapons() {
   weaponForm.appendChild(weaponFormHeader)
 
   let weaponFormTitle = document.createElement('div')
+  weaponFormTitle.id = 'weaponForm'
   let weaponList = ['Biological', 'Chemical', 'Vehicles', 'Explosives', 'Firearms', 'Weapon6', 'Weapon7', 'Unknown']
   weaponFormTitle.innerHTML = ``
   let index = 0;
   for (index = 0; index < weaponList.length; index++)
-    weaponFormTitle.innerHTML = weaponFormTitle.innerHTML + `<div class="input1"><input type="checkbox" id="weapon-box-` + index + `">` +
-    `<label for="weapon-box-` + index + `">${weaponList[index]}</label></div>`;
+      weaponFormTitle.innerHTML =weaponFormTitle.innerHTML+`<div class="input1"><input type="checkbox" id="weapon-box-`+index+`">`
+      +`<label for="weapon-box-`+index+  `">${weaponList[index]}</label></div>`;
   weaponForm.appendChild(weaponFormTitle)
 }
 
@@ -47,6 +94,7 @@ function generateAttacks() {
   weaponForm.appendChild(weaponFormHeader)
 
   let weaponFormTitle = document.createElement('div')
+  weaponFormTitle.id = 'attacksForm';
   let weaponList = ['Attack1', 'Attack2', 'Attack3', 'Attack4', 'Attack5', 'Attack6', 'Attack7', 'Attack8']
   weaponFormTitle.innerHTML = ``
   let index = 0;
@@ -63,6 +111,7 @@ function generateTargets() {
   weaponForm.appendChild(weaponFormHeader)
 
   let weaponFormTitle = document.createElement('div')
+  weaponFormTitle.id = 'targetForm';
   let weaponList = ['Target1', 'Target2', 'Target3', 'Target4', 'Target5', 'Target6', 'Target7', 'Target8']
   weaponFormTitle.innerHTML = ``
   let index = 0;
@@ -85,7 +134,7 @@ function generateRegions() {
   let regionList = ['Central America & Caribbean', 'Eastern Europe', 'Middle East & North Africa', 'North America', 'South America', 'Southeast Asia',
     'Sub-Saharan Africa', 'Western Europe'
   ]
-  regionFormTitle.innerHTML = regionFormTitle.innerHTML + `<input list='allRegions'>`
+  regionFormTitle.innerHTML = regionFormTitle.innerHTML + `<input list='allRegions' id='allRegionsInput'>`
   let index = 0;
   for (index = 0; index < regionList.length; index++)
     regionOptionChoose.innerHTML = regionOptionChoose.innerHTML + `<option value=${regionList[index]}>`
@@ -356,7 +405,7 @@ function generateCountries() {
     "Zimbabwe",
     "Åland Islands"
   ];
-  regionFormTitle.innerHTML = regionFormTitle.innerHTML + `<input class='countries-input' list='allCountries'>`
+  regionFormTitle.innerHTML = regionFormTitle.innerHTML + `<input class='countries-input' list='allCountries' id='allCountriesInput'>`
   let index = 0;
   for (index = 0; index < regionList.length; index++)
     regionOptionChoose.innerHTML = regionOptionChoose.innerHTML +
