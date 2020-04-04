@@ -21,7 +21,9 @@ class AttacksController
     {
         switch ($this->requestMethod) {
             case 'GET':
-                if (sizeof($uri) > 3){
+                if (isset($_GET["preview"]) && $_GET["preview"] == "true") {
+                    $response = $this->getAttacksPreview();
+                } else if (sizeof($uri) > 3) {
                     $response = $this->getById($uri[3]);
                 } else {
                     $response = $this->getFirst(1000);
@@ -32,10 +34,10 @@ class AttacksController
             case 'POST':
                 echo ('It\'s working!');
         }
-        if (isset($response['status_code_header'])){
+        if (isset($response['status_code_header'])) {
             header($response['status_code_header']);
         }
-        if (isset($response['body'])){
+        if (isset($response['body'])) {
             if ($response['body']) {
                 echo $response['body'];
             }
@@ -49,27 +51,25 @@ class AttacksController
         $response['body'] = json_encode($result);
         return $response;
     }
-    
-    private function getById($id){
-        if (is_numeric($id) && intval($id)>=0 && intval($id)<=180000){
+
+    private function getById($id)
+    {
+        if (is_numeric($id) && intval($id) >= 0 && intval($id) <= 180000) {
             $result = $this->attacksGateway->getById($id);
             $response['status_code_header'] = 'HTTP/1.1 200 OK';
             $response['body'] = json_encode($result);
-        }else{
-
+        } else {
             $response['status_code_header'] = 'HTTP/1.1 404 Not Found';
             $response['body'] = json_encode("eroare");
         }
         return $response;
-
-        // $result = [ "country" => "test", "latitude" => 200, "longitude" => 100];
-        // if (strcmp($id, "gresit") == 0){
-        //     $response['status_code_header'] = 'HTTP/1.1 404 Not Found';
-        // } else {
-        //     $response['status_code_header'] = 'HTTP/1.1 200 OK';
-        // }
-        // $response['body'] = json_encode($result);
-        // return $response;
     }
 
+    private function getAttacksPreview()
+    {
+        $result = $this->attacksGateway->getPreview();
+        $response['status_code_header'] = 'HTTP/1.1 200 OK';
+        $response['body'] = json_encode($result);
+        return $response;
+    }
 }

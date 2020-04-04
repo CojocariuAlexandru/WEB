@@ -42,6 +42,8 @@
 
 .mapPageViewButton {
     grid-area: mapPageView;
+
+    margin-bottom: 20px;
 }
 
 @media screen and (max-width: 700px) {

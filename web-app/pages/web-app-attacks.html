@@ -1,17 +1,37 @@
-<div id="attacksPage">
-    <div class="searchAnAttack">
-        <div>
-            View detailed information about an attack
-        </div>
-        <div class="searchZone">
-            <div class="inputZone">
-                <label for="searchAttackButton">Attack id</label>
-                <input type="text" id="searchAttackButton">
+<div id="attacks-page">
+    <div class="attacks-page-header">
+        <h1 class="attacks-page-text">
+            View attack details
+        </h1>
+        <div class="attacks-page-search">
+            <!-- The search button was taken from here: https://codepen.io/kristyjy/pen/zGOXYb -->
+            <div class="search" id="search-wrapper">
+                <input type="text" class="search-box" />
+                <span class="search-button" onclick="toggleSearchButton()">
+                    <span class="search-icon"></span>
+                </span>
             </div>
-        <button onclick="searchAttack()">Search</button>
         </div>
     </div>
-    <div class="mostInterestingAttacks">
-        The most interesting attacks
+    <div class="attacks-page-cards">
+        {{#each this}}
+        <div class="attacks-page-card">
+            <div class="attacks-page-card-map-zone">
+            </div>
+            <div class="attacks-page-card-info-zone">
+                <h3>{{country}}</h3>
+                <h3>{{attack_type}}</h3>
+                <div class="last-row">
+                    <div class="left">
+                        <span>Killed: {{kills_count}}</span>
+                        <span>Wounded: {{wounded_count}}</span>
+                    </div>
+                    <div class="right">
+                        <span>#{{id}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
     </div>
 </div>
