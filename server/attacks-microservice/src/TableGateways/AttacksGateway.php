@@ -15,7 +15,7 @@ class AttacksGateway
     public function getFirst($first)
     {
         $statement = "
-            SELECT country, latitude, longitude
+            SELECT country, latitude, longitude, region, id
             FROM attacks
             LIMIT " . $first . ";";
         try {

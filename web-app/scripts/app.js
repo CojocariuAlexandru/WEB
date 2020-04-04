@@ -7,34 +7,6 @@ let map;
 
 // ------------------------------------------------------ Application models -------------------------------------------------
 
-class Attack {
-    // constructor(id, country, region, numberOfTerrorists, numberOfKills, numberOfWounded, successfullAttack, knownAttackers, weaponsUsed,
-    //     motive, weaponDetails, ransom, otherDetails, latitude, longitude, countryLatitude, countryLongitude) {
-    //         this.id = id;
-    //         this.country = country;
-    //         this.region = region;
-    //     this.numberOfTerrorists = numberOfTerrorists;
-    //     this.numberOfKills = numberOfKills;
-    //     this.numberOfWounded = numberOfWounded;
-    //     this.successfullAttack = successfullAttack;
-    //     this.knownAttackers = knownAttackers;
-    //     this.weaponsUsed = weaponsUsed;
-    //     this.motive = motive;
-    //     this.weaponDetails = weaponDetails;
-    //     this.ransom = ransom;
-    //     this.otherDetails = otherDetails;
-    //     this.latitude = latitude;
-    //     this.longitude = longitude;
-    //     this.countryLatitude = countryLatitude;
-    //     this.countryLongitude = countryLongitude;
-    // }
-    constructor(id, country, region){
-        this.id = id;
-        this.country = country;
-        this.region = region;
-    }
-
-}
 
 class ReplaceObject {
     constructor(label, value) {
@@ -374,7 +346,6 @@ function statisticsResultsPageInit() {
 
 function statisticsDrawingsPageInit() {
     generateRecords();
-    generateOtherLists();
 }
 
 // ------------------------------------------------------- Map page ----------------------------------------------------------
@@ -481,6 +452,7 @@ function attackIdPageTemplate(templateName, attack) {
     return compiledTemplate(attack);
 }
 
+
 function attackIdPageInit(attack) {
     let attackAttack = document.querySelector('#mapAttack');
     map = new google.maps.Map(attackAttack, {
@@ -533,13 +505,32 @@ function attackIdPageInit(attack) {
 }
 
 /***********Attack list **********************/
-var numberOfRecords = 10;
+let parsed;
+let numberPerPage = 10;
+
 
 function generateRecords() {
     let attackListHead = document.querySelector('.recordList');
     let table = document.createElement('table');
-    table.setAttribute('class', 'attacksTable');
+    table.setAttribute('id', 'attacksTable');
+    table.setAttribute('class', 'attacksTable')
     attackListHead.appendChild(table);
+    getRequest(
+        (result) => {
+            parsed = JSON.parse(result);
+            displayRecords(1);
+               
+        }, (error) => {
+            console.log(error);
+        }
+    );
+   
+}
+function displayRecords(pageNumber){
+
+
+    let table=document.getElementById('attacksTable');
+    table.innerHTML =  ``;
 
     let particularRecord = document.createElement('tr');
     particularRecord.setAttribute('class', 'headingRecordList');
@@ -549,32 +540,45 @@ function generateRecords() {
                                         <th class='dateID'>Date</th>
                                 `;
     table.appendChild(particularRecord);
-    for (let i = 0; i < numberOfRecords; i++) {
+
+    for (let i = (pageNumber-1) * numberPerPage; i < pageNumber * numberPerPage && i<parsed.length; i++) {
         particularRecord = document.createElement('tr');
         particularRecord.setAttribute('class', 'particularRecord');
         particularRecord.innerHTML = `
-                                    <td class='attackID'>Terrorist attack #${i}</td>
-                                    <td class='locationID'>Country, Region</td>
-                                    <td class='dateID'>YYYY/MM/DD</td>
-                                    `;
+                            <td class='attackID'>${parsed[i].id}</td>
+                            <td class='locationID'>${parsed[i].country}, ${parsed[i].region} </td>
+                            <td class='dateID'>YYYY/MM/DD</td>
+                            `;
         if (i % 2 == 1) {
             particularRecord.style.backgroundColor = '#222831';
         }
         table.appendChild(particularRecord);
     }
+    generateOtherLists(pageNumber);
 }
 
-function generateOtherLists() {
-    let attackListHead = document.querySelector('.otherLists');
-    let otherAttackList = document.createElement('footer');
-    let listText = "<p class = 'numberList'> << ";
-    for (let i = 0; i * 20 <= numberOfRecords; i++) {
-        if (i * 20 + 20 <= numberOfRecords) {
-            listText = listText + `${i+1}, `;
-        } else {
-            listText = listText + `${i+1} >> </p> `;
 
+function generateOtherLists(pageNumber) {
+    let attackListHead = document.querySelector('.otherLists');
+    attackListHead.innerHTML=``;
+    let otherAttackList = document.createElement('footer');
+    let listText = `<p class = 'numberList'>`;
+    console.log(pageNumber*numberPerPage);
+    console.log(parsed.length);
+
+    if (pageNumber==1){
+        listText = listText + `1`;
+        if (pageNumber * numberPerPage<parsed.length){
+            listText = listText + `,<span class="changePage" onclick="displayRecords(2)">2</span> >>`;
         }
+    } else if (pageNumber * numberPerPage >= parsed.length){
+        listText = listText + `<< `;
+        listText = listText + `<span class="changePage" onclick="displayRecords(${pageNumber-1})">${pageNumber-1}, </span>`;
+        listText = listText + `${pageNumber}`;
+    } else {
+        listText = listText + `<< <span class="changePage" onclick="displayRecords(${pageNumber-1})">${pageNumber-1}, </span>`;
+        listText = listText + `${pageNumber}, `;
+        listText = listText + `<span class="changePage" onclick="displayRecords(${pageNumber+1})">${pageNumber+1} </span> >>`;
     }
     otherAttackList.innerHTML = listText;
     attackListHead.appendChild(otherAttackList);
