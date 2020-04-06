@@ -32,7 +32,9 @@ class AttacksController
             case 'OPTIONS':
                 break;
             case 'POST':
-                echo ('It\'s working!');
+                $rawData = file_get_contents("php://input");
+                $decoded = json_decode($rawData, true);
+                $response = $this->getStatisticsResult($decoded);
         }
         if (isset($response['status_code_header'])) {
             header($response['status_code_header']);
@@ -43,6 +45,44 @@ class AttacksController
             }
         }
     }
+
+    private function getStatisticsResult($decoded){
+
+        $this->getStartDate($decoded);
+        $this->setArrays($decoded, "weaponsUsed");
+        $this->setArrays($decoded, "attacksUsed");
+        $this->setArrays($decoded, "tagets");
+
+        $result = $this->attacksGateway->getStatistics($decoded);
+        $response['status_code_header'] = 'HTTP/1.1 200 OK';
+        $response['body']=json_encode($decoded);
+        print_r($response['body']);
+        return $response;
+    }
+
+    private function getStartDate(&$decoded){
+        if ($decoded["dateStart"]==""){
+            $decoded["dateStart"]="1970-01-01";
+        }
+    }
+
+    private function setArrays(&$decoded, $name){
+        $i=0;
+        $exploded = explode(",", $decoded[$name]);
+        $decoded[$name] = "1000";
+        foreach ($exploded as $value){
+            if (strcmp($value,"true")==0){
+                $decoded[$name]=$decoded[$name].",$i";
+            }
+            $i++;
+        }
+    }
+
+
+
+
+
+
 
     private function getFirst($first)
     {
