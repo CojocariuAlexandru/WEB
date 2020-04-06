@@ -32,7 +32,10 @@ class AttacksController
             case 'OPTIONS':
                 break;
             case 'POST':
-                echo ('It\'s working!');
+                $rawData = file_get_contents("php://input");
+                $decoded = json_decode($rawData, true);
+                $wp = explode(',' , $decoded['weaponsUsed']);
+                print_r($wp[0]);
         }
         if (isset($response['status_code_header'])) {
             header($response['status_code_header']);

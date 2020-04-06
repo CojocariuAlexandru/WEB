@@ -10,6 +10,11 @@ function statisticsPageInit(node) {
 }
 
 function sendStatisticsRequest() {
+    let weaponList = ['Biological', 'Chemical', 'Vehicles', 'Explosives', 'Firearms', 'Weapon6', 'Weapon7', 'Unknown'];
+    let attackList = ['Attack1', 'Attack2', 'Attack3', 'Attack4', 'Attack5', 'Attack6', 'Attack7', 'Attack8'];
+    let targetList = ['Target1', 'Target2', 'Target3', 'Target4', 'Target5', 'Target6', 'Target7', 'Target8'];
+
+
     let dateStartInput       = document.querySelector('#dateInputStart');
     let dateFinalInput       = document.querySelector('#dateInputFinal');
     let successInput         = document.querySelector('#succesInput');
@@ -31,16 +36,35 @@ function sendStatisticsRequest() {
     let damagesChecked = [];
     let index;
     for(index=0; index<weaponFormInput.children.length;index++){
-      weaponsChecked.push(weaponFormInput.children[index].children[0].checked);
+        if(weaponFormInput.children[index].children[0].checked == true){
+          weaponsChecked.push(weaponList[index]);
+        }
     }
     for(index=0; index<attackFormInput.children.length;index++){
-      attacksChecked.push(attackFormInput.children[index].children[0].checked);
+      if(attackFormInput.children[index].children[0].checked == true){
+        attacksChecked.push(attackList[index]);
+      }
     }
     for(index=0; index<targetFormInput.children.length;index++){
-      targetsChecked.push(targetFormInput.children[index].children[0].checked);
+      if(targetFormInput.children[index].children[0].checked == true){
+        targetsChecked.push(targetList[index]);
+      }
     }
     for(index=0; index<damageFormInput.children.length;index++){
-      damagesChecked.push(damageFormInput.children[index].children[0].checked);
+      if(damageFormInput.children[index].children[0].checked == true){
+        if(index == 0){
+          damagesChecked.push('Minor');
+        }
+        else if(index == 1){
+          damagesChecked.push('Major');
+        }
+        else if(index == 2){
+          damagesChecked.push('Cayastrophic');
+        }
+        else if(index == 3){
+          damagesChecked.push('Unknown');
+        }
+      }
     }
 
 
@@ -59,7 +83,6 @@ function sendStatisticsRequest() {
         success:         `${successInput.checked}`,
         knownAttacker:   `${knownInput.checked}`
     };
-    console.log(filters);
 
     let xhttp = new XMLHttpRequest();
     xhttp.open("POST", "http://localhost:8001/api/attacks", true);
