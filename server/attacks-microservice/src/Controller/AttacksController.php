@@ -34,8 +34,7 @@ class AttacksController
             case 'POST':
                 $rawData = file_get_contents("php://input");
                 $decoded = json_decode($rawData, true);
-                $wp = explode(',' , $decoded['weaponsUsed']);
-                print_r($wp[0]);
+                $response = $this->getGoodAttacks($decoded);
         }
         if (isset($response['status_code_header'])) {
             header($response['status_code_header']);
@@ -47,34 +46,61 @@ class AttacksController
         }
     }
 
-    private function getStatisticsResult($decoded){
+    private function getGoodAttacks($decoded){
+        $transformed = [];
 
-        $this->getStartDate($decoded);
-        $this->setArrays($decoded, "weaponsUsed");
-        $this->setArrays($decoded, "attacksUsed");
-        $this->setArrays($decoded, "tagets");
+        $this->getStartDate($decoded, $transformed);
+        $this->getEndDate($decoded, $transformed);
+        $this->setArrays($decoded, $transformed, "weaponsUsed");
+        $this->setArrays($decoded, $transformed, "attacksUsed");
+        $this->setArrays($decoded, $transformed, "targets");
+        $this->setValue($decoded, $transformed, "terroristNumber");
+        $this->setValue($decoded, $transformed, "deathsNumber");
+        $this->setValue($decoded, $transformed, "woundNumber");
+        $this->setValue($decoded, $transformed, "success");
+        $this->setValue($decoded, $transformed, "knownAttacker");
+        $this->setIfExists($decoded, $transformed, "region");
+        $this->setIfExists($decoded, $transformed, "country");
 
-        $result = $this->attacksGateway->getStatistics($decoded);
+
+
+        $result = $this->attacksGateway->getStatistics($transformed);
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
-        $response['body']=json_encode($decoded);
+        $response['body']=json_encode($transformed);
         print_r($response['body']);
         return $response;
     }
+    private function setIfExists($decoded, &$transformed, $name){
+        if ($decoded[$name]!="")
+            $transformed[$name]=$decoded[$name];
+    }
+    
+    private function setValue($decoded, &$transformed, $name){
+        $transformed[$name]=$decoded[$name];
+    }
 
-    private function getStartDate(&$decoded){
+    private function getStartDate($decoded, &$transformed){
         if ($decoded["dateStart"]==""){
-            $decoded["dateStart"]="1970-01-01";
+            $transformed["startDate"]="1970-01-01";
+        }else{
+            $transformed["startDate"]=$decoded["dateStart"];
         }
     }
 
-    private function setArrays(&$decoded, $name){
+    private function getEndDate($decoded, &$transformed){
+        if ($decoded["dateFinal"]==""){
+            $transformed["finalDate"]="sysdate";
+        }else{
+            $transformed["finalDate"]=$decoded["dateFinal"];
+        }
+    }
+
+    private function setArrays($decoded, &$transformed, $name){
         $i=0;
+      //  $transformed[$name]=[];
         $exploded = explode(",", $decoded[$name]);
-        $decoded[$name] = "1000";
         foreach ($exploded as $value){
-            if (strcmp($value,"true")==0){
-                $decoded[$name]=$decoded[$name].",$i";
-            }
+            $transformed[$name][$i]=$value;
             $i++;
         }
     }

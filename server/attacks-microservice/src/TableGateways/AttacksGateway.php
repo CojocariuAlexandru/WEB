@@ -41,16 +41,16 @@ class AttacksGateway
             exit($e->getMessage());
         }
     }
-    public function getStatistics($decoded)
+    public function getStatistics($transformed)
     {
         $statement = "
             SELECT *
-            FROM attacks WHERE
-            startDate < TO_DATE(". $decoded["startDate"]."\",\"YYYY-MM-DD\")";
+            FROM attacks WHERE";
 
-        $this->prepareStatement($statement);
+        $this->prepareStatement($statement, $transformed);
 
-        
+        echo $statement;
+
         try {
             $statement = $this->db->query($statement);
             $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
@@ -59,27 +59,40 @@ class AttacksGateway
             exit($e->getMessage());
         }
     }
-    private function prepareStatement(&$statement, $decoded){
+    private function prepareStatement(&$statement, $transformed){
+
+        $statement = $statement . "date >= TO_DATE(" . $transformed["startDate"] .  ", 'YYYY-MM-DD' )";
+        $statement = $statement . "AND date <= TO_DATE(" . $transformed["finaltDate"] . ", 'YYYY-MM-DD' ) ";
+
+        $this->statementArray($statement, $transformed["weaponsUsed"]);
+        $this->statementArray($statement, $transformed["attacksUsed"]);
+        $this->statementArray($statement, $transformed["targets"]);
+
+        $this->setCondition($statement, $transformed["terroristNumber"], "terroristNumber", "<=");
+        $this->setCondition($statement, $transformed["deathsNumber"], "deathsNumber", "<=");
+        $this->setCondition($statement, $transformed["woundNumber"], "woundNumber", "<=");
+
+        $this->setCondition($statement, $transformed["success"], "success", "=");
+        $this->setCondition($statement, $transformed["region"], "region", "=");
+        $this->setCondition($statement, $transformed["country"], "country", "=");
+        $this->setCondition($statement, $transformed["knownAttacker"], "knownAttacker", "=");
+
+    }
 
 
-        if ($decoded["country"]!=""){
-            $statement = $statement . "AND country=".$decoded["country"];
+
+    private function setCondition(&$statement, $value, $str, $op){
+        $statement = $statement . "AND $str $op $value";
+    }
+
+    private function statementArray(&$statement, $array){
+        $str = "AND $array IN (";
+
+        foreach($array as $elem){
+            $str = $str + $elem + ",";
         }
 
-        if ($decoded["region"]!=""){
-            $statement = $statement . "AND region=".$decoded["region"];
-        }
-
-        $statement = $statement . "attack_type IN(".$decoded["attack_type"].")";
-        $statement = $statement . "weaponUsed IN(".$decoded["weapon_used"].")";
-        $statement = $statement . "targets IN(".$decoded["tagets"].")";
-
-        
-        
-
-
-
-
+        $str = $str +$array[0]+")";
     }
 
 
