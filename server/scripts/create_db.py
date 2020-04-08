@@ -10,7 +10,7 @@ import csv
 dbName = "TeVi"
 dbTableName = "Attacks"
 csvFileName = "data.csv"
-csvConfFileName = "db_creation_config.txt"
+distinctValuesFile = 'distinct_values.txt'
 
 def getDbConnection(db):
     return mysql.connector.connect(
@@ -31,58 +31,158 @@ print(f"\"{dbName}\" database created!")
 mydb = getDbConnection(dbName)
 mycursor = mydb.cursor()
 
-createTableQuery = """ CREATE TABLE {} (id INT AUTO_INCREMENT PRIMARY KEY,
-                        country VARCHAR(255),
-                        region VARCHAR(255),
+createTableQuery = """ CREATE TABLE {} (
+                        id INT AUTO_INCREMENT PRIMARY KEY,
+                        date DATE,
+                        extended BOOLEAN,
+                        region VARCHAR(36),
+                        country VARCHAR(36),
+                        provState VARCHAR(50),
+                        city VARCHAR(70),
                         latitude REAL(10,5),
                         longitude REAL(10,5),
-                        attack_type VARCHAR(255),
-                        motive VARCHAR(1023),
-                        terrorists_count INT,
-                        kills_count INT,
-                        wounded_count INT,
+                        summary VARCHAR(2436),
+                        attackType VARCHAR(40),
                         success BOOLEAN,
-                        weapon_type VARCHAR(255),
-                        weapon_details VARCHAR(1023))""".format(dbTableName)
+                        suicide BOOLEAN,
+                        targType VARCHAR(32),
+                        targSubtype VARCHAR(76),
+                        targetName VARCHAR(348),
+                        targetNat VARCHAR(38),
+                        groupName VARCHAR(116),
+                        motive VARCHAR(904),
+                        terrCount INT,
+                        weaponType VARCHAR(80),
+                        weaponSubtype VARCHAR(48),
+                        weaponDetail VARCHAR(660),
+                        killsCount INT,
+                        woundedCount INT,
+                        propExtent VARCHAR(50),
+                        propComment VARCHAR(842),
+                        addNotes VARCHAR(1940),
+                        sCite1 VARCHAR(572),
+                        sCite2 VARCHAR(572),
+                        sCite3 VARCHAR(550))""".format(dbTableName)
 
 mycursor.execute(createTableQuery)
 print(f"\"{dbTableName}\" table created!")
 
-if path.exists(csvConfFileName) == False:
-    print(f"\"{csvConfFileName}\" file not found!")
-    exit(1)
-
 columns = {}
-
-f = open(csvConfFileName, "r")
-lineNumber = 1
-for line in f:
-    tokens = line.split()
-    if len(tokens) != 2:
-        print(f"Error in file \"{csvConfFileName}\", line {lineNumber}! Too many tokens!")
-        exit(1)
-    columns[tokens[0]] = tokens[1]
-    lineNumber += 1
-f.close()
 
 if path.exists(csvFileName) == False:
     print(f"\"{csvFileName}\" file not found!")
     exit(1)
 
-insertAttackQuery = """ INSERT INTO attacks (country, region, latitude, longitude, attack_type, motive,
-                                            terrorists_count, kills_count, wounded_count, success, weapon_type, weapon_details)
-                                            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+insert_attack_query = """ INSERT INTO attacks (
+                                date,
+                                extended,
+                                region,
+                                country,
+                                provState,
+                                city,
+                                latitude,
+                                longitude,
+                                summary,
+                                attackType,
+                                success,
+                                suicide,
+                                targType,
+                                targSubtype,
+                                targetName,
+                                targetNat,
+                                groupName,
+                                motive,
+                                terrCount,
+                                weaponType,
+                                weaponSubtype,
+                                weaponDetail,
+                                killsCount,
+                                woundedCount,
+                                propExtent,
+                                propComment,
+                                addNotes,
+                                sCite1,
+                                sCite2,
+                                sCite3)
+                    VALUES (%s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s,
+                            %s, %s, %s, %s, %s)"""
+
+def process_varchar(row, col_name):
+    return row[col_name]
+
+def process_boolean(row, col_name):
+    return False if row[col_name] == '' else (True if (int(row[col_name]) == 1) else False)
+
+def process_int(row, col_name):
+    return -1 if row[col_name] == '' else int(float(row[col_name]))
+
+def process_float(row, col_name):
+    return 0.0 if row[col_name] == '' else float(row[col_name])
+
+def process_date(row, col_year_name, col_month_name, col_day_name):
+    return row[col_year_name] + '-' + row[col_month_name] + '-' + row[col_day_name]
 
 with open(csvFileName, mode='r') as attacks_file:
     csv_reader = csv.DictReader(attacks_file)
     line_count = 0
     for row in csv_reader:
         if line_count > 0:
-            values = (row['country_txt'], row['region_txt'], (0.0 if row['latitude'] == '' else float(row['latitude'])), (0.0 if row['longitude'] == '' else float(row['longitude'])), 
-                        row['attacktype1_txt'], row['motive'], (-1 if row['nperps'] == '' else int(float(row['nperps']))), (-1 if row['nkill'] == '' else int(float(row['nkill']))), 
-                        (-1 if row['nwound'] == '' else int(float((row['nwound'])))), (False if row['success'] == '' else (True if (int(row['success']) == 1 ) else False)), row['weaptype1_txt'], row['weapdetail'])
-            mycursor.execute(insertAttackQuery, values)
+            values = (
+                process_date(row, 'iyear', 'imonth', 'iday'),
+                process_boolean(row, 'extended'),
+                process_varchar(row, 'region_txt'),
+                process_varchar(row, 'country_txt'),
+                process_varchar(row, 'provstate'),
+                process_varchar(row, 'city'),
+                process_float(row, 'latitude'),
+                process_float(row, 'longitude'),
+                process_varchar(row, 'summary'),
+                process_varchar(row, 'attacktype1_txt'),
+                process_boolean(row, 'success'),
+                process_boolean(row, 'suicide'),
+                process_varchar(row, 'targtype1_txt'),
+                process_varchar(row, 'targsubtype1_txt'),
+                process_varchar(row, 'target1'),
+                process_varchar(row, 'natlty1_txt'),
+                process_varchar(row, 'gname'),
+                process_varchar(row, 'motive'),
+                process_int(row, 'nperps'),
+                process_varchar(row, 'weaptype1_txt'),
+                process_varchar(row, 'weapsubtype1_txt'),
+                process_varchar(row, 'weapdetail'),
+                process_int(row, 'nkill'),
+                process_int(row, 'nwound'),
+                process_varchar(row, 'propextent_txt'),
+                process_varchar(row, 'propcomment'),
+                process_varchar(row, 'addnotes'),
+                process_varchar(row, 'scite1'),
+                process_varchar(row, 'scite2'),
+                process_varchar(row, 'scite3')
+            )
+            mycursor.execute(insert_attack_query, values)
         line_count += 1
     print(f"Inserted {line_count-1} attacks in the database!")
         
 mydb.commit()
+
+columns_to_print_diff_values = ["region", "country", "attackType", "weaponType"]
+
+with open(distinctValuesFile, "w") as file:
+    for column in columns_to_print_diff_values:
+        select_distincts_query = """SELECT DISTINCT {} FROM attacks""".format(column)
+        
+        value = (column)
+        mycursor.execute(select_distincts_query)
+        distinct_values = mycursor.fetchall()
+        
+        line_str = ','.join(map(str,distinct_values)).replace(',)', '').replace('(', '')
+
+        file.write(column + ':\n')
+        file.write(line_str)
+        file.write('\n')
+
+print(f'Created file \"{distinctValuesFile}\"!')
