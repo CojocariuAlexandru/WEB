@@ -1,12 +1,33 @@
-country_txt country
-region_txt region
-latitude latitude
-longitude longitude
-attacktype1_txt attack_type
-motive motive
-nperps terrorists_count
-nkill kills_count
-nwound wounded_count
-success success
-weaptype1_txt weapon_type
-weapdetail weapon_details
+# eventid id - each attack will get an id between 1 and attacksCount
+- iyear year    \
+- imonth month   | date - DATE
+- iday day      /
+extended extended - BOOLEAN
+region_txt region - VARCHAR(36) - max len: 27
+country_txt country - VARCHAR(36) - max len: 32
+provstate provState - VARCHAR(50) - max len: 47
+city city - VARCHAR(70) - max len: 65
+latitude latitude - REAL(10,5)
+longitude longitude - REAL(10,5)
+summary summary - VARCHAR(2436) - max len: 2431
+attacktype1_txt attackType - VARCHAR(40) - max len: 35
+success success - BOOLEAN
+suicide suicide - BOOLEAN
+targtype1_txt targType - VARCHAR(32) - max len: 30
+targsubtype1_txt targSubtype - VARCHAR(76) - max len: 71 
+target1 targetName - VARCHAR(348) - max len: 343
+natlty1_txt targetNat - VARCHAR(38) - max len: 34
+gname groupName - VARCHAR(116) - max len: 112 
+motive motive - VARCHAR(904) - max len: 899
+nperps terrCount - INT
+weaptype1_txt weaponType - VARCHAR(80) - max len: 75
+weapsubtype1_txt weaponSubtype - VARCHAR(48) - max len: 41
+weapdetail weaponDetail - VARCHAR(660) - max len: 656
+nkill killsCount - INT
+nwound woundedCount - INT
+propextent_txt propExtent - VARCHAR(50) - max len: 45
+propcomment propComment - VARCHAR(842) - max len: 839
+addnotes addNotes - VARCHAR(1940) - max len: 1935
+scite1 sCite1 - VARCHAR(572) - max len: 566
+scite2 sCite2 - VARCHAR(572) - max len: 561
+scite3 sCite3 - VARCHAR(550) - max len: 545

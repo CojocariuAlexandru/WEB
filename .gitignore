@@ -1,3 +1,4 @@
 
 **/*.csv
 **/data
+**/distinct_values.txt
