@@ -45,7 +45,7 @@ class AttacksGateway
     {
         $statement = "
             SELECT *
-            FROM attacks WHERE";
+            FROM attacks WHERE ";
 
         $this->prepareStatement($statement, $transformed);
 
@@ -61,32 +61,41 @@ class AttacksGateway
     }
     private function prepareStatement(&$statement, $transformed){
 
-        $statement = $statement . "date >= TO_DATE(" . $transformed["startDate"] .  ", 'YYYY-MM-DD' )";
-        $statement = $statement . "AND date <= TO_DATE(" . $transformed["finaltDate"] . ", 'YYYY-MM-DD' ) ";
+        $statement = $statement . "date >= STR_TO_DATE('" . $transformed["startDate"] .  "' , '%Y-%m-%d')";
+        if ($transformed["finalDate"]=="sysdate")
+        $statement = $statement . " AND date <= sysdate() ";
+        else
+            $statement = $statement . " AND date <= STR_TO_DATE('" . $transformed["finalDate"] . "', 'YYYY-MM-DD') ";
 
-        $this->statementArray($statement, $transformed["weaponsUsed"]);
-        $this->statementArray($statement, $transformed["attacksUsed"]);
-        $this->statementArray($statement, $transformed["targets"]);
+        $this->statementArray($statement, $transformed["weaponType"], "weaponType");
+        $this->statementArray($statement, $transformed["attackType"], "attackType");
+        $this->statementArray($statement, $transformed["targType"], "targType");
 
-        $this->setCondition($statement, $transformed["terroristNumber"], "terroristNumber", "<=");
-        $this->setCondition($statement, $transformed["deathsNumber"], "deathsNumber", "<=");
-        $this->setCondition($statement, $transformed["woundNumber"], "woundNumber", "<=");
+        $this->setCondition($statement, $transformed["terrCount"], "terrCount", "<=");
+        $this->setCondition($statement, $transformed["killsCount"], "killsCount", "<=");
+        $this->setCondition($statement, $transformed["woundedCount"],"woundedCount", "<=");
 
         $this->setCondition($statement, $transformed["success"], "success", "=");
-        $this->setCondition($statement, $transformed["region"], "region", "=");
-        $this->setCondition($statement, $transformed["country"], "country", "=");
-        $this->setCondition($statement, $transformed["knownAttacker"], "knownAttacker", "=");
+        if (array_key_exists("region", $transformed))
+            $this->setConditionStr($statement, $transformed["region"], "region", "=");
+        if (array_key_exists("country", $transformed))
+            $this->setConditionStr($statement, $transformed["country"], "country", "=");
+
+        $statement = $statement . ";";
 
     }
 
 
 
     private function setCondition(&$statement, $value, $str, $op){
-        $statement = $statement . "AND $str $op $value";
+        $statement = $statement . "AND $str $op $value ";
+    }
+    private function setConditionStr(&$statement, $value, $str, $op){
+        $statement = $statement . "AND $str $op '$value' ";
     }
 
-    private function statementArray(&$statement, $array){
-        $str = "AND $array IN (";
+    private function statementArray(&$statement, $array, $name){
+        $str = "AND $name IN (";
 
         foreach($array as $elem){
             $str = $str + $elem + ",";

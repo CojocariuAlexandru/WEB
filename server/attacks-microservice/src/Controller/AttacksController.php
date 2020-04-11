@@ -51,28 +51,34 @@ class AttacksController
 
         $this->getStartDate($decoded, $transformed);
         $this->getEndDate($decoded, $transformed);
-        $this->setArrays($decoded, $transformed, "weaponsUsed");
-        $this->setArrays($decoded, $transformed, "attacksUsed");
-        $this->setArrays($decoded, $transformed, "targets");
-        $this->setValue($decoded, $transformed, "terroristNumber");
-        $this->setValue($decoded, $transformed, "deathsNumber");
-        $this->setValue($decoded, $transformed, "woundNumber");
-        $this->setValue($decoded, $transformed, "success");
-        $this->setValue($decoded, $transformed, "knownAttacker");
+        $this->setArrays($decoded, $transformed, "weaponType");
+        $this->setArrays($decoded, $transformed, "attackType");
+        $this->setArrays($decoded, $transformed, "targType");
+        $this->setValue($decoded, $transformed, "terrCount");
+        $this->setValue($decoded, $transformed, "killsCount");
+        $this->setValue($decoded, $transformed, "woundedCount");
+        $this->setValueBool($decoded, $transformed, "success");
+        $this->setValueBool($decoded, $transformed, "knownAttacker");
         $this->setIfExists($decoded, $transformed, "region");
         $this->setIfExists($decoded, $transformed, "country");
 
 
 
         $result = $this->attacksGateway->getStatistics($transformed);
+        print_r($result);
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
-        $response['body']=json_encode($transformed);
-        print_r($response['body']);
+        $response['body']=json_encode($result);
         return $response;
     }
     private function setIfExists($decoded, &$transformed, $name){
         if ($decoded[$name]!="")
             $transformed[$name]=$decoded[$name];
+    }
+    private function setValueBool($decoded, &$transformed, $name){
+        if ($decoded[$name]=="true")
+            $transformed[$name]="1";
+        else 
+            $transformed[$name]="0";
     }
     
     private function setValue($decoded, &$transformed, $name){
