@@ -34,7 +34,7 @@ class AttacksController
             case 'POST':
                 $rawData = file_get_contents("php://input");
                 $decoded = json_decode($rawData, true);
-                $response = $this->getGoodAttacks($decoded);
+                 $response = $this->getGoodAttacks($decoded);
         }
         if (isset($response['status_code_header'])) {
             header($response['status_code_header']);
@@ -63,9 +63,8 @@ class AttacksController
         $this->setIfExists($decoded, $transformed, "country");
 
 
-
         $result = $this->attacksGateway->getStatistics($transformed);
-        print_r($result);
+       // print_r($result);
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body']=json_encode($result);
         return $response;
@@ -103,17 +102,12 @@ class AttacksController
 
     private function setArrays($decoded, &$transformed, $name){
         $i=0;
-      //  $transformed[$name]=[];
         $exploded = explode(",", $decoded[$name]);
         foreach ($exploded as $value){
             $transformed[$name][$i]=$value;
             $i++;
         }
     }
-
-
-
-
 
 
 

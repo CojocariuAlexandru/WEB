@@ -1,6 +1,8 @@
 function statisticsResultsPageInit(node) {
     mainContent.innerHTML = loadPage(node.template);
 
+    console.log(parsed1);
+
     addPiechart();
     addPiechart2();
     addPiechart3();
@@ -76,12 +78,14 @@ function addPiechart3() {
     google.charts.setOnLoadCallback(drawChart);
 
     function drawChart() {
-        var data = google.visualization.arrayToDataTable([
+        var data = google.visualization.arrayToDataTable(
+        [
             ['Task', 'Hours per Day'],
             ['Trump', 6],
             ['America', 10],
             ['Unknown', 10]
-        ]);
+        ]
+        );
         var options = {
             // 'title' : 'Most used attack',
             'fontSize': 10,

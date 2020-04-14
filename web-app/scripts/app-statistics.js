@@ -9,6 +9,8 @@ function statisticsPageInit(node) {
   sliderFunction()
 }
 
+var parsed1;
+
 function sendStatisticsRequest() {
     let weaponList = ['Biological', 'Chemical', 'Vehicles', 'Explosives', 'Firearms', 'Weapon6', 'Weapon7', 'Unknown'];
     let attackList = ['Attack1', 'Attack2', 'Attack3', 'Attack4', 'Attack5', 'Attack6', 'Attack7', 'Attack8'];
@@ -84,12 +86,20 @@ function sendStatisticsRequest() {
         knownAttacker:   `${knownInput.checked}`
     };
 
-    let xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "http://localhost:8001/api/attacks", true);
-    xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.send(JSON.stringify(filters));
+    filters = JSON.stringify(filters);
 
-    navigateRoot('/statistics-results');
+
+    httpPOST("http://localhost:8001/api/attacks", filters, (result) => { 
+      // console.log(result.res);
+      parsed1 = JSON.parse(result.res);
+      // console.log(parsed);
+      navigateRoot('/statistics-results');
+
+      // aici se scrie cod in caz de raspuns 200
+     }, (eroare) => { 
+       // aici se scrie cod in caz de eroare
+       } );
+
 
 }
 

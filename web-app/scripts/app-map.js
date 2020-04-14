@@ -1,3 +1,5 @@
+
+
 function mapPageInit(node) {
     mainContent.innerHTML = loadPage(node.template);
 

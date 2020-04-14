@@ -46,10 +46,10 @@ class AttacksGateway
         $statement = "
             SELECT *
             FROM attacks WHERE ";
-
+        
         $this->prepareStatement($statement, $transformed);
 
-        echo $statement;
+        // echo $statement;
 
         try {
             $statement = $this->db->query($statement);
@@ -65,11 +65,11 @@ class AttacksGateway
         if ($transformed["finalDate"]=="sysdate")
         $statement = $statement . " AND date <= sysdate() ";
         else
-            $statement = $statement . " AND date <= STR_TO_DATE('" . $transformed["finalDate"] . "', 'YYYY-MM-DD') ";
+            $statement = $statement . " AND date <= STR_TO_DATE('" . $transformed["finalDate"] . "', '%Y-%m-%d') ";
 
-        $this->statementArray($statement, $transformed["weaponType"], "weaponType");
-        $this->statementArray($statement, $transformed["attackType"], "attackType");
-        $this->statementArray($statement, $transformed["targType"], "targType");
+        // $this->statementArray($statement, $transformed["weaponType"], "weaponType");
+        // $this->statementArray($statement, $transformed["attackType"], "attackType");
+        // $this->statementArray($statement, $transformed["targType"], "targType");
 
         $this->setCondition($statement, $transformed["terrCount"], "terrCount", "<=");
         $this->setCondition($statement, $transformed["killsCount"], "killsCount", "<=");
@@ -81,7 +81,7 @@ class AttacksGateway
         if (array_key_exists("country", $transformed))
             $this->setConditionStr($statement, $transformed["country"], "country", "=");
 
-        $statement = $statement . ";";
+        $statement = $statement . "LIMIT 10;";
 
     }
 
@@ -95,13 +95,14 @@ class AttacksGateway
     }
 
     private function statementArray(&$statement, $array, $name){
-        $str = "AND $name IN (";
+        $str = " AND $name IN (";
 
         foreach($array as $elem){
-            $str = $str + $elem + ",";
+            $str = $str . "'" . $elem .  "',";
         }
 
-        $str = $str +$array[0]+")";
+        $str = $str . "'" . $array[0]."') ";
+        $statement = $statement . $str;
     }
 
 
