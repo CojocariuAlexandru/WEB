@@ -16,34 +16,60 @@ function generateRecords() {
     httpGET("http://localhost:8001/api/attacks",
         (result) => {
             parsed = JSON.parse(result.res);
-            displayRecords(1);
+            window.addEventListener('resize', showRecordsByWidth);
+            displayRecords(1, window.innerWidth);
         }, (error) => {
             console.log(error);
         }
     );
 }
 
-function displayRecords(pageNumber) {
+function showRecordsByWidth(){
+    displayRecords(1, window.innerWidth);
+}
+
+function displayRecords(pageNumber, windowWidth) {
     let table = document.getElementById('attacksTable');
     table.innerHTML = ``;
 
     let particularRecord = document.createElement('tr');
     particularRecord.setAttribute('class', 'headingRecordList');
-    particularRecord.innerHTML = `
-                                        <th class='attackID'>ID</th> 
-                                        <th class='locationID'>Location</th> 
-                                        <th class='dateID'>Date</th>
-                                `;
+
+    if(windowWidth >= 1000){
+        particularRecord.innerHTML = `
+                                            <th id='attackID' class='tableCellDataID'>ID</th> 
+                                            <th id='locationID' class='tableCellDataAttack'>Location</th> 
+                                            <th id='dateID' class='tableCellData'>Date</th>
+                                            <th id='attackType' class='tableCellData'>Attack Type</th>
+                                            <th id='targetType' class='tableCellData'>Target Type</th>
+                                    `;
+        }
+        else{
+            particularRecord.innerHTML = `<th class='attackInformation'>Attacks information</th> `
+        }
     table.appendChild(particularRecord);
 
     for (let i = (pageNumber - 1) * numberPerPage; i < pageNumber * numberPerPage && i < parsed.length; i++) {
         particularRecord = document.createElement('tr');
         particularRecord.setAttribute('class', 'particularRecord');
-        particularRecord.innerHTML = `
-                            <td class='attackID'>${parsed[i].id}</td>
-                            <td class='locationID'>${parsed[i].country}, ${parsed[i].region} </td>
-                            <td class='dateID'>YYYY/MM/DD</td>
-                            `;
+        if(windowWidth >= 1000){
+            particularRecord.innerHTML = `
+                                <td id='attackID' class='tableCellDataID'>${parsed[i].id}</td>
+                                <td id='locationID' class='tableCellDataAttack'>${parsed[i].country}, ${parsed[i].region} </td>
+                                <td id='dateID' class='tableCellData'>YYYY/MM/DD</td>
+                                <td id='attackType' class='tableCellData'>Attack Type</td>
+                                <td id='targetType' class='tableCellData'>Target Type</td>
+                                `;
+            }
+            else{
+                particularRecord.innerHTML = `<td class='attackInformation'>
+                                                <p>ID: ${parsed[i].id}</p>
+                                                <p>Location: ${parsed[i].country}, ${parsed[i].region}</p>
+                                                <p>Date: data</p>
+                                                <p>Target type: </p>
+                                                <p>Attack type: </p>
+                                            </td>`
+            }
         if (i % 2 == 1) {
             particularRecord.style.backgroundColor = '#222831';
         }
