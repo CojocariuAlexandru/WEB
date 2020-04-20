@@ -1,6 +1,5 @@
 function statisticsDrawingsPageInit(node) {
     mainContent.innerHTML = loadPage(node.template);
-
     generateRecords();
 }
 

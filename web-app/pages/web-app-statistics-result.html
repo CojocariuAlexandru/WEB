@@ -25,15 +25,15 @@
     <div class="values">
         <div class="container-values">
             <ul>
-                <li>10/10/2020</li>
-                <li>11/10/2020</li>
-                <li>Region</li>
-                <li>Country</li>
-                <li>100</li>
-                <li>1000</li>
-                <li>100</li>
-                <li>Attack type</li>
-                <li>Target type</li>
+                <li>{{ateStart}}</li>
+                <li>{{dateFinal}}</li>
+                <li>{{region}}</li>
+                <li>{{country}}</li>
+                <li>{{terrCount}}</li>
+                <li>{{killsCount}}</li>
+                <li>{{woundedCount}}</li>
+                <li>{{attackType}}</li>
+                <li>{{targType}}</li>
                 <li>Weapon type</li>
                 <li>10000000$</li>
                 <li>YES</li>
@@ -42,7 +42,7 @@
 
         </div>
     </div>
-    <div class="details-1">
+    <div class="details-1" id="countriesList">
         <h3>Most frequently attacked</h3>
         <ul>
             <li>Romania</li>
@@ -85,7 +85,7 @@
     </div>
     
     <div class="pie-2"></div>
-    <div class="details-2">
+    <div class="details-2" id="attacksList">
         <h3>Most frequently used attack</h3>
         <ul>
             <li>Type1</li>
@@ -94,7 +94,7 @@
         </ul>
     </div>
     <div class="pie-3"></div>
-    <div class="details-3">
+    <div class="details-3" id="targetsList">
         <h3>Most frequently targets</h3>
         <ul>
             <li>Trump</li>

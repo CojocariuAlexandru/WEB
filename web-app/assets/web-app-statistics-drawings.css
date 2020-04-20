@@ -166,6 +166,7 @@ input#searchText {
             "attackTypeForm attackTypeForm targetTypeForm targetTypeForm"
             "weaponTypeForm weaponTypeForm damageForm damageForm"
             "regionForm regionForm countryForm countryForm"
+            "cityForm cityForm cityForm cityForm"
             "fourthRow fourthRow fourthRow fourthRow"
             "submitForm submitForm submitForm submitForm";
     }
@@ -219,6 +220,7 @@ input#searchText {
             "damageForm"
             "regionForm"
             "countryForm"
+            "cityForm"
             "fourthRow"
             "submitForm";
         box-sizing: border-box;

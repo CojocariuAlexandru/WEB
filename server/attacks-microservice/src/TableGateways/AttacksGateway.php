@@ -81,7 +81,7 @@ class AttacksGateway
         if (array_key_exists("country", $transformed))
             $this->setConditionStr($statement, $transformed["country"], "country", "=");
 
-        $statement = $statement . "LIMIT 10;";
+        $statement = $statement . "LIMIT 100;";
 
     }
 
