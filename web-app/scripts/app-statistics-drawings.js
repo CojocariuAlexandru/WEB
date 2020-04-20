@@ -1,3 +1,10 @@
+var setIdCriteria=-1;
+var setLocationCriteria=-1;
+var setDateCriteria=-1;
+var setTargetTypeCriteria=-1;
+var setAttackTypeCriteria=-1;
+var currentPageNumber = 1;
+
 function statisticsDrawingsPageInit(node) {
     mainContent.innerHTML = loadPage(node.template);
 
@@ -16,6 +23,7 @@ function generateRecords() {
     httpGET("http://localhost:8001/api/attacks",
         (result) => {
             parsed = JSON.parse(result.res);
+            console.log(parsed);
             window.addEventListener('resize', showRecordsByWidth);
             displayRecords(1, window.innerWidth);
             showProperPlaceHolderAdvancedText(window.innerWidth);
@@ -27,7 +35,7 @@ function generateRecords() {
 
 function showRecordsByWidth(){
     showProperPlaceHolderAdvancedText(window.innerWidth);
-    displayRecords(1, window.innerWidth);
+    displayRecords(currentPageNumber, window.innerWidth);
 }
 
 function showProperPlaceHolderAdvancedText(windowWidth){
@@ -41,6 +49,7 @@ function showProperPlaceHolderAdvancedText(windowWidth){
 }
 
 function displayRecords(pageNumber, windowWidth) {
+    console.log(currentPageNumber);
     let table = document.getElementById('attacksTable');
     table.innerHTML = ``;
 
@@ -49,11 +58,11 @@ function displayRecords(pageNumber, windowWidth) {
 
     if(windowWidth >= 1000){
         particularRecord.innerHTML = `
-                                            <th id='attackID' class='tableCellDataID'>ID</th> 
-                                            <th id='locationID' class='tableCellDataAttack'>Location</th> 
-                                            <th id='dateID' class='tableCellData'>Date</th>
-                                            <th id='attackType' class='tableCellData'>Attack Type</th>
-                                            <th id='targetType' class='tableCellData'>Target Type</th>
+                                            <th id='attackIDHeader' class='tableCellDataID' onclick='sortByID()'>ID &#x21C5</th> 
+                                            <th id='locationIDHeader' class='tableCellDataAttack' onclick='sortByLocation()'>Location &#x21C5</th> 
+                                            <th id='dateIDHeader' class='tableCellData'>Date &#x21C5</th>
+                                            <th id='attackTypeHeader' class='tableCellData'>Attack Type &#x21C5</th>
+                                            <th id='targetTypeHeader' class='tableCellData'>Target Type &#x21C5</th>
                                     `;
         }
         else{
@@ -104,17 +113,126 @@ function generateOtherLists(pageNumber) {
     if (pageNumber == 1) {
         listText = listText + `1`;
         if (pageNumber * numberPerPage < parsed.length) {
-            listText = listText + `,<span class="changePage" onclick="displayRecords(2)">2</span> >>`;
+            listText = listText + `,<span class="changePage" onclick="increasePageNumber();showRecordsByWidth()">2</span> >>`;
         }
     } else if (pageNumber * numberPerPage >= parsed.length) {
         listText = listText + `<< `;
-        listText = listText + `<span class="changePage" onclick="displayRecords(${pageNumber-1})">${pageNumber-1}, </span>`;
+        listText = listText + `<span class="changePage" onclick="reducePageNumber();showRecordsByWidth()">${pageNumber-1}, </span>`;
         listText = listText + `${pageNumber}`;
     } else {
-        listText = listText + `<< <span class="changePage" onclick="displayRecords(${pageNumber-1})">${pageNumber-1}, </span>`;
+        listText = listText + `<< <span class="changePage" onclick="reducePageNumber();showRecordsByWidth()">${pageNumber-1}, </span>`;
         listText = listText + `${pageNumber}, `;
-        listText = listText + `<span class="changePage" onclick="displayRecords(${pageNumber+1})">${pageNumber+1} </span> >>`;
+        listText = listText + `<span class="changePage" onclick="increasePageNumber();showRecordsByWidth()">${pageNumber+1} </span> >>`;
     }
     otherAttackList.innerHTML = listText;
     attackListHead.appendChild(otherAttackList);
+}
+
+
+function sortByID(){
+    if(setIdCriteria == 1){
+        parsed.sort(sortIdCriteriaAscending);
+        setIdCriteria = -1;
+    }
+    else{
+        parsed.sort(sortIdCriteriaDescending)
+        setIdCriteria = 1;
+    }
+    displayRecords(1, window.innerWidth);
+}
+
+function sortIdCriteriaAscending(a, b){
+    let valA = parseInt(a.id);
+    let valB = parseInt(b.id);
+    if(valA > valB){
+        return 1;
+    }
+    else if(valB > valA){
+        return -1;
+    }
+    else{
+        return 0;
+    }
+}
+
+function sortIdCriteriaDescending(a, b){
+    let valA = parseInt(a.id);
+    let valB = parseInt(b.id);
+    if(valA > valB){
+        return -1;
+    }
+    else if(valB > valA){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
+function sortByLocation(){
+    if(setLocationCriteria == 1){
+        parsed.sort(sortLocationCriteriaAscending);
+        setLocationCriteria = -1;
+    }
+    else{
+        parsed.sort(sortLocationCriteriaDescending)
+        setLocationCriteria = 1;
+    }
+    displayRecords(1, window.innerWidth);
+}
+
+function sortLocationCriteriaAscending(a, b){
+    valA = a.country; 
+    valB = b.country;
+    if(valA > valB){
+        return 1;
+    }
+    else if(valB > valA){
+        return -1;
+    }
+    else{
+        valA = a.region;
+        valB = b.region;
+        if(valA > valB){
+            return 1;
+        }
+        else if(valB > valA){
+            return -1;
+        }
+        else{
+            return 0;
+        }
+    }
+}
+
+function sortLocationCriteriaDescending(a, b){
+    valA = a.country; 
+    valB = b.country;
+    if(valA > valB){
+        return -1;
+    }
+    else if(valB > valA){
+        return 1;
+    }
+    else{
+        valA = a.region;
+        valB = b.region;
+        if(valA > valB){
+            return -1;
+        }
+        else if(valB > valA){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
+}
+
+function reducePageNumber(){
+    currentPageNumber = currentPageNumber - 1;
+}
+
+function increasePageNumber(){
+    currentPageNumber = currentPageNumber + 1;
 }

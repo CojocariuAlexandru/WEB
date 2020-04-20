@@ -84,12 +84,8 @@ div.recordList {
     display: table-row;
 }
 
-#dateID,
-#locationID,
-#attackID,
-#attackType,
-#targetType {
-    align-items: center;
+#attacksTable > .headingRecordList > th{
+    cursor: pointer;
 }
 
 #locationID{

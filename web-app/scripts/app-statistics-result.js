@@ -1,6 +1,5 @@
 function statisticsResultsPageInit(node) {
     mainContent.innerHTML = loadPage(node.template);
-
     addPiechart();
     addPiechart2();
     addPiechart3();
