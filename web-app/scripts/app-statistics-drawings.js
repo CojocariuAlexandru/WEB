@@ -18,6 +18,7 @@ function generateRecords() {
             parsed = JSON.parse(result.res);
             window.addEventListener('resize', showRecordsByWidth);
             displayRecords(1, window.innerWidth);
+            showProperPlaceHolderAdvancedText(window.innerWidth);
         }, (error) => {
             console.log(error);
         }
@@ -25,7 +26,18 @@ function generateRecords() {
 }
 
 function showRecordsByWidth(){
+    showProperPlaceHolderAdvancedText(window.innerWidth);
     displayRecords(1, window.innerWidth);
+}
+
+function showProperPlaceHolderAdvancedText(windowWidth){
+    let advancedSearch = document.querySelector('#searchText');
+    if(windowWidth >= 600){
+        advancedSearch.setAttribute('placeholder', 'Search attack by ID');
+    }
+    else{
+        advancedSearch.setAttribute('placeholder', 'Search by ID');
+    }
 }
 
 function displayRecords(pageNumber, windowWidth) {
@@ -62,13 +74,16 @@ function displayRecords(pageNumber, windowWidth) {
                                 `;
             }
             else{
-                particularRecord.innerHTML = `<td class='attackInformation'>
-                                                <p>ID: ${parsed[i].id}</p>
-                                                <p>Location: ${parsed[i].country}, ${parsed[i].region}</p>
-                                                <p>Date: data</p>
-                                                <p>Target type: </p>
-                                                <p>Attack type: </p>
-                                            </td>`
+                particularRecord.innerHTML = 
+                `
+                <td class='attackInformation'>
+                    <p><span class='smallScreenHeader'>ID:         </span> ${parsed[i].id}                          </p>
+                    <p><span class='smallScreenHeader'>Location:   </span> ${parsed[i].country}, ${parsed[i].region}</p>
+                    <p><span class='smallScreenHeader'>Date:       </span>                                          </p>
+                    <p><span class='smallScreenHeader'>Target type:</span>                                          </p>
+                    <p><span class='smallScreenHeader'>Attack type:</span>                                          </p>
+                </td>
+                `
             }
         if (i % 2 == 1) {
             particularRecord.style.backgroundColor = '#222831';

@@ -6,6 +6,10 @@
     #searchText{
         margin-bottom: 10px;
     }
+    #plusSearch{
+        margin-right: 10px;
+        margin-left: 6px;
+    }
 }
 @media only screen and (min-width: 1000px){
     #searchText{
@@ -14,6 +18,9 @@
     .sortList{
         height: 90px;
     }
+    #plusSearch {
+        margin-right: 30px;
+     }
 }
 
 .listOfAttacks {
@@ -111,8 +118,11 @@ div.recordList {
 
 .attackInformation{
     width: 100%;
-    text-align: center;
     align-items: center;
+}
+
+.smallScreenHeader{
+    font-weight: bold;
 }
 
 
@@ -128,7 +138,6 @@ div.recordList {
     background-color: #393e46;
     margin: 0 50px 40px 50px;
     border-radius: 16px;
-    ;
     padding: 10px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     align-items: center;
@@ -145,6 +154,7 @@ div.recordList {
 input#searchText {
     padding: 0 30px;
     color: #065e61;
+    width: 100%;
 }
 
 #advancedSearch {
@@ -157,6 +167,8 @@ input#searchText {
     align-items: center;
     margin: 0 20px;
     cursor: pointer;
+    align-items: center;
+    align-self: center;
 
     transition: all .2s;
 }
@@ -172,14 +184,11 @@ input#searchText {
     position: relative;
 }
 
-#plusSearch {
-    margin-right: 30px;
-    margin-left: 30px;
-}
-
 #advancedSearchText {
     color: #eee;
-    font-size: 22px;
+    width: 100%;
+    text-align: center;
+    margin-right: 6px;
 }
 
 
