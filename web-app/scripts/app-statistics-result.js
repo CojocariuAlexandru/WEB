@@ -80,7 +80,8 @@ function statisticsResultsPageInit(node) {
 
     resultFilters = getFilters();
 
-    mainContent.innerHTML = loadPage(node.template);
+    let compiledTemplate = Handlebars.compile(loadPage(node.template));
+    mainContent.innerHTML = compiledTemplate(resultFilters);
 
     console.log(parsed1);
 
