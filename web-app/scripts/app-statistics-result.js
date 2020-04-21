@@ -48,21 +48,21 @@ function getFilters(){
 
 }
 
-function constructParagraf(countries, name, title){
-    // let elem = document.getElementById(name);
+function constructParagraf(countries, name, title, exclude){
     let elem = document.querySelector(name);
     elem.innerHTML=``;
-    // let elem = document.getElementById("countriesList");
-
+    
     let header = document.createElement('h3');
     header.innerHTML = title;
     elem.appendChild(header);
 
     let list = document.createElement('ul');
     for (country in countries){
-        let el = document.createElement('li');
-        el.innerHTML = countries[country][0];
-        list.appendChild(el);
+        if (countries[country][0]!=exclude){
+            let el = document.createElement('li');
+            el.innerHTML = countries[country][0];
+            list.appendChild(el);
+        }
     }
 
     elem.appendChild(list);
@@ -74,7 +74,7 @@ function statisticsResultsPageInit(node) {
     sort(countries);
     attackTypes = getData('AttackType', 'Most frequently attackTypes', "attackType");
     sort(attackTypes);
-    targTypes = getData('TargetType', 'Most frequently targetTyes', "targType");
+    targTypes = getData('TargetType', 'Most frequently types of target', "targType");
     sort(targTypes);
     datesAppearing = getData('date', 'Most frequent dates', 'date');
     sort(datesAppearing);
@@ -91,9 +91,9 @@ function statisticsResultsPageInit(node) {
     addPiechart3();
     addColumnChart();
 
-    constructParagraf(countries, ".details-1", "Most frequently attacked");
-    constructParagraf(attackTypes, ".details-2", "Most frequently attackTypes");
-    constructParagraf(targTypes, ".details-3", "Most frequently targetTyes");
+    constructParagraf(countries, ".details-1", "Most frequently attacked", "Country");
+    constructParagraf(attackTypes, ".details-2", "Most frequently attackTypes", "AttackType");
+    constructParagraf(targTypes, ".details-3", "Most frequently targetTyes", "TargetType");
     
 
 }

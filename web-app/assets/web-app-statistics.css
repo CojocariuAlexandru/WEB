@@ -9,6 +9,8 @@
         " weaponTypeForm weaponTypeForm damageForm damageForm"
         "regionForm regionForm countryForm countryForm"
         "cityForm cityForm cityForm cityForm"
+        "targTypeSelect targTypeSelect targSubtypeSelect targSubtypeSelect"
+        "weaponTypeSelect weaponTypeSelect weaponSubtypeSelect weaponSubtypeSelect"
         "fourthRow fourthRow fourthRow fourthRow"
         "submitForm submitForm submitForm submitForm";
     box-sizing: border-box;
@@ -17,7 +19,6 @@
     padding: 20px;
     font-size: 20px;
     width: 100%;
-
 
     overflow-y: scroll;
 }
@@ -61,6 +62,10 @@ input.dataForm1,
 .weaponTypeForm,
 .targetTypeForm,
 .attackTypeForm,
+.targTypeSelect,
+.targSubtypeSelect,
+.weaponTypeSelect,
+.weaponSubtypeSelect,
 .damageForm,
 .knownForm,
 .successForm,
@@ -269,6 +274,10 @@ input.dataForm1,
 .damageForm h3,
 .regionForm h3,
 .cityForm h3,
+.targTypeSelect h3,
+.targSubtypeSelect h3,
+.weaponTypeSelect h3,
+.weaponSubtypeSelect h3,
 .countryForm h3 {
     color: #eee;
     font-size: 22px;
@@ -304,11 +313,35 @@ input.dataForm1,
     grid-area: targetTypeForm;
 }
 
+.targTypeSelect{
+    grid-area: targTypeSelect;
+}
+.targSubtypeSelect{
+    grid-area: targSubtypeSelect;
+}
+.weaponTypeSelect{
+    grid-area: weaponTypeSelect;
+}
+.weaponSubtypeSelect{
+    grid-area: weaponSubtypeSelect;
+
+}
+
 /* FOURTH ROW */
-.fourthRow {
-    grid-area: fourthRow;
+.fourthRow ,
+.regionForm,
+.countryForm,
+.cityForm,
+.targTypeSelect,
+.targSubtypeSelect,
+.weaponTypeSelect,
+.weaponSubtypeSelect{
     margin-left: 10px;
     margin-right: 10px;
+}
+
+.fourthRow {
+    grid-area: fourthRow;
 }
 
 .fourthRow div {
@@ -327,20 +360,14 @@ input.dataForm1,
 /* REGION FORM */
 .regionForm {
     grid-area: regionForm;
-    margin-left: 10px;
-    margin-right: 10px;
 }
 
 /* COUNTRY FORM */
 .countryForm {
     grid-area: countryForm;
-    margin-left: 10px;
-    margin-right: 10px;
 }
 .cityForm{
     grid-area: cityForm;
-    margin-left: 10px;
-    margin-right: 10px;
 }
 
 /* SUBMIT FORM */

@@ -1,3 +1,37 @@
+var weaponSubtypes ={
+  'Biological' : [""],
+  'Chemical' : [ "","Explosive","Poisoning"],
+  'Explosives' : [ "","Dynamite/TNT","Grenade","Landmine","Letter Bomb","Other Explosive Type","Pipe Bomb","Pressure Trigger","Projectile (rockets, mortars, RPGs, etc.)","Remote Trigger","Sticky Bomb","Suicide (carried bodily by human being)","Time Fuse","Unknown Explosive Type","Unknown Gun Type","Vehicle"],
+  'Fake Weapons' : [ ""],
+  'Firearms' : [ "","Automatic or Semi-Automatic Rifle","Handgun","Other Gun Type"]
+};
+
+var targetSubtypes = {
+'Abortion Related' : [ "Clinics","Personnel"],
+'Airports & Aircraft' : [ "","Aircraft (not at an airport)","Airline Officer/Personnel","Airport"],
+'Business' : [ "","Bank/Commerce","Construction","Entertainment/Cultural/Stadium/Casino","Farm/Ranch","Gas/Oil/Electric","Hotel/Resort","Industrial/Textiles/Factory","Legal Services","Medical/Pharmaceutical","Mining","Multinational Corporation","Oil Tanker","Private Security Company/Firm","Restaurant/Bar/Café","Retail/Grocery/Bakery"],
+'Educational Institution' : [ "","Other Personnel","School/University/Educational Building","Teacher/Professor/Instructor"],
+'Food or Water Supply' : [ "Food Supply","Water Supply"],
+'Government (Diplomatic)' : [ "","Diplomatic Personnel (outside of embassy, consulat...","Embassy/Consulate","International Organization (peacekeeper, aid agenc..."],
+'Government (General)' : [ "","Election-related","Government Building/Facility/Office","Government Personnel (excluding police, military)","Head of State","Intelligence","Judge/Attorney/Court","Medical/Pharmaceutical","Named Civilian","Politician or Political Party Movement/Meeting/Ral...","Private Security Company/Firm","Royalty"],
+'Journalists & Media' : [ "","Newspaper Journalist/Staff/Facility","Other (including online news agencies)","Radio Journalist/Staff/Facility","Television Journalist/Staff/Facility"],
+'Maritime' : [ "","Civilian Maritime","Commercial Maritime","Oil Tanker","Port"],
+'Military' : [ "","Alleged Informant","Military Aircraft","Military Barracks/Base/Headquarters/Checkpost","Military Checkpoint","Military Maritime","Military Personnel (soldiers, troops, officers, fo...","Military Recruiting Station/Academy","Military Transportation/Vehicle (excluding convoys...","Military Unit/Patrol/Convoy","Military Weaponry","NATO","Non-combatant Personnel","Paramilitary"],
+'NGO' : [ "","Domestic NGO","International NGO"],
+'Other' : [ "","Ambulance","Demilitarized Zone (including Green Zone)","Fire Fighter/Truck"],
+'Police' : [ "","Alleged Informant","Police Building (headquarters, station, school)","Police Checkpoint","Police Patrol (including vehicles and convoys)","Police Security Forces/Officers","Prison/Jail"],
+'Private Citizens & Property' : [ "","Alleged Informant","Farmer","House/Apartment/Residence","Labor Union Related","Laborer (General)/Occupation Identified","Marketplace/Plaza/Square","Memorial/Cemetery/Monument","Museum/Cultural Center/Cultural House","Named Civilian","Political Party Member/Rally","Procession/Gathering (funeral, wedding, birthday, ...","Protester","Public Area (garden, parking lot, garage, beach, p...","Race/Ethnicity Identified","Refugee (including Camps/IDP/Asylum Seekers)","Religion Identified","Student","Unnamed Civilian/Unspecified","Vehicles/Transportation","Village/City/Town/Suburb"],
+'Religious Figures/Institutions' : [ "","Affiliated Institution","Place of Worship","Religious Figure"],
+'Telecommunication' : [ "","Internet Infrastructure","Multiple Telecommunication Targets","Radio","Telephone/Telegraph","Television"],
+'Terrorists/Non-State Militia' : [ "","Alleged Informant","Non-State Militia","Terrorist"],
+'Tourists' : [ "Named Civilian","Other Facility","Tour Bus/Van","Tourism Travel Agency","Tourist"],
+'Transportation' : [ "","Bridge/Car Tunnel","Bus (excluding tourists)","Bus Station/Stop","Highway/Road/Toll/Traffic Signal","Subway","Taxi/Rickshaw","Train/Train Tracks/Trolley"],
+'Unknown' : [ ""],
+'Utilities' : [ "","Electricity","Gas","Oil"],
+'Violent Political Party' : [ "","Party Office/Facility","Party Official/Candidate/Other Personnel","Rally"]
+};
+
+
 var regions = {
     'Australasia & Oceania'	:{
       'Australia' : [ 'Adelaide','Bankstown','Bannockburn','Beechworth','Brighton','Brisbane','Broadbeach','Canberra','Coffs Harbour','Condell Park','Dandenong','Darwin','Fawkner','Gawler','Geelong','Hobart','Hobbys Yards','Joondalup','Kakudu National Park','Lakemba','Liverpool','Logan','Maitland','Melbourne','Minto','Norlane','Normahurst','Oberon','Orange','Paramatta','Parramatta','Perth','Queanbeyan','Rooty Hill','St. Kilda East','Sydney','Toowoomba','Townsville','Unknown','Vale View','Waitara','Warilla'],
