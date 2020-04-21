@@ -7,12 +7,12 @@ import mysql.connector
 
 import csv
 
-dbName = "TeVi"
-dbTableName = "Attacks"
-csvFileName = "data.csv"
-distinctValuesFile = 'distinct_values.txt'
+db_name = "TeVi"
+db_table_name = "Attacks"
+csv_file_name = "data.csv"
+distinct_values_file = 'distinct_values.txt'
 
-def getDbConnection(db):
+def get_db_connection(db):
     return mysql.connector.connect(
         host = "localhost",
         user = "root",
@@ -20,18 +20,18 @@ def getDbConnection(db):
         database = db
     )
 
-mydb = getDbConnection("")
+mydb = get_db_connection("")
 mycursor = mydb.cursor()
 
-mycursor.execute("DROP DATABASE IF EXISTS Tevi")
+mycursor.execute("DROP DATABASE IF EXISTS {}".format(db_name))
 
-mycursor.execute("CREATE DATABASE Tevi")
-print(f"\"{dbName}\" database created!")
+mycursor.execute("CREATE DATABASE {}".format(db_name))
+print(f"\"{db_name}\" database created!")
 
-mydb = getDbConnection(dbName)
+mydb = get_db_connection(db_name)
 mycursor = mydb.cursor()
 
-createTableQuery = """ CREATE TABLE {} (
+create_table_query = """ CREATE TABLE {} (
                         id INT AUTO_INCREMENT PRIMARY KEY,
                         date DATE,
                         extended BOOLEAN,
@@ -62,15 +62,15 @@ createTableQuery = """ CREATE TABLE {} (
                         addNotes VARCHAR(1940),
                         sCite1 VARCHAR(572),
                         sCite2 VARCHAR(572),
-                        sCite3 VARCHAR(550))""".format(dbTableName)
+                        sCite3 VARCHAR(550))""".format(db_table_name)
 
-mycursor.execute(createTableQuery)
-print(f"\"{dbTableName}\" table created!")
+mycursor.execute(create_table_query)
+print(f"\"{db_table_name}\" table created!")
 
 columns = {}
 
-if path.exists(csvFileName) == False:
-    print(f"\"{csvFileName}\" file not found!")
+if path.exists(csv_file_name) == False:
+    print(f"\"{csv_file_name}\" file not found!")
     exit(1)
 
 insert_attack_query = """ INSERT INTO attacks (
@@ -126,7 +126,7 @@ def process_float(row, col_name):
 def process_date(row, col_year_name, col_month_name, col_day_name):
     return row[col_year_name] + '-' + row[col_month_name] + '-' + row[col_day_name]
 
-with open(csvFileName, mode='r') as attacks_file:
+with open(csv_file_name, mode='r') as attacks_file:
     csv_reader = csv.DictReader(attacks_file)
     line_count = 0
     for row in csv_reader:
@@ -171,7 +171,7 @@ mydb.commit()
 
 columns_to_print_diff_values = ["region", "country", "attackType", "weaponType"]
 
-with open(distinctValuesFile, "w") as file:
+with open(distinct_values_file, "w") as file:
     for column in columns_to_print_diff_values:
         select_distincts_query = """SELECT DISTINCT {} FROM attacks""".format(column)
         
@@ -185,4 +185,4 @@ with open(distinctValuesFile, "w") as file:
         file.write(line_str)
         file.write('\n')
 
-print(f'Created file \"{distinctValuesFile}\"!')
+print(f'Created file \"{distinct_values_file}\"!')

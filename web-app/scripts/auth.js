@@ -83,13 +83,26 @@ function signUp() {
     if (pwd != rpwd) {
         console.log('The passwords don\'t match');
     } else {
-        signUpAddUser(username, pwd);
-        signUpClearFields();
-        switchLoginSignup();
+        signUpAddUser(username, pwd, () => {
+            signUpClearFields();
+            switchLoginSignup();
+        }, () => {
+            console.log("ERROR");
+        });
     }
 }
 
-function signUpAddUser(username, pwd) {
+function signUpAddUser(username, pwd, onSuccess, onError) {
+    let registerObj = {
+        username: username,
+        password: pwd
+    };
+    httpPOST('http://localhost:8002/api/register', JSON.stringify(registerObj), () => {
+        onSuccess();
+    }, () => {
+        onError();
+    });
+
     let users = JSON.parse(localStorage.getItem('users'));
     if (users == null) {
         users = [];
