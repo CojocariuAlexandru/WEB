@@ -4,6 +4,7 @@ var setDateCriteria=-1;
 var setTargetTypeCriteria=-1;
 var setAttackTypeCriteria=-1;
 var currentPageNumber = 1;
+var advancedFormOn = 0;
 
 function statisticsDrawingsPageInit(node) {
     mainContent.innerHTML = loadPage(node.template);
@@ -235,4 +236,41 @@ function reducePageNumber(){
 
 function increasePageNumber(){
     currentPageNumber = currentPageNumber + 1;
+}
+
+
+function showAdvancedForm(){
+    let listOfAttacksPage = document.querySelector('.listOfAttacks');
+    if(advancedFormOn == 0){
+
+        let advancedForm = document.createElement('div');
+        advancedForm.setAttribute('id', 'advancedForm');
+        advancedForm.innerHTML = 
+        `
+        <div id = 'searchCriteriaAdvancedForm'>
+            <p id='advancedID'>       ID          </p>
+            <p id='advancedLocation'> Location    </p>
+            <p id='advancedDate'>     Date        </p>
+            <p id='advancedAttack'>   Attack type </p>
+            <p id='advancedTarget'>   Target type </p>
+        </div>
+        <div id = 'searchCriteriaAdvancedInput'>
+            <input type='text' id='advancedIdInput'>
+            <input type='text' id='advancedLocationInput'>
+            <div id = 'advancedDateInput'>
+                <input class='dataForm1' type='date' id='dateInputStart'></input>
+                <span>-</span>
+                <input class='dataForm1' type='date' id='dateInputFinal'></input>
+            </div>
+            <input type='text' id='advancedAttackInput'>
+            <input type='text' id='advancedTargetInput'>
+        </div>
+        `;
+        listOfAttacksPage.insertBefore(advancedForm, listOfAttacksPage.children[2]);
+        advancedFormOn = 1;
+    }
+    else{
+        listOfAttacksPage.removeChild(listOfAttacksPage.children[2]);
+        advancedFormOn = 0;
+    }
 }

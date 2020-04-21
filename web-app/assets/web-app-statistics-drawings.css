@@ -194,6 +194,54 @@ input#searchText {
     z-index: 1;
 }
 
+/* ADVANCED SEARCH */
+#advancedForm, #advancedFormSmallScreen{
+    display: flex;
+    flex-direction: column;
+    margin: 0 50px;
+    margin-bottom: 50px;
+    padding: 6px;
+    border-radius: 20px;
+    background-color: #076064c9;
+    height: 120px;
+}
+
+#searchCriteriaAdvancedForm, #searchCriteriaAdvancedInput{
+    display: flex;
+    color : #eee;
+    font-size: 26px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+}
+
+
+#searchCriteriaAdvancedForm > p{
+    font-weight: bold;
+}
+#searchCriteriaAdvancedInput{
+    display:flex;
+}
+
+#searchCriteriaAdvancedInput > input[type = 'text']{
+    height:30px;
+    margin-right: 6px;
+}
+
+#advancedIdInput{
+    flex:1;
+}
+
+#advancedLocationInput, #advancedDateInput, #advancedTargetInput, #advancedAttackInput{
+    flex:2;
+}
+#advancedID{
+    flex:1;
+} 
+#advancedLocation, #advancedDate, #advancedTarget, #advancedAttack{
+    flex:2;
+}
+
+
 /* LIST OF RECORDS */
 
 .changePage {
