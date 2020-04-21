@@ -109,9 +109,9 @@ class AttacksGateway
     public function getPreview()
     {
         $statement = "
-            SELECT id, latitude, longitude, country, attack_type, kills_count, wounded_count 
+            SELECT id, latitude, longitude, country, attackType, killsCount, woundedCount 
             FROM attacks
-            ORDER BY kills_count DESC
+            ORDER BY killsCount DESC
             LIMIT 12;";
         try {
             $statement = $this->db->query($statement);
