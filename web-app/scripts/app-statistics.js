@@ -14,9 +14,9 @@ var parsed1;
 var filters;
 
 function sendStatisticsRequest() {
-    let weaponList = ['Biological', 'Chemical', 'Vehicles', 'Explosives', 'Firearms', 'Weapon6', 'Weapon7', 'Unknown'];
-    let attackList = ['Attack1', 'Attack2', 'Attack3', 'Attack4', 'Attack5', 'Attack6', 'Attack7', 'Attack8'];
-    let targetList = ['Target1', 'Target2', 'Target3', 'Target4', 'Target5', 'Target6', 'Target7', 'Target8'];
+    let weaponList = ['Biological', 'Chemical', 'Explosives', 'Fake Weapons', 'Firearms', 'Incendiary', 'Melee', 'Radiological', 'Sabotage Equipment', 'Vehicle', 'Unknown', 'Other'];
+    let attackList = ['Armed Assault', 'Assasination', 'Bombing', 'Facility Attack', 'Hijacking', 'Hostage Taking', 'Unarmed', 'Unknown'];
+    let targetList = ['Airports', 'Business', 'Educational institution', 'Government', 'Military', 'Police', 'Religious Figures', 'Other'];
 
 
     let dateStartInput       = document.querySelector('#dateInputStart');
@@ -113,7 +113,7 @@ function generateWeapons() {
 
   let weaponFormTitle = document.createElement('div')
   weaponFormTitle.id = 'weaponForm'
-  let weaponList = ['Biological', 'Chemical', 'Vehicles', 'Explosives', 'Firearms', 'Weapon6', 'Weapon7', 'Unknown']
+  let weaponList = ['Biological', 'Chemical', 'Explosives', 'Fake Weapons', 'Firearms', 'Incendiary', 'Melee', 'Radiological', 'Sabotage Equipment', 'Vehicle', 'Unknown', 'Other'];
   weaponFormTitle.innerHTML = ``
   let index = 0;
   for (index = 0; index < weaponList.length; index++)
@@ -130,7 +130,7 @@ function generateAttacks() {
 
   let weaponFormTitle = document.createElement('div')
   weaponFormTitle.id = 'attacksForm';
-  let weaponList = ['Attack1', 'Attack2', 'Attack3', 'Attack4', 'Attack5', 'Attack6', 'Attack7', 'Attack8']
+  let weaponList = ['Armed Assault', 'Assasination', 'Bombing', 'Facility Attack', 'Hijacking', 'Hostage Taking', 'Unarmed', 'Unknown'];
   weaponFormTitle.innerHTML = ``
   let index = 0;
   for (index = 0; index < weaponList.length; index++)
@@ -147,7 +147,7 @@ function generateTargets() {
 
   let weaponFormTitle = document.createElement('div')
   weaponFormTitle.id = 'targetForm';
-  let weaponList = ['Target1', 'Target2', 'Target3', 'Target4', 'Target5', 'Target6', 'Target7', 'Target8']
+  let weaponList = ['Airports', 'Business', 'Educational institution', 'Government', 'Military', 'Police', 'Religious Figures', 'Other'];
   weaponFormTitle.innerHTML = ``
   let index = 0;
   for (index = 0; index < weaponList.length; index++)

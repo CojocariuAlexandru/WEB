@@ -76,6 +76,8 @@ function statisticsResultsPageInit(node) {
     sort(attackTypes);
     targTypes = getData('TargetType', 'Most frequently targetTyes', "targType");
     sort(targTypes);
+    datesAppearing = getData('date', 'Most frequent dates', 'date');
+    sort(datesAppearing);
 
 
     resultFilters = getFilters();
