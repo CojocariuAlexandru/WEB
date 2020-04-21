@@ -1,19 +1,27 @@
 let attacksPageInput;
+let previewAttacks = null;
 
 function attacksPageInit(node) {
     mainContent.innerHTML = '';
 
-    httpGET("http://localhost:8001/api/attacks?preview=true", (response) => {
-        let attacks = JSON.parse(response.res);
+    if (previewAttacks == null) {
+        httpGET("http://localhost:8001/api/attacks?preview=true", (response) => {
+            previewAttacks = JSON.parse(response.res);
+            displayPreviewAttacks(node, previewAttacks);
+        }, (error) => {
+            console.log(error);
+        });
+    } else {
+        displayPreviewAttacks(node, previewAttacks);
+    }
+}
 
-        let compiledTemplate = Handlebars.compile(loadPage(node.template));
-        mainContent.innerHTML = compiledTemplate(attacks);
+function displayPreviewAttacks(node, attacks) {
+    let compiledTemplate = Handlebars.compile(loadPage(node.template));
+    mainContent.innerHTML = compiledTemplate(attacks);
 
-        initAttacksPageEvents();
-        // initMaps(attacks);
-    }, (error) => {
-        console.log(error);
-    });
+    initAttacksPageEvents();
+    // initMaps(attacks);
 }
 
 function initAttacksPageEvents() {
