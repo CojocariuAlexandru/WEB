@@ -10,6 +10,14 @@ async function getDbConnection() {
     });
 }
 
+async function getPasswordSalt(connection, username){
+    return (await connection.execute('SELECT password_salt FROM users WHERE username = ?', [username]))[0];
+}
+
+async function getPasswordFinalForm(connection, username){
+    return (await connection.execute('SELECT password FROM users WHERE username = ?', [username]))[0];
+}
+
 async function getUserByUsername(connection, username) {
     return (await connection.execute('SELECT * FROM users WHERE username = ?', [username]))[0];
 }
@@ -22,3 +30,5 @@ async function insertNewUser(connection, username, password, passwordSalt) {
 exports.getDbConnection = getDbConnection;
 exports.getUserByUsername = getUserByUsername;
 exports.insertNewUser = insertNewUser;
+exports.getPasswordSalt = getPasswordSalt;
+exports.getPasswordFinalForm = getPasswordFinalForm;

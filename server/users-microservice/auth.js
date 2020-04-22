@@ -1,6 +1,7 @@
 const config = require('./config');
 const crypto = require('crypto');
 const db = require('./db');
+var jwt = require('jsonwebtoken');
 
 async function handleRequest(req, res, body) {
     let goodRequest = false;
@@ -25,8 +26,49 @@ async function handleRequest(req, res, body) {
 }
 
 async function handleLogin(req, res, body) {
+    //Getting connection to database
+    let connectionToDB = await db.getDbConnection();
 
-    res.end();
+    //Verification input is valid
+    if (body.username === undefined || body.password === undefined) {
+        res.statusCode = 400;
+        res.end('You have to specify the username and the password of the user!');
+        return;
+    }
+
+    if (body.password.length < 6 || body.password.length > 64) {
+        res.statusCode = 400;
+        res.end('The password has to have at least 6 characters and at most 64 characters!');
+        return;
+    }
+
+    //Get the salt and final form after aplying the salt
+    let passwordSaltDB = await db.getPasswordSalt(connectionToDB, body.username);
+    let passwordFinalFormDB = await db.getPasswordFinalForm(connectionToDB, body.username);
+
+    //Make some processing
+    let passwordSalt = JSON.stringify(passwordSaltDB);
+    auxArray = passwordSalt.split("\"");
+    passwordSalt = auxArray[3];
+
+    let passwordFinalForm = JSON.stringify(passwordFinalFormDB);
+    auxArray = passwordFinalForm.split("\"");
+    passwordFinalForm = auxArray[3];
+
+    console.log(passwordSalt);
+    console.log(passwordFinalForm);    
+
+    let passwordFinalWithUserInput = sha512Password(body.password, passwordSalt).passwordHash;
+    console.log(passwordFinalWithUserInput);
+
+    if(passwordFinalWithUserInput.startsWith(passwordFinalForm) == true){
+        let token = jwt.sign(body, 'secret');
+        res.end(token);
+    }
+    else{
+        res.statusCode = 400;
+        res.end('Login unsuccessful');
+    }
 }
 
 async function handleRegister(req, res, body) {
@@ -67,6 +109,7 @@ function saltHashPassword(password) {
     let salt = getPasswordSalt(16);
     return sha512Password(password, salt);
 }
+
 
 function sha512Password(password, salt) {
     let hash = crypto.createHmac('sha512', salt);
