@@ -42,6 +42,14 @@ async function handleLogin(req, res, body) {
         return;
     }
 
+    //Check if a user with that name exists
+    let users = await db.getUserByUsername(connectionToDB, body.username);
+    if (users.length == 0) {
+        res.statusCode = 400;
+        res.end('No such user is registered.');
+        return;
+    }
+
     //Get the salt and final form after aplying the salt
     let passwordSaltDB = await db.getPasswordSalt(connectionToDB, body.username);
     let passwordFinalFormDB = await db.getPasswordFinalForm(connectionToDB, body.username);
