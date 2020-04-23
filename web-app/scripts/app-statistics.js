@@ -45,6 +45,14 @@ function sendStatisticsRequest() {
     let regionFormInput      = document.querySelector('#allRegionsInput');
     let countryFormInput     = document.querySelector('#allCountriesInput');
 
+    let cityFormInputMORE        = document.querySelector('#allCitiesInput');
+    let targetTypeFormInputMORE  = document.querySelector('#allTargetsInput');
+    let subTargetFormInputMORE   = document.querySelector('#allSubTargetsInput');
+    let weaponFormInputMORE      = document.querySelector('#allWeaponsInput');
+    let subWeaponFormInputMORE   = document.querySelector('#allSubWeaponsInput');
+    let targetNameFormInputMORE  = document.querySelector('#allTargetNamesInput');
+    let targetNatFormInputMORE   =document.querySelector('#allTargetNationalitiesInput');
+    let groupFormInputMORE       = document.querySelector('#allGroupsInput');
 
     let weaponsChecked = [];
     let attacksChecked = [];
@@ -83,6 +91,21 @@ function sendStatisticsRequest() {
       }
     }
 
+  let finalWeaponToSend;
+  if(weaponFormInputMORE.value){
+    finalWeaponToSend = `${weaponFormInputMORE.value}`;
+  }
+  else{
+    finalWeaponToSend = weaponsChecked;
+  }
+
+  let finalTargetToSend;
+  if(targetTypeFormInputMORE.value){
+    finalTargetToSend = `${targetTypeFormInputMORE.value}`;
+  }
+  else{
+    finalTargetToSend = targetsChecked;
+  }
 
   filters = {
         dateStart:       `${dateStartInput.value}`,
@@ -90,16 +113,22 @@ function sendStatisticsRequest() {
         terrCount: `${terroristNumberInput.value}`,
         killsCount:    `${deathsNumberInput.value}`,
         woundedCount:     `${woundedNumberInput.value}`,
-        weaponType:     `${weaponsChecked}`,
+        city: `${cityFormInputMORE.value}`,
+        weaponType:     `${finalWeaponToSend}`,
+        subWeaponType:  `${subWeaponFormInputMORE.value}`,
         attackType:     `${attacksChecked}`,
-        targType:          `${targetsChecked}`,
+        targType:          `${finalTargetToSend}`,
+        targSubtype:     `${subTargetFormInputMORE.value}`,
+        targName:        `${targetNameFormInputMORE.value}`,
+        targNation:      `${targetNatFormInputMORE.value}`,
+        groupName:       `${groupFormInputMORE.value}`,
         damages:         `${damagesChecked}`,
         region:          `${regionFormInput.value}`,
         country:         `${countryFormInput.value}`,
         success:         `${successInput.checked}`,
         knownAttacker:   `${knownInput.checked}`
     };
-
+    console.log(filters);
     filters = JSON.stringify(filters);
 
 
