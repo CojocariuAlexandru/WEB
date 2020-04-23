@@ -53,6 +53,7 @@ function sendStatisticsRequest() {
     let targetNameFormInputMORE  = document.querySelector('#allTargetNamesInput');
     let targetNatFormInputMORE   =document.querySelector('#allTargetNationalitiesInput');
     let groupFormInputMORE       = document.querySelector('#allGroupsInput');
+    let suicideFormInput     = document.querySelector('#suicideInput');
 
     let weaponsChecked = [];
     let attacksChecked = [];
@@ -115,28 +116,29 @@ function sendStatisticsRequest() {
         woundedCount:     `${woundedNumberInput.value}`,
         city: `${cityFormInputMORE.value}`,
         weaponType:     `${finalWeaponToSend}`,
-        subWeaponType:  `${subWeaponFormInputMORE.value}`,
+        weaponSubtype:  `${subWeaponFormInputMORE.value}`,
         attackType:     `${attacksChecked}`,
         targType:          `${finalTargetToSend}`,
         targSubtype:     `${subTargetFormInputMORE.value}`,
-        targName:        `${targetNameFormInputMORE.value}`,
-        targNation:      `${targetNatFormInputMORE.value}`,
+        targetName:        `${targetNameFormInputMORE.value}`,
+        targetNat:      `${targetNatFormInputMORE.value}`,
         groupName:       `${groupFormInputMORE.value}`,
-        damages:         `${damagesChecked}`,
+        propExtent:         `${damagesChecked}`,
         region:          `${regionFormInput.value}`,
         country:         `${countryFormInput.value}`,
         success:         `${successInput.checked}`,
-        knownAttacker:   `${knownInput.checked}`
+        knownAttacker:   `${knownInput.checked}`,
+        suicide:         `${suicideFormInput.checked}`
     };
     console.log(filters);
     filters = JSON.stringify(filters);
 
 
     httpPOST("http://localhost:8001/api/attacks", filters, (result) => { 
-      // console.log(result.res);
-      parsed1 = JSON.parse(result.res);
-      // console.log(parsed);
-      navigateRoot('/statistics-results');
+       console.log(result.res);
+       parsed1 = JSON.parse(result.res);
+       console.log(parsed1);
+       navigateRoot('/statistics-results');
 
       // aici se scrie cod in caz de raspuns 200
      }, (eroare) => { 
@@ -252,7 +254,6 @@ if (!(region in regions) && !(country in regions[region])){
   regionList = [''];
 }else
   regionList = regions[region][country];
-console.log(regions[region][country]);
 
 regionFormTitle.innerHTML = regionFormTitle.innerHTML + `<input class='cities-input' list='allCities' id='allCitiesInput'>`
 let index = 0;

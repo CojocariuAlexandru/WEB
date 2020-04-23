@@ -54,17 +54,24 @@ class AttacksController
         $this->setArrays($decoded, $transformed, "weaponType");
         $this->setArrays($decoded, $transformed, "attackType");
         $this->setArrays($decoded, $transformed, "targType");
+        $this->setArrays($decoded, $transformed, "propExtent");
+
         $this->setValue($decoded, $transformed, "terrCount");
         $this->setValue($decoded, $transformed, "killsCount");
         $this->setValue($decoded, $transformed, "woundedCount");
         $this->setValueBool($decoded, $transformed, "success");
-        $this->setValueBool($decoded, $transformed, "knownAttacker");
+        $this->setValueBool($decoded, $transformed, "suicide");
         $this->setIfExists($decoded, $transformed, "region");
         $this->setIfExists($decoded, $transformed, "country");
+        $this->setIfExists($decoded, $transformed, "city");
+        $this->setIfExists($decoded, $transformed, "groupName");
+        $this->setIfExists($decoded, $transformed, "targetNat");
+        $this->setIfExists($decoded, $transformed, "targetName");
+        $this->setIfExists($decoded, $transformed, "targSubtype");
+        $this->setIfExists($decoded, $transformed, "weaponSubtype");
 
 
         $result = $this->attacksGateway->getStatistics($transformed);
-       // print_r($result);
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body']=json_encode($result);
         return $response;
@@ -101,6 +108,7 @@ class AttacksController
     }
 
     private function setArrays($decoded, &$transformed, $name){
+
         $i=0;
         $exploded = explode(",", $decoded[$name]);
         foreach ($exploded as $value){
