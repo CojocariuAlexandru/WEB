@@ -44,6 +44,7 @@ function sendStatisticsRequest() {
     let damageFormInput      = document.querySelector('#damageForm');
     let regionFormInput      = document.querySelector('#allRegionsInput');
     let countryFormInput     = document.querySelector('#allCountriesInput');
+    let suicideFormInput     = document.querySelector('#suicideInput');
 
     let cityFormInputMORE        = document.querySelector('#allCitiesInput');
     let targetTypeFormInputMORE  = document.querySelector('#allTargetsInput');
@@ -77,47 +78,69 @@ function sendStatisticsRequest() {
     for(index=0; index<damageFormInput.children.length;index++){
       if(damageFormInput.children[index].children[0].checked == true){
         if(index == 0){
-          damagesChecked.push('Minor');
+          damagesChecked.push('Minor (likely < $1 million)');
         }
         else if(index == 1){
-          damagesChecked.push('Major');
+          damagesChecked.push('Major (likely >= $1 million but < $1 billion)');
         }
         else if(index == 2){
-          damagesChecked.push('Cayastrophic');
+          damagesChecked.push('Catastrophic (likely >= $1 billion)');
         }
         else if(index == 3){
           damagesChecked.push('Unknown');
         }
       }
     }
+    if(damagesChecked.length == 0){
+      damagesChecked.push('Minor (likely < $1 million)');
+      damagesChecked.push('Major (likely >= $1 million but < $1 billion)');
+      damagesChecked.push('Catastrophic (likely >= $1 billion)');
+      damagesChecked.push('Unknown');
+    }
 
   let finalWeaponToSend;
   if(weaponFormInputMORE.value){
     finalWeaponToSend = `${weaponFormInputMORE.value}`;
   }
-  else{
+  else if(`${subWeaponFormInputMORE.value}`){
+    finalWeaponToSend = `${weaponFormInputMORE.value}`;
+  }
+  else if(weaponsChecked.length > 0){
     finalWeaponToSend = weaponsChecked;
+  }
+  else{
+    finalWeaponToSend = weaponList;
   }
 
   let finalTargetToSend;
   if(targetTypeFormInputMORE.value){
     finalTargetToSend = `${targetTypeFormInputMORE.value}`;
   }
-  else{
+  else if(`${subTargetFormInputMORE.value}`){
+    finalTargetToSend = `${targetTypeFormInputMORE.value}`;
+  }
+  else if(targetsChecked.length > 0){
     finalTargetToSend = targetsChecked;
+  }
+  else{
+    finalTargetToSend = targetList;
+  }
+
+  if(attacksChecked.length == 0){
+    attacksChecked = attackList;
   }
 
   filters = {
         dateStart:       `${dateStartInput.value}`,
         dateFinal:       `${dateFinalInput.value}`,
-        terrCount: `${terroristNumberInput.value}`,
-        killsCount:    `${deathsNumberInput.value}`,
-        woundedCount:     `${woundedNumberInput.value}`,
-        city: `${cityFormInputMORE.value}`,
-        weaponType:     `${finalWeaponToSend}`,
-        subWeaponType:  `${subWeaponFormInputMORE.value}`,
-        attackType:     `${attacksChecked}`,
-        targType:          `${finalTargetToSend}`,
+        terrCount:       `${terroristNumberInput.value}`,
+        killsCount:      `${deathsNumberInput.value}`,
+        woundedCount:    `${woundedNumberInput.value}`,
+        city:            `${cityFormInputMORE.value}`,
+        weaponType:      `${finalWeaponToSend}`,
+        subWeaponType:   `${subWeaponFormInputMORE.value}`,
+        attackType:      `${attacksChecked}`,
+        targType:        `${finalTargetToSend}`,
         targSubtype:     `${subTargetFormInputMORE.value}`,
         targName:        `${targetNameFormInputMORE.value}`,
         targNation:      `${targetNatFormInputMORE.value}`,
@@ -126,7 +149,8 @@ function sendStatisticsRequest() {
         region:          `${regionFormInput.value}`,
         country:         `${countryFormInput.value}`,
         success:         `${successInput.checked}`,
-        knownAttacker:   `${knownInput.checked}`
+        knownAttacker:   `${knownInput.checked}`,
+        suicide:         `${suicideFormInput.checked}`
     };
     console.log(filters);
     filters = JSON.stringify(filters);
