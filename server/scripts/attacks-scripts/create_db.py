@@ -12,13 +12,25 @@ db_table_name = "Attacks"
 csv_file_name = "data.csv"
 distinct_values_file = 'distinct_values.txt'
 
+# Use this function to connect to the docker container
+# def get_db_connection(db):
+#	return mysql.connector.connect(
+#        host = "157.245.121.183",
+#	 port = "3306",
+#        user = "root",
+#        password = "pass",
+#        database = db,
+#	 auth_plugin='mysql_native_password'
+#	)
+
 def get_db_connection(db):
-    return mysql.connector.connect(
-        host = "localhost",
-        user = "root",
-        password = "",
-        database = db
-    )
+	return mysql.connector.connect(
+         host = "localhost",
+         user = "root",
+	 port = "5006",
+         password = "password",
+         database = db
+	)
 
 mydb = get_db_connection("")
 mycursor = mydb.cursor()
@@ -73,7 +85,7 @@ if path.exists(csv_file_name) == False:
     print(f"\"{csv_file_name}\" file not found!")
     exit(1)
 
-insert_attack_query = """ INSERT INTO attacks (
+insert_attack_query = """ INSERT INTO {} (
                                 date,
                                 extended,
                                 region,
@@ -109,7 +121,7 @@ insert_attack_query = """ INSERT INTO attacks (
                             %s, %s, %s, %s, %s,
                             %s, %s, %s, %s, %s,
                             %s, %s, %s, %s, %s,
-                            %s, %s, %s, %s, %s)"""
+                            %s, %s, %s, %s, %s)""".format(db_table_name)
 
 def process_varchar(row, col_name):
     return row[col_name]
@@ -124,12 +136,15 @@ def process_float(row, col_name):
     return 0.0 if row[col_name] == '' else float(row[col_name])
 
 def process_date(row, col_year_name, col_month_name, col_day_name):
-    return row[col_year_name] + '-' + row[col_month_name] + '-' + row[col_day_name]
+    return row[col_year_name] + '-' + row[col_month_name] + '-' + row[col_day_name] if row[col_day_name] != '0' else '1'
 
 with open(csv_file_name, mode='r') as attacks_file:
     csv_reader = csv.DictReader(attacks_file)
     line_count = 0
     for row in csv_reader:
+        print(line_count)
+        if line_count > 200:
+            break
         if line_count > 0:
             values = (
                 process_date(row, 'iyear', 'imonth', 'iday'),
@@ -173,7 +188,7 @@ columns_to_print_diff_values = ["region", "country", "attackType", "weaponType"]
 
 with open(distinct_values_file, "w") as file:
     for column in columns_to_print_diff_values:
-        select_distincts_query = """SELECT DISTINCT {} FROM attacks""".format(column)
+        select_distincts_query = """SELECT DISTINCT {} FROM {}""".format(column, db_table_name)
         
         value = (column)
         mycursor.execute(select_distincts_query)

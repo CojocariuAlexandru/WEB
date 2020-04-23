@@ -2,3 +2,4 @@
 **/*.csv
 **/data
 **/distinct_values.txt
+**/cloud

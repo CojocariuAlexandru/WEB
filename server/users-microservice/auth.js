@@ -63,24 +63,21 @@ async function handleLogin(req, res, body) {
     auxArray = passwordFinalForm.split("\"");
     passwordFinalForm = auxArray[3];
 
-    console.log(passwordSalt);
-    console.log(passwordFinalForm);    
-
     let passwordFinalWithUserInput = sha512Password(body.password, passwordSalt).passwordHash;
-    console.log(passwordFinalWithUserInput);
 
-    if(passwordFinalWithUserInput.startsWith(passwordFinalForm) == true){
+    if (passwordFinalWithUserInput.startsWith(passwordFinalForm) == true) {
         let token = jwt.sign(body, 'secret');
         res.end(token);
-    }
-    else{
+    } else {
         res.statusCode = 400;
         res.end('Login unsuccessful');
     }
 }
 
 async function handleRegister(req, res, body) {
+    console.log("WAITING");
     let con = await db.getDbConnection();
+    console.log("END");
 
     if (body.username === undefined || body.password === undefined) {
         res.statusCode = 400;
@@ -122,7 +119,7 @@ function saltHashPassword(password) {
 function sha512Password(password, salt) {
     let hash = crypto.createHmac('sha512', salt);
     hash.update(password);
-    let hashValue = hash.digest('hex');
+    let hashValue = hash.digest('hex').substr(0, 64);
     return {
         salt: salt,
         passwordHash: hashValue

@@ -2,6 +2,6 @@
 
 1. Open XAMPP and start MySQL
 
-2. 'python -m pip install mysql-connector' OR 'pip install mysql-connector'
+2. 'python -m pip install mysql-connector-python' OR 'pip install mysql-connector-python'
 
 3. python create_db.py (in the folder associated with the microservice)
