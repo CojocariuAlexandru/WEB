@@ -4,13 +4,21 @@ function statisticsPageInit(node) {
   generateWeapons();
   generateAttacks();
   generateTargets();
-  generateRegions();
-  generateCountries();
-  generateCities();
-  generateTargetTypes();
-  generateTargetSubtypes();
-  generateWeaponTypes();
-  generateWeaponSubtypes();
+  generate(regions, ".regionForm", "Region of the attack", "allRegions",  `<input list='allRegions' id='allRegionsInput' onchange=populate('allRegionsInput') >`);
+  generate(emptyObject, ".countryForm", 'Country', 'allCountries', `<input list='allCountries' id='allCountriesInput'>`);
+  generate(emptyObject, '.cityForm',  'City', 'allCities', `<input list='allCities' id='allCitiesInput'>`);
+  generate(targetSubtypes, '.targTypeSelect', 'TargetType', 'allTargets', `<input list='allTargets' id='allTargetsInput' onchange=populateTargetSubtypes('allTargetsInput')>`);
+  generate(emptyObject,'.targSubtypeSelect',  'TargetSubtype', 'allSubTargets', `<input list='allSubTargets' id='allSubTargetsInput'>`);
+  generate(weaponSubtypes, '.weaponTypeSelect', 'WeaponType', 'allWeapons', `<input list='allWeapons' id='allWeaponsInput' onchange=populateWeaponsSubtypes('allWeaponsInput')>` );
+  generate(emptyObject, '.weaponSubtypeSelect', 'WeaponSubtype', 'allSubWeapons',  ` <input list='allSubWeapons' id='allSubWeaponsInput'>`);
+  generate(emptyObject, ".specificTargetName", 'Target Name', 'allTargetNames', `<input list='allTargetNames' id='allTargetNamesInput'>`);
+  generate(emptyObject, ".specificTargetNat", 'Target Nationality', 'allTargetNationalities', `<input list='allTargetNationalities' id='allTargetNationalitiesInput'>`);
+  generate(emptyObject, ".specificGroup", 'Group of terrorists', 'allGroups', `<input list='allGroups' id='allGroupsInput'>`);
+
+  let preButton = document.getElementById("hidden-button");
+  preButton.style.display ="none";
+  hiddenMoreDetails("none");
+
   sliderFunction();
 }
 
@@ -162,6 +170,7 @@ function generateTargets() {
 
 
 //https://www.youtube.com/watch?v=UliJeDbc4cw
+// -------------------------------------------DYNAMIC LIST-------------------------------------------------------
 function populate(id1){
     let s1 = document.getElementById(id1);
 
@@ -285,158 +294,30 @@ function populateWeaponsSubtypes(id1){
   regionForm.appendChild(regionFormTitle);
 }
 
+// ----------------------------------GENERATING FORM LISTS-------------------------------------
 
+function generate(listOfValues, selectClass, name, id, input){
+  let selectedForm = document.querySelector(selectClass);
+  let header = document.createElement('h3');
+  header.innerHTML = name;
+  selectedForm.appendChild(header);
 
-function generateRegions() {
-  let regionForm = document.querySelector('.regionForm');
+  let divElement = document.createElement('div')
+  let optionChoose = document.createElement('datalist');
+  optionChoose.setAttribute('id', id);
 
-  let weaponFormHeader = document.createElement('h3');
-  weaponFormHeader.innerHTML = 'Region of the attack';
-  regionForm.appendChild(weaponFormHeader)
-
-  let regionFormTitle = document.createElement('div')
-  let regionOptionChoose = document.createElement('datalist');
-  regionOptionChoose.setAttribute('id', 'allRegions');
-
-  let regionList = Object.keys(regions); 
-  regionFormTitle.innerHTML = regionFormTitle.innerHTML + `<input list='allRegions' id='allRegionsInput' onchange=populate('allRegionsInput') >`
+  let values = Object.keys(listOfValues); 
+  divElement.innerHTML = divElement.innerHTML + input;
   let index = 0;
-  for (index = 0; index < regionList.length; index++)
-    regionOptionChoose.innerHTML = regionOptionChoose.innerHTML + `<option value="${regionList[index]}">`
+  for (index = 0; index < values.length; index++)
+      optionChoose.innerHTML = optionChoose.innerHTML + `<option value="${values[index]}">`;
 
-  regionFormTitle.innerHTML = regionFormTitle.innerHTML + '</datalist>'
-  regionFormTitle.appendChild(regionOptionChoose)
-  regionForm.appendChild(regionFormTitle)
-}
-
-function generateCountries() {
-  let regionForm = document.querySelector('.countryForm')
-
-  let weaponFormHeader = document.createElement('h3');
-  weaponFormHeader.innerHTML = 'Country';
-  regionForm.appendChild(weaponFormHeader);
-
-  let regionFormTitle = document.createElement('div');
-  let regionOptionChoose = document.createElement('datalist');
-  regionOptionChoose.setAttribute('id', 'allCountries');
-  let regionList=[];
-  
-  regionFormTitle.innerHTML = regionFormTitle.innerHTML + `<input class='countries-input' list='allCountries' id='allCountriesInput'>`
-  let index = 0;
-  for (index = 0; index < regionList.length; index++)
-    regionOptionChoose.innerHTML = regionOptionChoose.innerHTML +
-    `<option value='${regionList[index]}'>`
-  regionFormTitle.innerHTML = regionFormTitle.innerHTML + '</datalist>'
-  regionFormTitle.appendChild(regionOptionChoose)
-  regionForm.appendChild(regionFormTitle)
+  divElement.innerHTML = divElement.innerHTML + '</datalist>';
+  divElement.appendChild(optionChoose);
+  selectedForm.appendChild(divElement);
 }
 
 
-function generateCities() {
-  let regionForm = document.querySelector('.cityForm')
-
-  let weaponFormHeader = document.createElement('h3');
-  weaponFormHeader.innerHTML = 'City';
-  regionForm.appendChild(weaponFormHeader);
-
-  let regionFormTitle = document.createElement('div');
-  let regionOptionChoose = document.createElement('datalist');
-  regionOptionChoose.setAttribute('id', 'allCities');
-  let regionList=[];
-  
-  regionFormTitle.innerHTML = regionFormTitle.innerHTML + `<input class='cities-input' list='allCities' id='allCitiesInput'>`
-  let index = 0;
-  for (index = 0; index < regionList.length; index++)
-    regionOptionChoose.innerHTML = regionOptionChoose.innerHTML +
-    `<option value='${regionList[index]}'>`
-  regionFormTitle.innerHTML = regionFormTitle.innerHTML + '</datalist>'
-  regionFormTitle.appendChild(regionOptionChoose)
-  regionForm.appendChild(regionFormTitle)
-}
-
-function generateTargetTypes(){
-  let regionForm = document.querySelector('.targTypeSelect')
-
-  let weaponFormHeader = document.createElement('h3');
-  weaponFormHeader.innerHTML = 'TargetType';
-  regionForm.appendChild(weaponFormHeader);
-
-  let regionFormTitle = document.createElement('div');
-  let regionOptionChoose = document.createElement('datalist');
-  regionOptionChoose.setAttribute('id', 'allTargets');
-  
-  let list = Object.keys(targetSubtypes);
-
-  regionFormTitle.innerHTML = regionFormTitle.innerHTML + `<input class='cities-input' list='allTargets' id='allTargetsInput' onchange=populateTargetSubtypes('allTargetsInput')>`
-  let index = 0;
-  for (index = 0; index < list.length; index++)
-    regionOptionChoose.innerHTML = regionOptionChoose.innerHTML +
-    `<option value='${list[index]}'>`
-  regionFormTitle.innerHTML = regionFormTitle.innerHTML + '</datalist>'
-  regionFormTitle.appendChild(regionOptionChoose)
-  regionForm.appendChild(regionFormTitle)
-}
-
-function generateTargetSubtypes(){
-  let regionForm = document.querySelector('.targSubtypeSelect')
-
-  let weaponFormHeader = document.createElement('h3');
-  weaponFormHeader.innerHTML = 'TargetSubtype';
-  regionForm.appendChild(weaponFormHeader);
-
-  let regionFormTitle = document.createElement('div');
-  let regionOptionChoose = document.createElement('datalist');
-  regionOptionChoose.setAttribute('id', 'allSubTargets');
-  
-  regionFormTitle.innerHTML = regionFormTitle.innerHTML + `<input class='cities-input' list='allSubTargets' id='allSubTargetsInput'>`;
-  regionFormTitle.innerHTML = regionFormTitle.innerHTML + '</datalist>'
-  regionFormTitle.appendChild(regionOptionChoose)
-  regionForm.appendChild(regionFormTitle)
-}
-
-
-function generateWeaponTypes(){
-  let regionForm = document.querySelector('.weaponTypeSelect')
-
-  let weaponFormHeader = document.createElement('h3');
-  weaponFormHeader.innerHTML = 'WeaponType';
-  regionForm.appendChild(weaponFormHeader);
-
-  let regionFormTitle = document.createElement('div');
-  let regionOptionChoose = document.createElement('datalist');
-  regionOptionChoose.setAttribute('id', 'allWeapons');
-  
-  let list = Object.keys(weaponSubtypes);
-
-  regionFormTitle.innerHTML = regionFormTitle.innerHTML + `<input class='cities-input' list='allWeapons' id='allWeaponsInput' onchange=populateWeaponsSubtypes('allWeaponsInput')>`
-  let index = 0;
-  for (index = 0; index < list.length; index++)
-    regionOptionChoose.innerHTML = regionOptionChoose.innerHTML +
-    `<option value='${list[index]}'>`
-  regionFormTitle.innerHTML = regionFormTitle.innerHTML + '</datalist>'
-  regionFormTitle.appendChild(regionOptionChoose)
-  regionForm.appendChild(regionFormTitle)
-}
-
-
-function generateWeaponSubtypes(){
-  let regionForm = document.querySelector('.weaponSubtypeSelect')
-
-  let weaponFormHeader = document.createElement('h3');
-  weaponFormHeader.innerHTML = 'WeaponSubtype';
-  regionForm.appendChild(weaponFormHeader);
-
-  let regionFormTitle = document.createElement('div');
-  let regionOptionChoose = document.createElement('datalist');
-  regionOptionChoose.setAttribute('id', 'allSubWeapons');
-  
-  let list = Object.keys(targetSubtypes);
-
-  regionFormTitle.innerHTML = regionFormTitle.innerHTML + `<input class='cities-input' list='allSubWeapons' id='allSubWeaponsInput'>`;
-  regionFormTitle.innerHTML = regionFormTitle.innerHTML + '</datalist>'
-  regionFormTitle.appendChild(regionOptionChoose)
-  regionForm.appendChild(regionFormTitle)
-}
 
 function sliderFunction() {
 
@@ -464,5 +345,83 @@ function sliderFunction() {
     output2.innerHTML = this.value;
   }
 
+
+}
+
+// ---------------------------- MORE DETAILS -------------------------------------
+
+
+
+function moreDetails(){
+  let preButton = document.getElementById("hidden-button");
+  preButton.style.display =  'block';
+
+  let preButton2 = document.getElementById("hidden-button2");
+  preButton2.style.display =  'none';
+
+  hiddenMoreDetails("");
+  displayMoreDetails("none");
+  document.documentElement.scrollTop = 0; 
+  
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+
+}
+
+function lessDetails(){
+  let preButton = document.getElementById("hidden-button2");
+  preButton.style.display =  'block';
+
+  let preButton2 = document.getElementById("hidden-button");
+  preButton2.style.display =  'none';
+
+  hiddenMoreDetails("none");
+  displayMoreDetails("");
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+
+function displayMoreDetails(displayType){
+  let elem1 = document.getElementsByClassName("firstRow1");
+  let elem2 = document.getElementsByClassName("firstRow2");
+  let elem3 = document.getElementsByClassName("attackTypeForm");
+  let elem4 = document.getElementsByClassName("targetTypeForm");
+  let elem5 = document.getElementsByClassName("weaponTypeForm");
+  let elem6 = document.getElementsByClassName("damageForm");
+  let elem7 = document.getElementsByClassName("regionForm");
+  let elem8 = document.getElementsByClassName("countryForm");
+  let elem9 = document.getElementsByClassName("fourthRow");
+
+  elem1[0].style.display = displayType;
+  elem2[0].style.display = displayType;
+  elem3[0].style.display = displayType;
+  elem4[0].style.display = displayType;
+  elem5[0].style.display = displayType;
+  elem6[0].style.display = displayType;
+  elem7[0].style.display = displayType;
+  elem8[0].style.display = displayType;
+  elem9[0].style.display = displayType;
+}
+
+function hiddenMoreDetails(displayType){
+  let elem1 = document.getElementsByClassName("cityForm");
+  let elem2 = document.getElementsByClassName("targTypeSelect");
+  let elem3 = document.getElementsByClassName("targSubtypeSelect");
+  let elem4 = document.getElementsByClassName("weaponTypeSelect");
+  let elem5 = document.getElementsByClassName("weaponSubtypeSelect");
+  let elem6 = document.getElementsByClassName("specificTargetName");
+  let elem7 = document.getElementsByClassName("specificTargetNat");
+  let elem8 = document.getElementsByClassName("specificGroup");
+  let elem9 = document.getElementsByClassName("specificParagraph");
+
+  elem1[0].style.display = displayType;
+  elem2[0].style.display = displayType;
+  elem3[0].style.display = displayType;
+  elem4[0].style.display = displayType;
+  elem5[0].style.display = displayType;
+  elem6[0].style.display = displayType;
+  elem7[0].style.display = displayType;
+  elem8[0].style.display = displayType;
+  elem9[0].style.display = displayType;
 
 }

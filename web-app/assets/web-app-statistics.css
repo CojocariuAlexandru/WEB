@@ -11,7 +11,13 @@
         "cityForm cityForm cityForm cityForm"
         "targTypeSelect targTypeSelect targSubtypeSelect targSubtypeSelect"
         "weaponTypeSelect weaponTypeSelect weaponSubtypeSelect weaponSubtypeSelect"
+
+        "specificParagraph specificParagraph specificParagraph specificParagraph"
+        "specificTargetName specificTargetName specificTargetNat specificTargetNat"
+        "specificGroup specificGroup specificGroup specificGroup"
+
         "fourthRow fourthRow fourthRow fourthRow"
+        "button-1 button-1 button-2 button-2"
         "submitForm submitForm submitForm submitForm";
     box-sizing: border-box;
     border: 1px solid black;
@@ -66,6 +72,10 @@ input.dataForm1,
 .targSubtypeSelect,
 .weaponTypeSelect,
 .weaponSubtypeSelect,
+.specificParagraph,
+.specificTargetName,
+.specificTargetNat,
+.specificGroup,
 .damageForm,
 .knownForm,
 .successForm,
@@ -198,12 +208,12 @@ input.dataForm1,
 #rangeTerr.slider::after,
 #rangeDeaths.slider::after,
 #rangeWound.slider::after {
-    content: "1000";
+    content: "25000";
     color: #065e61;
     position: absolute;
     font-size: 16px;
     bottom: 4px;
-    right: -42px;
+    right: -48px;
 }
 
 #rangeDeaths.slider::after {
@@ -211,7 +221,7 @@ input.dataForm1,
 }
 
 #rangeWound.slider::after {
-    content: "4000";
+    content: "10000";
 }
 
 #rangeTerr.slider::-webkit-slider-thumb,
@@ -278,6 +288,10 @@ input.dataForm1,
 .targSubtypeSelect h3,
 .weaponTypeSelect h3,
 .weaponSubtypeSelect h3,
+.specificParagraph h3, 
+.specificTargetName h3,
+.specificTargetNat h3, 
+.specificGroup h3,
 .countryForm h3 {
     color: #eee;
     font-size: 22px;
@@ -327,6 +341,22 @@ input.dataForm1,
 
 }
 
+.specificParagraph{
+    grid-area: specificParagraph;
+}
+
+.specificTargetName{
+    grid-area: specificTargetName;
+}
+
+.specificTargetNat{
+    grid-area: specificTargetNat;
+}
+
+.specificGroup{
+    grid-area: specificGroup;
+}
+
 /* FOURTH ROW */
 .fourthRow ,
 .regionForm,
@@ -335,7 +365,11 @@ input.dataForm1,
 .targTypeSelect,
 .targSubtypeSelect,
 .weaponTypeSelect,
-.weaponSubtypeSelect{
+.weaponSubtypeSelect,
+.specificParagraph,
+.specificTargetName,
+.specificTargetNat,
+.specificGroup{
     margin-left: 10px;
     margin-right: 10px;
 }
@@ -346,13 +380,12 @@ input.dataForm1,
 
 .fourthRow div {
     padding: 10px;
-    margin: 20px;
     font-size: 30px;
     font-weight: bold;
 }
 
 #label1 {
-    font-size: 30px;
+    font-size: 20px;
     font-weight: bold;
 }
 

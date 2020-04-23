@@ -269,8 +269,14 @@ input#searchText {
             "regionForm regionForm countryForm countryForm"
             "cityForm cityForm cityForm cityForm"
             "targTypeSelect targTypeSelect targSubtypeSelect targSubtypeSelect"
-        "weaponTypeSelect weaponTypeSelect weaponSubtypeSelect weaponSubtypeSelect"
+            "weaponTypeSelect weaponTypeSelect weaponSubtypeSelect weaponSubtypeSelect"
+            
+            "specificParagraph specificParagraph specificParagraph specificParagraph"
+            "specificTargetName specificTargetName specificTargetNat specificTargetNat"
+            "specificGroup specificGroup specificGroup specificGroup"
+
             "fourthRow fourthRow fourthRow fourthRow"
+            "button-1 button-1 button-2 button-2"
             "submitForm submitForm submitForm submitForm";
     }
 
@@ -328,7 +334,15 @@ input#searchText {
             "targSubtypeSelect"
             "weaponTypeSelect"
             "weaponSubtypeSelect"
+
+            "specificParagraph"
+            "specificTargetName"
+            "specificTargetNat"
+            "specificGroup"
+
             "fourthRow"
+            "button-1"
+            "button-2"
             "submitForm";
         box-sizing: border-box;
         border: 1px solid black;

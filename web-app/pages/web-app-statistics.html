@@ -18,7 +18,7 @@
                 <div class='nrTerrForm'>
                     <div class="slideContainer">
                         <label for='rangeTerr'><h4>Maximum number of terrorists:</h4></label>
-                        <input type="range" min="0" max="1000" value="500" class="slider" id="rangeTerr">
+                        <input type="range" min="0" max="25000" value="12500" class="slider" id="rangeTerr">
                         <div><span id="numberTerr"> ana</span></div>
                     </div>
                     
@@ -37,7 +37,7 @@
                 <div class='nrWoundedForm'>
                     <div class="slideContainer">
                         <label for='rangeWound'><h4>Maximum number of wounded:</h4></label>
-                        <input type="range" min="0" max="4000" value="2000" class="slider" id="rangeWound" >
+                        <input type="range" min="0" max="10000" value="5000" class="slider" id="rangeWound" >
                         <div><span id="numberWound"> ana</span></div>
                     </div>
                 </div>
@@ -87,6 +87,25 @@
         <!-- Country list is generated in statistics.js-->
     </div>
 
+
+
+    <div class='fourthRow'>
+        <div class='input1'>
+            <input type='checkbox' id='succesInput'></input>
+            <label for='succesInput' id='label1'>Successfull attack</label>
+        </div>
+        <div class='input1'>
+            <input type='checkbox' id='knownInput'></input>
+            <label for='knownInput' id='label1'>It is known who attacked</label>
+        </div>
+
+        <div class='input1'>
+            <input type='checkbox' id='suicideInput'></input>
+            <label for='suicideInput' id='label1'>It was a suicide</label>
+        </div>
+        
+    </div>
+
         <div class='cityForm'>
         </div>
 
@@ -101,16 +120,24 @@
         <div class='weaponSubtypeSelect'>
         </div>
 
-    <div class='fourthRow'>
-        <div class='input1'>
-            <input type='checkbox' id='succesInput'></input>
-            <label for='succesInput' id='label1'>Successfull attack</label>
+        <div class='specificParagraph'>
+            <p>Do you want to get statistics for a specific target or a specific group of terrorists? Please fill in:</p>
         </div>
-        <div class='input1'>
-            <input type='checkbox' id='knownInput'></input>
-            <label for='knownInput' id='label1'>It is known who attacked</label>
+
+        <div class='specificTargetName'>
         </div>
         
+        <div class='specificTargetNat'>
+        </div>  
+
+        <div class='specificGroup'>
+        </div>  
+
+    <div class="button-1" id="hidden-button">
+        <button class="button-link1" onclick="lessDetails()">Previous</button>
+    </div>
+    <div class="button-2" id="hidden-button2">
+        <button class="button-link1" onclick="moreDetails()">More details</button>
     </div>
 
     <section class='submitForm' onclick="sendStatisticsRequest()">

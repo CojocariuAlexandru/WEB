@@ -1,3 +1,6 @@
+var emptyObject = {
+}
+
 var weaponSubtypes ={
   'Biological' : [""],
   'Chemical' : [ "","Explosive","Poisoning"],
