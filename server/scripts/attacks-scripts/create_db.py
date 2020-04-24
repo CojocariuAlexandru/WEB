@@ -12,24 +12,24 @@ db_table_name = "Attacks"
 csv_file_name = "data.csv"
 distinct_values_file = 'distinct_values.txt'
 
-# Use this function to connect to the docker container
+#Use this function to connect to the docker container
 # def get_db_connection(db):
-#	return mysql.connector.connect(
-#        host = "157.245.121.183",
-#	 port = "3306",
-#        user = "root",
-#        password = "pass",
-#        database = db,
-#	 auth_plugin='mysql_native_password'
+#    return mysql.connector.connect(
+#       host = "157.245.121.183",
+#	port = "5006",
+#       user = "root",
+#       password = "password",
+#       database = db,
+#	auth_plugin='mysql_native_password'
 #	)
 
 def get_db_connection(db):
 	return mysql.connector.connect(
-         host = "localhost",
-         user = "root",
-	 port = "5006",
-         password = "password",
-         database = db
+          host = "localhost",
+          user = "root",
+ 	  port = "3306",
+          password = "",
+          database = db
 	)
 
 mydb = get_db_connection("")

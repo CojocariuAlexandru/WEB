@@ -13,9 +13,6 @@ async function handleRequest(req, res, body) {
         } else if (req.url === '/api/register') {
             goodRequest = true;
             await handleRegister(req, res, body);
-        } else if (req.url === '/api/logout') {
-            goodRequest = true;
-            await handleLogout(req, res, body);
         }
     }
 
@@ -53,6 +50,7 @@ async function handleLogin(req, res, body) {
     //Get the salt and final form after aplying the salt
     let passwordSaltDB = await db.getPasswordSalt(connectionToDB, body.username);
     let passwordFinalFormDB = await db.getPasswordFinalForm(connectionToDB, body.username);
+    let adminDB = await db.getAdminFlag(connectionToDB, body.username);
 
     //Make some processing
     let passwordSalt = JSON.stringify(passwordSaltDB);
@@ -63,10 +61,18 @@ async function handleLogin(req, res, body) {
     auxArray = passwordFinalForm.split("\"");
     passwordFinalForm = auxArray[3];
 
+    admin = adminDB[0].admin;
+
     let passwordFinalWithUserInput = sha512Password(body.password, passwordSalt).passwordHash;
 
     if (passwordFinalWithUserInput.startsWith(passwordFinalForm) == true) {
-        let token = jwt.sign(body, 'secret');
+        let tokenBody = {
+            username: body.username,
+            admin: admin
+        };
+        let token = jwt.sign(tokenBody, config.ACCESS_TOKEN_SECRET, {
+            expiresIn: "36h"
+        });
         res.end(token);
     } else {
         res.statusCode = 400;
@@ -102,11 +108,6 @@ async function handleRegister(req, res, body) {
     await db.insertNewUser(con, body.username, passInfo.passwordHash, passInfo.salt);
 
     res.end('User created successfully!');
-}
-
-async function handleLogout(req, res, body) {
-
-    res.end();
 }
 
 // https://ciphertrick.com/salt-hash-passwords-using-nodejs-crypto/?fbclid=IwAR0QbqgLOHe-H3PJjmByQ5dukYrraNgH6_FB81ON_ryRqdXRn41MQChvFZ4

@@ -14,7 +14,7 @@ function mapPageInit(node) {
         styles: getMapNightModeStyle()
     });
 
-    httpGET("http://localhost:8001/api/attacks", (result) => {
+    httpGET(URL_MICROSERVICE_ATTACKS + "/api/attacks", (result) => {
         parsed = JSON.parse(result.res);
 
         for (let i = 0; i < parsed.length; ++i) {

@@ -1,5 +1,13 @@
 let login = true; // boolean flag, true = display login widget, false = display register widget
 
+function getDecodedUserToken() {
+    let token = localStorage.getItem('Token');
+    if (token == null) {
+        return null;
+    }
+    return jwt_decode(token);
+}
+
 function changeLogin() {
     if (login) {
         return;
@@ -18,23 +26,36 @@ function userLogin() {
     let username = document.querySelector('#login-username').value;
     let pwd = document.querySelector('#login-pwd').value;
 
-    if (userLoginCheckCredentials(username, pwd)) {
+    signInUser(username, pwd, (res) => {
+        saveUserToken(res.res);
         userLoginClearFields();
-        userLoginRememberCredentials(username);
         setWebAppTemplateAsSite();
         navigateRoot('/home');
-    } else {
+    }, (err) => {
         console.log('Error message');
-    }
+    });
+}
+
+function saveUserToken(token) {
+    localStorage.setItem('Token', token);
+}
+
+function signInUser(username, pwd, onSuccess, onError) {
+    let loginObj = {
+        username: username,
+        password: pwd
+    };
+
+    httpPOST(URL_MICROSERVICE_USERS + '/api/login', JSON.stringify(loginObj), (res) => {
+        onSuccess(res)
+    }, (err) => {
+        onError(err)
+    })
 }
 
 function userLoginClearFields() {
     document.querySelector('#login-username').value = '';
     document.querySelector('#login-pwd').value = '';
-}
-
-function userLoginRememberCredentials(username) {
-    localStorage.setItem('username', username)
 }
 
 function userLoginCheckCredentials(username, pwd) {
@@ -59,7 +80,7 @@ function userLogout() {
 }
 
 function userLogoutRemoveCredentials() {
-    localStorage.removeItem('username');
+    localStorage.removeItem('Token');
 }
 
 function switchLoginSignup() {
@@ -97,21 +118,12 @@ function signUpAddUser(username, pwd, onSuccess, onError) {
         username: username,
         password: pwd
     };
-    httpPOST('http://localhost:8002/api/register', JSON.stringify(registerObj), () => {
+
+    httpPOST(URL_MICROSERVICE_USERS + '/api/register', JSON.stringify(registerObj), () => {
         onSuccess();
     }, () => {
         onError();
     });
-
-    let users = JSON.parse(localStorage.getItem('users'));
-    if (users == null) {
-        users = [];
-    }
-    users.push({
-        'username': username,
-        'password': pwd
-    });
-    localStorage.setItem('users', JSON.stringify(users));
 }
 
 function signUpClearFields() {
@@ -121,7 +133,7 @@ function signUpClearFields() {
 }
 
 function userIsLoggedIn() {
-    let user = localStorage.getItem('username');
+    let user = localStorage.getItem('Token');
     if (user == null) {
         return false;
     }

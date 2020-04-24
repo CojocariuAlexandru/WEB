@@ -5,7 +5,7 @@ http.createServer(
   function (req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Request-Method', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST');      
+    res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST');
     if (req.method === 'OPTIONS') {
       res.writeHead(200);
       res.end();

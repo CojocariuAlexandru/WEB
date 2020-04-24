@@ -86,7 +86,7 @@ function setWebAppTemplateAsSiteAsync() {
 }
 
 function setWebAppTemplateAsSiteInit() {
-    let username = localStorage.getItem('username');
+    let username = getDecodedUserToken().username;
     let usernameContainer = document.querySelector('#web-app-username');
     usernameContainer.innerHTML = username;
 }

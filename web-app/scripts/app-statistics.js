@@ -95,7 +95,7 @@ function sendStatisticsRequest() {
     filters = JSON.stringify(filters);
 
 
-    httpPOST("http://localhost:8001/api/attacks", filters, (result) => { 
+    httpPOST(URL_MICROSERVICE_ATTACKS + "/api/attacks", filters, (result) => { 
       // console.log(result.res);
       parsed1 = JSON.parse(result.res);
       // console.log(parsed);
