@@ -196,7 +196,7 @@ function populate(id1){
 function populateCities(id1, id2){
   let s1 = document.getElementById(id1);
   let s2 = document.getElementById(id2);
-let regionForm = document.querySelector('.cityForm')
+let regionForm = document.querySelector('.cityForm');
   regionForm.innerHTML =  ``;
 
 let weaponFormHeader = document.createElement('h3');

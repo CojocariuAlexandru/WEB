@@ -26,7 +26,7 @@ class AttacksGateway
             exit($e->getMessage());
         }
     }
-    
+
     public function getById($id)
     {
         $statement = "
@@ -41,12 +41,13 @@ class AttacksGateway
             exit($e->getMessage());
         }
     }
+
     public function getStatistics($transformed)
     {
         $statement = "
             SELECT *
             FROM attacks WHERE ";
-        
+
         $this->prepareStatement($statement, $transformed);
 
         // echo $statement;
@@ -59,11 +60,13 @@ class AttacksGateway
             exit($e->getMessage());
         }
     }
-    private function prepareStatement(&$statement, $transformed){
+
+    private function prepareStatement(&$statement, $transformed)
+    {
 
         $statement = $statement . "date >= STR_TO_DATE('" . $transformed["startDate"] .  "' , '%Y-%m-%d')";
-        if ($transformed["finalDate"]=="sysdate")
-        $statement = $statement . " AND date <= sysdate() ";
+        if ($transformed["finalDate"] == "sysdate")
+            $statement = $statement . " AND date <= sysdate() ";
         else
             $statement = $statement . " AND date <= STR_TO_DATE('" . $transformed["finalDate"] . "', '%Y-%m-%d') ";
 
@@ -73,7 +76,7 @@ class AttacksGateway
 
         $this->setCondition($statement, $transformed["terrCount"], "terrCount", "<=");
         $this->setCondition($statement, $transformed["killsCount"], "killsCount", "<=");
-        $this->setCondition($statement, $transformed["woundedCount"],"woundedCount", "<=");
+        $this->setCondition($statement, $transformed["woundedCount"], "woundedCount", "<=");
 
         $this->setCondition($statement, $transformed["success"], "success", "=");
         if (array_key_exists("region", $transformed))
@@ -82,29 +85,64 @@ class AttacksGateway
             $this->setConditionStr($statement, $transformed["country"], "country", "=");
 
         $statement = $statement . "LIMIT 100;";
-
     }
 
-
-
-    private function setCondition(&$statement, $value, $str, $op){
+    private function setCondition(&$statement, $value, $str, $op)
+    {
         $statement = $statement . "AND $str $op $value ";
     }
-    private function setConditionStr(&$statement, $value, $str, $op){
+    private function setConditionStr(&$statement, $value, $str, $op)
+    {
         $statement = $statement . "AND $str $op '$value' ";
     }
 
-    private function statementArray(&$statement, $array, $name){
+    private function statementArray(&$statement, $array, $name)
+    {
         $str = " AND $name IN (";
 
-        foreach($array as $elem){
+        foreach ($array as $elem) {
             $str = $str . "'" . $elem .  "',";
         }
 
-        $str = $str . "'" . $array[0]."') ";
+        $str = $str . "'" . $array[0] . "') ";
         $statement = $statement . $str;
     }
 
+    public function getAttacksInfoForMapPage($filters)
+    {
+        $statement = "SELECT latitude, longitude FROM attacks WHERE ";
+
+        $this->prepareStatementForMapPage($statement, $filters);
+
+        try {
+            $statement = $this->db->query($statement);
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            return $result;
+        } catch (\PDOException $e) {
+            exit($e->getMessage());
+        }
+    }
+
+    private function prepareStatementForMapPage(&$statement, $filters)
+    {
+        $statement = $statement . "date >= STR_TO_DATE('" . $filters["startDate"] .  "' , '%Y-%m-%d')";
+        if ($filters["finalDate"] == "sysdate")
+            $statement = $statement . " AND date <= sysdate() ";
+        else
+            $statement = $statement . " AND date <= STR_TO_DATE('" . $filters["finalDate"] . "', '%Y-%m-%d') ";
+
+        if (array_key_exists("region", $filters)) {
+            $this->setConditionStr($statement, $filters["region"], "region", "=");
+        }
+        if (array_key_exists("country", $filters)) {
+            $this->setConditionStr($statement, $filters["country"], "country", "=");
+        }
+        if (array_key_exists("city", $filters)) {
+            $this->setConditionStr($statement, $filters["city"], "city", "=");
+        }
+
+        $statement = $statement . "LIMIT 10000;";
+    }
 
     public function getPreview()
     {

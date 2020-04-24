@@ -1,4 +1,4 @@
-#home{
+#home {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -9,20 +9,21 @@
 }
 
 #home .left-container,
-#home .right-container{
+#home .mid-container,
+#home .right-container {
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    width: 42%;
+    width: 30%;
     height: 88%;
 
     border: dashed 2px #eee;
-    border-radius:15px;
+    border-radius: 15px;
     transition: color 0.5s linear, border 0.5s linear;
 }
 
-#home .description{
+#home .description {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -30,42 +31,43 @@
     width: 92%;
 }
 
-#home .description .title{
+#home .description .title {
     font-size: 24px;
     font-weight: 500;
     text-align: center;
-    margin:10px;
+    margin: 10px;
 }
 
-#home .description .text{
+#home .description .text {
     margin-top: 16px;
     font-size: 18px;
     text-align: justify;
 }
-#home .left-container img, 
-#home .right-container img{
-    max-width:80%;
+
+#home .left-container img,
+#home .mid-container img,
+#home .right-container img {
+    max-width: 80%;
 }
 
-
 #home .left-container:hover,
-#home .right-container:hover{
+#home .mid-container:hover,
+#home .right-container:hover {
     cursor: pointer;
     border: dashed 2px #00acb567;
     border-radius: 16px;
-    color:#065e61;
-
+    color: #065e61;
 }
 
-
 @media only screen and (max-width: 900px) {
-    #home{
+    #home {
         flex-direction: column;
         justify-content: flex-start;
     }
 
     #home .left-container,
-    #home .right-container{
+    #home .mid-container,
+    #home .right-container {
         width: 88%;
         height: auto;
         font-size: 16px;
@@ -75,20 +77,25 @@
 }
 
 @media only screen and (max-width: 400px) {
+
     #home .left-container,
-    #home .right-container{
+    #home .mid-container,
+    #home .right-container {
         width: 90%;
         padding: 0;
     }
-    #home .description .title{
+
+    #home .description .title {
         font-size: 20px;
     }
-    
-    #home .description .text{
+
+    #home .description .text {
         font-size: 16px;
     }
-    #home .left-container img, 
-    #home .right-container img{
-        max-width:90%;
+
+    #home .left-container img,
+    #home .mid-container img,
+    #home .right-container img {
+        max-width: 90%;
     }
 }
