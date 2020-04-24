@@ -134,12 +134,11 @@ function sendStatisticsRequest() {
     filters = JSON.stringify(filters);
 
 
-    httpPOST("http://localhost:8001/api/attacks", filters, (result) => { 
-       console.log(result.res);
-       parsed1 = JSON.parse(result.res);
-       console.log(parsed1);
-       navigateRoot('/statistics-results');
-
+    httpPOST(URL_MICROSERVICE_ATTACKS + "/api/attacks", filters, (result) => { 
+      // console.log(result.res);
+      parsed1 = JSON.parse(result.res);
+      // console.log(parsed);
+      navigateRoot('/statistics-results');
       // aici se scrie cod in caz de raspuns 200
      }, (eroare) => { 
        // aici se scrie cod in caz de eroare
@@ -236,7 +235,7 @@ function populate(id1){
 function populateCities(id1, id2){
   let s1 = document.getElementById(id1);
   let s2 = document.getElementById(id2);
-let regionForm = document.querySelector('.cityForm')
+let regionForm = document.querySelector('.cityForm');
   regionForm.innerHTML =  ``;
 
 let weaponFormHeader = document.createElement('h3');

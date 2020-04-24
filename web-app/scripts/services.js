@@ -1,3 +1,8 @@
+const URL_MICROSERVICE_USERS = "http://157.245.121.183:5001";
+// const URL_MICROSERVICE_ATTACKS = "http://157.245.121.183:5002";
+
+const URL_MICROSERVICE_ATTACKS = "http://localhost:8001";
+
 function httpRequest(url, httpVerb, body, res, err) {
     let xmlhttp = new XMLHttpRequest();
     xmlhttp.open(httpVerb, url);

@@ -2,7 +2,7 @@ function attackIdPageBefore(node, id) {
     mainContent.innerHTML = '';
 
     let xmlhttp = new XMLHttpRequest();
-    let apiPath = "http://localhost:8001/api/attacks/" + id;
+    let apiPath = URL_MICROSERVICE_ATTACKS + "/api/attacks/" + id;
     xmlhttp.open("GET", apiPath);
     xmlhttp.send();
     xmlhttp.onreadystatechange = function () {

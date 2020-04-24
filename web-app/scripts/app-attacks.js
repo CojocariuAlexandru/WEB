@@ -5,7 +5,7 @@ function attacksPageInit(node) {
     mainContent.innerHTML = '';
 
     if (previewAttacks == null) {
-        httpGET("http://localhost:8001/api/attacks?preview=true", (response) => {
+        httpGET(URL_MICROSERVICE_ATTACKS + "/api/attacks?preview=true", (response) => {
             previewAttacks = JSON.parse(response.res);
             displayPreviewAttacks(node, previewAttacks);
         }, (error) => {

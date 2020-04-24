@@ -1,0 +1,46 @@
+version: "3.7"
+services:
+    users-db:
+        image: mysql
+        container_name: tevi-users-microservice-mysql
+        restart: on-failure
+        command: 
+            - --lower_case_table_names=1
+        volumes: 
+            - ./tevi/micros-users/db:/var/lib/mysql
+        environment: 
+            MYSQL_ROOT_PASSWORD: password
+        ports:
+            - '5005:3306'
+    users-server:
+        image: alexoloieri/tevi-users
+        container_name: tevi-users-microservice-server
+        restart: always
+        links:
+            - users-db:users-db
+        depends_on: 
+            - users-db
+        ports:
+            - '5001:8002'
+    attacks-db:
+        image: mysql
+        container_name: tevi-attacks-microservice-mysql
+        restart: on-failure
+        command:
+            - --lower_case_table_names=1
+        volumes:
+            - ./tevi/micros-attacks/db:/var/lib/mysql
+        environment: 
+            MYSQL_ROOT_PASSWORD: password
+        ports:
+            - '5006:3306'
+    attacks-server:
+        image: alexoloieri/tevi-attacks
+        container_name: tevi-attacks-microservice-server
+        restart: always
+        links:
+            - attacks-db:attacks-db
+        depends_on:
+            - attacks-db
+        ports:
+            - '5002:8001'
