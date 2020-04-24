@@ -21,9 +21,9 @@ function mapPageInit(node) {
         console.log(error);
     });
 
-    generateRegions();
-    generateCountries();
-    generateCities();
+    generate(regions, ".regionForm", "Region of the attack", "allRegions",  `<input list='allRegions' id='allRegionsInput' onchange=populate('allRegionsInput') >`);
+    generate(emptyObject, ".countryForm", 'Country', 'allCountries', `<input list='allCountries' id='allCountriesInput'>`);
+    generate(emptyObject, '.cityForm',  'City', 'allCities', `<input list='allCities' id='allCitiesInput'>`);
 }
 
 function centerMapOnCountry(countryName) {
@@ -52,7 +52,6 @@ function getMapCoordinates() {
 
 function sendMapVisualizationRequest() {
     let filters = mapPageGetFilterObject();
-    console.log(filters);
 
     httpPOST(URL_MICROSERVICE_ATTACKS + '/api/attacks?mapPage=true', JSON.stringify(filters), (result) => {
         parsed = JSON.parse(result.res);
