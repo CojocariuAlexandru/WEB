@@ -127,7 +127,7 @@ function sendStatisticsRequest() {
         region:          `${regionFormInput.value}`,
         country:         `${countryFormInput.value}`,
         success:         `${successInput.checked}`,
-        knownAttacker:   `${knownInput.checked}`,
+        extended:   `${extendedInput.checked}`,
         suicide:         `${suicideFormInput.checked}`
     };
     console.log(filters);

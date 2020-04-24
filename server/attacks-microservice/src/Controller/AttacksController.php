@@ -61,6 +61,7 @@ class AttacksController
         $this->setValue($decoded, $transformed, "woundedCount");
         $this->setValueBool($decoded, $transformed, "success");
         $this->setValueBool($decoded, $transformed, "suicide");
+        $this->setValueBool($decoded, $transformed, "extended");
         $this->setIfExists($decoded, $transformed, "region");
         $this->setIfExists($decoded, $transformed, "country");
         $this->setIfExists($decoded, $transformed, "city");
@@ -109,11 +110,13 @@ class AttacksController
 
     private function setArrays($decoded, &$transformed, $name){
 
-        $i=0;
-        $exploded = explode(",", $decoded[$name]);
-        foreach ($exploded as $value){
-            $transformed[$name][$i]=$value;
-            $i++;
+        if ($decoded[$name]!=""){
+            $i=0;
+            $exploded = explode(",", $decoded[$name]);
+            foreach ($exploded as $value){
+                $transformed[$name][$i]=$value;
+                $i++;
+            }
         }
     }
 

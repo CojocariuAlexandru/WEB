@@ -57,12 +57,15 @@ function constructParagraf(countries, name, title, exclude){
     elem.appendChild(header);
 
     let list = document.createElement('ul');
+    let i=0;
     for (country in countries){
         if (countries[country][0]!=exclude){
             let el = document.createElement('li');
             el.innerHTML = countries[country][0];
             list.appendChild(el);
         }
+        if (i>10) break;
+        i++;
     }
 
     elem.appendChild(list);
