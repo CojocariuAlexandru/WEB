@@ -12,7 +12,8 @@
     "pie-3 pie-3 pie-3 details-3 details-3 details-3" 
     "world-map world-map world-map world-map world-map world-map" 
     "button-1 button-1 button-2 button-2 button-3 button-3" 
-    "view-table view-table view-table view-table view-table view-table";
+    "view-table view-table view-table view-table view-table view-table"
+    "more-plots more-plots more-plots more-plots more-plots more-plots";
     width: 100%;
   }
 
@@ -51,6 +52,8 @@
 .button-3 { grid-area: button-3; }
 
 .view-table { grid-area: view-table; }
+
+.morePlots{ grid-area: more-plots;}
 
 /* TITLE-STAT */
 .title-stat h2{

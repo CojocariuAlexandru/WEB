@@ -56,6 +56,11 @@ statisticsResultsRoute.template = 'web-app-statistics-result';
 statisticsResultsRoute.initCallback = statisticsResultsPageInit;
 root.children.push(statisticsResultsRoute);
 
+let statistics2DResultsRoute = new Route('statistics-results-2D', true);
+statistics2DResultsRoute.template = 'web-app-statistics-result2D';
+statistics2DResultsRoute.initCallback = initStatisticsResult2D;
+root.children.push(statistics2DResultsRoute);
+
 //*** Statistics drawings route */
 let statisticsDrawingsRoute = new Route('statistics-drawings', true);
 statisticsDrawingsRoute.template = 'web-app-statistics-drawings';
@@ -79,6 +84,8 @@ attacksRoute.template = 'web-app-attacks';
 attacksRoute.initCallback = attacksPageInit;
 attacksRoute.children.push(thatAttackRoute);
 root.children.push(attacksRoute);
+
+
 
 // ------------------ Routing logic -------------------------
 
