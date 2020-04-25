@@ -94,6 +94,7 @@
     margin-right: 8px;
 }
 
+/* The search button was taken from here: https://codepen.io/kristyjy/pen/zGOXYb */
 .search {
     width: 60px;
     height: 60px;
@@ -205,4 +206,92 @@
     right: 18px;
     top: 8px;
     height: 18px;
+}
+
+@media screen and (max-width: 1200px) {
+    .attacks-page-cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .attacks-page-header {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+
+        height: auto;
+    }
+
+    .attacks-page-search {
+        width: auto;
+        max-width: 320px;
+    }
+}
+
+@media screen and (max-width: 760px) {
+    .attacks-page-cards {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .attacks-page-header h1 {
+        font-size: 28px;
+    }
+
+    .search {
+        width: 40px;
+        height: 40px;
+    }
+
+    .search.open:before {
+        height: 27px;
+        margin: 8px;
+    }
+
+    .search-button {
+        width: 40px;
+        height: 40px;
+        padding: 4px;
+    }
+
+    .search-icon {
+        width: 21px;
+        height: 21px;
+    }
+
+    .search-icon:before {
+        width: 2px;
+        height: 10px;
+        right: -3px;
+        top: 13px;
+    }
+
+    .search-icon:after {
+        width: 2px;
+        height: 10px;
+        right: -8px;
+        top: 18px;
+    }
+
+    .open .search-icon {
+        width: 32px;
+        height: 32px;
+    }
+
+    .open .search-icon:before {
+        right: 11px;
+        top: 11px;
+        height: 12px;
+    }
+
+    .open .search-icon:after {
+        right: 11px;
+        top: 4px;
+        height: 12px;
+    }
 }
