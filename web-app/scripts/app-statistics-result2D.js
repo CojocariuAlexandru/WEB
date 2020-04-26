@@ -1,16 +1,19 @@
 var frequencyOfCountries;
 var frequencyOfSuccess;
 var frequencyOfTargets;
+var frequencyOfAttacks;
 
 
 function initStatisticsResult2D(node){
     mainContent.innerHTML = loadPage(node.template);
-
+    console.log(attackTypes);
     createMatrices();
     getFrequencies();
+
     addCountryPreferences();
     addSuccessRate();
     addTargetPreferences();
+    addAttackPreferences();
 }
 
 // stackoverflow.com/questions/8301400/how-do-you-easily-create-empty-matrices-javascript
@@ -19,21 +22,28 @@ function createMatrices(){
     let j;
     frequencyOfCountries = [];
     frequencyOfTargets = [];
+    frequencyOfAttacks = [];
     for(i=1; i < countries.length; i++){
         frequencyOfCountries[countries[i][0]] = [];
-        for(j=0; j<=2200; j++){
+        for(j=0; j<=2015; j++){
             frequencyOfCountries[countries[i][0]][j] = 0;
         }
     }
     for(i=1; i < targTypes.length; i++){
         frequencyOfTargets[targTypes[i][0]] = [];
-        for(j=0; j<=2200; j++){
+        for(j=0; j<=2015; j++){
             frequencyOfTargets[targTypes[i][0]][j] = 0;
+        }
+    }
+    for(i=1; i < attackTypes.length; i++){
+        frequencyOfAttacks[attackTypes[i][0]] = [];
+        for(j=0; j<=2015; j++){
+            frequencyOfAttacks[attackTypes[i][0]][j] = 0;
         }
     }
 
     frequencyOfSuccess = [];
-    for(i=0; i<=2200; i++){
+    for(i=0; i<=2015; i++){
         frequencyOfSuccess[i] = 0;
     }
 }
@@ -44,6 +54,7 @@ function getFrequencies(){
     let countryAttacked;
     let successStatus;
     let targetAttacked;
+    let attackType;
     for(attack in parsed1){
         dateOccured = parsed1[attack]["date"];
         dateOccured = dateOccured.substring(0, 4);
@@ -52,14 +63,15 @@ function getFrequencies(){
         countryAttacked = parsed1[attack]["country"];
         successStatus = parsed1[attack]["success"];
         targetAttacked = parsed1[attack]["targType"];
+        attackType = parsed1[attack]["attackType"];
 
         frequencyOfCountries[countryAttacked][yearOccured] = frequencyOfCountries[countryAttacked][yearOccured] + 1;
         frequencyOfTargets[targetAttacked][yearOccured] = frequencyOfTargets[targetAttacked][yearOccured] + 1;
+        frequencyOfAttacks[attackType][yearOccured] = frequencyOfAttacks[attackType][yearOccured] + 1;
         if(successStatus == 1){
             frequencyOfSuccess[yearOccured] =  frequencyOfSuccess[yearOccured] + 1;
         }
     }
-    console.log(frequencyOfSuccess);
 }
 
 function addCountryPreferences(){
@@ -135,6 +147,34 @@ function addTargetPreferences(){
         var dataForChart = google.visualization.arrayToDataTable(data);
           var options = {
             title: 'Number of attacks which had a certain type of target',
+            backgroundColor: 'lightgray',
+            width: 1200,
+            height: 400,
+            curveType: 'function',
+            legend: { position: 'bottom' }
+          };
+          var chart = new google.visualization.LineChart(countryTargetDocument);
+          chart.draw(dataForChart, options);
+    }
+}
+
+function addAttackPreferences(){
+    let i;
+    let data;
+    let countryTargetDocument = document.querySelector('.plotAttacks');
+    data = [];
+    data.push(['Year', attackTypes[1][0], attackTypes[2][0], attackTypes[3][0], attackTypes[4][0], attackTypes[5][0]]);
+    for(i=1970; i<=2025; i++){
+        data.push([i.toString(), frequencyOfAttacks[attackTypes[1][0]][i], frequencyOfAttacks[attackTypes[2][0]][i], frequencyOfAttacks[attackTypes[3][0]][i], frequencyOfAttacks[attackTypes[4][0]][i], frequencyOfAttacks[attackTypes[5][0]][i]]);
+    }
+    google.charts.load('current', {
+        packages: ['corechart', 'bar']
+    });
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart(){
+        var dataForChart = google.visualization.arrayToDataTable(data);
+          var options = {
+            title: 'Number of attacks which used a certain method of attacking',
             backgroundColor: 'lightgray',
             width: 1200,
             height: 400,
