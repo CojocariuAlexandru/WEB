@@ -78,13 +78,20 @@ let thatAttackRoute = new Route(':id', true);
 thatAttackRoute.template = 'web-app-id-attack';
 thatAttackRoute.initCallback = attackIdPageBefore;
 
+let updateAttackRoute = new Route(':id', true);
+updateAttackRoute.template = 'web-app-update-id-attack';
+updateAttackRoute.initCallback = attackUpdateIdPageInit;
+
+let updateAttackIntermediateRoute = new Route('attacks-update', false);
+updateAttackIntermediateRoute.children.push(updateAttackRoute);
+root.children.push(updateAttackIntermediateRoute);
+
 //*** Attacks route */
 let attacksRoute = new Route('attacks', true);
 attacksRoute.template = 'web-app-attacks';
 attacksRoute.initCallback = attacksPageInit;
 attacksRoute.children.push(thatAttackRoute);
 root.children.push(attacksRoute);
-
 
 
 // ------------------ Routing logic -------------------------
