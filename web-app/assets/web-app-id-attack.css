@@ -20,7 +20,7 @@
   }
 }
 
-@media screen and (max-width:799px){
+@media screen and (max-width:1000px){
   .thatAttackGrid{
       display: grid;
       grid-template-columns: 1fr;

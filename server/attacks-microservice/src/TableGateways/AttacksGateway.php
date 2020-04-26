@@ -51,11 +51,13 @@ class AttacksGateway
             FROM attacks WHERE ";
 
         $prepareArray = $this->prepareStatement($statement, $transformed);
-        // print_r($prepareArray);
+        //  print_r($prepareArray);
+        //  print_r($statement);
 
         try {
             $statement = $this->db->prepare($statement);
             $statement->execute($prepareArray);
+            // print_r($statement);
             $result = $statement->fetchAll();
             return $result;
         } catch (\PDOException $e) {
@@ -140,10 +142,10 @@ class AttacksGateway
             $prepareArray1["weaponSubtype"] = $transformed["weaponSubtype"];
         }
 
-        // $statement = $statement . "LIMIT 10000;";
+         $statement = $statement . "LIMIT 1000;";
 
-        // echo $statement;
-        // print_r($prepareArray1);
+        //  echo $statement;
+        //  print_r($prepareArray1);
 
         return $prepareArray1;
     }
@@ -158,7 +160,7 @@ class AttacksGateway
     private function setConditionStr(&$statement, $value, $str, $op)
     {
         // $statement = $statement . "AND $str $op '$value' ";
-        $statement = $statement . "AND $str $op :$str ";
+        $statement = $statement . "AND UPPER(TRIM( $str )) $op  UPPER(TRIM(:$str)) ";
     }
 
     private function statementArray(&$statement, $array, $name, &$prepareArray)
@@ -169,7 +171,7 @@ class AttacksGateway
 
 
         foreach ($array as $elem) {
-            $value = $value . "'" . $elem .  "',";
+            $value = $value . $elem .  ",";
         }
 
         $prepareArray[$name] = substr($value, 0, -1);
