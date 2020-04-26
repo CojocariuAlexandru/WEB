@@ -9,6 +9,9 @@ function attackIdPageBefore(node, id) {
         if (this.readyState == 4 && this.status == 200) {
             let attack = JSON.parse(xmlhttp.responseText);
             let currentAttack = attack[0];
+            console.log(currentAttack);
+            prepareAttack(currentAttack);
+
             mainContent.innerHTML = attackIdPageTemplate(node.template, currentAttack);
             attackIdPageInit(currentAttack);
         } else if (this.readyState == 4 && this.status == 404) {
@@ -17,6 +20,21 @@ function attackIdPageBefore(node, id) {
     }
     return null;
 }
+
+function prepareAttack(currentAttack){
+    if (currentAttack["terrCount"]=="-99" || currentAttack["terrCount"]=="-1") 
+        currentAttack["terrCount"]="Unknown";
+    if (currentAttack["success"]=="1")
+        currentAttack["success"]="YES";
+    else currentAttack["success"]="NO";
+    if (currentAttack["suicide"]=="1")
+       currentAttack["suicide"]="YES";
+    else currentAttack["suicide"]="NO";
+    if (currentAttack["extended"]=="1")
+      currentAttack["extentded"]="YES";
+    else currentAttack["extended"]="NO";
+}
+
 
 function attackIdPageTemplate(templateName, attack) {
     let compiledTemplate = Handlebars.compile(loadPage(templateName));
@@ -66,7 +84,13 @@ function attackIdPageInit(attack) {
         attackData.style.color = "green";
     }
 
-    attackData = document.querySelector('#knownAttackers');
+    attackData = document.querySelector('#suicide');
+    if (attackData.innerHTML.localeCompare("NO") == 0) {
+        attackData.style.color = "red";
+    } else {
+        attackData.style.color = "green";
+    }
+    attackData = document.querySelector('#extended');
     if (attackData.innerHTML.localeCompare("NO") == 0) {
         attackData.style.color = "red";
     } else {

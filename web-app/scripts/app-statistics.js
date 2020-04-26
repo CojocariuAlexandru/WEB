@@ -220,9 +220,9 @@ function populate(id1){
   if (!(region in regions)){
     regionList = [''];
   }else
-    regionList = Object.keys(regions[region]);
+    regionList = regions[region];
   
-  regionFormTitle.innerHTML = regionFormTitle.innerHTML + `<input class='countries-input' list='allCountries' id='allCountriesInput' onchange=populateCities('allRegionsInput','allCountriesInput')>`
+  regionFormTitle.innerHTML = regionFormTitle.innerHTML + `<input class='countries-input' list='allCountries' id='allCountriesInput'>`
   let index = 0;
   for (index = 0; index < regionList.length; index++)
     regionOptionChoose.innerHTML = regionOptionChoose.innerHTML +
@@ -230,38 +230,6 @@ function populate(id1){
   regionFormTitle.innerHTML = regionFormTitle.innerHTML + '</datalist>'
   regionFormTitle.appendChild(regionOptionChoose)
   regionForm.appendChild(regionFormTitle)
-}
-
-function populateCities(id1, id2){
-  let s1 = document.getElementById(id1);
-  let s2 = document.getElementById(id2);
-let regionForm = document.querySelector('.cityForm');
-  regionForm.innerHTML =  ``;
-
-let weaponFormHeader = document.createElement('h3');
-weaponFormHeader.innerHTML = 'City';
-regionForm.appendChild(weaponFormHeader);
-
-let regionFormTitle = document.createElement('div');
-let regionOptionChoose = document.createElement('datalist');
-regionOptionChoose.setAttribute('id', 'allCities');
-
-let regionList;
-let region = s1.value;
-let country = s2.value;
-if (!(region in regions) && !(country in regions[region])){
-  regionList = [''];
-}else
-  regionList = regions[region][country];
-
-regionFormTitle.innerHTML = regionFormTitle.innerHTML + `<input class='cities-input' list='allCities' id='allCitiesInput'>`
-let index = 0;
-for (index = 0; index < regionList.length; index++)
-  regionOptionChoose.innerHTML = regionOptionChoose.innerHTML +
-  `<option value='${regionList[index]}'>`
-regionFormTitle.innerHTML = regionFormTitle.innerHTML + '</datalist>'
-regionFormTitle.appendChild(regionOptionChoose)
-regionForm.appendChild(regionFormTitle)
 }
 
 

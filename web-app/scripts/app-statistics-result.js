@@ -43,7 +43,7 @@ function getFilters(){
 
     console.log(resultFilters);
 
-    return resultFilters
+    return resultFilters;
 
 
 }
@@ -81,6 +81,10 @@ function statisticsResultsPageInit(node) {
     sort(targTypes);
     datesAppearing = getData('date', 'Most frequent dates', 'date');
     sort(datesAppearing);
+    console.log(countries);
+    console.log(attackTypes);
+    console.log(targTypes);
+    console.log(parsed1);
 
 
     resultFilters = getFilters();
