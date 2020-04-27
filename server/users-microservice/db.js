@@ -19,8 +19,20 @@ async function getPasswordFinalForm(connection, username) {
     return (await connection.execute('SELECT password FROM users WHERE username = ?', [username]))[0];
 }
 
+async function getAllUsers(connection) {
+    return await connection.execute('SELECT * FROM users');
+}
+
+async function updateUser(connection, user) {
+    return await connection.execute('UPDATE users set admin = ? WHERE username = ?', [user.admin, user.username]);
+}
+
 async function getAdminFlag(connection, username) {
     return (await connection.execute('SELECT admin FROM users WHERE username = ?', [username]))[0];
+}
+
+async function getUserById(connection, id) {
+    return (await connection.execute('SELECT * FROM users WHERE id = ?', [id]));
 }
 
 async function getUserByUsername(connection, username) {
@@ -38,3 +50,6 @@ exports.insertNewUser = insertNewUser;
 exports.getPasswordSalt = getPasswordSalt;
 exports.getPasswordFinalForm = getPasswordFinalForm;
 exports.getAdminFlag = getAdminFlag;
+exports.getUserById = getUserById;
+exports.updateUser = updateUser;
+exports.getAllUsers = getAllUsers;

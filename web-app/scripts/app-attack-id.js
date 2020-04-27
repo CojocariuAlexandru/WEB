@@ -21,20 +21,19 @@ function attackIdPageBefore(node, id) {
     return null;
 }
 
-function prepareAttack(currentAttack){
-    if (currentAttack["terrCount"]=="-99" || currentAttack["terrCount"]=="-1") 
-        currentAttack["terrCount"]="Unknown";
-    if (currentAttack["success"]=="1")
-        currentAttack["success"]="YES";
-    else currentAttack["success"]="NO";
-    if (currentAttack["suicide"]=="1")
-       currentAttack["suicide"]="YES";
-    else currentAttack["suicide"]="NO";
-    if (currentAttack["extended"]=="1")
-      currentAttack["extentded"]="YES";
-    else currentAttack["extended"]="NO";
+function prepareAttack(currentAttack) {
+    if (currentAttack["terrCount"] == "-99" || currentAttack["terrCount"] == "-1")
+        currentAttack["terrCount"] = "Unknown";
+    if (currentAttack["success"] == "1")
+        currentAttack["success"] = "YES";
+    else currentAttack["success"] = "NO";
+    if (currentAttack["suicide"] == "1")
+        currentAttack["suicide"] = "YES";
+    else currentAttack["suicide"] = "NO";
+    if (currentAttack["extended"] == "1")
+        currentAttack["extentded"] = "YES";
+    else currentAttack["extended"] = "NO";
 }
-
 
 function attackIdPageTemplate(templateName, attack) {
     let compiledTemplate = Handlebars.compile(loadPage(templateName));

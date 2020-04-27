@@ -30,7 +30,6 @@ function sendStatisticsRequest() {
     let attackList = ['Armed Assault', 'Assasination', 'Bombing', 'Facility Attack', 'Hijacking', 'Hostage Taking', 'Unarmed', 'Unknown'];
     let targetList = ['Airports', 'Business', 'Educational institution', 'Government', 'Military', 'Police', 'Religious Figures', 'Other'];
 
-
     let dateStartInput       = document.querySelector('#dateInputStart');
     let dateFinalInput       = document.querySelector('#dateInputFinal');
     let successInput         = document.querySelector('#succesInput');
@@ -133,7 +132,6 @@ function sendStatisticsRequest() {
     console.log(filters);
     filters = JSON.stringify(filters);
 
-
     httpPOST(URL_MICROSERVICE_ATTACKS + "/api/attacks", filters, (result) => { 
       // console.log(result.res);
       parsed1 = JSON.parse(result.res);
@@ -143,8 +141,6 @@ function sendStatisticsRequest() {
      }, (eroare) => { 
        // aici se scrie cod in caz de eroare
        } );
-
-
 }
 
 function generateWeapons() {
@@ -198,7 +194,6 @@ function generateTargets() {
   weaponForm.appendChild(weaponFormTitle)
 }
 
-
 //https://www.youtube.com/watch?v=UliJeDbc4cw
 // -------------------------------------------DYNAMIC LIST-------------------------------------------------------
 function populate(id1){
@@ -231,7 +226,6 @@ function populate(id1){
   regionFormTitle.appendChild(regionOptionChoose)
   regionForm.appendChild(regionFormTitle)
 }
-
 
 function populateTargetSubtypes(id1){
   let s1 = document.getElementById(id1);

@@ -1,25 +1,75 @@
+const Router = require('./router');
 const config = require('./config');
 const crypto = require('crypto');
 const db = require('./db');
-var jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
+
+router = new Router();
+
+router.addRoute('POST', '/api/login', handleLogin, true);
+router.addRoute('POST', '/api/register', handleRegister, true);
+
+router.addRoute('GET', '/api/users', handleGetAll, true);
+
+router.addRoute('PATCH', '/api/users/', handleUpdateUser, false);
 
 async function handleRequest(req, res, body) {
-    let goodRequest = false;
+    await router.solve(req, res, body, req.url);
+}
 
-    if (req.method === 'POST') {
-        if (req.url === '/api/login') {
-            goodRequest = true;
-            await handleLogin(req, res, body);
-        } else if (req.url === '/api/register') {
-            goodRequest = true;
-            await handleRegister(req, res, body);
+async function handleUpdateUser(req, res, body) {
+    let userIdStr = req.url.substr('/api/users/'.length);
+    if (isNaN(userIdStr)) {
+        res.status = 400;
+        res.statusMessage = 'Bad Request';
+        res.end('Invalid user id');
+        return;
+    }
+    if (body == null) {
+        res.status = 400;
+        res.statusMessage = 'Bad Request';
+        res.end('Request body missing');
+        return;
+    }
+
+    let connection = await db.getDbConnection();
+    let userId = parseInt(userIdStr);
+
+    let user = await db.getUserById(connection, userId);
+    if (user == null || user[0].length == 0) {
+        res.status = 404;
+        res.statusMessage = 'Not Found';
+        res.end('The user doesn\'t exist');
+        return;
+    }
+    user = user[0][0];
+    let oldValue = user.admin;
+
+    if (body['admin'] != undefined) {
+        if (body['admin'] == 'true' || body['admin'] == '1') {
+            user.admin = 1;
+        } else if (body['admin'] == 'false' || body['admin'] == '0') {
+            user.admin = 0;
         }
     }
-
-    if (!goodRequest) {
-        res.status = 400;
-        res.end('Error! Bad Request!');
+    if (oldValue != user.admin) {
+        await db.updateUser(connection, user);
     }
+
+    res.status = 200;
+    res.statusMessage = 'Ok';
+    res.end('');
+}
+
+async function handleGetAll(req, res, body) {
+    let connection = await db.getDbConnection();
+
+    let users = await db.getAllUsers(connection);
+
+    res.status = 200;
+    res.statusMessage = 'Ok';
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(users[0]));
 }
 
 async function handleLogin(req, res, body) {
@@ -81,9 +131,7 @@ async function handleLogin(req, res, body) {
 }
 
 async function handleRegister(req, res, body) {
-    console.log("WAITING");
     let con = await db.getDbConnection();
-    console.log("END");
 
     if (body.username === undefined || body.password === undefined) {
         res.statusCode = 400;
@@ -115,7 +163,6 @@ function saltHashPassword(password) {
     let salt = getPasswordSalt(16);
     return sha512Password(password, salt);
 }
-
 
 function sha512Password(password, salt) {
     let hash = crypto.createHmac('sha512', salt);
