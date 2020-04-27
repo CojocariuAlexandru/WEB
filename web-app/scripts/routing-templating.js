@@ -56,6 +56,11 @@ statisticsResultsRoute.template = 'web-app-statistics-result';
 statisticsResultsRoute.initCallback = statisticsResultsPageInit;
 root.children.push(statisticsResultsRoute);
 
+let statistics2DResultsRoute = new Route('statistics-results-2D', true);
+statistics2DResultsRoute.template = 'web-app-statistics-result2D';
+statistics2DResultsRoute.initCallback = initStatisticsResult2D;
+root.children.push(statistics2DResultsRoute);
+
 //*** Statistics drawings route */
 let statisticsDrawingsRoute = new Route('statistics-drawings', true);
 statisticsDrawingsRoute.template = 'web-app-statistics-drawings';
@@ -73,12 +78,21 @@ let thatAttackRoute = new Route(':id', true);
 thatAttackRoute.template = 'web-app-id-attack';
 thatAttackRoute.initCallback = attackIdPageBefore;
 
+let updateAttackRoute = new Route(':id', true);
+updateAttackRoute.template = 'web-app-update-id-attack';
+updateAttackRoute.initCallback = attackUpdateIdPageInit;
+
+let updateAttackIntermediateRoute = new Route('attacks-update', false);
+updateAttackIntermediateRoute.children.push(updateAttackRoute);
+root.children.push(updateAttackIntermediateRoute);
+
 //*** Attacks route */
 let attacksRoute = new Route('attacks', true);
 attacksRoute.template = 'web-app-attacks';
 attacksRoute.initCallback = attacksPageInit;
 attacksRoute.children.push(thatAttackRoute);
 root.children.push(attacksRoute);
+
 
 // ------------------ Routing logic -------------------------
 

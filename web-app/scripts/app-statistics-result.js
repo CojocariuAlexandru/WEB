@@ -43,7 +43,7 @@ function getFilters(){
 
     console.log(resultFilters);
 
-    return resultFilters
+    return resultFilters;
 
 
 }
@@ -57,12 +57,15 @@ function constructParagraf(countries, name, title, exclude){
     elem.appendChild(header);
 
     let list = document.createElement('ul');
+    let i=0;
     for (country in countries){
         if (countries[country][0]!=exclude){
             let el = document.createElement('li');
             el.innerHTML = countries[country][0];
             list.appendChild(el);
         }
+        if (i>10) break;
+        i++;
     }
 
     elem.appendChild(list);
@@ -78,6 +81,10 @@ function statisticsResultsPageInit(node) {
     sort(targTypes);
     datesAppearing = getData('date', 'Most frequent dates', 'date');
     sort(datesAppearing);
+    console.log(countries);
+    console.log(attackTypes);
+    console.log(targTypes);
+    console.log(parsed1);
 
 
     resultFilters = getFilters();

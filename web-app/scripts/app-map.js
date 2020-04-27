@@ -1,4 +1,4 @@
-
+var markersArray = [];
 
 function mapPageInit(node) {
     mainContent.innerHTML = loadPage(node.template);
@@ -14,57 +14,107 @@ function mapPageInit(node) {
         styles: getMapNightModeStyle()
     });
 
-    httpGET("http://localhost:8001/api/attacks", (result) => {
+    httpGET(URL_MICROSERVICE_ATTACKS + "/api/attacks", (result) => {
         parsed = JSON.parse(result.res);
-
-        for (let i = 0; i < parsed.length; ++i) {
-            let pos = {
-                lat: parseInt(parsed[i].latitude),
-                lng: parseInt(parsed[i].longitude)
-            };
-
-            new google.maps.Marker({
-                position: pos,
-                map: map,
-                title: parsed[i].country
-            });
-        }
+        displayAttacksOnMap(parsed);
     }, (error) => {
         console.log(error);
     });
 
-    generateRegions();
-    generateCountries();
-
-    mapPageAddEventListeners();
+    generate(regions, ".regionForm", "Region of the attack", "allRegions",  `<input list='allRegions' id='allRegionsInput' onchange=populate('allRegionsInput') >`);
+    generate(emptyObject, ".countryForm", 'Country', 'allCountries', `<input list='allCountries' id='allCountriesInput'>`);
+    generate(emptyObject, '.cityForm',  'City', 'allCities', `<input list='allCities' id='allCitiesInput'>`);
 }
 
-function mapPageAddEventListeners() {
-    let countriesInput = document.querySelector('.countries-input');
-    if (countriesInput) {
-        countriesInput.addEventListener('change', mapPageCountrySelected)
-    }
-}
-
-function mapPageCountrySelected(event) {
-    let country = event.target.value;
-    let coordinates = getCountryCoordinates(country);
+function centerMapOnCountry(countryName) {
+    let coordinates = getCountryCoordinates(countryName);
     if (coordinates) {
         let centerMap = new google.maps.LatLng(coordinates.lat, coordinates.lon);
         map.panTo(centerMap);
         map.setZoom(5);
-        mapPageScrollUp();
     }
 }
 
+function centerMapOnRegion(regionName) {
+    let coordinatesZoom = getRegionCoordinatesAndZoom(regionName);
+    if (coordinatesZoom) {
+        let centerMap = new google.maps.LatLng(coordinatesZoom.lat, coordinatesZoom.lon);
+        map.panTo(centerMap);
+        map.setZoom(coordinatesZoom.zoom);
+    }
+}
+
+function getMapCoordinates() {
+    console.log(map.getZoom());
+    console.log(map.getCenter().lat());
+    console.log(map.getCenter().lng());
+}
+
 function sendMapVisualizationRequest() {
-    mapPageScrollUp();
+    let filters = mapPageGetFilterObject();
+
+    httpPOST(URL_MICROSERVICE_ATTACKS + '/api/attacks?mapPage=true', JSON.stringify(filters), (result) => {
+        parsed = JSON.parse(result.res);
+        removeAttacksFromMap();
+        mapPageScrollUp();
+
+        setTimeout(() => {
+            if (filters['country'] != ''){
+                centerMapOnCountry(filters['country']);
+            } else if (filters['region'] != ''){
+                centerMapOnRegion(filters['region']);
+            }
+            
+            displayAttacksOnMap(parsed);
+        }, 1000);
+    }, (err) => {
+        console.log(err);
+    });
+}
+
+function removeAttacksFromMap() {
+    while(markersArray.length) { 
+        markersArray.pop().setMap(null);
+    }
+}
+
+// https://stackoverflow.com/questions/1544739/google-maps-api-v3-how-to-remove-all-markers
+function displayAttacksOnMap(attacks) {
+    for (let i = 0; i < attacks.length; ++i) {
+        let pos = {
+            lat: parseInt(attacks[i].latitude),
+            lng: parseInt(attacks[i].longitude)
+        };
+
+        markersArray.push(new google.maps.Marker({
+            position: pos,
+            map: map,
+            title: attacks[i].country
+        }));
+    }
+}
+
+function mapPageGetFilterObject() {
+    let dateStartInput = document.querySelector('#dateInputStart');
+    let dateFinalInput = document.querySelector('#dateInputFinal');
+
+    let regionFormInput      = document.querySelector('#allRegionsInput');
+    let countryFormInput     = document.querySelector('#allCountriesInput');
+    let cityFormInput        = document.querySelector('#allCitiesInput');
+
+    return {
+        dateStart:       `${dateStartInput.value}`,
+        dateFinal:       `${dateFinalInput.value}`,
+        region:          `${regionFormInput.value}`,
+        country:         `${countryFormInput.value}`,
+        city:            `${cityFormInput.value}`
+    };
 }
 
 function mapPageScrollUp() {
     let mapPageTitle = document.querySelector('.mapVisualizationHeader');
     if (mapPageTitle) {
-        mapPageTitle.scrollIntoView();
+        mapPageTitle.scrollIntoView({behavior: "smooth"});
     }
 }
 
@@ -195,6 +245,28 @@ function getMapNightModeStyle() {
     ];
 }
 
+function getRegionCoordinatesAndZoom(regionName) {
+    let regionsDict = {
+        "Australia & Oceania" : { lat: 22.5050, lon: 159.8989, zoom: 4 },
+        "Central America & Caribbean" : { lat: 16.6453, lon: -75.3968, zoom: 5 },
+        "Central Asia" : { lat: 45.7956, lon: 60.6894, zoom: 4 },
+        "East Asia" : { lat: 36.0639, lon: 111.4026, zoom: 4 },
+        "Eastern Europe" : { lat: 51.4342, lon: 30.5885, zoom: 4 },
+        "Middle East & North Africa" : { lat: 30.6867, lon: 28.3370, zoom: 4 },
+        "North America" : { lat: 53.3114, lon: -97.1123, zoom: 3},
+        "South America" : { lat: -18.3691, lon: -63.0695, zoom: 3 },
+        "South Asia" : { lat: 24.7444, lon: 77.8201, zoom: 4 },
+        "Southeast Asia" : { lat: 9.5852, lon: 113.6910, zoom: 4 },
+        "Sub-Saharan Africa" : { lat: 1.1346, lon: 20.3018, zoom: 3 },
+        "Western Europe" : { lat: 49.1243, lon: 6.8085, zoom: 4 },
+    };
+
+    if (!(regionName in regionsDict)){
+        return null;
+    } else {
+        return regionsDict[regionName];
+    }
+}
 
 function getCountryCoordinates(countryName) {
     // https://developers.google.com/public-data/docs/canonical/countries_csv
@@ -236,9 +308,9 @@ function getCountryCoordinates(countryName) {
       "Belize" : { lat : 17.1899, lon : -88.4976 },
       "Canada" : { lat : 56.1304, lon : -106.347 },
       "Cocos Islands" : { lat : -12.1642, lon : 96.871 },
-      "Congo [DRC]" : { lat : -4.03833, lon : 21.7587 },
+      "Democratic Republic of the Congo" : { lat : -4.03833, lon : 21.7587 },
       "Central African Republic" : { lat : 6.61111, lon : 20.9394 },
-      "Congo" : { lat : -0.228021, lon : 15.8277 },
+      "Republic of the Congo" : { lat : -0.228021, lon : 15.8277 },
       "Switzerland" : { lat : 46.8182, lon : 8.22751 },
       "CÃ´te d'Ivoire" : { lat : 7.53999, lon : -5.54708 },
       "Cook Islands" : { lat : -21.2367, lon : -159.778 },
@@ -443,6 +515,7 @@ function getCountryCoordinates(countryName) {
       "Zambia" : { lat : -13.1339, lon : 27.8493 },
       "Zimbabwe" : { lat : -19.0154, lon : 29.1549 }
       };
+
       if (!(countryName in countriesDict)){
         return null;
       } else {

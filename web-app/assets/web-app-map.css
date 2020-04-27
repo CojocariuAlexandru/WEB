@@ -1,11 +1,12 @@
 .web-app .mapPageGrid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto auto auto auto;
+    grid-template-rows: auto auto auto auto auto auto;
     grid-template-areas: "mapVisualizationHeader mapVisualizationHeader"
         "mapPageMap mapPageMap"
         "mapPageDateInput mapPageDateInput"
         "regionForm countryForm"
+        "cityForm cityForm"
         "mapPageView mapPageView";
     box-sizing: border-box;
     border: 1px solid black;
@@ -50,14 +51,17 @@
     .web-app .mapPageGrid {
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: auto auto auto auto auto auto;
+        grid-template-rows: auto auto auto auto auto auto auto;
         grid-template-areas: "mapVisualizationHeader"
             "mapPageMap"
             "mapPageDateInput"
             "regionForm"
             "countryForm"
+            "cityForm"
             "mapPageView";
         background: #eee;
         font-size: 12px;
+
+        padding: 20px;
     }
 }

@@ -201,6 +201,7 @@ input#searchText {
     margin: 0 50px;
     margin-bottom: 50px;
     padding: 6px;
+    border: 1px solid black;
     border-radius: 20px;
     background-color: #076064c9;
     height: 120px;
@@ -212,6 +213,7 @@ input#searchText {
     font-size: 26px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     text-align: center;
+    font-size:22px;
 }
 
 
@@ -225,10 +227,13 @@ input#searchText {
 #searchCriteriaAdvancedInput > input[type = 'text']{
     height:30px;
     margin-right: 6px;
+    border: 1px solid black;
+    border-radius: 10px;
 }
 
 #advancedIdInput{
     flex:1;
+    width: 50px;
 }
 
 #advancedLocationInput, #advancedDateInput, #advancedTargetInput, #advancedAttackInput{
@@ -239,6 +244,15 @@ input#searchText {
 } 
 #advancedLocation, #advancedDate, #advancedTarget, #advancedAttack{
     flex:2;
+}
+
+#submitAdvancedInput{
+    border: 2px solid black;
+    border-radius: 10px;
+    font-size: 20px;
+}
+#submitAdvancedInput, #advancedFiller{
+    flex:1;
 }
 
 

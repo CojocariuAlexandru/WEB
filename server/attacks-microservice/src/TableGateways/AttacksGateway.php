@@ -26,7 +26,7 @@ class AttacksGateway
             exit($e->getMessage());
         }
     }
-    
+
     public function getById($id)
     {
         $statement = "
@@ -41,70 +41,186 @@ class AttacksGateway
             exit($e->getMessage());
         }
     }
+
     public function getStatistics($transformed)
     {
         $statement = "
-            SELECT *
+            SELECT id, date, extended, region, country, city, 
+            attackType, success, suicide, targType, terrCount, weaponType, 
+            killsCount, woundedCount, propExtent
             FROM attacks WHERE ";
-        
-        $this->prepareStatement($statement, $transformed);
 
-        // echo $statement;
+        $prepareArray = $this->prepareStatement($statement, $transformed);
+        //  print_r($prepareArray);
+        //  print_r($statement);
 
         try {
-            $statement = $this->db->query($statement);
-            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            $statement = $this->db->prepare($statement);
+            $statement->execute($prepareArray);
+            // print_r($statement);
+            $result = $statement->fetchAll();
             return $result;
         } catch (\PDOException $e) {
             exit($e->getMessage());
         }
     }
-    private function prepareStatement(&$statement, $transformed){
+
+    private function prepareStatement(&$statement, $transformed)
+    {
+        $prepareArray1 = [];
 
         $statement = $statement . "date >= STR_TO_DATE('" . $transformed["startDate"] .  "' , '%Y-%m-%d')";
-        if ($transformed["finalDate"]=="sysdate")
-        $statement = $statement . " AND date <= sysdate() ";
+        if ($transformed["finalDate"] == "sysdate")
+            $statement = $statement . " AND date <= sysdate() ";
         else
             $statement = $statement . " AND date <= STR_TO_DATE('" . $transformed["finalDate"] . "', '%Y-%m-%d') ";
 
-        // $this->statementArray($statement, $transformed["weaponType"], "weaponType");
-        // $this->statementArray($statement, $transformed["attackType"], "attackType");
-        // $this->statementArray($statement, $transformed["targType"], "targType");
+        if (array_key_exists("weaponType", $transformed))
+            $this->statementArray($statement, $transformed["weaponType"], "weaponType", $prepareArray1);
+        if (array_key_exists("attackType", $transformed))
+            $this->statementArray($statement, $transformed["attackType"], "attackType", $prepareArray1);
+        if (array_key_exists("targType", $transformed))
+            $this->statementArray($statement, $transformed["targType"], "targType", $prepareArray1);
+        if (array_key_exists("propExtent", $transformed))
+            $this->statementArray($statement, $transformed["propExtent"], "propExtent", $prepareArray1);
 
-        $this->setCondition($statement, $transformed["terrCount"], "terrCount", "<=");
-        $this->setCondition($statement, $transformed["killsCount"], "killsCount", "<=");
-        $this->setCondition($statement, $transformed["woundedCount"],"woundedCount", "<=");
-
-        $this->setCondition($statement, $transformed["success"], "success", "=");
-        if (array_key_exists("region", $transformed))
+        if (array_key_exists("terrCount", $transformed)) {
+            $this->setCondition($statement, $transformed["terrCount"], "terrCount", "<=");
+            $prepareArray1["terrCount"] = $transformed["terrCount"];
+        }
+        if (array_key_exists("killsCount", $transformed)) {
+            $this->setCondition($statement, $transformed["killsCount"], "killsCount", "<=");
+            $prepareArray1["killsCount"] = $transformed["killsCount"];
+        }
+        if (array_key_exists("woundedCount", $transformed)) {
+            $this->setCondition($statement, $transformed["woundedCount"], "woundedCount", "<=");
+            $prepareArray1["woundedCount"] = $transformed["woundedCount"];
+        }
+        if (array_key_exists("success", $transformed)) {
+            $this->setCondition($statement, $transformed["success"], "success", "=");
+            $prepareArray1["success"] = $transformed["success"];
+        }
+        if (array_key_exists("suicide", $transformed)) {
+            $this->setCondition($statement, $transformed["suicide"], "suicide", "=");
+            $prepareArray1["suicide"] = $transformed["suicide"];
+        }
+        if (array_key_exists("extended", $transformed)) {
+            $this->setCondition($statement, $transformed["extended"], "extended", "=");
+            $prepareArray1["extended"] = $transformed["extended"];
+        }
+        if (array_key_exists("region", $transformed)) {
             $this->setConditionStr($statement, $transformed["region"], "region", "=");
-        if (array_key_exists("country", $transformed))
+            $prepareArray1["region"] = $transformed["region"];
+        }
+        if (array_key_exists("country", $transformed)) {
             $this->setConditionStr($statement, $transformed["country"], "country", "=");
-
-        $statement = $statement . "LIMIT 100;";
-
-    }
-
-
-
-    private function setCondition(&$statement, $value, $str, $op){
-        $statement = $statement . "AND $str $op $value ";
-    }
-    private function setConditionStr(&$statement, $value, $str, $op){
-        $statement = $statement . "AND $str $op '$value' ";
-    }
-
-    private function statementArray(&$statement, $array, $name){
-        $str = " AND $name IN (";
-
-        foreach($array as $elem){
-            $str = $str . "'" . $elem .  "',";
+            $prepareArray1["country"] = $transformed["country"];
+        }
+        if (array_key_exists("city", $transformed)) {
+            $this->setConditionStr($statement, $transformed["city"], "city", "=");
+            $prepareArray1["city"] = $transformed["city"];
+        }
+        if (array_key_exists("targetName", $transformed)) {
+            $this->setConditionStr($statement, $transformed["targetName"], "targetName", "=");
+            $prepareArray1["targetName"] = $transformed["targetName"];
+        }
+        if (array_key_exists("targetNat", $transformed)) {
+            $this->setConditionStr($statement, $transformed["targetNat"], "targetNat", "=");
+            $prepareArray1["targetNat"] = $transformed["targetNat"];
+        }
+        if (array_key_exists("groupName", $transformed)) {
+            $this->setConditionStr($statement, $transformed["groupName"], "groupName", "=");
+            $prepareArray1["groupName"] = $transformed["groupName"];
         }
 
-        $str = $str . "'" . $array[0]."') ";
+        if (array_key_exists("targSubtype", $transformed)) {
+            $this->setConditionStr($statement, $transformed["targSubtype"], "targSubtype", "=");
+            $prepareArray1["targSubtype"] = $transformed["targSubtype"];
+        }
+        if (array_key_exists("weaponSubtype", $transformed)) {
+            $this->setConditionStr($statement, $transformed["weaponSubtype"], "weaponSubtype", "=");
+            $prepareArray1["weaponSubtype"] = $transformed["weaponSubtype"];
+        }
+
+         $statement = $statement . "LIMIT 1000;";
+
+        //  echo $statement;
+        //  print_r($prepareArray1);
+
+        return $prepareArray1;
+    }
+
+
+
+    private function setCondition(&$statement, $value, $str, $op)
+    {
+        // $statement = $statement . "AND $str $op $value ";
+        $statement = $statement . "AND $str $op :$str ";
+    }
+    private function setConditionStr(&$statement, $value, $str, $op)
+    {
+        // $statement = $statement . "AND $str $op '$value' ";
+        $statement = $statement . "AND UPPER(TRIM( $str )) $op  UPPER(TRIM(:$str)) ";
+    }
+
+    private function statementArray(&$statement, $array, $name, &$prepareArray)
+    {
+        $str = " AND $name IN ( :$name ) ";
+        $value = "";
+
+
+
+        foreach ($array as $elem) {
+            $value = $value . $elem .  ",";
+        }
+
+        $prepareArray[$name] = substr($value, 0, -1);
         $statement = $statement . $str;
     }
 
+    public function getAttacksInfoForMapPage($filters)
+    {
+        $statement = "SELECT latitude, longitude FROM attacks WHERE ";
+
+        $prepareArray = $this->prepareStatementForMapPage($statement, $filters);
+
+        try {
+            $statement = $this->db->prepare($statement);
+            $statement->execute($prepareArray);
+            $result = $statement->fetchAll();
+            return $result;
+        } catch (\PDOException $e) {
+            exit($e->getMessage());
+        }
+    }
+
+    private function prepareStatementForMapPage(&$statement, $filters)
+    {
+        $preparedArray = [];
+
+        $statement = $statement . "date >= STR_TO_DATE('" . $filters["startDate"] .  "' , '%Y-%m-%d')";
+        if ($filters["finalDate"] == "sysdate")
+            $statement = $statement . " AND date <= sysdate() ";
+        else
+            $statement = $statement . " AND date <= STR_TO_DATE('" . $filters["finalDate"] . "', '%Y-%m-%d') ";
+
+        if (array_key_exists("region", $filters)) {
+            $this->setConditionStr($statement, $filters["region"], "region", "=");
+            $preparedArray["region"] = $filters["region"];
+        }
+        if (array_key_exists("country", $filters)) {
+            $this->setConditionStr($statement, $filters["country"], "country", "=");
+            $preparedArray["country"] = $filters["country"];
+        }
+        if (array_key_exists("city", $filters)) {
+            $this->setConditionStr($statement, $filters["city"], "city", "=");
+            $preparedArray["city"] = $filters["city"];
+        }
+
+        $statement = $statement . "LIMIT 10000;";
+
+        return $preparedArray;
+    }
 
     public function getPreview()
     {

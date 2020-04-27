@@ -34,7 +34,11 @@ class AttacksController
             case 'POST':
                 $rawData = file_get_contents("php://input");
                 $decoded = json_decode($rawData, true);
-                 $response = $this->getGoodAttacks($decoded);
+                if (isset($_GET["mapPage"]) && $_GET["mapPage"] == "true") {
+                    $response = $this->getMapPageAttacks($decoded);
+                } else {
+                    $response = $this->getGoodAttacks($decoded);
+                }
         }
         if (isset($response['status_code_header'])) {
             header($response['status_code_header']);
@@ -46,7 +50,8 @@ class AttacksController
         }
     }
 
-    private function getGoodAttacks($decoded){
+    private function getGoodAttacks($decoded)
+    {
         $transformed = [];
 
         $this->getStartDate($decoded, $transformed);
@@ -54,62 +59,76 @@ class AttacksController
         $this->setArrays($decoded, $transformed, "weaponType");
         $this->setArrays($decoded, $transformed, "attackType");
         $this->setArrays($decoded, $transformed, "targType");
+        $this->setArrays($decoded, $transformed, "propExtent");
+
         $this->setValue($decoded, $transformed, "terrCount");
         $this->setValue($decoded, $transformed, "killsCount");
         $this->setValue($decoded, $transformed, "woundedCount");
         $this->setValueBool($decoded, $transformed, "success");
-        $this->setValueBool($decoded, $transformed, "knownAttacker");
+        $this->setValueBool($decoded, $transformed, "suicide");
+        $this->setValueBool($decoded, $transformed, "extended");
         $this->setIfExists($decoded, $transformed, "region");
         $this->setIfExists($decoded, $transformed, "country");
+        $this->setIfExists($decoded, $transformed, "city");
+        $this->setIfExists($decoded, $transformed, "groupName");
+        $this->setIfExists($decoded, $transformed, "targetNat");
+        $this->setIfExists($decoded, $transformed, "targetName");
+        $this->setIfExists($decoded, $transformed, "targSubtype");
+        $this->setIfExists($decoded, $transformed, "weaponSubtype");
 
 
         $result = $this->attacksGateway->getStatistics($transformed);
-       // print_r($result);
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
-        $response['body']=json_encode($result);
+        $response['body'] = json_encode($result);
         return $response;
     }
-    private function setIfExists($decoded, &$transformed, $name){
-        if ($decoded[$name]!="")
-            $transformed[$name]=$decoded[$name];
+    private function setIfExists($decoded, &$transformed, $name)
+    {
+        if ($decoded[$name] != "")
+            $transformed[$name] = $decoded[$name];
     }
-    private function setValueBool($decoded, &$transformed, $name){
-        if ($decoded[$name]=="true")
-            $transformed[$name]="1";
-        else 
-            $transformed[$name]="0";
-    }
-    
-    private function setValue($decoded, &$transformed, $name){
-        $transformed[$name]=$decoded[$name];
+    private function setValueBool($decoded, &$transformed, $name)
+    {
+        if ($decoded[$name] == "true")
+            $transformed[$name] = "1";
+        else
+            $transformed[$name] = "0";
     }
 
-    private function getStartDate($decoded, &$transformed){
-        if ($decoded["dateStart"]==""){
-            $transformed["startDate"]="1970-01-01";
-        }else{
-            $transformed["startDate"]=$decoded["dateStart"];
+    private function setValue($decoded, &$transformed, $name)
+    {
+        $transformed[$name] = $decoded[$name];
+    }
+
+    private function getStartDate($decoded, &$transformed)
+    {
+        if ($decoded["dateStart"] == "") {
+            $transformed["startDate"] = "1970-01-01";
+        } else {
+            $transformed["startDate"] = $decoded["dateStart"];
         }
     }
 
-    private function getEndDate($decoded, &$transformed){
-        if ($decoded["dateFinal"]==""){
-            $transformed["finalDate"]="sysdate";
-        }else{
-            $transformed["finalDate"]=$decoded["dateFinal"];
+    private function getEndDate($decoded, &$transformed)
+    {
+        if ($decoded["dateFinal"] == "") {
+            $transformed["finalDate"] = "sysdate";
+        } else {
+            $transformed["finalDate"] = $decoded["dateFinal"];
         }
     }
 
     private function setArrays($decoded, &$transformed, $name){
-        $i=0;
-        $exploded = explode(",", $decoded[$name]);
-        foreach ($exploded as $value){
-            $transformed[$name][$i]=$value;
-            $i++;
+
+        if ($decoded[$name]!=""){
+            $i=0;
+            $exploded = explode(",", $decoded[$name]);
+            foreach ($exploded as $value){
+                $transformed[$name][$i]=$value;
+                $i++;
+            }
         }
     }
-
-
 
     private function getFirst($first)
     {
@@ -135,6 +154,22 @@ class AttacksController
     private function getAttacksPreview()
     {
         $result = $this->attacksGateway->getPreview();
+        $response['status_code_header'] = 'HTTP/1.1 200 OK';
+        $response['body'] = json_encode($result);
+        return $response;
+    }
+
+    private function getMapPageAttacks($body)
+    {
+        $filters = [];
+
+        $this->getStartDate($body, $filters);
+        $this->getEndDate($body, $filters);
+        $this->setIfExists($body, $filters, "region");
+        $this->setIfExists($body, $filters, "country");
+        $this->setIfExists($body, $filters, "city");
+
+        $result = $this->attacksGateway->getAttacksInfoForMapPage($filters);
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = json_encode($result);
         return $response;

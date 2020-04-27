@@ -5,13 +5,14 @@ var setTargetTypeCriteria=-1;
 var setAttackTypeCriteria=-1;
 var currentPageNumber = 1;
 var advancedFormOn = 0;
+var parsed1Copy;
 
 function statisticsDrawingsPageInit(node) {
     mainContent.innerHTML = loadPage(node.template);
+    parsed1Copy = parsed1;
     generateRecords();
 }
 
-let parsed;
 let numberPerPage = 10;
 
 function generateRecords() {
@@ -20,21 +21,17 @@ function generateRecords() {
     table.setAttribute('id', 'attacksTable');
     table.setAttribute('class', 'attacksTable')
     attackListHead.appendChild(table);
-    httpGET("http://localhost:8001/api/attacks",
-        (result) => {
-            parsed = JSON.parse(result.res);
-            console.log(parsed);
-            window.addEventListener('resize', showRecordsByWidth);
-            displayRecords(1, window.innerWidth);
-            showProperPlaceHolderAdvancedText(window.innerWidth);
-        }, (error) => {
-            console.log(error);
-        }
-    );
+
+    console.log(parsed1);
+    window.addEventListener('resize', showRecordsByWidth);
+    displayRecords(1, window.innerWidth);
+    showProperPlaceHolderAdvancedText(window.innerWidth);
 }
 
 function showRecordsByWidth(){
     showProperPlaceHolderAdvancedText(window.innerWidth);
+    if(advancedFormOn == 1)
+        showRecordsByInput();
     displayRecords(currentPageNumber, window.innerWidth);
 }
 
@@ -51,7 +48,7 @@ function showProperPlaceHolderAdvancedText(windowWidth){
 function displayRecords(pageNumber, windowWidth) {
     console.log(currentPageNumber);
     let table = document.getElementById('attacksTable');
-    table.innerHTML = ``;
+    table.innerHTML = '';
 
     let particularRecord = document.createElement('tr');
     particularRecord.setAttribute('class', 'headingRecordList');
@@ -60,9 +57,9 @@ function displayRecords(pageNumber, windowWidth) {
         particularRecord.innerHTML = `
                                             <th id='attackIDHeader' class='tableCellDataID' onclick='sortByID()'>ID &#x21C5</th> 
                                             <th id='locationIDHeader' class='tableCellDataAttack' onclick='sortByLocation()'>Location &#x21C5</th> 
-                                            <th id='dateIDHeader' class='tableCellData'>Date &#x21C5</th>
-                                            <th id='attackTypeHeader' class='tableCellData'>Attack Type &#x21C5</th>
-                                            <th id='targetTypeHeader' class='tableCellData'>Target Type &#x21C5</th>
+                                            <th id='dateIDHeader' class='tableCellData' onclick='sortByDate()'>Date &#x21C5</th>
+                                            <th id='attackTypeHeader' class='tableCellData' onclick='sortByAttack()'>Attack Type &#x21C5</th>
+                                            <th id='targetTypeHeader' class='tableCellData' onclick='sortByTarget()'>Target Type &#x21C5</th>
                                     `;
         }
         else{
@@ -70,27 +67,27 @@ function displayRecords(pageNumber, windowWidth) {
         }
     table.appendChild(particularRecord);
 
-    for (let i = (pageNumber - 1) * numberPerPage; i < pageNumber * numberPerPage && i < parsed.length; i++) {
+    for (let i = (pageNumber - 1) * numberPerPage; i < pageNumber * numberPerPage && i < parsed1.length; i++) {
         particularRecord = document.createElement('tr');
         particularRecord.setAttribute('class', 'particularRecord');
         if(windowWidth >= 1000){
             particularRecord.innerHTML = `
-                                <td id='attackID' class='tableCellDataID'>${parsed[i].id}</td>
-                                <td id='locationID' class='tableCellDataAttack'>${parsed[i].country}, ${parsed[i].region} </td>
-                                <td id='dateID' class='tableCellData'>YYYY/MM/DD</td>
-                                <td id='attackType' class='tableCellData'>Attack Type</td>
-                                <td id='targetType' class='tableCellData'>Target Type</td>
+                                <td id='attackID' class='tableCellDataID'>${parsed1[i].id}</td>
+                                <td id='locationID' class='tableCellDataAttack'>${parsed1[i].country}, ${parsed1[i].region} </td>
+                                <td id='dateID' class='tableCellData'>${parsed1[i].date}</td>
+                                <td id='attackType' class='tableCellData'>${parsed1[i].attackType}</td>
+                                <td id='targetType' class='tableCellData'>${parsed1[i].targType}</td>
                                 `;
             }
             else{
                 particularRecord.innerHTML = 
                 `
                 <td class='attackInformation'>
-                    <p><span class='smallScreenHeader'>ID:         </span> ${parsed[i].id}                          </p>
-                    <p><span class='smallScreenHeader'>Location:   </span> ${parsed[i].country}, ${parsed[i].region}</p>
-                    <p><span class='smallScreenHeader'>Date:       </span>                                          </p>
-                    <p><span class='smallScreenHeader'>Target type:</span>                                          </p>
-                    <p><span class='smallScreenHeader'>Attack type:</span>                                          </p>
+                    <p><span class='smallScreenHeader'>ID:         </span> ${parsed1[i].id}                           </p>
+                    <p><span class='smallScreenHeader'>Location:   </span> ${parsed1[i].country}, ${parsed1[i].region}</p>
+                    <p><span class='smallScreenHeader'>Date:       </span> ${parsed1[i].date}                         </p>
+                    <p><span class='smallScreenHeader'>Target type:</span> ${parsed1[i].attackType}                   </p>
+                    <p><span class='smallScreenHeader'>Attack type:</span> ${parsed1[i].targType}                     </p>
                 </td>
                 `
             }
@@ -108,14 +105,14 @@ function generateOtherLists(pageNumber) {
     let otherAttackList = document.createElement('footer');
     let listText = `<p class = 'numberList'>`;
     console.log(pageNumber * numberPerPage);
-    console.log(parsed.length);
+    console.log(parsed1.length);
 
     if (pageNumber == 1) {
         listText = listText + `1`;
-        if (pageNumber * numberPerPage < parsed.length) {
+        if (pageNumber * numberPerPage < parsed1.length) {
             listText = listText + `,<span class="changePage" onclick="increasePageNumber();showRecordsByWidth()">2</span> >>`;
         }
-    } else if (pageNumber * numberPerPage >= parsed.length) {
+    } else if (pageNumber * numberPerPage >= parsed1.length) {
         listText = listText + `<< `;
         listText = listText + `<span class="changePage" onclick="reducePageNumber();showRecordsByWidth()">${pageNumber-1}, </span>`;
         listText = listText + `${pageNumber}`;
@@ -131,11 +128,11 @@ function generateOtherLists(pageNumber) {
 
 function sortByID(){
     if(setIdCriteria == 1){
-        parsed.sort(sortIdCriteriaAscending);
+        parsed1.sort(sortIdCriteriaAscending);
         setIdCriteria = -1;
     }
     else{
-        parsed.sort(sortIdCriteriaDescending)
+        parsed1.sort(sortIdCriteriaDescending)
         setIdCriteria = 1;
     }
     displayRecords(1, window.innerWidth);
@@ -171,11 +168,11 @@ function sortIdCriteriaDescending(a, b){
 
 function sortByLocation(){
     if(setLocationCriteria == 1){
-        parsed.sort(sortLocationCriteriaAscending);
+        parsed1.sort(sortLocationCriteriaAscending);
         setLocationCriteria = -1;
     }
     else{
-        parsed.sort(sortLocationCriteriaDescending)
+        parsed1.sort(sortLocationCriteriaDescending)
         setLocationCriteria = 1;
     }
     displayRecords(1, window.innerWidth);
@@ -229,6 +226,130 @@ function sortLocationCriteriaDescending(a, b){
     }
 }
 
+function sortByDate(){
+    if(setDateCriteria == 1){
+        parsed1.sort(sortDateCriteriaAscending);
+        setDateCriteria = -1;
+    }
+    else{
+        parsed1.sort(sortDateCriteriaDescending);
+        setDateCriteria = 1;
+    }
+    displayRecords(1, window.innerWidth);
+}
+
+function sortDateCriteriaAscending(a, b){
+    valA = new Date(a.date);
+    valA = valA.getTime();
+    valB = new Date(b.date);
+    valB = valB.getTime();
+    if(valA > valB){
+        return 1;
+    }
+    else if(valB > valA){
+        return -1;
+    }
+    else{
+        return 0;
+    }
+}
+
+function sortDateCriteriaDescending(a, b){
+    valA = new Date(a.date);
+    valA = valA.getTime();
+    valB = new Date(b.date);
+    valB = valB.getTime();
+    if(valA > valB){
+        return -1;
+    }
+    else if(valB > valA){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
+function sortByAttack(){
+    if(setAttackTypeCriteria == 1){
+        parsed1.sort(sortAttackCriteriaAscending);
+        setAttackTypeCriteria = -1;
+    }
+    else{
+        parsed1.sort(sortAttackCriteriaDescending);
+        setAttackTypeCriteria = 1;
+    }
+    displayRecords(1, window.innerWidth);
+}
+
+function sortAttackCriteriaAscending(a, b){
+    valA = a.attackType;
+    valB = b.attackType;
+    if(valA > valB){
+        return 1;
+    }
+    else if(valB > valA){
+        return -1;
+    }
+    else{
+        return 0;
+    }
+}
+
+function sortAttackCriteriaDescending(a, b){
+    valA = a.attackType;
+    valB = b.attackType;
+    if(valA > valB){
+        return -1;
+    }
+    else if(valB > valA){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
+function sortByTarget(){
+    if(setTargetTypeCriteria == 1){
+        parsed1.sort(sortTargetCriteriaAscending);
+        setTargetTypeCriteria = -1;
+    }
+    else{
+        parsed1.sort(sortTargetCriteriaDescending);
+        setTargetTypeCriteria = 1;
+    }
+    displayRecords(1, window.innerWidth);
+}
+
+function sortTargetCriteriaAscending(a, b){
+    valA = a.targType;
+    valB = b.targType;
+    if(valA > valB){
+        return 1;
+    }
+    else if(valB > valA){
+        return -1;
+    }
+    else{
+        return 0;
+    }
+}
+
+function sortTargetCriteriaDescending(a, b){
+    valA = a.targType;
+    valB = b.targType;
+    if(valA > valB){
+        return -1;
+    }
+    else if(valB > valA){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
 function reducePageNumber(){
     currentPageNumber = currentPageNumber - 1;
 }
@@ -252,6 +373,7 @@ function showAdvancedForm(){
             <p id='advancedDate'>     Date        </p>
             <p id='advancedAttack'>   Attack type </p>
             <p id='advancedTarget'>   Target type </p>
+            <p id='advancedFiller'></p>
         </div>
         <div id = 'searchCriteriaAdvancedInput'>
             <input type='text' id='advancedIdInput'>
@@ -263,6 +385,7 @@ function showAdvancedForm(){
             </div>
             <input type='text' id='advancedAttackInput'>
             <input type='text' id='advancedTargetInput'>
+            <input type='button' id='submitAdvancedInput' value='Send' onclick='showRecordsByWidth()'>
         </div>
         `;
         listOfAttacksPage.insertBefore(advancedForm, listOfAttacksPage.children[2]);
@@ -272,4 +395,57 @@ function showAdvancedForm(){
         listOfAttacksPage.removeChild(listOfAttacksPage.children[2]);
         advancedFormOn = 0;
     }
+}
+
+function showRecordsByInput(){
+    parsed1 = parsed1Copy;
+    let idValue = -1;
+    let locationValue = -1;
+    let dateStartValue = -1;
+    let dateFinalValue = -1;
+    let attackValue = -1;
+    let targetValue = -1;
+
+    let idForm = document.querySelector('#advancedIdInput');
+    if(`${idForm.value}`)
+        idValue = `${idForm.value}`;
+
+    let locationForm = document.querySelector('#advancedLocationInput');
+    if(`${locationForm.value}`)
+        locationValue = `${locationForm.value}`;
+
+    let dateStartForm = document.querySelector('#dateInputStart');
+    if(`${dateStartForm.value}`)
+        dateStartValue = `${dateStartForm.value}`;
+
+        
+    let dateFinalForm = document.querySelector('#dateInputFinal');
+    if(`${dateFinalForm.value}`)
+        dateFinalValue = `${dateFinalForm.value}`;
+
+    let attackForm = document.querySelector('#advancedAttackInput');
+    if(`${attackForm.value}`)
+        attackValue = `${attackForm.value}`;
+
+    let targetForm = document.querySelector('#advancedTargetInput');
+    if(`${targetForm.value}`)
+        targetValue = `${targetForm.value}`;
+
+    let parsed1Aux = [];
+    console.log(idValue);
+
+    //ID FILTER
+    for(let i = 0; i<parsed1.length; i++){
+        if(
+        (`${parsed1[i].id}` == idValue || idValue == -1) && 
+        (`${parsed1[i].country}` == locationValue || `${parsed1[i].region}` == locationValue || locationValue == -1) &&
+        (`${parsed1[i].attackType}` == attackValue || attackValue == -1) &&
+        (`${parsed1[i].targType}` == targetValue || targetValue == -1)
+        ){
+            parsed1Aux.push(parsed1[i]);
+        }
+    }
+
+
+    parsed1 = parsed1Aux;
 }

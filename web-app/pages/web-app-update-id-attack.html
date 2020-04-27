@@ -1,0 +1,141 @@
+
+
+<div class="grid-container-update">
+    <div class="update-header">
+        <h1>Terrorist attack {{id}} Update</h1>
+    </div>
+
+    <div class="update-date">
+        <div class='dateForm'>
+            <label for='dateInput' id='textDateInterval' ><b>Date:</b></label>
+            <input class='dataForm1' type='date' id='dateInput' value={{date}}></input>
+        </div>
+    </div>
+
+    <div class="update-region"> </div>
+    <div class="update-country">  </div>
+    <div class="update-city"></div>
+
+    <div class="update-latitude">
+        <h3>Latitude</h3>
+        <input type=number step=0.00001 value={{latitude}}> </input>
+    </div>
+    <div class="update-longitude">
+        <h3>Longitude</h3>
+        <input type=number step=0.00001 value={{longitude}}> </input>
+    </div>
+
+    <div class="update-killsCount">
+        <h3>Number of kills</h3>
+        <input type="number" id="quantity" name="quantity" value={{killsCount}}>
+    </div>
+    <div class="update-terrCount">
+        <h3>Terrorists</h3>
+        <input type="number" id="quantity" name="quantity" value={{terrCount}} >
+    </div>
+    <div class="update-woundedCount">
+        <h3>Wounded ppl</h3>
+        <input type="number" id="quantity" name="quantity" value={{woundedCount}}>
+    </div>
+
+    <div class="update-targType"></div>
+    <div class="update-targSubtype"></div>
+    <div class="update-attackType"></div>
+    <div class="update-groupName"></div>
+    <div class="update-weaponType"></div>
+    <div class="update-weaponSubtype"></div>
+
+
+
+    <div class="update-check">
+        <div class='input1'>
+            {{#if success}}
+            <input type='checkbox' id='succesInput' checked></input>
+            {{else}}
+            <input type='checkbox' id='succesInput'></input>
+            {{/if}}
+            <label for='succesInput' id='label1'>Successfull attack</label>
+        </div>
+        <div class='input1'>
+            {{#if extended}}
+            <input type='checkbox' id='extendedInput' checked></input>
+            {{else}}
+            <input type='checkbox' id='extendedInput'></input>
+            {{/if}}
+            <label for='extendedInput' id='label1'>Extended attack (over 24h)</label>
+        </div>
+
+        <div class='input1'>
+            {{#if suicide}}
+            <input type='checkbox' id='suicideInput' checked></input>
+            {{else}}
+            <input type='checkbox' id='suicideInput'></input>
+            {{/if}}
+            <label for='suicideInput' id='label1'>It was a suicide</label>
+        </div>
+    </div>
+    <div class="update-weaponDetails">
+        <h3>Weapon details</h3>
+        <textarea id="weaponDetails" rows="3" cols="30">
+        {{weaponDetails}}
+        </textarea>
+    </div>
+    <div class="update-targetName">
+        <h3>Target name</h3>
+        <textarea id="targetName" rows="3" cols="30">
+        {{targetName}}
+        </textarea>
+    </div>
+    <div class="update-targetNat">
+        <h3>Target nationality</h3>
+        <textarea id="targetNat" rows="3" cols="30">
+        {{targetNat}}
+        </textarea>
+    </div>
+    <div class="update-propExtent"></div>
+    <div class="update-propComment">
+        <h3>Damages details</h3>
+        <textarea id="propComment" rows="4" cols="50">
+        {{propComment}}
+        </textarea>
+        
+    </div>
+
+    <div class="update-summary">
+        <h3>Summary</h3>
+        <textarea id="summary" rows="4" cols="100">
+        {{summary}}
+        </textarea>
+    </div>
+    <div class="update-motive">
+        <h3>Motive</h3>
+        <textarea id="motive" rows="4" cols="100">
+        {{mtoive}}
+        </textarea>
+    </div>
+    <div class="update-notes">
+        <h3>Notes</h3>
+        <textarea id="notes" rows="4" cols="100">
+        {{addNotes}}
+        </textarea>
+    </div>
+    <div class="update-scite1">
+        <h3>Scite1</h3>
+        <textarea id="scite1" rows="4" cols="100">
+        {{sCite1}}
+        </textarea>
+    </div>
+    <div class="update-scite2">
+        <h3>Scite2</h3>
+        <textarea id="scite2" rows="4" cols="100">
+            {{sCite2}}
+        </textarea>
+    </div>
+    <div class="update-scite3">
+        <h3>Scite3</h3>
+        <textarea id="scite3" rows="4" cols="100">
+        {{sCite3}}
+        </textarea>
+    </div>
+
+  </div>
