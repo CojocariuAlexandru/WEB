@@ -7,7 +7,6 @@ use Src\TableGateways\AttacksGateway;
 class AttacksController
 {
     private $requestMethod;
-
     private $attacksGateway;
 
     public function __construct($db, $requestMethod)
@@ -39,6 +38,11 @@ class AttacksController
                 } else {
                     $response = $this->getGoodAttacks($decoded);
                 }
+            case 'PUT':
+                $rawData = file_get_contents("php://input");
+                $decoded = json_decode($rawData, true);
+                $response = $decoded;
+		        print_r($response);
         }
         if (isset($response['status_code_header'])) {
             header($response['status_code_header']);

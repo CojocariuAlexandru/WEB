@@ -132,12 +132,13 @@ function generateUpdate(listOfValues, selected, selectClass, name, id, input){
         sCite3: `${scite3Update.value}`.trim()
     };
 
-    console.log(filters);
+    console.log(JSON.stringify(filters));
 
     let currentURL = window.location.href; //get current URL
     let currentAttackID = currentURL.split("/"); //get current attack ID - currentAttackID[5]
+    console.log(URL_MICROSERVICE_ATTACKS + "api/attacks/" + currentAttackID[5]);
 
-    httpPUT(URL_MICROSERVICE_ATTACKS + "api/attacks/" + currentAttackID[5], filters, (result) => {
+    httpPUT(URL_MICROSERVICE_ATTACKS + "/api/attacks/" + currentAttackID[5], filters, (result) => {
         navigateRoot('/attacks-update/' + currentAttackID[5]);
      }, (error) => {
 
