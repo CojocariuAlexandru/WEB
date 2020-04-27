@@ -24,6 +24,10 @@ function attackIdPageBefore(node, id) {
 function prepareAttack(currentAttack){
     if (currentAttack["terrCount"]=="-99" || currentAttack["terrCount"]=="-1") 
         currentAttack["terrCount"]="Unknown";
+    if (currentAttack["woundedCount"]=="-99" || currentAttack["woundedCount"]=="-1") 
+        currentAttack["woundedCount"]="Unknown";
+    if (currentAttack["killsCount"]=="-99" || currentAttack["killsCount"]=="-1") 
+        currentAttack["killsCount"]="Unknown";
     if (currentAttack["success"]=="1")
         currentAttack["success"]="YES";
     else currentAttack["success"]="NO";
@@ -31,7 +35,7 @@ function prepareAttack(currentAttack){
        currentAttack["suicide"]="YES";
     else currentAttack["suicide"]="NO";
     if (currentAttack["extended"]=="1")
-      currentAttack["extentded"]="YES";
+      currentAttack["extended"]="YES";
     else currentAttack["extended"]="NO";
 }
 

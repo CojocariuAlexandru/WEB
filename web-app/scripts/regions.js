@@ -1,5 +1,23 @@
-var emptyObject = {
+var attacksTypes = {"Hostage Taking (Kidnapping)":[],
+ "Assassination":[], 
+ "Bombing/Explosion":[], 
+ "Facility/Infrastructure Attack":[],
+ "Armed Assault":[],
+ "Hijacking":[],
+"Unknown":[],
+"Unarmed Assault":[],
+"Hostage Taking (Barricade Incident)":[] 
 }
+
+var propExtent={
+ " Minor Damage":[],
+"Major Damage" :[],
+"Catastrophic damages" :[],
+"Unknown damages":[]
+}
+
+var emptyObject={};
+
 
 var weaponSubtypes ={
   'Biological' : [""],

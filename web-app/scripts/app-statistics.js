@@ -4,12 +4,12 @@ function statisticsPageInit(node) {
   generateWeapons();
   generateAttacks();
   generateTargets();
-  generate(regions, ".regionForm", "Region of the attack", "allRegions",  `<input list='allRegions' id='allRegionsInput' onchange=populate('allRegionsInput') >`);
+  generate(regions, ".regionForm", "Region of the attack", "allRegions",  `<input list='allRegions' id='allRegionsInput' onchange=populate('allRegionsInput','.countryForm') >`);
   generate(emptyObject, ".countryForm", 'Country', 'allCountries', `<input list='allCountries' id='allCountriesInput'>`);
   generate(emptyObject, '.cityForm',  'City', 'allCities', `<input list='allCities' id='allCitiesInput'>`);
-  generate(targetSubtypes, '.targTypeSelect', 'TargetType', 'allTargets', `<input list='allTargets' id='allTargetsInput' onchange=populateTargetSubtypes('allTargetsInput')>`);
+  generate(targetSubtypes, '.targTypeSelect', 'TargetType', 'allTargets', `<input list='allTargets' id='allTargetsInput' onchange=populateTargetSubtypes('allTargetsInput', '.targSubtypeSelect')>`);
   generate(emptyObject,'.targSubtypeSelect',  'TargetSubtype', 'allSubTargets', `<input list='allSubTargets' id='allSubTargetsInput'>`);
-  generate(weaponSubtypes, '.weaponTypeSelect', 'WeaponType', 'allWeapons', `<input list='allWeapons' id='allWeaponsInput' onchange=populateWeaponsSubtypes('allWeaponsInput')>` );
+  generate(weaponSubtypes, '.weaponTypeSelect', 'WeaponType', 'allWeapons', `<input list='allWeapons' id='allWeaponsInput' onchange=populateWeaponsSubtypes('allWeaponsInput','.weaponSubtypeSelect')>` );
   generate(emptyObject, '.weaponSubtypeSelect', 'WeaponSubtype', 'allSubWeapons',  ` <input list='allSubWeapons' id='allSubWeaponsInput'>`);
   generate(emptyObject, ".specificTargetName", 'Target Name', 'allTargetNames', `<input list='allTargetNames' id='allTargetNamesInput'>`);
   generate(emptyObject, ".specificTargetNat", 'Target Nationality', 'allTargetNationalities', `<input list='allTargetNationalities' id='allTargetNationalitiesInput'>`);
@@ -201,15 +201,11 @@ function generateTargets() {
 
 //https://www.youtube.com/watch?v=UliJeDbc4cw
 // -------------------------------------------DYNAMIC LIST-------------------------------------------------------
-function populate(id1){
+function populate(id1,name){
     let s1 = document.getElementById(id1);
 
-    let regionForm = document.querySelector('.countryForm');
+    let regionForm = document.querySelector(name+ " div");
     regionForm.innerHTML =  ``;
-
-  let weaponFormHeader = document.createElement('h3');
-  weaponFormHeader.innerHTML = 'Country';
-  regionForm.appendChild(weaponFormHeader);
 
   let regionFormTitle = document.createElement('div');
   let regionOptionChoose = document.createElement('datalist');
@@ -233,13 +229,10 @@ function populate(id1){
 }
 
 
-function populateTargetSubtypes(id1){
+function populateTargetSubtypes(id1,name){
   let s1 = document.getElementById(id1);
-  let regionForm = document.querySelector('.targSubtypeSelect');
+  let regionForm = document.querySelector(name+' div');
   regionForm.innerHTML =  ``;
-    let weaponFormHeader = document.createElement('h3');
-    weaponFormHeader.innerHTML = 'TargetSubtype';
-    regionForm.appendChild(weaponFormHeader);
 
     let regionFormTitle = document.createElement('div');
     let regionOptionChoose = document.createElement('datalist');
@@ -262,14 +255,11 @@ function populateTargetSubtypes(id1){
     regionForm.appendChild(regionFormTitle);
 }
 
-function populateWeaponsSubtypes(id1){
+function populateWeaponsSubtypes(id1, name){
   let s1 = document.getElementById(id1);
-  let regionForm = document.querySelector('.weaponSubtypeSelect')
+  let regionForm = document.querySelector(name + ' div')
 
   regionForm.innerHTML =  ``;
-    let weaponFormHeader = document.createElement('h3');
-  weaponFormHeader.innerHTML = 'WeaponSubtype';
-  regionForm.appendChild(weaponFormHeader);
 
   let regionFormTitle = document.createElement('div');
   let regionOptionChoose = document.createElement('datalist');
