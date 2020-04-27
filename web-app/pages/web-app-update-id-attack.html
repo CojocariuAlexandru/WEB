@@ -18,24 +18,24 @@
 
     <div class="update-latitude">
         <h3>Latitude</h3>
-        <input type=number step=0.00001 value={{latitude}}> </input>
+        <input type=number step=0.00001 value={{latitude}} id='latitudeInput'></input>
     </div>
     <div class="update-longitude">
         <h3>Longitude</h3>
-        <input type=number step=0.00001 value={{longitude}}> </input>
+        <input type=number step=0.00001 value={{longitude}} id='longitudeInput'> </input>
     </div>
 
     <div class="update-killsCount">
         <h3>Number of kills</h3>
-        <input type="number" id="quantity" name="quantity" value={{killsCount}}>
+        <input type="number" id="quantityKillsInput" name="quantity" value={{killsCount}}>
     </div>
     <div class="update-terrCount">
         <h3>Terrorists</h3>
-        <input type="number" id="quantity" name="quantity" value={{terrCount}} >
+        <input type="number" id="quantityTerroristsInput" name="quantity" value={{terrCount}} >
     </div>
     <div class="update-woundedCount">
         <h3>Wounded ppl</h3>
-        <input type="number" id="quantity" name="quantity" value={{woundedCount}}>
+        <input type="number" id="quantityWoundedInput" name="quantity" value={{woundedCount}}>
     </div>
 
     <div class="update-targType"></div>
@@ -137,5 +137,5 @@
         {{sCite3}}
         </textarea>
     </div>
-
+    <button onclick='generateAttackUpdateObject()'>Send update</button>
   </div>

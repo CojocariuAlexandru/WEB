@@ -39,3 +39,7 @@ function httpGET(url, res, err) {
 function httpPOST(url, obj, res, err) {
     httpRequest(url, "POST", obj, res, err);
 }
+
+function httpPUT(url, obj, res, err) {
+    httpRequest(url, "PUT", obj, res, err);
+}
