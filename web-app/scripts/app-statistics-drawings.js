@@ -46,8 +46,8 @@ function showProperPlaceHolderAdvancedText(windowWidth){
 }
 
 function displayRecords(pageNumber, windowWidth) {
-    console.log(currentPageNumber);
     let table = document.getElementById('attacksTable');
+    let functionToParticularAttack;
     table.innerHTML = '';
 
     let particularRecord = document.createElement('tr');
@@ -68,8 +68,10 @@ function displayRecords(pageNumber, windowWidth) {
     table.appendChild(particularRecord);
 
     for (let i = (pageNumber - 1) * numberPerPage; i < pageNumber * numberPerPage && i < parsed1.length; i++) {
+        functionToParticularAttack = `goToDedicatedPage(${parsed1[i].id})`;
         particularRecord = document.createElement('tr');
         particularRecord.setAttribute('class', 'particularRecord');
+        particularRecord.setAttribute('onclick', functionToParticularAttack);
         if(windowWidth >= 1000){
             particularRecord.innerHTML = `
                                 <td id='attackID' class='tableCellDataID'>${parsed1[i].id}</td>
@@ -97,6 +99,13 @@ function displayRecords(pageNumber, windowWidth) {
         table.appendChild(particularRecord);
     }
     generateOtherLists(pageNumber);
+}
+
+function goToDedicatedPage(pageID){
+    let urlToAttack;
+    urlToAttack = '/attacks/';
+    urlToAttack = urlToAttack + pageID;
+    navigateRoot(urlToAttack);
 }
 
 function generateOtherLists(pageNumber) {
@@ -417,11 +426,13 @@ function showRecordsByInput(){
     let dateStartForm = document.querySelector('#dateInputStart');
     if(`${dateStartForm.value}`)
         dateStartValue = `${dateStartForm.value}`;
+    let dateStartTime = new Date(dateStartValue);
 
         
     let dateFinalForm = document.querySelector('#dateInputFinal');
     if(`${dateFinalForm.value}`)
         dateFinalValue = `${dateFinalForm.value}`;
+    let dateFinalTime = new Date(dateFinalValue);
 
     let attackForm = document.querySelector('#advancedAttackInput');
     if(`${attackForm.value}`)
@@ -432,15 +443,21 @@ function showRecordsByInput(){
         targetValue = `${targetForm.value}`;
 
     let parsed1Aux = [];
-    console.log(idValue);
-
+    let timeOnParticularRecord;
     //ID FILTER
     for(let i = 0; i<parsed1.length; i++){
+        timeOnParticularRecord = new Date(`${parsed1[i].date}`);
         if(
         (`${parsed1[i].id}` == idValue || idValue == -1) && 
         (`${parsed1[i].country}` == locationValue || `${parsed1[i].region}` == locationValue || locationValue == -1) &&
         (`${parsed1[i].attackType}` == attackValue || attackValue == -1) &&
-        (`${parsed1[i].targType}` == targetValue || targetValue == -1)
+        (`${parsed1[i].targType}` == targetValue || targetValue == -1) &&
+        (
+            (dateStartTime.getTime() <= timeOnParticularRecord.getTime() &&
+            dateFinalTime.getTime() >= timeOnParticularRecord.getTime()) ||
+            dateStartValue == -1 ||
+            dateFinalValue == -1
+        )
         ){
             parsed1Aux.push(parsed1[i]);
         }

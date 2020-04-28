@@ -47,3 +47,67 @@ html {
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
+
+@keyframes alert-appearence {
+    from {
+        bottom: 0px;
+        opacity: 0;
+    }
+
+    to {
+        bottom: 40px;
+        opacity: 100%;
+    }
+}
+
+#app-alert {
+    position: fixed;
+
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 40px;
+    opacity: 100%;
+
+    /* https://www.w3schools.com/css/css3_shadows.asp */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
+
+    min-width: 420px;
+    height: 80px;
+
+    animation-name: alert-appearence;
+    animation-duration: 2s;
+}
+
+#app-alert .success {
+    background-color: #5cb85c;
+}
+
+#app-alert .error {
+    background-color: #d9534f;
+}
+
+.app-alert-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100%;
+    width: 100%;
+
+    border-radius: 10px;
+    font-size: 24px;
+}
+
+.app-alert-body i {
+    position: absolute;
+
+    right: 6px;
+    top: 6px;
+
+    font-size: 22px;
+}
+
+.app-alert-body i:hover {
+    cursor: pointer;
+}

@@ -197,8 +197,7 @@ function generateTargets() {
     `<label for="target-box-` + index + `">${weaponList[index]}</label></div>`;
   weaponForm.appendChild(weaponFormTitle)
 }
- 
- 
+
 //https://www.youtube.com/watch?v=UliJeDbc4cw
 // -------------------------------------------DYNAMIC LIST-------------------------------------------------------
 function populate(id1,name){
@@ -227,7 +226,6 @@ function populate(id1,name){
   regionFormTitle.appendChild(regionOptionChoose)
   regionForm.appendChild(regionFormTitle)
 }
- 
  
 function populateTargetSubtypes(id1,name){
   let s1 = document.getElementById(id1);

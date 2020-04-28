@@ -77,18 +77,18 @@ function setWebAppTemplateAsSite() {
 }
 
 function setWebAppTemplateAsSiteAsync() {
-    rootForContent.innerHTML = loadPage('web-app');
+    let compiledTemplate = Handlebars.compile(loadPage('web-app'));
+    let userDetails = getDecodedUserToken();
+
+    rootForContent.innerHTML = compiledTemplate({
+        admin: userDetails.admin,
+        username: userDetails.username
+    });
+
     webapp = true;
     rootForContent.className = "root web-app";
     mainContent = document.querySelector('#content');
-    setWebAppTemplateAsSiteInit();
     navigate(window.location.pathname);
-}
-
-function setWebAppTemplateAsSiteInit() {
-    let username = getDecodedUserToken().username;
-    let usernameContainer = document.querySelector('#web-app-username');
-    usernameContainer.innerHTML = username;
 }
 
 document.addEventListener('DOMContentLoaded', initPage);
@@ -130,4 +130,44 @@ function getPageWidth() {
 
 function getPageHeight() {
     return window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+}
+
+function showSuccess(message, time) {
+    showAlert(message, 'success', time);
+}
+
+function showError(message, time) {
+    showAlert(message, 'error', time);
+}
+
+function showAlert(message, type, time) {
+    removeAlertIfExists();
+
+    let root = document.querySelector('body');
+
+    let alert = document.createElement('div');
+    alert.id = 'app-alert';
+    alert.innerHTML = getAlertHTML(message, type);
+
+    root.appendChild(alert);
+
+    setTimeout((alert) => {
+        if (alert != null && alert.parentNode != null) {
+            alert.parentNode.removeChild(alert);
+        }
+    }, time, alert);
+}
+
+function removeAlertIfExists() {
+    let alert = document.querySelector('#app-alert');
+    if (alert != null) {
+        alert.parentNode.removeChild(alert);
+    }
+}
+
+function getAlertHTML(message, type) {
+    return `<div class="app-alert-body ${type}">
+        <i class="fa fa-remove" onclick="removeAlertIfExists()"></i>
+        ${message}
+        </div>`
 }

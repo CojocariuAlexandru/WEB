@@ -68,6 +68,7 @@ div.recordList {
 .particularRecord:hover {
     /*https://stackoverflow.com/questions/1625681/dynamically-change-color-to-lighter-or-darker-by-percentage-css-javascript*/
     filter: brightness(110%);
+    cursor: pointer;
 }
 
 .headingRecordList {

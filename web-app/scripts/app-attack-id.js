@@ -39,7 +39,6 @@ function prepareAttack(currentAttack){
     else currentAttack["extended"]="NO";
 }
 
-
 function attackIdPageTemplate(templateName, attack) {
     let compiledTemplate = Handlebars.compile(loadPage(templateName));
     return compiledTemplate(attack);
