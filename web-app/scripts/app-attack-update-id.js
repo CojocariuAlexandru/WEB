@@ -4,7 +4,7 @@ function attackUpdateIdPageInit(node, id) {
         // cod in caz de success
         let parsed = JSON.parse(res.res)[0];
         let compiledTemplate = Handlebars.compile(loadPage(node.template));
-        console.log(parsed);
+        // console.log(parsed);
         if (parsed.succes=="0")
             parsed.succes="";
         if (parsed.extended=="0")
@@ -58,7 +58,7 @@ function generateUpdate(listOfValues, selected, selectClass, name, id, input){
     optionChoose.setAttribute('id', id);
   
     let values = Object.keys(listOfValues); 
-    console.log(values);
+    // console.log(values);
     divElement.innerHTML = divElement.innerHTML + input;
     let index = 0;
     for (index = 0; index < values.length; index++)
@@ -69,7 +69,7 @@ function generateUpdate(listOfValues, selected, selectClass, name, id, input){
     selectedForm.appendChild(divElement);
   }
 
-  function generateAttackUpdateObject(){
+  function generateAttackUpdateObject(id){
     let dateUpdate = document.querySelector('#dateInput');
     let regionUpdate = document.querySelector('#allRegionsInput');
     let countryUpdate = document.querySelector('#allCountriesInput');
@@ -101,6 +101,7 @@ function generateUpdate(listOfValues, selected, selectClass, name, id, input){
     let scite3Update = document.querySelector('#scite3');
 
     filters = {
+        id:    `${id}`,
         dateStart:       `${dateUpdate.value}`,
         terrCount: `${terrUpdate.value}`,
         killsCount:    `${killsUpdate.value}`,
@@ -131,15 +132,16 @@ function generateUpdate(listOfValues, selected, selectClass, name, id, input){
         sCite2: `${scite2Update.value}`.trim(),
         sCite3: `${scite3Update.value}`.trim()
     };
-
+    console.log(filters);
     console.log(JSON.stringify(filters));
 
     let currentURL = window.location.href; //get current URL
     let currentAttackID = currentURL.split("/"); //get current attack ID - currentAttackID[5]
-    console.log(URL_MICROSERVICE_ATTACKS + "api/attacks/" + currentAttackID[5]);
+    console.log(URL_MICROSERVICE_ATTACKS + "/api/attacks/" + currentAttackID[5]);
 
     httpPUT(URL_MICROSERVICE_ATTACKS + "/api/attacks/" + currentAttackID[5], filters, (result) => {
-        navigateRoot('/attacks-update/' + currentAttackID[5]);
+        console.log(result.res);
+        navigateRoot('/attacks/' + currentAttackID[5]);
      }, (error) => {
 
      });
