@@ -77,18 +77,18 @@ function setWebAppTemplateAsSite() {
 }
 
 function setWebAppTemplateAsSiteAsync() {
-    rootForContent.innerHTML = loadPage('web-app');
+    let compiledTemplate = Handlebars.compile(loadPage('web-app'));
+    let userDetails = getDecodedUserToken();
+
+    rootForContent.innerHTML = compiledTemplate({
+        admin: userDetails.admin,
+        username: userDetails.username
+    });
+
     webapp = true;
     rootForContent.className = "root web-app";
     mainContent = document.querySelector('#content');
-    setWebAppTemplateAsSiteInit();
     navigate(window.location.pathname);
-}
-
-function setWebAppTemplateAsSiteInit() {
-    let username = getDecodedUserToken().username;
-    let usernameContainer = document.querySelector('#web-app-username');
-    usernameContainer.innerHTML = username;
 }
 
 document.addEventListener('DOMContentLoaded', initPage);

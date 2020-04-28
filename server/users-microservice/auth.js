@@ -11,13 +11,42 @@ router.addRoute('POST', '/api/register', handleRegister, true);
 
 router.addRoute('GET', '/api/users', handleGetAll, true);
 
-router.addRoute('PATCH', '/api/users/', handleUpdateUser, false);
+router.addRoute('PATCH', '/api/users/', handlePatchUser, false);
+
+router.addRoute('DELETE', '/api/users/', handleDeleteUser, false);
 
 async function handleRequest(req, res, body) {
     await router.solve(req, res, body, req.url);
 }
 
-async function handleUpdateUser(req, res, body) {
+async function handleDeleteUser(req, res, body) {
+    let userIdStr = req.url.substr('/api/users/'.length);
+    if (isNaN(userIdStr)) {
+        res.status = 400;
+        res.statusMessage = 'Bad Request';
+        res.end('Invalid user id');
+        return;
+    }
+
+    let connection = await db.getDbConnection();
+    let userId = parseInt(userIdStr);
+
+    let user = await db.getUserById(connection, userId);
+    if (user == null || user[0].length == 0) {
+        res.status = 404;
+        res.statusMessage = 'Not Found';
+        res.end('The user doesn\'t exist');
+        return;
+    }
+
+    await db.deleteUserById(connection, userId);
+
+    res.status = 204;
+    res.statusMessage = 'No Content';
+    res.end();
+}
+
+async function handlePatchUser(req, res, body) {
     let userIdStr = req.url.substr('/api/users/'.length);
     if (isNaN(userIdStr)) {
         res.status = 400;

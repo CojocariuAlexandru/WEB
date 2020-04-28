@@ -36,6 +36,16 @@
                     Attacks
                 </span>
             </div>
+            {{#if admin}}
+            <div class="option" onclick="navigateRootSidebar('/admin')">
+                <span class="icon">
+                    <i class="fa fa-dashboard"></i>
+                </span>
+                <span class="text">
+                    Admin P.
+                </span>
+            </div>
+            {{/if}}
         </div>
     </div>
     <div id="grey-part" onclick="toggleSidebar()"></div>
@@ -51,7 +61,9 @@
                 <div class="icon">
                     <i class="fa fa-user-circle-o"></i>
                 </div>
-                <div class="username" id="web-app-username"></div>
+                <div class="username">
+                    {{username}}
+                </div>
             </div>
             <div class="vertical-line"></div>
             <div class="logout-button" onclick="userLogout()">Logout</div>

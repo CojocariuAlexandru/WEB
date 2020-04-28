@@ -35,6 +35,10 @@ async function getUserById(connection, id) {
     return (await connection.execute('SELECT * FROM users WHERE id = ?', [id]));
 }
 
+async function deleteUserById(connection, id) {
+    return (await connection.execute('DELETE FROM users WHERE id = ?', [id]));
+}
+
 async function getUserByUsername(connection, username) {
     return (await connection.execute('SELECT * FROM users WHERE username = ?', [username]))[0];
 }
@@ -53,3 +57,4 @@ exports.getAdminFlag = getAdminFlag;
 exports.getUserById = getUserById;
 exports.updateUser = updateUser;
 exports.getAllUsers = getAllUsers;
+exports.deleteUserById = deleteUserById;
