@@ -75,6 +75,7 @@ class AttacksGateway
         $statement = $statement . " WHERE id = :id ";
         try {
             $statement = $this->db->prepare($statement);
+            print_r($statement);
             $statement->execute($prepareArray);
             return "Done";
         } catch (\PDOException $e) {

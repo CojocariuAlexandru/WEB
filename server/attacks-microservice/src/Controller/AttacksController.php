@@ -40,6 +40,7 @@ class AttacksController
                 } else {
                     $response = $this->getGoodAttacks($decoded);
                 }
+                break;
             case 'PUT':
                 $rawData = file_get_contents("php://input");
                 $decoded = json_decode($rawData, true);

@@ -26,10 +26,10 @@ var parsed1;
 var filters;
  
 function sendStatisticsRequest() {
-    let weaponList = ['Biological', 'Chemical', 'Explosives', 'Fake Weapons', 'Firearms', 'Incendiary', 'Melee', 'Radiological', 'Sabotage Equipment', 'Vehicle', 'Unknown', 'Other'];
-    let attackList = ['Armed Assault', 'Assasination', 'Bombing', 'Facility Attack', 'Hijacking', 'Hostage Taking', 'Unarmed', 'Unknown'];
-    let targetList = ['Airports', 'Business', 'Educational institution', 'Government', 'Military', 'Police', 'Religious Figures', 'Other'];
- 
+    let weaponList = ['Biological', 'Chemical', 'Explosives', 'Fake Weapons', 'Firearms', 'Incendiary', 'Melee', 'Radiological', 'Sabotage Equipment', 'Vehicle (not to include vehicle-borne explosives, i.e., car or truck bombs)', 'Unknown', 'Other'];
+    let attackList = ['Armed Assault', 'Assasination', 'Bombing/Explosion', 'Facility/Infrastructure Attack', 'Hijacking', 'Hostage Taking (Kidnapping)', 'Unarmed Assault', 'Unknown'];
+    let targetList = ['Airports & Aircraft', 'Business', 'Educational institution', 'Government (General)', 'Military', 'Police', '', 'Other'];
+
  
     let dateStartInput       = document.querySelector('#dateInputStart');
     let dateFinalInput       = document.querySelector('#dateInputFinal');
@@ -78,13 +78,13 @@ function sendStatisticsRequest() {
     for(index=0; index<damageFormInput.children.length;index++){
       if(damageFormInput.children[index].children[0].checked == true){
         if(index == 0){
-          damagesChecked.push('Minor');
+          damagesChecked.push('Minor (likely < $1 million)');
         }
         else if(index == 1){
-          damagesChecked.push('Major');
+          damagesChecked.push('Major (likely >= $1 million but < $1 billion)');
         }
         else if(index == 2){
-          damagesChecked.push('Cayastrophic');
+          damagesChecked.push('Catastrophic (likely >= $1 billion)');
         }
         else if(index == 3){
           damagesChecked.push('Unknown');
