@@ -2,6 +2,7 @@ var frequencyOfCountries;
 var frequencyOfSuccess;
 var frequencyOfTargets;
 var frequencyOfAttacks;
+var windowWidth;
 
 
 function initStatisticsResult2D(node){
@@ -9,7 +10,15 @@ function initStatisticsResult2D(node){
     console.log(attackTypes);
     createMatrices();
     getFrequencies();
+    window.addEventListener('resize', drawAllCharts);
 
+    drawAllCharts();
+}
+
+function drawAllCharts(){
+    windowWidth = window.innerWidth;
+    if(windowWidth <= 520)
+        windowWidth = windowWidth + 160;
     addCountryPreferences();
     addSuccessRate();
     addTargetPreferences();
@@ -78,6 +87,7 @@ function addCountryPreferences(){
     let i;
     let data;
     let countryPreferencesDocument = document.querySelector('.plotCountry');
+
     data = [];
     data.push(['Year', countries[1][0], countries[2][0], countries[3][0], countries[4][0], countries[5][0]]);
     for(i=1970; i<=2025; i++){
@@ -92,8 +102,8 @@ function addCountryPreferences(){
           var options = {
             title: 'Number of attacks per country in the last years',
             backgroundColor: 'lightgray',
-            width: 1200,
-            height: 400,
+            width: windowWidth * 0.8,
+            height: windowWidth * 0.8 / 2.5,
             curveType: 'function',
             legend: { position: 'bottom' }
           };
@@ -120,8 +130,8 @@ function addSuccessRate(){
           var options = {
             title: 'Number of successful attacks in the last years',
             backgroundColor: 'lightgray',
-            width: 1200,
-            height: 400,
+            width: windowWidth * 0.8,
+            height: windowWidth * 0.8 / 2.5,
             curveType: 'function',
             legend: { position: 'bottom' }
           };
@@ -148,8 +158,8 @@ function addTargetPreferences(){
           var options = {
             title: 'Number of attacks which had a certain type of target',
             backgroundColor: 'lightgray',
-            width: 1200,
-            height: 400,
+            width: windowWidth * 0.8,
+            height: windowWidth * 0.8 / 2.5,
             curveType: 'function',
             legend: { position: 'bottom' }
           };
@@ -176,8 +186,8 @@ function addAttackPreferences(){
           var options = {
             title: 'Number of attacks which used a certain method of attacking',
             backgroundColor: 'lightgray',
-            width: 1200,
-            height: 400,
+            width: windowWidth * 0.8,
+            height: windowWidth * 0.8 / 2.5,
             curveType: 'function',
             legend: { position: 'bottom' }
           };
