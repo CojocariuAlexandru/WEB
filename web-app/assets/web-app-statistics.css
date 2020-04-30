@@ -81,7 +81,7 @@ input.dataForm1,
 .successForm,
 .nrWoundedForm,
 .nrTerrForm,
-.nrDeathsForm {
+.nrDeathsForm{
     align-items: center;
 }
 
@@ -90,11 +90,12 @@ input.dataForm1,
 }
 
 .statisticsFormGrid>div:not(.statisticsFormHeading),
-.mapPageGrid>div:not(.mapVisualizationHeader) {
+.mapPageGrid>div:not(.mapVisualizationHeader),
+.grid-container-update>div:not(.update-header) {
     background-color: #eee;
     color: #065e61;
-    padding: 20px;
-    margin-bottom: 40px;
+    padding: 10px;
+    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -108,13 +109,15 @@ input.dataForm1,
 }
 
 .web-app .statisticsFormGrid,
-.web-app .mapPageGrid {
+.web-app .mapPageGrid,
+.web-app .grid-container-update {
     padding: 10px 50px;
 }
 
 .web-app .statisticsFormGrid h1,
 .web-app .mapPageGrid h1,
-#attacks-page .attacks-page-header h1 {
+#attacks-page .attacks-page-header h1, 
+.web-app .grid-container-update .update-header h1 {
     text-align: center;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     padding: 0px;
@@ -124,10 +127,9 @@ input.dataForm1,
 }
 
 .statisticsFormGrid>div:not(.statisticsFormHeading):hover,
-.mapPageGrid>div:not(.mapVisualizationHeader):hover {
+.mapPageGrid>div:not(.mapVisualizationHeader):hover,
+.grid-container-update>div:not(.update-header):hover {
     background-color: #f1f1f16b;
-    padding: 20px;
-    margin-bottom: 40px;
     display: flex;
     border: dashed 2px #065e61;
     background-color: #065e6109;
@@ -270,13 +272,13 @@ input.dataForm1,
     width: 50%;
 }
 
-.attackTypeForm,
+/* .attackTypeForm,
 .weaponTypeForm,
 .targetTypeForm,
 .damageForm {
     margin-left: 10px;
     margin-right: 10px;
-}
+} */
 
 .attackTypeForm h3,
 .weaponTypeForm h3,
@@ -292,14 +294,15 @@ input.dataForm1,
 .specificTargetName h3,
 .specificTargetNat h3, 
 .specificGroup h3,
-.countryForm h3 {
+.countryForm h3,
+.grid-container-update h3 {
     color: #eee;
-    font-size: 22px;
+    font-size: 20px;
     background-color: #065e61;
     display: inline;
-    margin: 10px 20px 30px 20px;
+    margin: 10px;
     padding: 10px;
-    border-radius: 15px;
+    border-radius: 40px;
     text-align: center;
 }
 
@@ -358,20 +361,12 @@ input.dataForm1,
 }
 
 /* FOURTH ROW */
-.fourthRow ,
-.regionForm,
-.countryForm,
-.cityForm,
-.targTypeSelect,
-.targSubtypeSelect,
-.weaponTypeSelect,
-.weaponSubtypeSelect,
-.specificParagraph,
-.specificTargetName,
-.specificTargetNat,
-.specificGroup{
+.statisticsFormGrid > div,
+.grid-container-update > div
+{
     margin-left: 10px;
     margin-right: 10px;
+    padding: 0;
 }
 
 .fourthRow {

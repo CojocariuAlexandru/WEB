@@ -73,21 +73,6 @@
            </li>
            {{/if}}
 
-           {{#if targetName}}
-           <li>
-            <div class="key"><span> Target: </span></div>
-            <div class="value"> <span>{{targetName}}</span></div>
-           </li>
-           {{/if}}
-
-           
-           {{#if targetNat}}
-           <li>
-            <div class="key"><span> Target nationality: </span></div>
-            <div class="value"> <span>{{targetNat}}</span></div>
-           </li>
-           {{/if}}
-
            {{#if groupName}}
            <li>
             <div class="key"><span> Group name: </span></div>
@@ -116,10 +101,10 @@
     </div>
     
     <div class='attackDetailTitle1'>
-        <h3>Target subtype</h3>
+        <h3>Target details</h3>
     </div>
     <div class='attackDetailTitle2'>
-        <h3>Weapon de tails</h3>
+        <h3>Weapon de details</h3>
     </div>
     <div class='attackDetailTitle3'>
         <h3>Damages</h3>
@@ -127,7 +112,15 @@
     
     {{#if targSubtype}}
     <div class='attackDetailText1'>
-        <p>{{targSubtype}}</p>
+        <p><b>Target subtype</b>: {{targSubtype}}</p>
+
+        {{#if targetName}}
+         <p><b>Target name</b>: {{targetName}}</p>
+        {{/if}}
+
+        {{#if targetNat}}
+        <p> <b>Target nationality</b>: {{targetNat}}</p>
+        {{/if}}
     </div>
     {{else}}
     <div class='attackDetailText1'>

@@ -1,5 +1,23 @@
-var emptyObject = {
+var attacksTypes = {"Hostage Taking (Kidnapping)":[],
+ "Assassination":[], 
+ "Bombing/Explosion":[], 
+ "Facility/Infrastructure Attack":[],
+ "Armed Assault":[],
+ "Hijacking":[],
+"Unknown":[],
+"Unarmed Assault":[],
+"Hostage Taking (Barricade Incident)":[] 
 }
+
+var propExtent={
+ " Minor Damage":[],
+"Major Damage" :[],
+"Catastrophic damages" :[],
+"Unknown damages":[]
+}
+
+var emptyObject={};
+
 
 var weaponSubtypes ={
   'Biological' : [""],
@@ -34,17 +52,17 @@ var targetSubtypes = {
   'Violent Political Party': ["", "Party Office/Facility", "Party Official/Candidate/Other Personnel", "Rally"]
 };
 
-
-var regions = {'Australasia & Oceania' : [ "Australia","Fiji","French Polynesia","New Caledonia","New Hebrides","New Zealand","Papua New Guinea","Solomon Islands","Vanuatu","Wallis and Futuna"],
-'Central America & Caribbean' : [ "Antigua and Barbuda","Bahamas","Barbados","Belize","Costa Rica","Cuba","Dominica","Dominican Republic","El Salvador","Grenada","Guadeloupe","Guatemala","Haiti","Honduras","Jamaica","Martinique","Nicaragua","Panama","St. Kitts and Nevis","St. Lucia","Trinidad and Tobago"],
-'Central Asia' : [ "Armenia","Azerbaijan","Georgia","Kazakhstan","Kyrgyzstan","Tajikistan","Turkmenistan","Uzbekistan"],
-'East Asia' : [ "China","Hong Kong","Japan","Macau","North Korea","South Korea","Taiwan"],
-'Eastern Europe' : [ "Albania","Belarus","Bosnia-Herzegovina","Bulgaria","Croatia","Czech Republic","Czechoslovakia","East Germany (GDR)","Estonia","Hungary","Kosovo","Latvia","Lithuania","Macedonia","Moldova","Montenegro","Poland","Romania","Russia","Serbia","Serbia-Montenegro","Slovak Republic","Slovenia","Soviet Union","Ukraine","Yugoslavia"],
-'Middle East & North Africa' : [ "Algeria","Bahrain","Egypt","International","Iran","Iraq","Israel","Jordan","Kuwait","Lebanon","Libya","Morocco","North Yemen","Qatar","Saudi Arabia","South Yemen","Syria","Tunisia","Turkey","United Arab Emirates","West Bank and Gaza Strip","Western Sahara","Yemen"],
-'North America' : [ "Canada","Mexico","United States"],
-'South America' : [ "Argentina","Bolivia","Brazil","Chile","Colombia","Ecuador","Falkland Islands","French Guiana","Guyana","Paraguay","Peru","Suriname","Uruguay","Venezuela"],
-'South Asia' : [ "Afghanistan","Bangladesh","Bhutan","India","Maldives","Mauritius","Nepal","Pakistan","Sri Lanka"],
-'Southeast Asia' : [ "Brunei","Cambodia","East Timor","Indonesia","Laos","Malaysia","Myanmar","Philippines","Singapore","South Vietnam","Thailand","Vietnam"],
-'Sub-Saharan Africa' : [ "Angola","Benin","Botswana","Burkina Faso","Burundi","Cameroon","Central African Republic","Chad","Comoros","Democratic Republic of the Congo","Djibouti","Equatorial Guinea","Eritrea","Ethiopia","Gabon","Gambia","Ghana","Guinea","Guinea-Bissau","Ivory Coast","Kenya","Lesotho","Liberia","Madagascar","Malawi","Mali","Mauritania","Mozambique","Namibia","Niger","Nigeria","People's Republic of the Congo","Republic of the Congo","Rhodesia","Rwanda","Senegal","Seychelles","Sierra Leone","Somalia","South Africa","South Sudan","Sudan","Swaziland","Tanzania","Togo","Uganda","Zaire","Zambia","Zimbabwe"],
-'Western Europe' : [ "Andorra","Austria","Belgium","Cyprus","Denmark","Finland","France","Germany","Greece","Iceland","Ireland","Italy","Luxembourg","Malta","Netherlands","Norway","Portugal","Spain","Sweden","Switzerland","United Kingdom","Vatican City","West Germany (FRG)"]
+var regions = {
+  'Australasia & Oceania': ["Australia", "Fiji", "French Polynesia", "New Caledonia", "New Hebrides", "New Zealand", "Papua New Guinea", "Solomon Islands", "Vanuatu", "Wallis and Futuna"],
+  'Central America & Caribbean': ["Antigua and Barbuda", "Bahamas", "Barbados", "Belize", "Costa Rica", "Cuba", "Dominica", "Dominican Republic", "El Salvador", "Grenada", "Guadeloupe", "Guatemala", "Haiti", "Honduras", "Jamaica", "Martinique", "Nicaragua", "Panama", "St. Kitts and Nevis", "St. Lucia", "Trinidad and Tobago"],
+  'Central Asia': ["Armenia", "Azerbaijan", "Georgia", "Kazakhstan", "Kyrgyzstan", "Tajikistan", "Turkmenistan", "Uzbekistan"],
+  'East Asia': ["China", "Hong Kong", "Japan", "Macau", "North Korea", "South Korea", "Taiwan"],
+  'Eastern Europe': ["Albania", "Belarus", "Bosnia-Herzegovina", "Bulgaria", "Croatia", "Czech Republic", "Czechoslovakia", "East Germany (GDR)", "Estonia", "Hungary", "Kosovo", "Latvia", "Lithuania", "Macedonia", "Moldova", "Montenegro", "Poland", "Romania", "Russia", "Serbia", "Serbia-Montenegro", "Slovak Republic", "Slovenia", "Soviet Union", "Ukraine", "Yugoslavia"],
+  'Middle East & North Africa': ["Algeria", "Bahrain", "Egypt", "International", "Iran", "Iraq", "Israel", "Jordan", "Kuwait", "Lebanon", "Libya", "Morocco", "North Yemen", "Qatar", "Saudi Arabia", "South Yemen", "Syria", "Tunisia", "Turkey", "United Arab Emirates", "West Bank and Gaza Strip", "Western Sahara", "Yemen"],
+  'North America': ["Canada", "Mexico", "United States"],
+  'South America': ["Argentina", "Bolivia", "Brazil", "Chile", "Colombia", "Ecuador", "Falkland Islands", "French Guiana", "Guyana", "Paraguay", "Peru", "Suriname", "Uruguay", "Venezuela"],
+  'South Asia': ["Afghanistan", "Bangladesh", "Bhutan", "India", "Maldives", "Mauritius", "Nepal", "Pakistan", "Sri Lanka"],
+  'Southeast Asia': ["Brunei", "Cambodia", "East Timor", "Indonesia", "Laos", "Malaysia", "Myanmar", "Philippines", "Singapore", "South Vietnam", "Thailand", "Vietnam"],
+  'Sub-Saharan Africa': ["Angola", "Benin", "Botswana", "Burkina Faso", "Burundi", "Cameroon", "Central African Republic", "Chad", "Comoros", "Democratic Republic of the Congo", "Djibouti", "Equatorial Guinea", "Eritrea", "Ethiopia", "Gabon", "Gambia", "Ghana", "Guinea", "Guinea-Bissau", "Ivory Coast", "Kenya", "Lesotho", "Liberia", "Madagascar", "Malawi", "Mali", "Mauritania", "Mozambique", "Namibia", "Niger", "Nigeria", "People's Republic of the Congo", "Republic of the Congo", "Rhodesia", "Rwanda", "Senegal", "Seychelles", "Sierra Leone", "Somalia", "South Africa", "South Sudan", "Sudan", "Swaziland", "Tanzania", "Togo", "Uganda", "Zaire", "Zambia", "Zimbabwe"],
+  'Western Europe': ["Andorra", "Austria", "Belgium", "Cyprus", "Denmark", "Finland", "France", "Germany", "Greece", "Iceland", "Ireland", "Italy", "Luxembourg", "Malta", "Netherlands", "Norway", "Portugal", "Spain", "Sweden", "Switzerland", "United Kingdom", "Vatican City", "West Germany (FRG)"]
 }

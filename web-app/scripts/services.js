@@ -1,7 +1,8 @@
 const URL_MICROSERVICE_USERS = "http://157.245.121.183:5001";
-// const URL_MICROSERVICE_ATTACKS = "http://157.245.121.183:5002";
+//const URL_MICROSERVICE_ATTACKS = "http://157.245.121.183:5002";
 
 const URL_MICROSERVICE_ATTACKS = "http://localhost:8001";
+// const URL_MICROSERVICE_USERS = "http://localhost:8002";
 
 function httpRequest(url, httpVerb, body, res, err) {
     let xmlhttp = new XMLHttpRequest();
@@ -38,4 +39,16 @@ function httpGET(url, res, err) {
 
 function httpPOST(url, obj, res, err) {
     httpRequest(url, "POST", obj, res, err);
+}
+
+function httpPUT(url, obj, res, err) {
+    httpRequest(url, "PUT", obj, res, err);
+}
+
+function httpPATCH(url, obj, res, err) {
+    httpRequest(url, "PATCH", obj, res, err);
+}
+
+function httpDELETE(url, res, err) {
+    httpRequest(url, "DELETE", null, res, err);
 }

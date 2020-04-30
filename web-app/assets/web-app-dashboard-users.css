@@ -1,0 +1,86 @@
+.dashboard-users-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+
+    color: #065e61;
+
+    padding: 10px 50px;
+}
+
+.dashboard-users-wrapper h1 {
+    text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    padding: 0px;
+    color: #065e61;
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+table.users-table {
+    width: 84%;
+
+    margin-top: 40px;
+
+    border-collapse: collapse;
+}
+
+table.users-table thead table.users-table tbody {
+    width: 100%;
+}
+
+table.users-table thead tr {
+    background-color: #065e6109;
+}
+
+table.users-table th,
+table.users-table td {
+    text-align: center;
+}
+
+table.users-table .small-col {
+    width: 80px;
+}
+
+table.users-table thead tr {
+    font-size: 30px;
+    height: 80px;
+
+    border: dashed 2px #065e61;
+}
+
+table.users-table tbody tr {
+    font-size: 22px;
+    height: 48px;
+}
+
+table.users-table .medium-col {
+    width: 120px;
+}
+
+table.users-table .large-col {
+    width: calc(100% - 280px);
+}
+
+table.users-table i {
+    font-size: 28px;
+}
+
+table.users-table i:hover {
+    cursor: pointer;
+}
+
+table.users-table tr .table-button {
+    visibility: hidden;
+}
+
+table.users-table tr:hover td {
+    background-color: #065e6109;
+    cursor: pointer;
+}
+
+table.users-table tr:hover .table-button {
+    visibility: visible;
+}

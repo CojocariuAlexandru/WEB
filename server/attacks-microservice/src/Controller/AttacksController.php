@@ -7,7 +7,6 @@ use Src\TableGateways\AttacksGateway;
 class AttacksController
 {
     private $requestMethod;
-
     private $attacksGateway;
 
     public function __construct($db, $requestMethod)
@@ -36,9 +35,16 @@ class AttacksController
                 $decoded = json_decode($rawData, true);
                 if (isset($_GET["mapPage"]) && $_GET["mapPage"] == "true") {
                     $response = $this->getMapPageAttacks($decoded);
+                } else if (sizeof($uri) > 3) {
+                    $response = $this->insertAttack($decoded);
                 } else {
                     $response = $this->getGoodAttacks($decoded);
                 }
+                break;
+            case 'PUT':
+                $rawData = file_get_contents("php://input");
+                $decoded = json_decode($rawData, true);
+                $response = $this->setAttack($decoded);
         }
         if (isset($response['status_code_header'])) {
             header($response['status_code_header']);
@@ -48,6 +54,20 @@ class AttacksController
                 echo $response['body'];
             }
         }
+    }
+
+    private function insertAttack($decoded){
+        $result = $this->attacksGateway->insertAttack($decoded);
+        $response['status_code_header'] = 'HTTP/1.1 200 OK';
+        $response['body'] = json_encode($result);
+        return $response;
+    }
+
+    private function setAttack($decoded){
+        $result = $this->attacksGateway->updateAttack($decoded);
+        $response['status_code_header'] = 'HTTP/1.1 200 OK';
+        $response['body'] = json_encode($result);
+        return $response;
     }
 
     private function getGoodAttacks($decoded)

@@ -93,6 +93,17 @@ attacksRoute.initCallback = attacksPageInit;
 attacksRoute.children.push(thatAttackRoute);
 root.children.push(attacksRoute);
 
+/*** Admin panel route */
+let adminPanelRoute = new Route('admin', true);
+adminPanelRoute.template = 'web-app-admin-panel';
+adminPanelRoute.initCallback = adminPanelInit;
+root.children.push(adminPanelRoute);
+
+/*** Users dashboard route */
+let usersDashboardRoute = new Route('users-dashboard', true);
+usersDashboardRoute.template = 'web-app-dashboard-users';
+usersDashboardRoute.initCallback = usersDashboardInit;
+root.children.push(usersDashboardRoute);
 
 // ------------------ Routing logic -------------------------
 

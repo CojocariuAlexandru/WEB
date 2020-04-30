@@ -42,6 +42,58 @@ class AttacksGateway
         }
     }
 
+    public function insertAttack($decoded){
+        $statement = "INSERT INTO attacks ( ";
+        $prepareArray = $this->prepareInsert($statement, $decoded);
+        try {
+            $statement = $this->db->prepare($statement);
+            $statement->execute($prepareArray);
+            return "Done";
+        } catch (\PDOException $e) {
+            exit($e->getMessage());
+        }
+
+    }
+
+    private function prepareInsert(&$statement, $transformed){
+        $prepareArray1 = [];
+        $values = "( ";
+        foreach((array)$transformed as $key => $value){
+             $prepareArray1[$key] = $value;
+             $statement = $statement . "$key, ";
+             $values = $values . ":$key, ";
+        }
+
+        $statement = $statement . ") VALUES " . substr($value, 0, -1) . ")";
+        return $prepareArray1;
+    }
+
+    public function updateAttack($decoded){
+        $statement = "UPDATE attacks SET ";
+        $prepareArray = $this->prepareUpdate($statement, $decoded);
+
+        $statement = $statement . " WHERE id = :id ";
+        try {
+            $statement = $this->db->prepare($statement);
+            print_r($statement);
+            $statement->execute($prepareArray);
+            return "Done";
+        } catch (\PDOException $e) {
+            exit($e->getMessage());
+        }
+
+    }
+
+    private function prepareUpdate(&$statement, $transformed){
+        $prepareArray1 = [];
+        foreach((array)$transformed as $key => $value){
+
+             $prepareArray1[$key] = $value;
+             $statement = $statement . "$key = :$key, ";
+        }
+        return $prepareArray1;
+    }
+
     public function getStatistics($transformed)
     {
         $statement = "

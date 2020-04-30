@@ -79,10 +79,7 @@
   .attackAbout ul li div span, .attackDetailText1, .attackDetailText2, .attackDetailText3, .attackOtherDetails{
       font-size: 12px;
   }
- 
 }
-
-
 
 .attackHeader{
   display:flex;   

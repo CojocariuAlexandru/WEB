@@ -9,17 +9,15 @@ function getDecodedUserToken() {
 }
 
 function changeLogin() {
-    if (login) {
-        return;
+    if (!login) {
+        switchLoginSignup();
     }
-    switchLoginSignup();
 }
 
 function changeSignUp() {
-    if (!login) {
-        return;
+    if (login) {
+        switchLoginSignup();
     }
-    switchLoginSignup();
 }
 
 function userLogin() {
