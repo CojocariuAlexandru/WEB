@@ -217,17 +217,17 @@ class AttacksGateway
 
     private function statementArray(&$statement, $array, $name, &$prepareArray)
     {
-        $str = " AND $name IN ( :$name ) ";
+        $index = 0;
+        $str = " AND $name IN ( ";
         $value = "";
 
-
-
         foreach ($array as $elem) {
-            $value = $value . $elem .  ",";
-        }
-
-        $prepareArray[$name] = substr($value, 0, -1);
-        $statement = $statement . $str;
+            $par = $name . $index;
+            $str = $str . ":$par,";
+            $prepareArray[$par]=$elem;
+            $index ++;
+        } 
+        $statement = $statement . substr($str, 0, -1) . ") ";
     }
 
     public function getAttacksInfoForMapPage($filters)

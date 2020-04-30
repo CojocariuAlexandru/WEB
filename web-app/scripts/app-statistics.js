@@ -135,13 +135,13 @@ function sendStatisticsRequest() {
  
  
     httpPOST(URL_MICROSERVICE_ATTACKS + "/api/attacks", filters, (result) => {
-      // console.log(result.res);
       parsed1 = JSON.parse(result.res);
-      // console.log(parsed);
-      navigateRoot('/statistics-results');
-      // aici se scrie cod in caz de raspuns 200
+      if (parsed1.length == 0)
+           mainContent.innerHTML = '<div class="attackDetailText2">  <p> No attacks found </p> </div>'
+      else
+          navigateRoot('/statistics-results');
      }, (eroare) => {
-       // aici se scrie cod in caz de eroare
+
        } );
  
  
