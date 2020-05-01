@@ -44,7 +44,12 @@ class AttacksController
             case 'PUT':
                 $rawData = file_get_contents("php://input");
                 $decoded = json_decode($rawData, true);
-                $response = $this->setAttack($decoded);
+                if (sizeof($uri) > 3)
+                    $response = $this->setAttack($decoded, $uri[3]);
+                else $response['status_code_header'] = 'HTTP/1.1 404 Not Found';
+                break;
+            case 'DELETE':
+                $response = $this->deleteById($uri[3]);
         }
         if (isset($response['status_code_header'])) {
             header($response['status_code_header']);
@@ -55,19 +60,47 @@ class AttacksController
             }
         }
     }
+    private function deleteById($id){
+        if (is_numeric($id) && intval($id) >= 0/* && intval($id) <= 180000*/) {
+            $result = $this->attacksGateway->deleteById($id);
+            $response['status_code_header'] = 'HTTP/1.1 200 OK';
+            $response['body'] = json_encode($result);
+        } else {
+            $response['status_code_header'] = 'HTTP/1.1 404 Not Found';
+            $response['body'] = json_encode("eroare");
+        }
+        return $response;
+    }
 
     private function insertAttack($decoded){
-        $result = $this->attacksGateway->insertAttack($decoded);
+        $this->prepareUpdate($decoded, $transformed);
+        $result = $this->attacksGateway->insertAttack($transformed);
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = json_encode($result);
         return $response;
     }
 
-    private function setAttack($decoded){
-        $result = $this->attacksGateway->updateAttack($decoded);
-        $response['status_code_header'] = 'HTTP/1.1 200 OK';
+
+    private function setAttack($decoded, $id){
+        $this->prepareUpdate($decoded, $transformed);
+        $result = $this->attacksGateway->updateAttack($transformed, $id);
+        if ($result == "err")
+           $response['status_code_header'] = 'HTTP/1.1 500 Internal Server Error';
+        else
+           $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = json_encode($result);
         return $response;
+    }
+
+    private function prepareUpdate($decoded, &$transformed){
+    
+        foreach((array)$decoded as $key => $value)
+            if ($value!="") 
+                $transformed[$key]=$value;
+        
+        $this->setValueBool($decoded, $transformed, "suicide");
+        $this->setValueBool($decoded, $transformed, "extended");
+        $this->setValueBool($decoded, $transformed, "success");       
     }
 
     private function getGoodAttacks($decoded)
@@ -160,9 +193,12 @@ class AttacksController
 
     private function getById($id)
     {
-        if (is_numeric($id) && intval($id) >= 0 && intval($id) <= 180000) {
+        if (is_numeric($id) && intval($id) >= 0/* && intval($id) <= 180000*/) {
             $result = $this->attacksGateway->getById($id);
-            $response['status_code_header'] = 'HTTP/1.1 200 OK';
+            if ($result!=[])
+                $response['status_code_header'] = 'HTTP/1.1 200 OK';
+            else
+                $response['status_code_header'] = 'HTTP/1.1 404 Not Found';
             $response['body'] = json_encode($result);
         } else {
             $response['status_code_header'] = 'HTTP/1.1 404 Not Found';

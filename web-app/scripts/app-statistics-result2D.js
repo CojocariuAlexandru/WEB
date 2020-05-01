@@ -91,7 +91,7 @@ function addCountryPreferences(){
         var dataForChart = google.visualization.arrayToDataTable(data);
           var options = {
             title: 'Number of attacks per country in the last years',
-            backgroundColor: 'lightgray',
+            backgroundColor: '#eee',
             width: 1200,
             height: 400,
             curveType: 'function',
@@ -119,7 +119,7 @@ function addSuccessRate(){
         var dataForChart = google.visualization.arrayToDataTable(data);
           var options = {
             title: 'Number of successful attacks in the last years',
-            backgroundColor: 'lightgray',
+            backgroundColor: '#eee',
             width: 1200,
             height: 400,
             curveType: 'function',
@@ -147,7 +147,7 @@ function addTargetPreferences(){
         var dataForChart = google.visualization.arrayToDataTable(data);
           var options = {
             title: 'Number of attacks which had a certain type of target',
-            backgroundColor: 'lightgray',
+            backgroundColor: '#eee',
             width: 1200,
             height: 400,
             curveType: 'function',
@@ -175,7 +175,7 @@ function addAttackPreferences(){
         var dataForChart = google.visualization.arrayToDataTable(data);
           var options = {
             title: 'Number of attacks which used a certain method of attacking',
-            backgroundColor: 'lightgray',
+            backgroundColor: '#eee',
             width: 1200,
             height: 400,
             curveType: 'function',

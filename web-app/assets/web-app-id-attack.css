@@ -14,7 +14,7 @@
               "attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading"
               "attackOtherDetails attackOtherDetails attackOtherDetails attackOtherDetails attackOtherDetails attackOtherDetails"
               "byKaggle byKaggle byKaggle byKaggle byKaggle byKaggle"
-              ;
+              "update update update delete delete delete";
 
       overflow-y: scroll;
   }
@@ -38,6 +38,8 @@
           "attackOtherDetailsHeading"
           "attackOtherDetails"
           "byKaggle"
+          "update"
+          "delete"
           ;
       overflow-y: scroll;
   }
@@ -266,3 +268,11 @@
 .attackOtherDetails{
   grid-area: attackOtherDetails;
 }
+
+.submitForm {
+  grid-area: update;
+}
+.deleteForm{
+  grid-area: delete;
+}
+

@@ -21,6 +21,13 @@ function attackIdPageBefore(node, id) {
     return null;
 }
 
+function navigateToUpdate(pageID){
+    let urlToAttack;
+    urlToAttack = '/attacks-update/';
+    urlToAttack = urlToAttack + pageID;
+    navigateRoot(urlToAttack);
+}
+
 function prepareAttack(currentAttack){
     if (currentAttack["terrCount"]=="-99" || currentAttack["terrCount"]=="-1") 
         currentAttack["terrCount"]="Unknown";
@@ -99,4 +106,21 @@ function attackIdPageInit(attack) {
     } else {
         attackData.style.color = "green";
     }
+}
+
+
+function areYouSure(){
+    let result =   confirm("Are you sure?");
+    if (result == true) {
+        let currentURL = window.location.href; //get current URL
+        let currentAttackID = currentURL.split("/"); //get current attack ID - currentAttackID[5]
+        console.log(URL_MICROSERVICE_ATTACKS + "/api/attacks/" + currentAttackID[5]);
+    
+        httpDELETE(URL_MICROSERVICE_ATTACKS + "/api/attacks/" + currentAttackID[5], (result) => {
+            console.log(result.res);
+            navigateRoot('');
+         }, (error) => {
+            //ALERT
+         });
+    } 
 }

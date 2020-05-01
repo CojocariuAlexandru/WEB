@@ -94,7 +94,7 @@ input.dataForm1,
 .grid-container-update>div:not(.update-header) {
     background-color: #eee;
     color: #065e61;
-    padding: 10px;
+    padding: 20px;
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;

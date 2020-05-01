@@ -27,6 +27,21 @@ class AttacksGateway
         }
     }
 
+    public function deleteById($id){
+        $statement = "
+            DELETE 
+            FROM attacks
+            WHERE id= :id ";
+        $prepareArray["id"]= $id;
+        try {
+            $statement = $this->db->prepare($statement);
+            $status = $statement->execute($prepareArray);
+                return $status;
+        } catch (\PDOException $e) {
+                exit($e->getMessage());
+        }
+    }
+
     public function getById($id)
     {
         $statement = "
@@ -47,8 +62,12 @@ class AttacksGateway
         $prepareArray = $this->prepareInsert($statement, $decoded);
         try {
             $statement = $this->db->prepare($statement);
-            $statement->execute($prepareArray);
-            return "Done";
+            $status = $statement->execute($prepareArray);
+            if ($status === false) {
+                return "err";
+            } else {
+                return "Done";
+            }
         } catch (\PDOException $e) {
             exit($e->getMessage());
         }
@@ -56,28 +75,37 @@ class AttacksGateway
     }
 
     private function prepareInsert(&$statement, $transformed){
-        $prepareArray1 = [];
-        $values = "( ";
+
+        $statement = $statement . " date, ";
+
+        $values = "(  STR_TO_DATE( :date , '%Y-%m-%d'), " ;
+
+        $prepareArray1["date"] = $transformed["date"];
+        unset($transformed['date']);
+        unset($transformed['id']);
+
         foreach((array)$transformed as $key => $value){
              $prepareArray1[$key] = $value;
              $statement = $statement . "$key, ";
              $values = $values . ":$key, ";
         }
-
-        $statement = $statement . ") VALUES " . substr($value, 0, -1) . ")";
+        $statement = substr($statement, 0, -2) . ") VALUES " . substr($values, 0, -2) . ")";
         return $prepareArray1;
     }
 
-    public function updateAttack($decoded){
+    public function updateAttack($decoded, $id){
         $statement = "UPDATE attacks SET ";
         $prepareArray = $this->prepareUpdate($statement, $decoded);
-
+        $prepareArray["id"]=$id;
         $statement = $statement . " WHERE id = :id ";
         try {
-            $statement = $this->db->prepare($statement);
-            print_r($statement);
-            $statement->execute($prepareArray);
-            return "Done";
+            $smt = $this->db->prepare($statement);
+            $status = $smt->execute($prepareArray);
+            if ($status === false) {
+                return "err";
+            } else {
+                return "Done";
+            }
         } catch (\PDOException $e) {
             exit($e->getMessage());
         }
@@ -85,12 +113,19 @@ class AttacksGateway
     }
 
     private function prepareUpdate(&$statement, $transformed){
-        $prepareArray1 = [];
+
+        $statement = $statement . " date = STR_TO_DATE( :date , '%Y-%m-%d'), ";
+        $prepareArray1["date"] = $transformed["date"];
+        unset($transformed['date']);
         foreach((array)$transformed as $key => $value){
 
              $prepareArray1[$key] = $value;
-             $statement = $statement . "$key = :$key, ";
+             $statement = $statement . "$key=:$key, ";
         }
+        $statement =  substr($statement, 0, -1);
+           $statement = substr($statement, 0, -1);
+
+
         return $prepareArray1;
     }
 
@@ -196,22 +231,15 @@ class AttacksGateway
 
          $statement = $statement . "LIMIT 1000;";
 
-        //  echo $statement;
-        //  print_r($prepareArray1);
-
         return $prepareArray1;
     }
 
 
 
-    private function setCondition(&$statement, $value, $str, $op)
-    {
-        // $statement = $statement . "AND $str $op $value ";
+    private function setCondition(&$statement, $value, $str, $op){
         $statement = $statement . "AND $str $op :$str ";
     }
-    private function setConditionStr(&$statement, $value, $str, $op)
-    {
-        // $statement = $statement . "AND $str $op '$value' ";
+    private function setConditionStr(&$statement, $value, $str, $op){
         $statement = $statement . "AND UPPER(TRIM( $str )) $op  UPPER(TRIM(:$str)) ";
     }
 

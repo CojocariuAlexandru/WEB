@@ -153,8 +153,6 @@
     </div>
 
     <div class="attackOtherDetails">
-
-
         {{#if summary}}
        <p><b>Summary</b>: {{summary}}</p>
        {{/if}}
@@ -181,9 +179,26 @@
        {{/if}}
 
        <p>There are no other details</p>
-
     </div>
 
+    <section class='submitForm' onclick="navigateToUpdate({{id}})">
+        <div id='submitButton2'>
+            <input type='button' value='Update' id='submitButton'>
+            <span id='span1'></span>
+            <span id='span2'></span>
+            <span id='span3'></span>
+            <span id='span4'></span>
+        </div>
+    </section>
 
+    <section class='submitForm deleteForm' onclick="areYouSure()">
+        <div class="deleteButton" id='submitButton2'>
+            <input type='button' value='Delete' id='submitButton'>
+            <span id='span1'></span>
+            <span id='span2'></span>
+            <span id='span3'></span>
+            <span id='span4'></span>
+        </div>
+    </section>
 
 </div>

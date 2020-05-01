@@ -69,7 +69,7 @@ function generateUpdate(listOfValues, selected, selectClass, name, id, input){
     selectedForm.appendChild(divElement);
   }
 
-  function generateAttackUpdateObject(id){
+  function generateAttackUpdateObject(){
     let dateUpdate = document.querySelector('#dateInput');
     let regionUpdate = document.querySelector('#allRegionsInput');
     let countryUpdate = document.querySelector('#allCountriesInput');
@@ -101,8 +101,7 @@ function generateUpdate(listOfValues, selected, selectClass, name, id, input){
     let scite3Update = document.querySelector('#scite3');
 
     filters = {
-        id:    `${id}`,
-        dateStart:       `${dateUpdate.value}`,
+        date:       `${dateUpdate.value}`,
         terrCount: `${terrUpdate.value}`,
         killsCount:    `${killsUpdate.value}`,
         woundedCount:     `${woundedUpdate.value}`,
@@ -122,7 +121,7 @@ function generateUpdate(listOfValues, selected, selectClass, name, id, input){
         extended:   `${extendedUpdate.checked}`,
         suicide:         `${suicideUpdate.checked}`,
         latitude: `${latitudeUpdate.value}`,
-        logitude: `${longitudeUpdate.value}`,
+        longitude: `${longitudeUpdate.value}`,
         propComment: `${dagamesDetailsUpdate.value}`.trim(),
         weaponDetail: `${weaponDetailsUpdate.value}`.trim(),
         summary: `${sumaryUpdate.value}`.trim(),
@@ -132,8 +131,10 @@ function generateUpdate(listOfValues, selected, selectClass, name, id, input){
         sCite2: `${scite2Update.value}`.trim(),
         sCite3: `${scite3Update.value}`.trim()
     };
+    if (filters["date"]=="")
+        filters["date"]="0000-00-00"
+    filters = JSON.stringify(filters);
     console.log(filters);
-    console.log(JSON.stringify(filters));
 
     let currentURL = window.location.href; //get current URL
     let currentAttackID = currentURL.split("/"); //get current attack ID - currentAttackID[5]
@@ -143,7 +144,7 @@ function generateUpdate(listOfValues, selected, selectClass, name, id, input){
         console.log(result.res);
         navigateRoot('/attacks/' + currentAttackID[5]);
      }, (error) => {
-
+        //ALERT
      });
       
   }
