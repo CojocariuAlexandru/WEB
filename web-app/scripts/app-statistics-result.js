@@ -1,6 +1,9 @@
 var countries;
 var attackTypes;
 var targTypes;
+var regions;
+var dateFrequency;
+var weaponTypes;
 
 function fillField(filters1, name){
     if (filters1[name]==""){
@@ -80,11 +83,20 @@ function statisticsResultsPageInit(node) {
     targTypes = getData('TargetType', 'Most frequently types of target', "targType");
     sort(targTypes);
     datesAppearing = getData('date', 'Most frequent dates', 'date');
-    sort(datesAppearing);
-    console.log(countries);
-    console.log(attackTypes);
-    console.log(targTypes);
-    console.log(parsed1);
+    regions = getData('region', 'Most frequently attacked regions', 'region');
+    sort(regions);
+    weaponTypes = getData('weaponType', 'Most frequently used weapons', 'weaponType');
+    sort(weaponTypes);
+    console.log(weaponTypes);
+
+    dateFrequency = [];
+    let i;
+    for(i=0; i<=2030; i++){
+        dateFrequency[i] = 0;
+    }
+    for(attack in parsed1){
+        dateFrequency[parseInt(parsed1[attack][1].substring(0, 4))] = dateFrequency[parseInt(parsed1[attack][1].substring(0, 4))] + 1;
+    }
 
 
     resultFilters = getFilters();
@@ -109,6 +121,7 @@ function statisticsResultsPageInit(node) {
 function getData(name, details, field){
     let data = [[name, details]];
     let ok;
+    
     for (attack in parsed1){
         ok=0;
         for (country in data){
@@ -117,6 +130,7 @@ function getData(name, details, field){
                 ok=1;
             }
         }
+  
         if (ok==0){
             data.push([parsed1[attack][field], 1]);
         }
@@ -219,19 +233,21 @@ function addPiechart3() {
 
 function addColumnChart() {
     let columnCharDivision = document.querySelector('.world-map-element');
+    let dataForChart = [['Year', 'number']];
     google.charts.load('current', {
         packages: ['corechart', 'bar']
     });
     google.charts.setOnLoadCallback(drawChart);
 
+
+    for(i in dateFrequency){
+        if(dateFrequency[i] > 0){
+            dataForChart.push([i.toString(), dateFrequency[i]]);
+        }
+    }
+
     function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-            ['Year', 'number'],
-            ['2014', 1000],
-            ['2015', 1170],
-            ['2016', 660],
-            ['2017', 1030]
-        ]);
+        var data = google.visualization.arrayToDataTable(dataForChart);
 
         //dupa un model de pe internet
         var options = {
@@ -275,7 +291,6 @@ function addColumnChart() {
         chart.draw(data, google.charts.Bar.convertOptions(options));
     }
 }
-
 
 // ---------------------------------LOADING BARS -----------------------------------------
 
