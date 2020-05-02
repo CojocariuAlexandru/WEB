@@ -28,103 +28,172 @@ function loadPage(pageName) {
 // https://medium.com/@bryanmanuele/how-i-implemented-my-own-spa-routing-system-in-vanilla-js-49942e3c4573
 
 class Route {
-    constructor(url, leaf) {
+    constructor(url, leaf, template, initCallback, children, guards) {
         this.url = url;
-        this.children = [];
         this.leaf = leaf;
+        this.template = template;
+        this.initCallback = initCallback;
+        this.children = children;
+        this.guards = guards;
     }
 }
 
-let root = new Route('/app', false);
+class RouteGuard {
+    constructor(guardCallback, redirectTo) {
+        this.guardCallback = guardCallback;
+        this.redirectTo = redirectTo;
+    }
+}
 
-// ------------------ Web app routes -------------------------
+const adminGuard = new RouteGuard(userIsAdmin, '/home');
 
-//*** Home route */
-let homeRoute = new Route('home', true);
-homeRoute.template = 'web-app-home';
-homeRoute.initCallback = homePageInit;
-root.children.push(homeRoute);
+class RouteBuilder {
+    constructor(url, leaf) {
+        this.url = url;
+        this.leaf = leaf;
+        this.template = null;
+        this.initCallback = null;
+        this.children = null;
+        this.guards = null;
+    }
 
-//*** Statistics route */
-let statisticsRoute = new Route('statistics', true);
-statisticsRoute.template = 'web-app-statistics';
-statisticsRoute.initCallback = statisticsPageInit;
-root.children.push(statisticsRoute);
+    setTemplate(template) {
+        this.template = template;
+        return this;
+    }
 
-let statisticsResultsRoute = new Route('statistics-results', true);
-statisticsResultsRoute.template = 'web-app-statistics-result';
-statisticsResultsRoute.initCallback = statisticsResultsPageInit;
-root.children.push(statisticsResultsRoute);
+    setInitCallback(initCallback) {
+        this.initCallback = initCallback;
+        return this;
+    }
 
-let statistics2DResultsRoute = new Route('statistics-results-2D', true);
-statistics2DResultsRoute.template = 'web-app-statistics-result2D';
-statistics2DResultsRoute.initCallback = initStatisticsResult2D;
-root.children.push(statistics2DResultsRoute);
+    setChildren(children) {
+        this.children = children;
+        return this;
+    }
 
-//*** Statistics drawings route */
-let statisticsDrawingsRoute = new Route('statistics-drawings', true);
-statisticsDrawingsRoute.template = 'web-app-statistics-drawings';
-statisticsDrawingsRoute.initCallback = statisticsDrawingsPageInit;
-root.children.push(statisticsDrawingsRoute);
+    setGuards(guards) {
+        this.guards = guards;
+        return this;
+    }
 
-//*** Map route */
-let mapRoute = new Route('map', true);
-mapRoute.template = 'web-app-map';
-mapRoute.initCallback = mapPageInit;
-root.children.push(mapRoute);
+    build() {
+        return new Route(this.url, this.leaf, this.template, this.initCallback, this.children, this.guards);
+    }
+}
 
-//*** Attack/id route */
-let thatAttackRoute = new Route(':id', true);
-thatAttackRoute.template = 'web-app-id-attack';
-thatAttackRoute.initCallback = attackIdPageBefore;
+const homeRoute = new RouteBuilder('home', true)
+    .setTemplate('web-app-home')
+    .setInitCallback(homePageInit)
+    .build();
 
-let updateAttackRoute = new Route(':id', true);
-updateAttackRoute.template = 'web-app-update-id-attack';
-updateAttackRoute.initCallback = attackUpdateIdPageInit;
+const statisticsFormRoute = new RouteBuilder('statistics', true)
+    .setTemplate('web-app-statistics')
+    .setInitCallback(statisticsPageInit)
+    .build();
 
-let updateAttackIntermediateRoute = new Route('attacks-update', false);
-updateAttackIntermediateRoute.children.push(updateAttackRoute);
-root.children.push(updateAttackIntermediateRoute);
+const statisticsResultRoute = new RouteBuilder('statistics-results', true)
+    .setTemplate('web-app-statistics-result')
+    .setInitCallback(statisticsResultsPageInit)
+    .build();
 
-//*** Attacks route */
-let attacksRoute = new Route('attacks', true);
-attacksRoute.template = 'web-app-attacks';
-attacksRoute.initCallback = attacksPageInit;
-attacksRoute.children.push(thatAttackRoute);
-root.children.push(attacksRoute);
+const statistics2DResultsRoute = new RouteBuilder('statistics-results-2D', true)
+    .setTemplate('web-app-statistics-result2D')
+    .setInitCallback(initStatisticsResult2D)
+    .build();
 
-/*** Admin panel route */
-let adminPanelRoute = new Route('admin', true);
-adminPanelRoute.template = 'web-app-admin-panel';
-adminPanelRoute.initCallback = adminPanelInit;
-root.children.push(adminPanelRoute);
+const statisticsDrawingsRoute = new RouteBuilder('statistics-drawings', true)
+    .setTemplate('web-app-statistics-drawings')
+    .setInitCallback(statisticsDrawingsPageInit)
+    .build();
 
-/*** Users dashboard route */
-let usersDashboardRoute = new Route('users-dashboard', true);
-usersDashboardRoute.template = 'web-app-dashboard-users';
-usersDashboardRoute.initCallback = usersDashboardInit;
-root.children.push(usersDashboardRoute);
+const mapRoute = new RouteBuilder('map', true)
+    .setTemplate('web-app-map')
+    .setInitCallback(mapPageInit)
+    .build();
+
+const attackIdPageRoute = new RouteBuilder(':id', true)
+    .setTemplate('web-app-id-attack')
+    .setInitCallback(attackIdPageBefore)
+    .build();
+
+const attacksPageRoute = new RouteBuilder('attacks', true)
+    .setTemplate('web-app-attacks')
+    .setInitCallback(attacksPageInit)
+    .setChildren([attackIdPageRoute])
+    .build();
+
+const attackIdUpdateRoute = new RouteBuilder(':id', true)
+    .setTemplate('web-app-update-id-attack')
+    .setInitCallback(attackUpdateIdPageInit)
+    .build();
+
+const attackIdUpdateRouteParent = new RouteBuilder('attacks-update', false)
+    .setChildren([attackIdUpdateRoute])
+    .build();
+
+const attacksInsertRoute = new RouteBuilder('attacks-insert', true)
+    .setTemplate('web-app-insert-id-attack')
+    .setInitCallback(attacksInsertPageInit)
+    .build();
+
+const adminPanelRoute = new RouteBuilder('admin', true)
+    .setTemplate('web-app-admin-panel')
+    .setInitCallback(adminPanelInit)
+    .setGuards([adminGuard])
+    .build();
+
+const usersDashboardRoute = new RouteBuilder('users-dashboard', true)
+    .setTemplate('web-app-dashboard-users')
+    .setInitCallback(usersDashboardInit)
+    .setGuards([adminGuard])
+    .build();
+
+const root = new RouteBuilder('/app', false)
+    .setChildren([homeRoute, statisticsFormRoute, statisticsResultRoute, statistics2DResultsRoute, statisticsDrawingsRoute,
+        mapRoute, attacksPageRoute, attackIdUpdateRouteParent, attacksInsertRoute, adminPanelRoute, usersDashboardRoute
+    ])
+    .build();
 
 // ------------------ Routing logic -------------------------
+
+function checkGuards(node) {
+    if (node.guards != null) {
+        for (let i = 0; i < node.guards.length; ++i) {
+            if (!node.guards[i].guardCallback()) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
 
 function updateMainContentRecursive(node, pathParts, index) {
     // Leaf route with parameter
     if (node.url && node.url[0] == ':' && index == pathParts.length && node.leaf === true) {
-        if (pageIsLoaded(node.template)) {
-            node.initCallback(node, pathParts[index-1]);
+        if (checkGuards(node)) {
+            if (pageIsLoaded(node.template)) {
+                node.initCallback(node, pathParts[index - 1]);
+            } else {
+                asyncLoadPage(node.template, node.initCallback, node, pathParts[index - 1]);
+            }
+            return false;
         } else {
-            asyncLoadPage(node.template, node.initCallback, node, pathParts[index-1]);
+            return true;
         }
-        return false;
     }
     // Leaf route with no parameter
-    if (index == pathParts.length && node.leaf === true) {
-        if (pageIsLoaded(node.template)) {
-            node.initCallback(node);
+    if (index == pathParts.length && node.leaf === true && checkGuards(node)) {
+        if (checkGuards(node)) {
+            if (pageIsLoaded(node.template)) {
+                node.initCallback(node);
+            } else {
+                asyncLoadPage(node.template, node.initCallback, node);
+            }
+            return false;
         } else {
-            asyncLoadPage(node.template, node.initCallback, node);
+            return true;
         }
-        return false;
     }
     if (node.children != null) {
         for (let i = 0; i < node.children.length; ++i) {

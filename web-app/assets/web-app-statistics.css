@@ -399,10 +399,11 @@ input.dataForm1,
 }
 
 /* SUBMIT FORM */
-.submitForm {
+.statisticsFormGrid .submitForm {
+    display: flex;
+    margin-bottom: 50px;
     grid-area: submitForm;
 }
-
 
 #dateInput {
     height: 20px;
@@ -452,14 +453,6 @@ input[type="checkbox"]:checked+label::before {
 }
 
 /* SUBMIT FORM */
-
-
-.submitForm {
-    display: flex;
-    margin-bottom: 50px;
-}
-
-
 
 #submitButton {
     width: 100%;

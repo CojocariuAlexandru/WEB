@@ -137,3 +137,11 @@ function userIsLoggedIn() {
     }
     return true;
 }
+
+function userIsAdmin() {
+    let decodedToken = getDecodedUserToken();
+    if (decodedToken == null) {
+        return false;
+    }
+    return (decodedToken.admin == 1);
+}

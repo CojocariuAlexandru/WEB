@@ -4,7 +4,7 @@ config.PORT = 8002;
 config.HOSTNAME = "0.0.0.0";
 config.ACCESS_TOKEN_SECRET = '8572011574de34822484c6ebfc32557a54784db7daad3641851fcd11486c6929763d9ae3162845b0375e0bf8fc10c550e8ad5561df9a1d90267ad68a6a31b65d';
 
-let production = false;
+let production = true;
 
 if (production) {
     config.DB_HOST = "users-db";
