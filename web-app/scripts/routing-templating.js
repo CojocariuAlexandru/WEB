@@ -126,6 +126,7 @@ const attacksPageRoute = new RouteBuilder('attacks', true)
 const attackIdUpdateRoute = new RouteBuilder(':id', true)
     .setTemplate('web-app-update-id-attack')
     .setInitCallback(attackUpdateIdPageInit)
+    .setGuards([adminGuard])
     .build();
 
 const attackIdUpdateRouteParent = new RouteBuilder('attacks-update', false)
@@ -133,8 +134,9 @@ const attackIdUpdateRouteParent = new RouteBuilder('attacks-update', false)
     .build();
 
 const attacksInsertRoute = new RouteBuilder('attacks-insert', true)
-    .setTemplate('web-app-insert-id-attack')
+    .setTemplate('web-app-insert-attack')
     .setInitCallback(attacksInsertPageInit)
+    .setGuards([adminGuard])
     .build();
 
 const adminPanelRoute = new RouteBuilder('admin', true)

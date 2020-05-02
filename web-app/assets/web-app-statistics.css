@@ -362,7 +362,8 @@ input.dataForm1,
 
 /* FOURTH ROW */
 .statisticsFormGrid > div,
-.grid-container-update > div
+.grid-container-update > div,
+.mapPageGrid > div
 {
     margin-left: 10px;
     margin-right: 10px;
