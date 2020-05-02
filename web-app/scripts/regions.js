@@ -7,14 +7,14 @@ var attacksTypes = {"Hostage Taking (Kidnapping)":[],
 "Unknown":[],
 "Unarmed Assault":[],
 "Hostage Taking (Barricade Incident)":[] 
-}
+};
 
 var propExtent={
  " Minor Damage":[],
 "Major Damage" :[],
 "Catastrophic damages" :[],
 "Unknown damages":[]
-}
+};
 
 var emptyObject={};
 
@@ -65,4 +65,4 @@ var regions = {
   'Southeast Asia': ["Brunei", "Cambodia", "East Timor", "Indonesia", "Laos", "Malaysia", "Myanmar", "Philippines", "Singapore", "South Vietnam", "Thailand", "Vietnam"],
   'Sub-Saharan Africa': ["Angola", "Benin", "Botswana", "Burkina Faso", "Burundi", "Cameroon", "Central African Republic", "Chad", "Comoros", "Democratic Republic of the Congo", "Djibouti", "Equatorial Guinea", "Eritrea", "Ethiopia", "Gabon", "Gambia", "Ghana", "Guinea", "Guinea-Bissau", "Ivory Coast", "Kenya", "Lesotho", "Liberia", "Madagascar", "Malawi", "Mali", "Mauritania", "Mozambique", "Namibia", "Niger", "Nigeria", "People's Republic of the Congo", "Republic of the Congo", "Rhodesia", "Rwanda", "Senegal", "Seychelles", "Sierra Leone", "Somalia", "South Africa", "South Sudan", "Sudan", "Swaziland", "Tanzania", "Togo", "Uganda", "Zaire", "Zambia", "Zimbabwe"],
   'Western Europe': ["Andorra", "Austria", "Belgium", "Cyprus", "Denmark", "Finland", "France", "Germany", "Greece", "Iceland", "Ireland", "Italy", "Luxembourg", "Malta", "Netherlands", "Norway", "Portugal", "Spain", "Sweden", "Switzerland", "United Kingdom", "Vatican City", "West Germany (FRG)"]
-}
+};

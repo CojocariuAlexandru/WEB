@@ -1,8 +1,8 @@
-var setIdCriteria=-1;
-var setLocationCriteria=-1;
-var setDateCriteria=-1;
-var setTargetTypeCriteria=-1;
-var setAttackTypeCriteria=-1;
+var setIdCriteria = -1;
+var setLocationCriteria = -1;
+var setDateCriteria = -1;
+var setTargetTypeCriteria = -1;
+var setAttackTypeCriteria = -1;
 var currentPageNumber = 1;
 var advancedFormOn = 0;
 var parsed1Copy;
@@ -28,19 +28,18 @@ function generateRecords() {
     showProperPlaceHolderAdvancedText(window.innerWidth);
 }
 
-function showRecordsByWidth(){
+function showRecordsByWidth() {
     showProperPlaceHolderAdvancedText(window.innerWidth);
-    if(advancedFormOn == 1)
+    if (advancedFormOn == 1)
         showRecordsByInput();
     displayRecords(currentPageNumber, window.innerWidth);
 }
 
-function showProperPlaceHolderAdvancedText(windowWidth){
+function showProperPlaceHolderAdvancedText(windowWidth) {
     let advancedSearch = document.querySelector('#searchText');
-    if(windowWidth >= 600){
+    if (windowWidth >= 600) {
         advancedSearch.setAttribute('placeholder', 'Search attack by ID');
-    }
-    else{
+    } else {
         advancedSearch.setAttribute('placeholder', 'Search by ID');
     }
 }
@@ -53,7 +52,7 @@ function displayRecords(pageNumber, windowWidth) {
     let particularRecord = document.createElement('tr');
     particularRecord.setAttribute('class', 'headingRecordList');
 
-    if(windowWidth >= 1000){
+    if (windowWidth >= 1000) {
         particularRecord.innerHTML = `
                                             <th id='attackIDHeader' class='tableCellDataID' onclick='sortByID()'>ID &#x21C5</th> 
                                             <th id='locationIDHeader' class='tableCellDataAttack' onclick='sortByLocation()'>Location &#x21C5</th> 
@@ -61,10 +60,9 @@ function displayRecords(pageNumber, windowWidth) {
                                             <th id='attackTypeHeader' class='tableCellData' onclick='sortByAttack()'>Attack Type &#x21C5</th>
                                             <th id='targetTypeHeader' class='tableCellData' onclick='sortByTarget()'>Target Type &#x21C5</th>
                                     `;
-        }
-        else{
-            particularRecord.innerHTML = `<th class='attackInformation'>Attacks information</th> `
-        }
+    } else {
+        particularRecord.innerHTML = `<th class='attackInformation'>Attacks information</th> `
+    }
     table.appendChild(particularRecord);
 
     for (let i = (pageNumber - 1) * numberPerPage; i < pageNumber * numberPerPage && i < parsed1.length; i++) {
@@ -72,7 +70,7 @@ function displayRecords(pageNumber, windowWidth) {
         particularRecord = document.createElement('tr');
         particularRecord.setAttribute('class', 'particularRecord');
         particularRecord.setAttribute('onclick', functionToParticularAttack);
-        if(windowWidth >= 1000){
+        if (windowWidth >= 1000) {
             particularRecord.innerHTML = `
                                 <td id='attackID' class='tableCellDataID'>${parsed1[i].id}</td>
                                 <td id='locationID' class='tableCellDataAttack'>${parsed1[i].country}, ${parsed1[i].region} </td>
@@ -80,9 +78,8 @@ function displayRecords(pageNumber, windowWidth) {
                                 <td id='attackType' class='tableCellData'>${parsed1[i].attackType}</td>
                                 <td id='targetType' class='tableCellData'>${parsed1[i].targType}</td>
                                 `;
-            }
-            else{
-                particularRecord.innerHTML = 
+        } else {
+            particularRecord.innerHTML =
                 `
                 <td class='attackInformation'>
                     <p><span class='smallScreenHeader'>ID:         </span> ${parsed1[i].id}                           </p>
@@ -92,7 +89,7 @@ function displayRecords(pageNumber, windowWidth) {
                     <p><span class='smallScreenHeader'>Attack type:</span> ${parsed1[i].targType}                     </p>
                 </td>
                 `
-            }
+        }
         if (i % 2 == 1) {
             particularRecord.style.backgroundColor = '#222831';
         }
@@ -101,7 +98,7 @@ function displayRecords(pageNumber, windowWidth) {
     generateOtherLists(pageNumber);
 }
 
-function goToDedicatedPage(pageID){
+function goToDedicatedPage(pageID) {
     let urlToAttack;
     urlToAttack = '/attacks/';
     urlToAttack = urlToAttack + pageID;
@@ -135,247 +132,216 @@ function generateOtherLists(pageNumber) {
 }
 
 
-function sortByID(){
-    if(setIdCriteria == 1){
+function sortByID() {
+    if (setIdCriteria == 1) {
         parsed1.sort(sortIdCriteriaAscending);
         setIdCriteria = -1;
-    }
-    else{
+    } else {
         parsed1.sort(sortIdCriteriaDescending)
         setIdCriteria = 1;
     }
     displayRecords(1, window.innerWidth);
 }
 
-function sortIdCriteriaAscending(a, b){
+function sortIdCriteriaAscending(a, b) {
     let valA = parseInt(a.id);
     let valB = parseInt(b.id);
-    if(valA > valB){
+    if (valA > valB) {
         return 1;
-    }
-    else if(valB > valA){
+    } else if (valB > valA) {
         return -1;
-    }
-    else{
+    } else {
         return 0;
     }
 }
 
-function sortIdCriteriaDescending(a, b){
+function sortIdCriteriaDescending(a, b) {
     let valA = parseInt(a.id);
     let valB = parseInt(b.id);
-    if(valA > valB){
+    if (valA > valB) {
         return -1;
-    }
-    else if(valB > valA){
+    } else if (valB > valA) {
         return 1;
-    }
-    else{
+    } else {
         return 0;
     }
 }
 
-function sortByLocation(){
-    if(setLocationCriteria == 1){
+function sortByLocation() {
+    if (setLocationCriteria == 1) {
         parsed1.sort(sortLocationCriteriaAscending);
         setLocationCriteria = -1;
-    }
-    else{
+    } else {
         parsed1.sort(sortLocationCriteriaDescending)
         setLocationCriteria = 1;
     }
     displayRecords(1, window.innerWidth);
 }
 
-function sortLocationCriteriaAscending(a, b){
-    valA = a.country; 
+function sortLocationCriteriaAscending(a, b) {
+    valA = a.country;
     valB = b.country;
-    if(valA > valB){
+    if (valA > valB) {
         return 1;
-    }
-    else if(valB > valA){
+    } else if (valB > valA) {
         return -1;
-    }
-    else{
+    } else {
         valA = a.region;
         valB = b.region;
-        if(valA > valB){
+        if (valA > valB) {
             return 1;
-        }
-        else if(valB > valA){
+        } else if (valB > valA) {
             return -1;
-        }
-        else{
+        } else {
             return 0;
         }
     }
 }
 
-function sortLocationCriteriaDescending(a, b){
-    valA = a.country; 
+function sortLocationCriteriaDescending(a, b) {
+    valA = a.country;
     valB = b.country;
-    if(valA > valB){
+    if (valA > valB) {
         return -1;
-    }
-    else if(valB > valA){
+    } else if (valB > valA) {
         return 1;
-    }
-    else{
+    } else {
         valA = a.region;
         valB = b.region;
-        if(valA > valB){
+        if (valA > valB) {
             return -1;
-        }
-        else if(valB > valA){
+        } else if (valB > valA) {
             return 1;
-        }
-        else{
+        } else {
             return 0;
         }
     }
 }
 
-function sortByDate(){
-    if(setDateCriteria == 1){
+function sortByDate() {
+    if (setDateCriteria == 1) {
         parsed1.sort(sortDateCriteriaAscending);
         setDateCriteria = -1;
-    }
-    else{
+    } else {
         parsed1.sort(sortDateCriteriaDescending);
         setDateCriteria = 1;
     }
     displayRecords(1, window.innerWidth);
 }
 
-function sortDateCriteriaAscending(a, b){
+function sortDateCriteriaAscending(a, b) {
     valA = new Date(a.date);
     valA = valA.getTime();
     valB = new Date(b.date);
     valB = valB.getTime();
-    if(valA > valB){
+    if (valA > valB) {
         return 1;
-    }
-    else if(valB > valA){
+    } else if (valB > valA) {
         return -1;
-    }
-    else{
+    } else {
         return 0;
     }
 }
 
-function sortDateCriteriaDescending(a, b){
+function sortDateCriteriaDescending(a, b) {
     valA = new Date(a.date);
     valA = valA.getTime();
     valB = new Date(b.date);
     valB = valB.getTime();
-    if(valA > valB){
+    if (valA > valB) {
         return -1;
-    }
-    else if(valB > valA){
+    } else if (valB > valA) {
         return 1;
-    }
-    else{
+    } else {
         return 0;
     }
 }
 
-function sortByAttack(){
-    if(setAttackTypeCriteria == 1){
+function sortByAttack() {
+    if (setAttackTypeCriteria == 1) {
         parsed1.sort(sortAttackCriteriaAscending);
         setAttackTypeCriteria = -1;
-    }
-    else{
+    } else {
         parsed1.sort(sortAttackCriteriaDescending);
         setAttackTypeCriteria = 1;
     }
     displayRecords(1, window.innerWidth);
 }
 
-function sortAttackCriteriaAscending(a, b){
+function sortAttackCriteriaAscending(a, b) {
     valA = a.attackType;
     valB = b.attackType;
-    if(valA > valB){
+    if (valA > valB) {
         return 1;
-    }
-    else if(valB > valA){
+    } else if (valB > valA) {
         return -1;
-    }
-    else{
+    } else {
         return 0;
     }
 }
 
-function sortAttackCriteriaDescending(a, b){
+function sortAttackCriteriaDescending(a, b) {
     valA = a.attackType;
     valB = b.attackType;
-    if(valA > valB){
+    if (valA > valB) {
         return -1;
-    }
-    else if(valB > valA){
+    } else if (valB > valA) {
         return 1;
-    }
-    else{
+    } else {
         return 0;
     }
 }
 
-function sortByTarget(){
-    if(setTargetTypeCriteria == 1){
+function sortByTarget() {
+    if (setTargetTypeCriteria == 1) {
         parsed1.sort(sortTargetCriteriaAscending);
         setTargetTypeCriteria = -1;
-    }
-    else{
+    } else {
         parsed1.sort(sortTargetCriteriaDescending);
         setTargetTypeCriteria = 1;
     }
     displayRecords(1, window.innerWidth);
 }
 
-function sortTargetCriteriaAscending(a, b){
+function sortTargetCriteriaAscending(a, b) {
     valA = a.targType;
     valB = b.targType;
-    if(valA > valB){
+    if (valA > valB) {
         return 1;
-    }
-    else if(valB > valA){
+    } else if (valB > valA) {
         return -1;
-    }
-    else{
+    } else {
         return 0;
     }
 }
 
-function sortTargetCriteriaDescending(a, b){
+function sortTargetCriteriaDescending(a, b) {
     valA = a.targType;
     valB = b.targType;
-    if(valA > valB){
+    if (valA > valB) {
         return -1;
-    }
-    else if(valB > valA){
+    } else if (valB > valA) {
         return 1;
-    }
-    else{
+    } else {
         return 0;
     }
 }
 
-function reducePageNumber(){
+function reducePageNumber() {
     currentPageNumber = currentPageNumber - 1;
 }
 
-function increasePageNumber(){
+function increasePageNumber() {
     currentPageNumber = currentPageNumber + 1;
 }
 
-
-function showAdvancedForm(){
+function showAdvancedForm() {
     let listOfAttacksPage = document.querySelector('.listOfAttacks');
-    if(advancedFormOn == 0){
-
+    if (advancedFormOn == 0) {
         let advancedForm = document.createElement('div');
         advancedForm.setAttribute('id', 'advancedForm');
-        advancedForm.innerHTML = 
-        `
+        advancedForm.innerHTML =
+            `
         <div id = 'searchCriteriaAdvancedForm'>
             <p id='advancedID'>       ID          </p>
             <p id='advancedLocation'> Location    </p>
@@ -399,14 +365,13 @@ function showAdvancedForm(){
         `;
         listOfAttacksPage.insertBefore(advancedForm, listOfAttacksPage.children[2]);
         advancedFormOn = 1;
-    }
-    else{
+    } else {
         listOfAttacksPage.removeChild(listOfAttacksPage.children[2]);
         advancedFormOn = 0;
     }
 }
 
-function showRecordsByInput(){
+function showRecordsByInput() {
     parsed1 = parsed1Copy;
     let idValue = -1;
     let locationValue = -1;
@@ -416,53 +381,55 @@ function showRecordsByInput(){
     let targetValue = -1;
 
     let idForm = document.querySelector('#advancedIdInput');
-    if(`${idForm.value}`)
+    if (`${idForm.value}`) {
         idValue = `${idForm.value}`;
-
+    }
     let locationForm = document.querySelector('#advancedLocationInput');
-    if(`${locationForm.value}`)
+    if (`${locationForm.value}`) {
         locationValue = `${locationForm.value}`;
-
+    }
+        
     let dateStartForm = document.querySelector('#dateInputStart');
-    if(`${dateStartForm.value}`)
+    if (`${dateStartForm.value}`) {
         dateStartValue = `${dateStartForm.value}`;
+    }
     let dateStartTime = new Date(dateStartValue);
 
-        
     let dateFinalForm = document.querySelector('#dateInputFinal');
-    if(`${dateFinalForm.value}`)
+    if (`${dateFinalForm.value}`) {
         dateFinalValue = `${dateFinalForm.value}`;
+    }
     let dateFinalTime = new Date(dateFinalValue);
 
     let attackForm = document.querySelector('#advancedAttackInput');
-    if(`${attackForm.value}`)
+    if (`${attackForm.value}`) {
         attackValue = `${attackForm.value}`;
-
+    }
     let targetForm = document.querySelector('#advancedTargetInput');
-    if(`${targetForm.value}`)
+    if (`${targetForm.value}`) {
         targetValue = `${targetForm.value}`;
+    }
 
     let parsed1Aux = [];
     let timeOnParticularRecord;
     //ID FILTER
-    for(let i = 0; i<parsed1.length; i++){
+    for (let i = 0; i < parsed1.length; i++) {
         timeOnParticularRecord = new Date(`${parsed1[i].date}`);
-        if(
-        (`${parsed1[i].id}` == idValue || idValue == -1) && 
-        (`${parsed1[i].country}` == locationValue || `${parsed1[i].region}` == locationValue || locationValue == -1) &&
-        (`${parsed1[i].attackType}` == attackValue || attackValue == -1) &&
-        (`${parsed1[i].targType}` == targetValue || targetValue == -1) &&
-        (
-            (dateStartTime.getTime() <= timeOnParticularRecord.getTime() &&
-            dateFinalTime.getTime() >= timeOnParticularRecord.getTime()) ||
-            dateStartValue == -1 ||
-            dateFinalValue == -1
-        )
-        ){
+        if (
+            (`${parsed1[i].id}` == idValue || idValue == -1) &&
+            (`${parsed1[i].country}` == locationValue || `${parsed1[i].region}` == locationValue || locationValue == -1) &&
+            (`${parsed1[i].attackType}` == attackValue || attackValue == -1) &&
+            (`${parsed1[i].targType}` == targetValue || targetValue == -1) &&
+            (
+                (dateStartTime.getTime() <= timeOnParticularRecord.getTime() &&
+                    dateFinalTime.getTime() >= timeOnParticularRecord.getTime()) ||
+                dateStartValue == -1 ||
+                dateFinalValue == -1
+            )
+        ) {
             parsed1Aux.push(parsed1[i]);
         }
     }
-
 
     parsed1 = parsed1Aux;
 }

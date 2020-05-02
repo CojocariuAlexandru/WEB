@@ -21,29 +21,38 @@ function attackIdPageBefore(node, id) {
     return null;
 }
 
-function navigateToUpdate(pageID){
+function navigateToUpdate(pageID) {
     let urlToAttack;
     urlToAttack = '/attacks-update/';
     urlToAttack = urlToAttack + pageID;
     navigateRoot(urlToAttack);
 }
 
-function prepareAttack(currentAttack){
-    if (currentAttack["terrCount"]=="-99" || currentAttack["terrCount"]=="-1") 
-        currentAttack["terrCount"]="Unknown";
-    if (currentAttack["woundedCount"]=="-99" || currentAttack["woundedCount"]=="-1") 
-        currentAttack["woundedCount"]="Unknown";
-    if (currentAttack["killsCount"]=="-99" || currentAttack["killsCount"]=="-1") 
-        currentAttack["killsCount"]="Unknown";
-    if (currentAttack["success"]=="1")
-        currentAttack["success"]="YES";
-    else currentAttack["success"]="NO";
-    if (currentAttack["suicide"]=="1")
-       currentAttack["suicide"]="YES";
-    else currentAttack["suicide"]="NO";
-    if (currentAttack["extended"]=="1")
-      currentAttack["extended"]="YES";
-    else currentAttack["extended"]="NO";
+function prepareAttack(currentAttack) {
+    if (currentAttack["terrCount"] == "-99" || currentAttack["terrCount"] == "-1") {
+        currentAttack["terrCount"] = "Unknown";
+    }
+    if (currentAttack["woundedCount"] == "-99" || currentAttack["woundedCount"] == "-1") {
+        currentAttack["woundedCount"] = "Unknown";
+    }
+    if (currentAttack["killsCount"] == "-99" || currentAttack["killsCount"] == "-1") {
+        currentAttack["killsCount"] = "Unknown";
+    }
+    if (currentAttack["success"] == "1") {
+        currentAttack["success"] = "YES";
+    } else {
+        currentAttack["success"] = "NO";
+    }
+    if (currentAttack["suicide"] == "1") {
+        currentAttack["suicide"] = "YES";
+    } else {
+        currentAttack["suicide"] = "NO";
+    }
+    if (currentAttack["extended"] == "1") {
+        currentAttack["extended"] = "YES";
+    } else {
+        currentAttack["extended"] = "NO";
+    }
 }
 
 function attackIdPageTemplate(templateName, attack) {
@@ -109,18 +118,18 @@ function attackIdPageInit(attack) {
 }
 
 
-function areYouSure(){
-    let result =   confirm("Are you sure?");
+function areYouSure() {
+    let result = confirm("Are you sure?");
     if (result == true) {
         let currentURL = window.location.href; //get current URL
         let currentAttackID = currentURL.split("/"); //get current attack ID - currentAttackID[5]
         console.log(URL_MICROSERVICE_ATTACKS + "/api/attacks/" + currentAttackID[5]);
-    
+
         httpDELETE(URL_MICROSERVICE_ATTACKS + "/api/attacks/" + currentAttackID[5], (result) => {
             console.log(result.res);
             navigateRoot('');
-         }, (error) => {
+        }, (error) => {
             //ALERT
-         });
-    } 
+        });
+    }
 }
