@@ -1,7 +1,9 @@
 var frequencyOfCountries;
+var frequencyOfRegions;
 var frequencyOfSuccess;
 var frequencyOfTargets;
 var frequencyOfAttacks;
+var frequencyOfWeaponType;
 var windowWidth;
 
 
@@ -20,9 +22,11 @@ function drawAllCharts(){
     if(windowWidth <= 520)
         windowWidth = windowWidth + 160;
     addCountryPreferences();
+    addRegionsPreferences();
     addSuccessRate();
     addTargetPreferences();
     addAttackPreferences();
+    addWeaponTypePreferences();
 }
 
 // stackoverflow.com/questions/8301400/how-do-you-easily-create-empty-matrices-javascript
@@ -32,10 +36,18 @@ function createMatrices(){
     frequencyOfCountries = [];
     frequencyOfTargets = [];
     frequencyOfAttacks = [];
+    frequencyOfRegions = [];
+    frequencyOfWeaponType = [];
     for(i=1; i < countries.length; i++){
         frequencyOfCountries[countries[i][0]] = [];
         for(j=0; j<=2015; j++){
             frequencyOfCountries[countries[i][0]][j] = 0;
+        }
+    }
+    for(i=1; i < regions.length; i++){
+        frequencyOfRegions[regions[i][0]] = [];
+        for(j=0; j<=2015; j++){
+            frequencyOfRegions[regions[i][0]][j] = 0;
         }
     }
     for(i=1; i < targTypes.length; i++){
@@ -48,6 +60,12 @@ function createMatrices(){
         frequencyOfAttacks[attackTypes[i][0]] = [];
         for(j=0; j<=2015; j++){
             frequencyOfAttacks[attackTypes[i][0]][j] = 0;
+        }
+    }
+    for(i=1; i < weaponTypes.length; i++){
+        frequencyOfWeaponType[weaponTypes[i][0]] = [];
+        for(j=0; j<=2015; j++){
+            frequencyOfWeaponType[weaponTypes[i][0]][j] = 0;
         }
     }
 
@@ -64,19 +82,24 @@ function getFrequencies(){
     let successStatus;
     let targetAttacked;
     let attackType;
+    let weaopnType;
     for(attack in parsed1){
         dateOccured = parsed1[attack]["date"];
         dateOccured = dateOccured.substring(0, 4);
         yearOccured = parseInt(dateOccured);
 
         countryAttacked = parsed1[attack]["country"];
+        regionAttacked = parsed1[attack]["region"];
         successStatus = parsed1[attack]["success"];
         targetAttacked = parsed1[attack]["targType"];
         attackType = parsed1[attack]["attackType"];
+        weaopnType = parsed1[attack]["weaponType"];
 
         frequencyOfCountries[countryAttacked][yearOccured] = frequencyOfCountries[countryAttacked][yearOccured] + 1;
+        frequencyOfRegions[regionAttacked][yearOccured] = frequencyOfRegions[regionAttacked][yearOccured] + 1;
         frequencyOfTargets[targetAttacked][yearOccured] = frequencyOfTargets[targetAttacked][yearOccured] + 1;
         frequencyOfAttacks[attackType][yearOccured] = frequencyOfAttacks[attackType][yearOccured] + 1;
+        frequencyOfWeaponType[weaopnType][yearOccured] = frequencyOfWeaponType[weaopnType][yearOccured] + 1;
         if(successStatus == 1){
             frequencyOfSuccess[yearOccured] =  frequencyOfSuccess[yearOccured] + 1;
         }
@@ -101,6 +124,35 @@ function addCountryPreferences(){
         var dataForChart = google.visualization.arrayToDataTable(data);
           var options = {
             title: 'Number of attacks per country in the last years',
+            backgroundColor: 'lightgray',
+            width: windowWidth * 0.8,
+            height: windowWidth * 0.8 / 2.5,
+            curveType: 'function',
+            legend: { position: 'bottom' }
+          };
+          var chart = new google.visualization.LineChart(countryPreferencesDocument);
+          chart.draw(dataForChart, options);
+    }
+}
+
+function addRegionsPreferences(){
+    let i;
+    let data;
+    let countryPreferencesDocument = document.querySelector('.plotRegion');
+
+    data = [];
+    data.push(['Year', regions[1][0], regions[2][0], regions[3][0], regions[4][0], regions[5][0]]);
+    for(i=1970; i<=2025; i++){
+        data.push([i.toString(), frequencyOfRegions[regions[1][0]][i], frequencyOfRegions[regions[2][0]][i], frequencyOfRegions[regions[3][0]][i], frequencyOfRegions[regions[4][0]][i], frequencyOfRegions[regions[5][0]][i]]);
+    }
+    google.charts.load('current', {
+        packages: ['corechart', 'bar']
+    });
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart(){
+        var dataForChart = google.visualization.arrayToDataTable(data);
+          var options = {
+            title: 'Number of attacks per globe region in the last years',
             backgroundColor: 'lightgray',
             width: windowWidth * 0.8,
             height: windowWidth * 0.8 / 2.5,
@@ -185,6 +237,34 @@ function addAttackPreferences(){
         var dataForChart = google.visualization.arrayToDataTable(data);
           var options = {
             title: 'Number of attacks which used a certain method of attacking',
+            backgroundColor: 'lightgray',
+            width: windowWidth * 0.8,
+            height: windowWidth * 0.8 / 2.5,
+            curveType: 'function',
+            legend: { position: 'bottom' }
+          };
+          var chart = new google.visualization.LineChart(countryTargetDocument);
+          chart.draw(dataForChart, options);
+    }
+}
+
+function addWeaponTypePreferences(){
+    let i;
+    let data;
+    let countryTargetDocument = document.querySelector('.plotWeaponType');
+    data = [];
+    data.push(['Year', weaponTypes[1][0], weaponTypes[2][0], weaponTypes[3][0], weaponTypes[4][0], weaponTypes[5][0]]);
+    for(i=1970; i<=2025; i++){
+        data.push([i.toString(), frequencyOfWeaponType[weaponTypes[1][0]][i], frequencyOfWeaponType[weaponTypes[2][0]][i], frequencyOfWeaponType[weaponTypes[3][0]][i], frequencyOfWeaponType[weaponTypes[4][0]][i], frequencyOfWeaponType[weaponTypes[5][0]][i]]);
+    }
+    google.charts.load('current', {
+        packages: ['corechart', 'bar']
+    });
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart(){
+        var dataForChart = google.visualization.arrayToDataTable(data);
+          var options = {
+            title: 'Number of attacks which used a certain weapon',
             backgroundColor: 'lightgray',
             width: windowWidth * 0.8,
             height: windowWidth * 0.8 / 2.5,

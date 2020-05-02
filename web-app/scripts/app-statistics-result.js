@@ -1,7 +1,9 @@
 var countries;
 var attackTypes;
 var targTypes;
+var regions;
 var dateFrequency;
+var weaponTypes;
 
 function fillField(filters1, name){
     if (filters1[name]==""){
@@ -81,10 +83,11 @@ function statisticsResultsPageInit(node) {
     targTypes = getData('TargetType', 'Most frequently types of target', "targType");
     sort(targTypes);
     datesAppearing = getData('date', 'Most frequent dates', 'date');
-
-    console.log(countries);
-    console.log(attackTypes);
-    console.log(targTypes);
+    regions = getData('region', 'Most frequently attacked regions', 'region');
+    sort(regions);
+    weaponTypes = getData('weaponType', 'Most frequently used weapons', 'weaponType');
+    sort(weaponTypes);
+    console.log(weaponTypes);
 
     dateFrequency = [];
     let i;
@@ -94,7 +97,6 @@ function statisticsResultsPageInit(node) {
     for(attack in parsed1){
         dateFrequency[parseInt(parsed1[attack][1].substring(0, 4))] = dateFrequency[parseInt(parsed1[attack][1].substring(0, 4))] + 1;
     }
-    console.log(dateFrequency);
 
 
     resultFilters = getFilters();
