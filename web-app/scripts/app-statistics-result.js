@@ -441,15 +441,14 @@ function move() {
 // https://www.youtube.com/watch?v=IEKEV02TVew
 function downloadImageAs(imageType){
     console.log('exporting image...');
-    if(imageType.localeCompare('SVG') == 0){
-        let imageToBePrinted = document.querySelector('.pie-1');
-        html2canvas(imageToBePrinted).then(canvas => {
-            canvas.toBlob(
-                function(blob){
-                    saveAs(blob, "screenshot.png");
-                    }
-                , "image/png");
-        });
+    let imageToBePrinted = document.querySelector('.grid-container');
+    html2canvas(imageToBePrinted).then(canvas => {
+        canvas.toBlob(
+            function(blob){
+                saveAs(blob, "raport." + imageType);
+                }
+            , "image/" + imageType);
+    });
 
-    }
+    
 }
