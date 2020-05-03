@@ -435,3 +435,21 @@ function move() {
         }
     }
 }
+
+
+// https://html2canvas.hertzen.com/
+// https://www.youtube.com/watch?v=IEKEV02TVew
+function downloadImageAs(imageType){
+    console.log('exporting image...');
+    if(imageType.localeCompare('SVG') == 0){
+        let imageToBePrinted = document.querySelector('.pie-1');
+        html2canvas(imageToBePrinted).then(canvas => {
+            canvas.toBlob(
+                function(blob){
+                    saveAs(blob, "screenshot.png");
+                    }
+                , "image/png");
+        });
+
+    }
+}
