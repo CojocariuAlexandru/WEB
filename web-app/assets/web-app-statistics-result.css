@@ -9,13 +9,22 @@
     "damage-made damage-made damage-made damage-made damage-made damage-made" 
     "extended24 extended24 extended24 extended24 extended24 extended24" 
     "details-2 details-2 details-2 pie-2 pie-2 pie-2" 
-    "pie-3 pie-3 pie-3 details-3 details-3 details-3" 
-    "world-map world-map world-map world-map world-map world-map" 
+    "pie-3 pie-3 pie-3 details-3 details-3 details-3"
+    "details-4 details-4 details-4 pie-4 pie-4 pie-4" 
+    "world-map world-map world-map world-map world-map world-map" ;
+    width: 100%;
+    margin-bottom:40px;
+  }
+
+  .grid-container-result-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1auto, 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto;
+    grid-template-areas: 
     "button-1 button-2 button-3 button-4 button-5 button-6" 
     "view-table view-table view-table view-table view-table view-table"
 
-    "table table table table table table"
-    "more-plots more-plots more-plots more-plots more-plots more-plots";
+    "table table table table table table";
     width: 100%;
     margin-bottom:40px;
   }
@@ -43,10 +52,14 @@
 .pie-2 { grid-area: pie-2; }
 
 .details-2 { grid-area: details-2; }
+.pie-4 { grid-area: pie-4; }
+
 
 .pie-3 { grid-area: pie-3; }
 
 .details-3 { grid-area: details-3; }
+.details-4 { grid-area: details-4; }
+
 
 .button-1 { grid-area: button-1; }
 
@@ -65,8 +78,6 @@
 }
 
 .view-table { grid-area: view-table; }
-
-.morePlots{ grid-area: more-plots;}
 
 /* TITLE-STAT */
 .title-stat h2{
@@ -106,7 +117,7 @@
 
 /* DETAILS-1 DETAILS-2*/
 
-.details-1, .details-2, .details-3{
+.details-1, .details-2, .details-3, .details-4{
     display: flex;
     flex-direction: column;
     margin: 20px 60px 60px 60px;
@@ -116,7 +127,7 @@
 }
 
 
-.details-1 ul, .details-2 ul, .details-3 ul{
+.details-1 ul, .details-2 ul, .details-3 ul, .details-4 ul{
     columns: 2;
   -webkit-columns: 2;
   -moz-columns: 2;
@@ -129,14 +140,15 @@
 
 .details-1 ul li::before,
 .details-2 ul li::before,
-.details-3 ul li::before {
+.details-3 ul li::before,
+.details-4 ul li::before {
     content: "\2022";
     color:#054a4d;
     font-weight: bolder;
     margin-right: 10px;
     margin-left: -6px;
   }
-.details-1 h3, .details-2 h3, .details-3 h3{
+.details-1 h3, .details-2 h3, .details-3 h3, .details-4 h3{
     color:#eee;
     font-size:22px;
     text-align: center;
@@ -356,11 +368,11 @@
 /* RESPONSIVE */
 
 @media only screen and (max-width: 1200px) {
-  .details-1 ul, .details-2 ul, .details-3 ul{
+  .details-1 ul, .details-2 ul, .details-3 ul, .details-4 ul{
     columns:1;
     font-size:16px;
   }
-  .details-1 h3, .details-2 h3, .details-3 h3{
+  .details-1 h3, .details-2 h3, .details-3 h3, .details-4 h3{
     font-size:18px;
   }
   .fields .container-fields{
@@ -390,25 +402,33 @@
     "pie-2 pie-2 pie-2 pie-2 pie-2 pie-2" 
     "details-3 details-3 details-3 details-3 details-3 details-3" 
     "pie-3 pie-3 pie-3 pie-3 pie-3 pie-3"
+    "details-4 details-4 details-4 details-4 details-4 details-4" 
+    "pie-4 pie-4 pie-4 pie-4 pie-4 pie-4"
     "world-map world-map world-map world-map world-map world-map" 
-    "button-1 button-1 button-2 button-2 button-3 button-3" 
-    "view-table view-table view-table view-table view-table view-table";
+    ;
   }
-  .details-1 ul, .details-2 ul, .details-3 ul{
+
+  .grid-container-result-buttons {
+    grid-template-areas: "button-1 button-1 button-2 button-2 button-3 button-3" 
+    "button-4 button-4 button-5 button-5 button-6 button-6" 
+    "view-table view-table view-table view-table view-table view-table"
+    "table table table table table table" 
+  }
+  .details-1 ul, .details-2 ul, .details-3 ul, .details-4 ul{
     display: none;
   }
-  .details-1, .details-2, .details-3{
+  .details-1, .details-2, .details-3, .details-4{
     margin: 60px 60px 0 60px;
     font-size: 20px;
   }
   .extended24{
     margin-bottom: 0;
   }
-  .pie-2{
+  div.pie-2, div.pie-3{
     border-bottom: dashed 2px #054a4d;
   }
   .export{
-    width:60%;
+    width:80%;
   }
 
 }
@@ -421,7 +441,7 @@
     .values .container-values{
       font-size: 12px;
     }
-    .details-1 h3, .details-2 h3, .details-3 h3{
+    .details-1 h3, .details-2 h3, .details-3 h3, .details-4 h3{
       font-size:14px;
     }
     .attack-rate h3,
@@ -448,15 +468,18 @@
     "pie-3 pie-3 pie-3 pie-3 pie-3 pie-3"
     "world-map world-map world-map world-map world-map world-map" 
     "button-1 button-1 button-2 button-2 button-3 button-3" 
-    "view-table view-table view-table view-table view-table view-table";
+    "button-4 button-4 button-5 button-5 button-6 button-6" 
+    "view-table view-table view-table view-table view-table view-table"
+    "table table table table table table";
   }
+
   .fields .container-fields{
     display:none;
   }
   .values .container-values{
     display:none;
   }
-  .details-1, .details-2, .details-3{
+  .details-1, .details-2, .details-3, .details-4{
     margin: 20px;
   }
   .view-table p{
@@ -473,9 +496,7 @@
  .damage-bar-border, .attack-bar-border, .extended-bar-border{
     margin-right: 20px;
   }
-  .export{
-    width:60%;
-  }
+
   .pie-1, .pie-3{
     margin-left:20px;
   }

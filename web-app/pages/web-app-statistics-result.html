@@ -17,7 +17,9 @@
                 <li>Weapon type</li>
                 <li>Amount of damage</li>
                 <li>Successful attack</li>
-                <li>It is known who attacked</li>
+                <li>Extended over 24h</li>
+                <li>Suicide</li>
+
             </ul>
 
         </div>
@@ -34,10 +36,11 @@
                 <li>{{woundedCount}}</li>
                 <li>{{attackType}}</li>
                 <li>{{targType}}</li>
-                <li>Weapon type</li>
-                <li>10000000$</li>
-                <li>YES</li>
-                <li>YES</li>
+                <li>{{weaponType}}</li>
+                <li>{{damage}}</li>
+                <li>{{success}}</li>
+                <li>{{extended}}</li>
+                <li>{{suicide}}</li>
             </ul>
 
         </div>
@@ -79,16 +82,24 @@
         </div>
     
         <div class="pie-2"></div>
-        <div class="details-2" id="attacksList">
+        <div class="details-2">
         </div>
 
         <div class="pie-3"></div>
-        <div class="details-3" id="targetsList">
+        <div class="details-3">
+        </div>
+
+        <div class="pie-4"></div>
+        <div class="details-4">
         </div>
 
         <div class="world-map">
             <div class="world-map-element"></div>
         </div>
+    
+  </div>
+
+<div  class="grid-container-result-buttons">
     <div class="export button-1" onclick="downloadImageAs('svg')">
         <span href="" class="button-link1">SVG</span>
     </div>
@@ -101,11 +112,11 @@
     <div class="export button-4" onclick="downloadCsv();">
         <span href="" class="button-link1">CSV</span>
     </div>
-    <div class="export button-5" onclick="">
+    <div class="export button-5" onclick="downloadPdf()">
         <span href="" class="button-link2">PDF</span>
     </div>
-    <div class="export button-6" onclick="">
-        <span href="" class="button-link3">WOW</span>
+    <div class="export button-6" onclick="downloadImageAs('bmp')">
+        <span href="" class="button-link3">BMP</span>
     </div>
 
 
@@ -122,6 +133,4 @@
             <span id='span4'></span>
         </div>
     </section>
-  </div>
-
- 
+</div>

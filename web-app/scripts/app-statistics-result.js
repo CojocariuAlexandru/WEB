@@ -4,6 +4,7 @@ var targTypes;
 var regions;
 var dateFrequency;
 var weaponTypes;
+var damages;
 
 function fillField(filters1, name) {
     if (filters1[name] == "") {
@@ -41,13 +42,23 @@ function getFilters() {
     resultFilters["killsCount"] = filters["killsCount"];
     resultFilters["woundedCount"] = filters["woundedCount"];
 
+    resultFilters["success"] = filters["success"];
+    resultFilters["extended"] = filters["extended"];
+    resultFilters["suicide"] = filters["suicide"];
+
+
     resultFilters["attackType"] = attackTypes[1][0];
     resultFilters["targType"] = targTypes[1][0];
+    resultFilters["weaponType"] = weaponTypes[1][0];
+
+
+    resultFilters["damage"] = damages[2][0];
 
     console.log(resultFilters);
 
     return resultFilters;
 }
+
 
 function constructParagraf(countries, name, title, exclude) {
     let elem = document.querySelector(name);
@@ -84,7 +95,8 @@ function statisticsResultsPageInit(node) {
     sort(regions);
     weaponTypes = getData('weaponType', 'Most frequently used weapons', 'weaponType');
     sort(weaponTypes);
-    console.log(weaponTypes);
+    damages = getData('damages', 'Most frequently used weapons', 'propExtent');
+    sort(damages);
 
     dateFrequency = [];
     let i;
@@ -104,11 +116,15 @@ function statisticsResultsPageInit(node) {
     addPiechart();
     addPiechart2();
     addPiechart3();
+    addPiechart4();
+
     addColumnChart();
 
     constructParagraf(countries, ".details-1", "Most frequently attacked", "Country");
     constructParagraf(attackTypes, ".details-2", "Most frequently attackTypes", "AttackType");
     constructParagraf(targTypes, ".details-3", "Most frequently targetTyes", "TargetType");
+    constructParagraf(weaponTypes, ".details-4", "Most frequently weaponTypes", "WeaponType");
+
 }
 
 function getData(name, details, field) {
@@ -205,6 +221,31 @@ function addPiechart3() {
 
     function drawChart() {
         var data = google.visualization.arrayToDataTable(targTypes);
+        var options = {
+            // 'title' : 'Most used attack',
+            'fontSize': 10,
+            'colors': ['#054a4d', '#065e61', '#0da3a8', '#09865d', '#062a61'],
+            'width': '100%',
+            'height': 300,
+            'is3D': true,
+            'backgroundColor': 'transparent',
+            'margin': '0 auto'
+        };
+        var chart = new google.visualization.PieChart(piechartDivision);
+        chart.draw(data, options);
+    }
+}
+
+function addPiechart4() {
+    let piechartDivision = document.querySelector('.pie-4');
+
+    google.charts.load('current', {
+        'packages': ['corechart']
+    });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable(weaponTypes);
         var options = {
             // 'title' : 'Most used attack',
             'fontSize': 10,
@@ -441,7 +482,7 @@ function move() {
 // https://www.youtube.com/watch?v=IEKEV02TVew
 function downloadImageAs(imageType){
     console.log('exporting image...');
-    let imageToBePrinted = document.querySelector('.grid-container');
+    let imageToBePrinted = document.querySelector('.grid-container-result');
     html2canvas(imageToBePrinted).then(canvas => {
         canvas.toBlob(
             function(blob){

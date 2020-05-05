@@ -292,7 +292,7 @@ input#searchText {
 
             "fourthRow fourthRow fourthRow fourthRow"
             "button-1 button-1 button-2 button-2"
-            "submitForm submitForm submitForm submitForm";
+            "statistici-buton statistici-buton statistici-buton statistici-buton";
     }
 
     .attackTypeForm div,
@@ -358,7 +358,7 @@ input#searchText {
             "fourthRow"
             "button-1"
             "button-2"
-            "submitForm";
+            "statistici-buton";
         box-sizing: border-box;
         border: 1px solid black;
         padding: 10px;
