@@ -229,7 +229,7 @@ class AttacksGateway
             $prepareArray1["weaponSubtype"] = $transformed["weaponSubtype"];
         }
 
-         $statement = $statement . "LIMIT 1000;";
+        //  $statement = $statement . "LIMIT 1000;";
 
         return $prepareArray1;
     }

@@ -2,7 +2,7 @@
   .thatAttackGrid{
       width: 100%;
       
-      margin:20px 0 0 0px;
+      margin:20px 0 40px 0px;
 
       display: grid;
       grid-template-columns: repeat(6, 1fr);
@@ -269,7 +269,7 @@
   grid-area: attackOtherDetails;
 }
 
-.submitForm {
+.updateForm {
   grid-area: update;
 }
 .deleteForm{

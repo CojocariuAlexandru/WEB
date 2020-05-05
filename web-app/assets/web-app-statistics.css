@@ -18,7 +18,7 @@
 
         "fourthRow fourthRow fourthRow fourthRow"
         "button-1 button-1 button-2 button-2"
-        "submitForm submitForm submitForm submitForm";
+        "statistici-buton statistici-buton statistici-buton statistici-buton";
     box-sizing: border-box;
     border: 1px solid black;
     background: #eee;
@@ -400,10 +400,13 @@ input.dataForm1,
 }
 
 /* SUBMIT FORM */
-.statisticsFormGrid .submitForm {
+ .submitForm {
     display: flex;
-    margin-bottom: 50px;
-    grid-area: submitForm;
+    margin-bottom: 30px;}
+
+.statistici-buton{
+    grid-area: statistici-buton;
+
 }
 
 #dateInput {
