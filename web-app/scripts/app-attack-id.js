@@ -21,10 +21,12 @@ function attackIdPageBefore(node, id) {
     return null;
 }
 
-function navigateToUpdate(pageID) {
+function navigateToUpdate() {
+    let currentURL = window.location.href; //get current URL
+    let currentAttackID = currentURL.split("/"); //get current attack ID - currentAttackID[5]
     let urlToAttack;
     urlToAttack = '/attacks-update/';
-    urlToAttack = urlToAttack + pageID;
+    urlToAttack = urlToAttack + currentAttackID[5];
     navigateRoot(urlToAttack);
 }
 
