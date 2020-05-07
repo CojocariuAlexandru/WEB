@@ -480,9 +480,9 @@ function move() {
 
 // https://html2canvas.hertzen.com/
 // https://www.youtube.com/watch?v=IEKEV02TVew
-function downloadImageAs(imageType){
+function downloadImageAs(imageType, className){
     console.log('exporting image...');
-    let imageToBePrinted = document.querySelector('.grid-container-result');
+    let imageToBePrinted = document.getElementsByClassName(className)[0];
     html2canvas(imageToBePrinted).then(canvas => {
         canvas.toBlob(
             function(blob){
