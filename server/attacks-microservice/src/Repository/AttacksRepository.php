@@ -1,10 +1,9 @@
 <?php
 
-namespace Src\TableGateways;
+namespace Src\Repository;
 
-class AttacksGateway
+class AttacksRepository implements iAttacksRepository
 {
-
     private $db = null;
 
     public function __construct($db)
@@ -18,6 +17,7 @@ class AttacksGateway
             SELECT country, latitude, longitude, region, id
             FROM attacks
             LIMIT " . $first . ";";
+
         try {
             $statement = $this->db->query($statement);
             $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
@@ -27,16 +27,15 @@ class AttacksGateway
         }
     }
 
-    public function getAttackByPlaceInPage($pageId, $onPage)
+    public function getByPlaceInPage($pageId, $onPage)
     {
-        //20 attacks / page
-        $pageIndexInDB = ($pageId-1) * $onPage;
+        $pageIndexInDB = ($pageId - 1) * $onPage;
         $statement = "
                     SELECT country, latitude, longitude, region, id
                     FROM attacks
                     ORDER BY ID LIMIT " . $onPage . " OFFSET " . $pageIndexInDB . ";";
 
-        try{
+        try {
             $statement = $this->db->query($statement);
             $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
             return $result;
@@ -45,18 +44,20 @@ class AttacksGateway
         }
     }
 
-    public function deleteById($id){
+    public function deleteById($id)
+    {
         $statement = "
             DELETE 
             FROM attacks
             WHERE id= :id ";
-        $prepareArray["id"]= $id;
+        $prepareArray["id"] = $id;
+
         try {
             $statement = $this->db->prepare($statement);
             $status = $statement->execute($prepareArray);
-                return $status;
+            return $status;
         } catch (\PDOException $e) {
-                exit($e->getMessage());
+            exit($e->getMessage());
         }
     }
 
@@ -66,6 +67,7 @@ class AttacksGateway
             SELECT * 
             FROM attacks
             WHERE id=" . $id . ";";
+
         try {
             $statement = $this->db->query($statement);
             $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
@@ -75,16 +77,17 @@ class AttacksGateway
         }
     }
 
-    public function insertAttack($decoded){
+    public function insert($decoded)
+    {
         $statement = "INSERT INTO attacks ( ";
         $prepareArray = $this->prepareInsert($statement, $decoded);
+
         try {
             $statement = $this->db->prepare($statement);
             $status = $statement->execute($prepareArray);
             if ($status === false) {
                 return "err";
             } else {
-
                 $statement = "SELECT MAX(id) id FROM attacks; ";
                 $statement = $this->db->query($statement);
                 $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
@@ -93,33 +96,34 @@ class AttacksGateway
         } catch (\PDOException $e) {
             exit($e->getMessage());
         }
-
     }
 
-    private function prepareInsert(&$statement, $transformed){
-
+    private function prepareInsert(&$statement, $transformed)
+    {
         $statement = $statement . " date, ";
 
-        $values = "(  STR_TO_DATE( :date , '%Y-%m-%d'), " ;
+        $values = "(  STR_TO_DATE( :date , '%Y-%m-%d'), ";
 
         $prepareArray1["date"] = $transformed["date"];
         unset($transformed['date']);
         unset($transformed['id']);
 
-        foreach((array)$transformed as $key => $value){
-             $prepareArray1[$key] = $value;
-             $statement = $statement . "$key, ";
-             $values = $values . ":$key, ";
+        foreach ((array) $transformed as $key => $value) {
+            $prepareArray1[$key] = $value;
+            $statement = $statement . "$key, ";
+            $values = $values . ":$key, ";
         }
         $statement = substr($statement, 0, -2) . ") VALUES " . substr($values, 0, -2) . ")";
         return $prepareArray1;
     }
 
-    public function updateAttack($decoded, $id){
+    public function update($decoded, $id)
+    {
         $statement = "UPDATE attacks SET ";
         $prepareArray = $this->prepareUpdate($statement, $decoded);
-        $prepareArray["id"]=$id;
+        $prepareArray["id"] = $id;
         $statement = $statement . " WHERE id = :id ";
+
         try {
             $smt = $this->db->prepare($statement);
             $status = $smt->execute($prepareArray);
@@ -131,22 +135,20 @@ class AttacksGateway
         } catch (\PDOException $e) {
             exit($e->getMessage());
         }
-
     }
 
-    private function prepareUpdate(&$statement, $transformed){
-
+    private function prepareUpdate(&$statement, $transformed)
+    {
         $statement = $statement . " date = STR_TO_DATE( :date , '%Y-%m-%d'), ";
         $prepareArray1["date"] = $transformed["date"];
         unset($transformed['date']);
-        foreach((array)$transformed as $key => $value){
+        foreach ((array) $transformed as $key => $value) {
 
-             $prepareArray1[$key] = $value;
-             $statement = $statement . "$key=:$key, ";
+            $prepareArray1[$key] = $value;
+            $statement = $statement . "$key=:$key, ";
         }
         $statement =  substr($statement, 0, -1);
-           $statement = substr($statement, 0, -1);
-
+        $statement = substr($statement, 0, -1);
 
         return $prepareArray1;
     }
@@ -158,16 +160,12 @@ class AttacksGateway
             attackType, success, suicide, targType, terrCount, weaponType, 
             killsCount, woundedCount, propExtent
             FROM attacks WHERE ";
-
         $prepareArray = $this->prepareStatement($statement, $transformed);
-        //  print_r($prepareArray);
-        //  print_r($statement);
 
         try {
             $statement = $this->db->prepare($statement);
             $statement->execute($prepareArray);
-            // print_r($statement);
-            $result = $statement->fetchAll();
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
             return $result;
         } catch (\PDOException $e) {
             exit($e->getMessage());
@@ -179,19 +177,24 @@ class AttacksGateway
         $prepareArray1 = [];
 
         $statement = $statement . "date >= STR_TO_DATE('" . $transformed["startDate"] .  "' , '%Y-%m-%d')";
-        if ($transformed["finalDate"] == "sysdate")
+        if ($transformed["finalDate"] == "sysdate") {
             $statement = $statement . " AND date <= sysdate() ";
-        else
+        } else {
             $statement = $statement . " AND date <= STR_TO_DATE('" . $transformed["finalDate"] . "', '%Y-%m-%d') ";
+        }
 
-        if (array_key_exists("weaponType", $transformed))
+        if (array_key_exists("weaponType", $transformed)) {
             $this->statementArray($statement, $transformed["weaponType"], "weaponType", $prepareArray1);
-        if (array_key_exists("attackType", $transformed))
+        }
+        if (array_key_exists("attackType", $transformed)) {
             $this->statementArray($statement, $transformed["attackType"], "attackType", $prepareArray1);
-        if (array_key_exists("targType", $transformed))
+        }
+        if (array_key_exists("targType", $transformed)) {
             $this->statementArray($statement, $transformed["targType"], "targType", $prepareArray1);
-        if (array_key_exists("propExtent", $transformed))
+        }
+        if (array_key_exists("propExtent", $transformed)) {
             $this->statementArray($statement, $transformed["propExtent"], "propExtent", $prepareArray1);
+        }
 
         if (array_key_exists("terrCount", $transformed)) {
             $this->setCondition($statement, $transformed["terrCount"], "terrCount", "<=");
@@ -241,7 +244,6 @@ class AttacksGateway
             $this->setConditionStr($statement, $transformed["groupName"], "groupName", "=");
             $prepareArray1["groupName"] = $transformed["groupName"];
         }
-
         if (array_key_exists("targSubtype", $transformed)) {
             $this->setConditionStr($statement, $transformed["targSubtype"], "targSubtype", "=");
             $prepareArray1["targSubtype"] = $transformed["targSubtype"];
@@ -251,17 +253,16 @@ class AttacksGateway
             $prepareArray1["weaponSubtype"] = $transformed["weaponSubtype"];
         }
 
-        //  $statement = $statement . "LIMIT 1000;";
-
         return $prepareArray1;
     }
 
-
-
-    private function setCondition(&$statement, $value, $str, $op){
+    private function setCondition(&$statement, $value, $str, $op)
+    {
         $statement = $statement . "AND $str $op :$str ";
     }
-    private function setConditionStr(&$statement, $value, $str, $op){
+
+    private function setConditionStr(&$statement, $value, $str, $op)
+    {
         $statement = $statement . "AND UPPER(TRIM( $str )) $op  UPPER(TRIM(:$str)) ";
     }
 
@@ -269,27 +270,28 @@ class AttacksGateway
     {
         $index = 0;
         $str = " AND $name IN ( ";
-        $value = "";
 
         foreach ($array as $elem) {
             $par = $name . $index;
             $str = $str . ":$par,";
-            $prepareArray[$par]=$elem;
-            $index ++;
-        } 
+            $prepareArray[$par] = $elem;
+            $index++;
+        }
         $statement = $statement . substr($str, 0, -1) . ") ";
     }
 
-    public function getAttacksInfoForMapPage($filters)
+    public function getInfoForMapPage($filters)
     {
-        $statement = "SELECT latitude, longitude FROM attacks WHERE ";
-
+        $statement = "
+            SELECT latitude, longitude 
+            FROM attacks WHERE ";
         $prepareArray = $this->prepareStatementForMapPage($statement, $filters);
 
         try {
             $statement = $this->db->prepare($statement);
             $statement->execute($prepareArray);
-            $result = $statement->fetchAll();
+
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
             return $result;
         } catch (\PDOException $e) {
             exit($e->getMessage());
@@ -301,10 +303,11 @@ class AttacksGateway
         $preparedArray = [];
 
         $statement = $statement . "date >= STR_TO_DATE('" . $filters["startDate"] .  "' , '%Y-%m-%d')";
-        if ($filters["finalDate"] == "sysdate")
+        if ($filters["finalDate"] == "sysdate") {
             $statement = $statement . " AND date <= sysdate() ";
-        else
+        } else {
             $statement = $statement . " AND date <= STR_TO_DATE('" . $filters["finalDate"] . "', '%Y-%m-%d') ";
+        }
 
         if (array_key_exists("region", $filters)) {
             $this->setConditionStr($statement, $filters["region"], "region", "=");
@@ -319,7 +322,7 @@ class AttacksGateway
             $preparedArray["city"] = $filters["city"];
         }
 
-        $statement = $statement . "LIMIT 10000;";
+        $statement = $statement . "LIMIT 15000;";
 
         return $preparedArray;
     }
@@ -331,6 +334,7 @@ class AttacksGateway
             FROM attacks
             ORDER BY killsCount DESC
             LIMIT 12;";
+
         try {
             $statement = $this->db->query($statement);
             $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
