@@ -20,6 +20,14 @@ class AttacksController
     {
         switch ($this->requestMethod) {
             case 'GET':
+
+                //Attacks dashboard case: (pageId, onPage) => returns the attack which is the onPage-th in the page with ID 'pageId'
+                if (strcmp($uri[3], "attacks-dashboard") == 0 )
+                    {
+                        $response = $this->getAttackByPlaceInPage($_GET["pageId"], $_GET["onPage"]);
+                        break;
+                    }
+
                 if (isset($_GET["preview"]) && $_GET["preview"] == "true") {
                     $response = $this->getAttacksPreview();
                 } else if (sizeof($uri) > 3) {
@@ -27,10 +35,11 @@ class AttacksController
                 } else {
                     $response = $this->getFirst(1000);
                 }
+               
                 break;
             case 'OPTIONS':
                 break;
-            case 'POST':
+            case 'POST':    
                 $rawData = file_get_contents("php://input");
                 $decoded = json_decode($rawData, true);
                 if (isset($_GET["mapPage"]) && $_GET["mapPage"] == "true") {
@@ -186,6 +195,14 @@ class AttacksController
     private function getFirst($first)
     {
         $result = $this->attacksGateway->getFirst($first);
+        $response['status_code_header'] = 'HTTP/1.1 200 OK';
+        $response['body'] = json_encode($result);
+        return $response;
+    }
+
+
+    private function getAttackByPlaceInPage($pageId, $onPage){
+        $result = $this->attacksGateway->getAttackByPlaceInPage($pageId, $onPage);
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = json_encode($result);
         return $response;

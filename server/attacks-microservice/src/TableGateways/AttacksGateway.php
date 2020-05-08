@@ -27,6 +27,23 @@ class AttacksGateway
         }
     }
 
+    public function getAttackByPlaceInPage($pageId, $onPage)
+    {
+        //20 attacks / page
+        $pageIndexInDB = 20 * $pageId + ($onPage - 1);
+        $statement = "
+                    SELECT country, latitude, longitude, region, id
+                    FROM attacks
+                    ORDER BY ID LIMIT 1 OFFSET " . $pageIndexInDB . ";";
+        try{
+            $statement = $this->db->query($statement);
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            return $result;
+        } catch (\PDOException $e) {
+            exit($e->getMessage());
+        }
+    }
+
     public function deleteById($id){
         $statement = "
             DELETE 
