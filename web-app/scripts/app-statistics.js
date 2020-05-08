@@ -127,7 +127,7 @@ function sendStatisticsRequest() {
   console.log(filters);
   filters = JSON.stringify(filters);
 
-  httpPOST(URL_MICROSERVICE_ATTACKS + "/api/attacks", filters, (result) => {
+  httpPOST(URL_MICROSERVICE_ATTACKS + "/api/attacks/filters", filters, (result) => {
     parsed1 = JSON.parse(result.res);
     if (parsed1.length == 0) {
       mainContent.innerHTML = '<div class="attackDetailText2">  <p> No attacks found </p> </div>'

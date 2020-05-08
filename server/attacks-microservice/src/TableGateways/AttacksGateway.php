@@ -66,7 +66,11 @@ class AttacksGateway
             if ($status === false) {
                 return "err";
             } else {
-                return "Done";
+
+                $statement = "SELECT MAX(id) id FROM attacks; ";
+                $statement = $this->db->query($statement);
+                $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+                return $result;
             }
         } catch (\PDOException $e) {
             exit($e->getMessage());

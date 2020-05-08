@@ -95,10 +95,19 @@ function generateAttackInsertObject() {
     filters = JSON.stringify(filters);
     console.log(filters);
 
-
-    httpPOST(URL_MICROSERVICE_ATTACKS + "/api/attacks/id" , filters, (result) => {
-        console.log(result.res);
-        navigateRoot('/attacks');
+    let number2;
+    let id_result;
+    let number;
+    let nume;
+    httpPOST(URL_MICROSERVICE_ATTACKS + "/api/attacks" , filters, (result) => {
+        id_result=JSON.parse(result.res);
+        console.log(id_result[0]);
+        number2 = id_result[0]['id'];
+        console.log(number2);
+        nume = '/attacks/';
+        number = nume.concat(number2);
+        console.log(number);
+        navigateRoot(number);
     }, (error) => {
         //ALERT
     });

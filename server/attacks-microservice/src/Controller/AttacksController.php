@@ -36,9 +36,9 @@ class AttacksController
                 if (isset($_GET["mapPage"]) && $_GET["mapPage"] == "true") {
                     $response = $this->getMapPageAttacks($decoded);
                 } else if (sizeof($uri) > 3) {
+                    $response = $this->getGoodAttacks($decoded, $uri[3]);
+                } else {$response = $this->insertAttack($decoded);
                     $response = $this->insertAttack($decoded);
-                } else {
-                    $response = $this->getGoodAttacks($decoded);
                 }
                 break;
             case 'PUT':
@@ -103,8 +103,14 @@ class AttacksController
         $this->setValueBool($decoded, $transformed, "success");       
     }
 
-    private function getGoodAttacks($decoded)
+    private function getGoodAttacks($decoded, $id)
     {
+        if ($id!="filters") {
+            
+            $response['status_code_header'] = 'HTTP/1.1 404 Not Found';
+            $response['body'] = json_encode("eroare");
+            return $response;
+        }
         $transformed = [];
 
         $this->getStartDate($decoded, $transformed);
