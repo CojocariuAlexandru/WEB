@@ -30,11 +30,12 @@ class AttacksGateway
     public function getAttackByPlaceInPage($pageId, $onPage)
     {
         //20 attacks / page
-        $pageIndexInDB = 20 * $pageId + ($onPage - 1);
+        $pageIndexInDB = ($pageId-1) * $onPage;
         $statement = "
                     SELECT country, latitude, longitude, region, id
                     FROM attacks
-                    ORDER BY ID LIMIT 1 OFFSET " . $pageIndexInDB . ";";
+                    ORDER BY ID LIMIT " . $onPage . " OFFSET " . $pageIndexInDB . ";";
+
         try{
             $statement = $this->db->query($statement);
             $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
