@@ -27,6 +27,10 @@
   margin-bottom: 40px;
 }
 
+.grid-container-result-buttons.no-margin {
+  margin-bottom: 10px;
+}
+
 .title-stat {
   grid-area: title-stat;
   display: flex;

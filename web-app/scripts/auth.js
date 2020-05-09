@@ -30,15 +30,25 @@ function changeSignUp() {
 
 function userLogin() {
     let username = document.querySelector('#login-username').value;
+    if (!validateString(username, 3, 64)) {
+        showError('The username has to have between 3 and 64 characters', 3000);
+        return;
+    }
     let pwd = document.querySelector('#login-pwd').value;
+    if (!validateString(pwd, 6, 64)) {
+        showError('The password has to have between 6 and 64 characters', 3000);
+        return;
+    }
 
     signInUser(username, pwd, (res) => {
-        saveUserToken(res.res);
-        userLoginClearFields();
-        setWebAppTemplateAsSite();
-        navigateRoot('/home');
+        showSuccess('You have successfully logged in!', 2500, () => {
+            saveUserToken(res.res);
+            userLoginClearFields();
+            setWebAppTemplateAsSite();
+            navigateRoot('/home');
+        })
     }, (err) => {
-        console.log('Error message');
+        showError(err.res, 2500);
     });
 }
 
@@ -100,23 +110,34 @@ function switchLoginSignup() {
         signupComponent.style.display = 'none';
     }
     login = !login;
+    document.querySelector('#empty').scrollIntoView();
 }
 
 function signUp() {
     let username = document.querySelector('#register-username').value;
+    if (!validateString(username, 3, 64)) {
+        showError('The username has to have between 3 and 64 characters!', 3000);
+        return;
+    }
     let pwd = document.querySelector('#register-pwd').value;
+    if (!validateString(pwd, 6, 64)) {
+        showError('The password has to have between 6 and 64 characters!', 3000);
+        return;
+    }
     let rpwd = document.querySelector('#register-rpwd').value;
-
     if (pwd != rpwd) {
-        console.log('The passwords don\'t match');
-    } else {
-        signUpAddUser(username, pwd, () => {
+        showError('The passwords don\'t match!', 3000);
+        return;
+    }
+
+    signUpAddUser(username, pwd, () => {
+        showSuccess('Account created successfully!', 2000, () => {
             signUpClearFields();
             switchLoginSignup();
-        }, () => {
-            console.log("ERROR");
         });
-    }
+    }, (err) => {
+        showError(err.res, 2500);
+    });
 }
 
 function signUpAddUser(username, pwd, onSuccess, onError) {
@@ -127,8 +148,8 @@ function signUpAddUser(username, pwd, onSuccess, onError) {
 
     httpPOST(URL_MICROSERVICE_USERS + '/api/register', JSON.stringify(registerObj), () => {
         onSuccess();
-    }, () => {
-        onError();
+    }, (err) => {
+        onError(err);
     });
 }
 
@@ -148,7 +169,7 @@ function userIsLoggedIn() {
 
 function userIsAdmin() {
     let decodedToken = getDecodedUserToken();
-    if (decodedToken != null && decodedToken.admin == 1){
+    if (decodedToken != null && decodedToken.admin == 1) {
         return true;
     }
     return false;

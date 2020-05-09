@@ -10,7 +10,17 @@ var parsed1Copy;
 function statisticsDrawingsPageInit(node) {
     mainContent.innerHTML = loadPage(node.template);
     parsed1Copy = parsed1;
+
+    setIdCriteria = -1;
+    setLocationCriteria = -1;
+    setDateCriteria = -1;
+    setTargetTypeCriteria = -1;
+    setAttackTypeCriteria = -1;
+    currentPageNumber = 1;
+    advancedFormOn = 0;
+
     generateRecords();
+    document.querySelector('#scroll-to-element').scrollIntoView();
 }
 
 let numberPerPage = 10;
@@ -23,7 +33,7 @@ function generateRecords() {
     attackListHead.appendChild(table);
 
     window.addEventListener('resize', showRecordsByWidth);
-    displayRecords(1, window.innerWidth);
+    displayRecords(currentPageNumber, window.innerWidth);
     showProperPlaceHolderAdvancedText(window.innerWidth);
 }
 

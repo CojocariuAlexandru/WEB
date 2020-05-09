@@ -12,6 +12,7 @@ function initStatisticsResult2D(node) {
     getFrequencies();
     window.addEventListener('resize', drawAllCharts);
     drawAllCharts();
+    document.querySelector('#scroll-to').scrollIntoView();
 }
 
 function drawAllCharts() {
@@ -290,4 +291,11 @@ function addWeaponTypePreferences() {
         var chart = new google.visualization.LineChart(countryTargetDocument);
         chart.draw(dataForChart, options);
     }
+}
+
+function goBackToMainStatisticsPage() {
+    mainContent.innerHTML = getLoaderHTML();
+    setTimeout(() => {
+        navigateRoot('/statistics-results');
+    }, 100);
 }

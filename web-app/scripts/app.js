@@ -132,15 +132,15 @@ function getPageHeight() {
     return window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 }
 
-function showSuccess(message, time) {
-    showAlert(message, 'success', time);
+function showSuccess(message, time, callback) {
+    showAlert(message, 'success', time, callback);
 }
 
-function showError(message, time) {
-    showAlert(message, 'error', time);
+function showError(message, time, callback) {
+    showAlert(message, 'error', time, callback);
 }
 
-function showAlert(message, type, time) {
+function showAlert(message, type, time, callback) {
     removeAlertIfExists();
 
     let root = document.querySelector('body');
@@ -151,11 +151,14 @@ function showAlert(message, type, time) {
 
     root.appendChild(alert);
 
-    setTimeout((alert) => {
+    setTimeout((alert, callback) => {
         if (alert != null && alert.parentNode != null) {
             alert.parentNode.removeChild(alert);
         }
-    }, time, alert);
+        if (callback != null) {
+            callback();
+        }
+    }, time, alert, callback);
 }
 
 function removeAlertIfExists() {
@@ -174,4 +177,14 @@ function getAlertHTML(message, type) {
 
 function getLoaderHTML() {
     return '<div class="loader-wrapper"> <div class="loader"></div> </div>';
+}
+
+function validateString(str, minLen, maxLen) {
+    if (str == null) {
+        return false;
+    }
+    if (str.length < minLen || str.length > maxLen) {
+        return false;
+    }
+    return true;
 }

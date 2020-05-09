@@ -16,6 +16,7 @@ function fillField(filters1, name) {
 
 function getFilters() {
     let resultFilters = {};
+    let oldFilters = filters;
     filters = JSON.parse(filters);
     if (filters["dateStart"] == "") {
         resultFilters["dateStart"] = "01/01/1970";
@@ -52,6 +53,7 @@ function getFilters() {
 
     resultFilters["damage"] = damages[2][0];
 
+    filters = oldFilters;
     return resultFilters;
 }
 
@@ -113,7 +115,6 @@ function statisticsResultsPageInit(node) {
 
     let compiledTemplate = Handlebars.compile(loadPage(node.template));
     mainContent.innerHTML = compiledTemplate(resultFilters);
-
 
     addPiechart();
     addPiechart2();
@@ -376,7 +377,7 @@ function getDamageMade() {
     let rate2 = damageType1[1][1];
 
     damageType1[2][1] = 100 - (rate1 + rate2);
-    
+
     return damageType1;
 }
 
