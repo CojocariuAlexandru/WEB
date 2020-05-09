@@ -44,3 +44,10 @@ services:
             - attacks-db
         ports:
             - '5002:8001'
+    web-app:
+        image: alexoloieri/tevi
+        container_name: tevi-web-app
+        restart: always
+        ports:
+            - '80:5000'
+            
