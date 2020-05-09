@@ -155,9 +155,15 @@ const usersDashboardRoute = new RouteBuilder('users-dashboard', true)
     .setGuards([adminGuard])
     .build();
 
+const attacksDashboardRoute = new RouteBuilder('attacks-dashboard', true)
+    .setTemplate('web-app-dashboard-attacks')
+    .setInitCallback(attacksDashboardInit)
+    .setGuards([adminGuard])
+    .build();
+
 const root = new RouteBuilder('/app', false)
     .setChildren([homeRoute, statisticsFormRoute, statisticsResultRoute, statistics2DResultsRoute, statisticsDrawingsRoute,
-        mapRoute, attacksPageRoute, attackIdUpdateRouteParent, attacksInsertRoute, adminPanelRoute, usersDashboardRoute
+        mapRoute, attacksPageRoute, attackIdUpdateRouteParent, attacksInsertRoute, adminPanelRoute, usersDashboardRoute, attacksDashboardRoute
     ])
     .build();
 
@@ -200,7 +206,7 @@ function updateMainContentRecursive(node, pathParts, index) {
         }
     }
     // Leaf route with no parameter
-    if (index == pathParts.length && node.leaf === true && checkGuards(node)) {
+    if (index == pathParts.length && node.leaf === true) {
         let checkResult = checkGuards(node);
         if (checkResult['flag']) {
             if (pageIsLoaded(node.template)) {

@@ -2,7 +2,7 @@
   .thatAttackGrid {
     width: 100%;
 
-    margin: 20px 0 40px 0px;
+    margin: 0;
 
     display: grid;
     grid-template-columns: repeat(6, 1fr);
@@ -106,7 +106,7 @@
   justify-content: center;
   color: #065e61;
   font-family: BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  margin-bottom: 20px;
+  margin: 20px 0;
 }
 
 .attackAbout h4 {
@@ -297,6 +297,8 @@
 
 .attackOtherDetails {
   grid-area: attackOtherDetails;
+
+  margin-bottom: 12px;
 }
 
 .updateForm {
