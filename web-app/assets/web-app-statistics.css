@@ -217,6 +217,12 @@ input.dataForm1,
     right: -48px;
 }
 
+#rangeTerr.slider:hover,
+#rangeDeaths.slider:hover,
+#rangeWound.slider:hover {
+    cursor: pointer;
+}
+
 #rangeDeaths.slider::after {
     content: "2000";
 }
@@ -464,7 +470,8 @@ input[type="checkbox"]:checked+label::before {
     transition: color 0.3s linear;
 }
 
-#submitButton2 {
+#submitButton2,
+#submitButton3 {
     color: #065e61;
     font-size: 16px;
     border: 2px solid #065e61;
@@ -479,7 +486,13 @@ input[type="checkbox"]:checked+label::before {
     overflow: hidden;
 }
 
-#submitButton2 span {
+#submitButton2.modified,
+#submitButton3.modified {
+    margin: 0 12px;
+}
+
+#submitButton2 span,
+#submitButton3 span {
     position: absolute;
     width: 25%;
     height: 100%;
@@ -495,26 +508,31 @@ input[type="checkbox"]:checked+label::before {
     color: #eee;
 }
 
-#submitButton2:hover span {
+#submitButton2:hover span,
+#submitButton3:hover span {
     transform: translateY(0) scale(2);
 }
 
-#submitButton2 #span1 {
+#submitButton2 #span1,
+#submitButton3 #span1 {
     transition-delay: 0;
     left: 0;
 }
 
-#submitButton2 #span2 {
+#submitButton2 #span2,
+#submitButton3 #span2 {
     transition-delay: 0.2s;
     left: 25%;
 }
 
-#submitButton2 #span3 {
+#submitButton2 #span3,
+#submitButton3 #span3 {
     transition-delay: 0.4s;
     left: 50%;
 }
 
-#submitButton2 #span4 {
+#submitButton2 #span4,
+#submitButton3 #span4 {
     transition-delay: 0.6s;
     left: 75%;
 }

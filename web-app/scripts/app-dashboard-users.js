@@ -7,12 +7,10 @@ function usersDashboardInit(node) {
     httpGET(URL_MICROSERVICE_USERS + '/api/users', (response) => {
         users = JSON.parse(response.res);
 
-        console.log(users);
-
         compiledUsersDashboardTemplate = Handlebars.compile(loadPage(node.template));
         mainContent.innerHTML = compiledUsersDashboardTemplate(users);
     }, (err) => {
-
+        console.log(err);
     });
 }
 
@@ -21,7 +19,7 @@ function removeUser(rowIndex) {
         users.splice(rowIndex, 1);
         mainContent.innerHTML = compiledUsersDashboardTemplate(users);
     }, (err) => {
-
+        console.log(err);
     });
 }
 

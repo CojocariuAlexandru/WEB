@@ -8,7 +8,6 @@ var windowWidth;
 
 function initStatisticsResult2D(node) {
     mainContent.innerHTML = loadPage(node.template);
-    console.log(attackTypes);
     createMatrices();
     getFrequencies();
     window.addEventListener('resize', drawAllCharts);

@@ -93,7 +93,6 @@ function generateAttackInsertObject() {
     if (filters["date"] == "")
         filters["date"] = "0000-00-00"
     filters = JSON.stringify(filters);
-    console.log(filters);
 
     let number2;
     let id_result;
@@ -101,15 +100,13 @@ function generateAttackInsertObject() {
     let nume;
     httpPOST(URL_MICROSERVICE_ATTACKS + "/api/attacks", filters, (result) => {
         id_result = JSON.parse(result.res);
-        console.log(id_result[0]);
         number2 = id_result[0]['id'];
-        console.log(number2);
         nume = '/attacks/';
         number = nume.concat(number2);
-        console.log(number);
         navigateRoot(number);
     }, (error) => {
         //ALERT
+        console.log(error);
     });
 
 }

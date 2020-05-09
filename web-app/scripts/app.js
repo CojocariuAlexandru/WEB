@@ -171,3 +171,7 @@ function getAlertHTML(message, type) {
         ${message}
         </div>`
 }
+
+function getLoaderHTML() {
+    return '<div class="loader-wrapper"> <div class="loader"></div> </div>';
+}

@@ -46,15 +46,11 @@ function getFilters() {
     resultFilters["extended"] = filters["extended"];
     resultFilters["suicide"] = filters["suicide"];
 
-
     resultFilters["attackType"] = attackTypes[1][0];
     resultFilters["targType"] = targTypes[1][0];
     resultFilters["weaponType"] = weaponTypes[1][0];
 
-
     resultFilters["damage"] = damages[2][0];
-
-    console.log(resultFilters);
 
     return resultFilters;
 }
@@ -84,6 +80,11 @@ function constructParagraf(countries, name, title, exclude) {
 }
 
 function statisticsResultsPageInit(node) {
+    if (parsed1.length == 0) {
+        mainContent.innerHTML = '<div class="attackDetailText2">  <p> No attacks found </p> </div>'
+        return;
+    }
+
     countries = getData('Country', 'Most frequently attacked', "country");
     sort(countries);
     attackTypes = getData('AttackType', 'Most frequently attackTypes', "attackType");
@@ -104,14 +105,15 @@ function statisticsResultsPageInit(node) {
         dateFrequency[i] = 0;
     }
     for (attack in parsed1) {
-        dateFrequency[parseInt(parsed1[attack][1].substring(0, 4))] = dateFrequency[parseInt(parsed1[attack][1].substring(0, 4))] + 1;
+        if (parsed1[attack]["date"] != null) {
+            dateFrequency[parseInt(parsed1[attack]["date"].substring(0, 4))] = dateFrequency[parseInt(parsed1[attack]["date"].substring(0, 4))] + 1;
+        }
     }
     resultFilters = getFilters();
 
     let compiledTemplate = Handlebars.compile(loadPage(node.template));
     mainContent.innerHTML = compiledTemplate(resultFilters);
 
-    console.log(parsed1);
 
     addPiechart();
     addPiechart2();
@@ -124,7 +126,6 @@ function statisticsResultsPageInit(node) {
     constructParagraf(attackTypes, ".details-2", "Most frequently attackTypes", "AttackType");
     constructParagraf(targTypes, ".details-3", "Most frequently targetTyes", "TargetType");
     constructParagraf(weaponTypes, ".details-4", "Most frequently weaponTypes", "WeaponType");
-
 }
 
 function getData(name, details, field) {
@@ -375,11 +376,7 @@ function getDamageMade() {
     let rate2 = damageType1[1][1];
 
     damageType1[2][1] = 100 - (rate1 + rate2);
-
-    console.log(damageType1[0][1]);
-    console.log(damageType1[1][1]);
-    console.log(damageType1[2][1]);
-
+    
     return damageType1;
 }
 
@@ -480,7 +477,6 @@ function move() {
 // https://html2canvas.hertzen.com/
 // https://www.youtube.com/watch?v=IEKEV02TVew
 function downloadImageAs(imageType, className) {
-    console.log('exporting image...');
     let imageToBePrinted = document.getElementsByClassName(className)[0];
     html2canvas(imageToBePrinted).then(canvas => {
         canvas.toBlob(
@@ -529,7 +525,6 @@ function createCSV() {
 
 // https://stackoverflow.com/questions/14964035/how-to-export-javascript-array-info-to-csv-on-client-side
 function downloadCsv() {
-    console.log(parsed1);
     let rows = createCSV();
 
     let csvContent = "data:text/csv;charset=utf-8," + rows.map(e => e.join(",")).join("\n");

@@ -148,10 +148,10 @@ function userIsLoggedIn() {
 
 function userIsAdmin() {
     let decodedToken = getDecodedUserToken();
-    if (decodedToken == null) {
-        return false;
+    if (decodedToken != null && decodedToken.admin == 1){
+        return true;
     }
-    return (decodedToken.admin == 1);
+    return false;
 }
 
 function tokenIsExpired() {

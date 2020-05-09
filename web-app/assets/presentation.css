@@ -301,7 +301,7 @@ body .presentation .grid-container {
 
 .presentation .about p,
 .presentation .us p {
-    border: solid 2px black;
+    /* border: solid 2px black; */
     margin-bottom: 8px;
 }
 

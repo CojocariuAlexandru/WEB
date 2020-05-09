@@ -22,7 +22,6 @@ function generateRecords() {
     table.setAttribute('class', 'attacksTable')
     attackListHead.appendChild(table);
 
-    console.log(parsed1);
     window.addEventListener('resize', showRecordsByWidth);
     displayRecords(1, window.innerWidth);
     showProperPlaceHolderAdvancedText(window.innerWidth);
@@ -110,8 +109,6 @@ function generateOtherLists(pageNumber) {
     attackListHead.innerHTML = ``;
     let otherAttackList = document.createElement('footer');
     let listText = `<p class = 'numberList'>`;
-    console.log(pageNumber * numberPerPage);
-    console.log(parsed1.length);
 
     if (pageNumber == 1) {
         listText = listText + `1`;

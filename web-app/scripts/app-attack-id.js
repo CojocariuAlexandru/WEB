@@ -9,7 +9,6 @@ function attackIdPageBefore(node, id) {
         if (this.readyState == 4 && this.status == 200) {
             let attack = JSON.parse(xmlhttp.responseText);
             let currentAttack = attack[0];
-            console.log(currentAttack);
             prepareAttack(currentAttack);
 
             mainContent.innerHTML = attackIdPageTemplate(node.template, currentAttack);
@@ -125,13 +124,12 @@ function areYouSure() {
     if (result == true) {
         let currentURL = window.location.href; //get current URL
         let currentAttackID = currentURL.split("/"); //get current attack ID - currentAttackID[5]
-        console.log(URL_MICROSERVICE_ATTACKS + "/api/attacks/" + currentAttackID[5]);
 
         httpDELETE(URL_MICROSERVICE_ATTACKS + "/api/attacks/" + currentAttackID[5], (result) => {
-            console.log(result.res);
             navigateRoot('');
         }, (error) => {
             //ALERT
+            console.log(error);
         });
     }
 }

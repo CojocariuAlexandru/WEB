@@ -22,7 +22,6 @@
   grid-template-rows: 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto;
   grid-template-areas:
     "button-1 button-2 button-3 button-4 button-5 button-6"
-    "view-table view-table view-table view-table view-table view-table"
     "table table table table table table";
   width: 100%;
   margin-bottom: 40px;
@@ -117,10 +116,10 @@
 
 .table {
   grid-area: table;
-}
 
-.view-table {
-  grid-area: view-table;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* TITLE-STAT */
@@ -407,16 +406,6 @@
   font-size: 20px;
 }
 
-.view-table p {
-  margin: 30px 60px 60px 60px;
-  color: #054a4d;
-  font-size: 22px;
-}
-
-.view-table a {
-  color: #16aeb6;
-}
-
 /* PIE CHARTS */
 
 .pie-1,
@@ -487,7 +476,6 @@
   .grid-container-result-buttons {
     grid-template-areas: "button-1 button-1 button-2 button-2 button-3 button-3"
       "button-4 button-4 button-5 button-5 button-6 button-6"
-      "view-table view-table view-table view-table view-table view-table"
       "table table table table table table";
   }
 
@@ -562,7 +550,6 @@
       "world-map world-map world-map world-map world-map world-map"
       "button-1 button-1 button-2 button-2 button-3 button-3"
       "button-4 button-4 button-5 button-5 button-6 button-6"
-      "view-table view-table view-table view-table view-table view-table"
       "table table table table table table";
   }
 
@@ -579,10 +566,6 @@
   .details-3,
   .details-4 {
     margin: 20px;
-  }
-
-  .view-table p {
-    font-size: 14px;
   }
 
   .world-map .world-map-element {
@@ -631,5 +614,15 @@
   .attack-bar-border,
   .extended-bar-border {
     width: calc(100% - 40px);
+  }
+
+  .table {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  #submitButton3.modified {
+    margin-top: 12px;
   }
 }

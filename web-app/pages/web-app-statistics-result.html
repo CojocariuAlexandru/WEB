@@ -129,15 +129,17 @@
         <span href="" class="button-link3">BMP</span>
     </div>
 
-
-    <div class="view-table">
-        <p> Check the attacks that we used to generate your statistics <a
-                onclick="navigateRoot('/statistics-drawings')">HERE</a> &#9786;</p>
-    </div>
-
-    <section class='table submitForm' onclick="navigateRoot('/statistics-results-2D')">
-        <div id='submitButton2'>
+    <section class='table submitForm'>
+        <div id='submitButton2' class="modified" onclick="navigateRoot('/statistics-results-2D')">
             <input type='button' value='More statistics' id='submitButton'>
+            <span id='span1'></span>
+            <span id='span2'></span>
+            <span id='span3'></span>
+            <span id='span4'></span>
+        </div>
+
+        <div id='submitButton3' class="modified" onclick="navigateRoot('/statistics-drawings')">
+            <input type='button' value='View Filtered Attacks' id='submitButton'>
             <span id='span1'></span>
             <span id='span2'></span>
             <span id='span3'></span>
