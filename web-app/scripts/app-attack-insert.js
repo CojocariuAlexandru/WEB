@@ -3,28 +3,28 @@ function attacksInsertPageInit(node) {
 
     generateUpdate(regions, "", ".update-region", "Region", "allRegions", `<input list='allRegions'
     id='allRegionsInput' onchange="populate('allRegionsInput', '.update-country')" >`);
-   generateUpdate(emptyObject, "", ".update-country", 'Country', 'allCountries',
-       `<input list='allCountries' id='allCountriesInput'>`);
-   generateUpdate(emptyObject, "", '.update-city', 'City', 'allCities',
-       `<input list='allCities' id='allCitiesInput'>`);
+    generateUpdate(emptyObject, "", ".update-country", 'Country', 'allCountries',
+        `<input list='allCountries' id='allCountriesInput'>`);
+    generateUpdate(emptyObject, "", '.update-city', 'City', 'allCities',
+        `<input list='allCities' id='allCitiesInput'>`);
 
-   generateUpdate(targetSubtypes, "", '.update-targType', 'TargetType', 'allTargets',
-       `<input list='allTargets' id='allTargetsInput' onchange="populateTargetSubtypes('allTargetsInput', '.update-targSubtype')">`);
-   generateUpdate(emptyObject, "", '.update-targSubtype', 'TargetSubtype', 'allSubTargets', `<input list='allSubTargets' id='allSubTargetsInput'>`);
+    generateUpdate(targetSubtypes, "", '.update-targType', 'TargetType', 'allTargets',
+        `<input list='allTargets' id='allTargetsInput' onchange="populateTargetSubtypes('allTargetsInput', '.update-targSubtype')">`);
+    generateUpdate(emptyObject, "", '.update-targSubtype', 'TargetSubtype', 'allSubTargets', `<input list='allSubTargets' id='allSubTargetsInput'>`);
 
 
-   generateUpdate(emptyObject, "", ".update-groupName", 'Group', 'allGroups', `<input list='allGroups' id='allGroupsInput'>`);
-   generateUpdate(attacksTypes, "", ".update-attackType", 'Attack Type', 'allAttacks', `<input list='allAttacks' id='allAttacksInput'>`)
-   generateUpdate(weaponSubtypes, "", ".update-weaponType", "Weapon Type", 'allWeapons',
-       `<input list='allWeapons' id='allWeaponsInput'
+    generateUpdate(emptyObject, "", ".update-groupName", 'Group', 'allGroups', `<input list='allGroups' id='allGroupsInput'>`);
+    generateUpdate(attacksTypes, "", ".update-attackType", 'Attack Type', 'allAttacks', `<input list='allAttacks' id='allAttacksInput'>`)
+    generateUpdate(weaponSubtypes, "", ".update-weaponType", "Weapon Type", 'allWeapons',
+        `<input list='allWeapons' id='allWeaponsInput'
      onchange="populateWeaponsSubtypes('allWeaponsInput', '.update-weaponSubtype')" >`)
 
-   generateUpdate(emptyObject, "", ".update-weaponSubtype", "Weapon Subtype", 'allSubWeapons',
-       `<input list='allSubWeapons' id='allSubWeaponsInput'>`)
+    generateUpdate(emptyObject, "", ".update-weaponSubtype", "Weapon Subtype", 'allSubWeapons',
+        `<input list='allSubWeapons' id='allSubWeaponsInput'>`)
 
-   generateUpdate(propExtent, "", ".update-propExtent", "Amount of damage",
-       'allDamages',
-       `<input list='allDamages' id='allDamagesInput'>`);
+    generateUpdate(propExtent, "", ".update-propExtent", "Amount of damage",
+        'allDamages',
+        `<input list='allDamages' id='allDamagesInput'>`);
 }
 
 
@@ -99,8 +99,8 @@ function generateAttackInsertObject() {
     let id_result;
     let number;
     let nume;
-    httpPOST(URL_MICROSERVICE_ATTACKS + "/api/attacks" , filters, (result) => {
-        id_result=JSON.parse(result.res);
+    httpPOST(URL_MICROSERVICE_ATTACKS + "/api/attacks", filters, (result) => {
+        id_result = JSON.parse(result.res);
         console.log(id_result[0]);
         number2 = id_result[0]['id'];
         console.log(number2);

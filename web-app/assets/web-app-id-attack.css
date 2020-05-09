@@ -1,56 +1,60 @@
-@media screen and (min-width:800px){
-  .thatAttackGrid{
-      width: 100%;
-      
-      margin:20px 0 40px 0px;
+@media screen and (min-width:800px) {
+  .thatAttackGrid {
+    width: 100%;
 
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      grid-template-rows: auto auto auto auto auto auto auto;
-      grid-template-areas: "attackHeader attackHeader attackHeader attackHeader attackHeader attackHeader"
-              "attackAbout attackAbout attackAbout mapAttack1 mapAttack1 mapAttack1" 
-              "attackDetailTitle1 attackDetailTitle1 attackDetailTitle2 attackDetailTitle2 attackDetailTitle3 attackDetailTitle3"
-              "attackDetailText1 attackDetailText1 attackDetailText2 attackDetailText2 attackDetailText3 attackDetailText3"
-              "attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading"
-              "attackOtherDetails attackOtherDetails attackOtherDetails attackOtherDetails attackOtherDetails attackOtherDetails"
-              "byKaggle byKaggle byKaggle byKaggle byKaggle byKaggle"
-              "update update update delete delete delete";
+    margin: 20px 0 40px 0px;
 
-      overflow-y: scroll;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: auto auto auto auto auto auto auto;
+    grid-template-areas: "attackHeader attackHeader attackHeader attackHeader attackHeader attackHeader"
+      "attackAbout attackAbout attackAbout mapAttack1 mapAttack1 mapAttack1"
+      "attackDetailTitle1 attackDetailTitle1 attackDetailTitle2 attackDetailTitle2 attackDetailTitle3 attackDetailTitle3"
+      "attackDetailText1 attackDetailText1 attackDetailText2 attackDetailText2 attackDetailText3 attackDetailText3"
+      "attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading attackOtherDetailsHeading"
+      "attackOtherDetails attackOtherDetails attackOtherDetails attackOtherDetails attackOtherDetails attackOtherDetails"
+      "byKaggle byKaggle byKaggle byKaggle byKaggle byKaggle"
+      "update update update delete delete delete";
+
+    overflow-y: scroll;
   }
 }
 
-@media screen and (max-width:1000px){
-  .thatAttackGrid{
-      display: grid;
-      grid-template-columns: 1fr;
-      grid-template-rows: auto;
-      grid-template-areas:
-          "attackHeader"
-          "attackAbout"
-          "mapAttack1" 
-          "attackDetailTitle1"
-          "attackDetailText1"  
-          "attackDetailTitle2"
-          "attackDetailText2" 
-          "attackDetailTitle3"
-          "attackDetailText3"
-          "attackOtherDetailsHeading"
-          "attackOtherDetails"
-          "byKaggle"
-          "update"
-          "delete"
-          ;
-      overflow-y: scroll;
+@media screen and (max-width:1000px) {
+  .thatAttackGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "attackHeader"
+      "attackAbout"
+      "mapAttack1"
+      "attackDetailTitle1"
+      "attackDetailText1"
+      "attackDetailTitle2"
+      "attackDetailText2"
+      "attackDetailTitle3"
+      "attackDetailText3"
+      "attackOtherDetailsHeading"
+      "attackOtherDetails"
+      "byKaggle"
+      "update"
+      "delete"
+    ;
+    overflow-y: scroll;
   }
 
-  .attackDetailText1, .attackDetailText2, .attackDetailText3{
-      margin-bottom: 30px;
+  .attackDetailText1,
+  .attackDetailText2,
+  .attackDetailText3 {
+    margin-bottom: 30px;
   }
-  .attackHeader{
-      margin-top:20px;
-      font-size:15px;
+
+  .attackHeader {
+    margin-top: 20px;
+    font-size: 15px;
   }
+
   /* #mapAttack{
       padding-left: 0;
       margin-left: 0;
@@ -58,101 +62,118 @@
       max-width: 80%;
   
   } */
-  .mapAttack1{
-      width: 100%;
-      min-height: 300px;
+  .mapAttack1 {
+    width: 100%;
+    min-height: 300px;
   }
 }
 
-@media screen and (max-width:610px){
-  .attackHeader{
-      font-size:14px;
-      text-align: center;
+@media screen and (max-width:610px) {
+  .attackHeader {
+    font-size: 14px;
+    text-align: center;
   }
-  .attackAbout ul li div span, .attackDetailText1, .attackDetailText2, .attackDetailText3, .attackOtherDetails{
-      font-size: 16px;
-  }
-}
-@media screen and (max-width:340px){
-  .attackHeader{
-      font-size:14px;
-      text-align: center;
-  }
-  .attackAbout ul li div span, .attackDetailText1, .attackDetailText2, .attackDetailText3, .attackOtherDetails{
-      font-size: 12px;
+
+  .attackAbout ul li div span,
+  .attackDetailText1,
+  .attackDetailText2,
+  .attackDetailText3,
+  .attackOtherDetails {
+    font-size: 16px;
   }
 }
 
-.attackHeader{
-  display:flex;   
+@media screen and (max-width:340px) {
+  .attackHeader {
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .attackAbout ul li div span,
+  .attackDetailText1,
+  .attackDetailText2,
+  .attackDetailText3,
+  .attackOtherDetails {
+    font-size: 12px;
+  }
+}
+
+.attackHeader {
+  display: flex;
   flex-direction: column;
   grid-area: attackHeader;
   align-items: center;
   justify-content: center;
   color: #065e61;
-  font-family:  BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   margin-bottom: 20px;
 }
 
-.attackAbout h4{
+.attackAbout h4 {
   display: inline;
-  color:#065e61;
+  color: #065e61;
   font-size: 22px;
   text-align: center;
 }
-.attackAbout ul{
+
+.attackAbout ul {
   margin-top: 20px;
   color: #064244;
   font-size: 18px;
   font-weight: bold;
 }
 
-.attackAbout ul li{
+.attackAbout ul li {
   border-bottom: 1px dashed;
   padding: 4px;
   display: flex;
   transition: linear 0.3s background-color;
 }
-.attackAbout ul li div{
-  flex:auto; 
+
+.attackAbout ul li div {
+  flex: auto;
   /* flex 1 1 auto */
 }
+
 .attackAbout ul li .key {
   text-align: left;
   font-weight: bold;
 }
-.attackAbout ul li .value{
+
+.attackAbout ul li .value {
   text-align: right;
   font-weight: normal;
 }
 
 
-.attackAbout ul li:hover{
+.attackAbout ul li:hover {
   background-color: #0a919627;
 }
-.attackAbout ul span{
+
+.attackAbout ul span {
   text-align: left;
   margin-top: 20px;
   color: #07595c;
   font-size: 18px;
 }
-.attackAbout{
+
+.attackAbout {
   display: flex;
   grid-area: attackAbout;
   flex-direction: column;
   margin: 0 40px 16px 40px;
   background-color: #065e6121;
   border-radius: 10px;
-  padding:20px 40px;
+  padding: 20px 40px;
 }
 
-.mapAttack1{
+.mapAttack1 {
   grid-area: mapAttack1;
   z-index: 0;
   position: relative;
 }
 
-#mapAttack{
+#mapAttack {
   text-align: center;
   min-height: calc(100% - 20px);
   height: auto;
@@ -160,8 +181,9 @@
   margin: 0 40px 20px 40px;
   border-radius: 10px;
   border: dashed 1px #065e61;
-  box-shadow: #065e61 4px 4px 10px ;
+  box-shadow: #065e61 4px 4px 10px;
 }
+
 /* RIPPLE LOADER (CSS 30 seconds)*/
 .ripple-loader {
   position: absolute;
@@ -191,6 +213,7 @@
     height: 0;
     opacity: 1;
   }
+
   100% {
     top: 0;
     left: 0;
@@ -202,77 +225,84 @@
 
 
 
-.attackDetailTitle1{
+.attackDetailTitle1 {
   grid-area: attackDetailTitle1;
 }
 
-.attackDetailTitle2{
+.attackDetailTitle2 {
   grid-area: attackDetailTitle2;
 }
 
-.attackDetailTitle3{
+.attackDetailTitle3 {
   grid-area: attackDetailTitle3;
 }
-.attackDetailTitle1, .attackDetailTitle2, .attackDetailTitle3{
+
+.attackDetailTitle1,
+.attackDetailTitle2,
+.attackDetailTitle3 {
   text-align: center;
   border-top: #064244 2px dashed;
-  margin: 20px 0 20px 0 ;
-  padding: 40px 0 0 0 ;
+  margin: 20px 0 20px 0;
+  padding: 40px 0 0 0;
 
 }
 
-.attackDetailTitle1 h3, .attackDetailTitle2 h3, .attackDetailTitle3 h3{
+.attackDetailTitle1 h3,
+.attackDetailTitle2 h3,
+.attackDetailTitle3 h3 {
   display: inline;
   font-size: 22px;
   text-align: center;
-  color:#eee;
+  color: #eee;
   background-color: #0c6568;
   border-radius: 20px;
-  padding:6px 10px;
+  padding: 6px 10px;
 }
 
 
-.attackDetailText1{
+.attackDetailText1 {
   grid-area: attackDetailText1;
 }
 
-.attackDetailText2{
+.attackDetailText2 {
   grid-area: attackDetailText2;
 }
 
-.attackDetailText3{
+.attackDetailText3 {
   grid-area: attackDetailText3;
 }
 
-.attackDetailText1, .attackDetailText2, .attackDetailText3, 
-.attackOtherDetails p{  
+.attackDetailText1,
+.attackDetailText2,
+.attackDetailText3,
+.attackOtherDetails p {
   margin: 20px 30px 20px 30px;
   background-color: #065e6121;
   border-radius: 10px;
-  padding:16px;
+  padding: 16px;
   text-align: justify;
   font-size: 16px;
 }
 
-.attackOtherDetailsHeading{
+.attackOtherDetailsHeading {
   display: flex;
   grid-area: attackOtherDetailsHeading;
   margin-top: 30px;
   padding-top: 20px;
   align-items: center;
   justify-content: center;
-  color:#064244;
+  color: #064244;
   border-top: 2px dashed #065e61;
 }
 
-.attackOtherDetails{
+.attackOtherDetails {
   grid-area: attackOtherDetails;
 }
 
 .updateForm {
   grid-area: update;
 }
-.deleteForm{
+
+.deleteForm {
   grid-area: delete;
 }
-

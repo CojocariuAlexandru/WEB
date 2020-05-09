@@ -388,7 +388,7 @@ function showRecordsByInput() {
     if (`${locationForm.value}`) {
         locationValue = `${locationForm.value}`;
     }
-        
+
     let dateStartForm = document.querySelector('#dateInputStart');
     if (`${dateStartForm.value}`) {
         dateStartValue = `${dateStartForm.value}`;

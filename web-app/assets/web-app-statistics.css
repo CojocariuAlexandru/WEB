@@ -29,7 +29,6 @@
     overflow-y: scroll;
 }
 
-
 .dataForm1 {
     background: #fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png) 97% 50% no-repeat;
 }
@@ -81,7 +80,7 @@ input.dataForm1,
 .successForm,
 .nrWoundedForm,
 .nrTerrForm,
-.nrDeathsForm{
+.nrDeathsForm {
     align-items: center;
 }
 
@@ -104,7 +103,6 @@ input.dataForm1,
     border-radius: 15px;
     transition: color 0.5s linear, border 0.5s linear, background-color 0.5s linear;
 
-
     /*box-shadow: 1px 2px 5px;*/
 }
 
@@ -116,7 +114,7 @@ input.dataForm1,
 
 .web-app .statisticsFormGrid h1,
 .web-app .mapPageGrid h1,
-#attacks-page .attacks-page-header h1, 
+#attacks-page .attacks-page-header h1,
 .web-app .grid-container-update .update-header h1 {
     text-align: center;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -163,7 +161,8 @@ input.dataForm1,
     margin: 5px 0;
 }
 
-#dateInputStart, #dateInputFinal {
+#dateInputStart,
+#dateInputFinal {
     height: 20px;
 }
 
@@ -247,10 +246,6 @@ input.dataForm1,
     background: #065e61;
 }
 
-
-
-
-
 /* ATTACK TYPE FORM */
 
 .attackTypeForm {
@@ -290,9 +285,9 @@ input.dataForm1,
 .targSubtypeSelect h3,
 .weaponTypeSelect h3,
 .weaponSubtypeSelect h3,
-.specificParagraph h3, 
+.specificParagraph h3,
 .specificTargetName h3,
-.specificTargetNat h3, 
+.specificTargetNat h3,
 .specificGroup h3,
 .countryForm h3,
 .grid-container-update h3 {
@@ -305,7 +300,6 @@ input.dataForm1,
     border-radius: 40px;
     text-align: center;
 }
-
 
 /* DAMAGE FORM */
 
@@ -330,41 +324,42 @@ input.dataForm1,
     grid-area: targetTypeForm;
 }
 
-.targTypeSelect{
+.targTypeSelect {
     grid-area: targTypeSelect;
 }
-.targSubtypeSelect{
+
+.targSubtypeSelect {
     grid-area: targSubtypeSelect;
 }
-.weaponTypeSelect{
+
+.weaponTypeSelect {
     grid-area: weaponTypeSelect;
 }
-.weaponSubtypeSelect{
-    grid-area: weaponSubtypeSelect;
 
+.weaponSubtypeSelect {
+    grid-area: weaponSubtypeSelect;
 }
 
-.specificParagraph{
+.specificParagraph {
     grid-area: specificParagraph;
 }
 
-.specificTargetName{
+.specificTargetName {
     grid-area: specificTargetName;
 }
 
-.specificTargetNat{
+.specificTargetNat {
     grid-area: specificTargetNat;
 }
 
-.specificGroup{
+.specificGroup {
     grid-area: specificGroup;
 }
 
 /* FOURTH ROW */
-.statisticsFormGrid > div,
-.grid-container-update > div,
-.mapPageGrid > div
-{
+.statisticsFormGrid>div,
+.grid-container-update>div,
+.mapPageGrid>div {
     margin-left: 10px;
     margin-right: 10px;
     padding: 0;
@@ -395,16 +390,18 @@ input.dataForm1,
 .countryForm {
     grid-area: countryForm;
 }
-.cityForm{
+
+.cityForm {
     grid-area: cityForm;
 }
 
 /* SUBMIT FORM */
- .submitForm {
+.submitForm {
     display: flex;
-    margin-bottom: 30px;}
+    margin-bottom: 30px;
+}
 
-.statistici-buton{
+.statistici-buton {
     grid-area: statistici-buton;
 
 }
@@ -413,9 +410,7 @@ input.dataForm1,
     height: 20px;
 }
 
-
 /* CHECKBOX */
-
 
 /* Inspired by a tutorial */
 input[type="checkbox"] {
@@ -431,7 +426,6 @@ input[type="checkbox"]+label {
     color: #065e61;
     cursor: pointer;
 }
-
 
 input[type="checkbox"]+label::before {
     /*label immediately after*/

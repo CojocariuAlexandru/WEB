@@ -1,27 +1,29 @@
-@media only screen and (max-width: 800px){
-    .topFiveHeader{
+@media only screen and (max-width: 800px) {
+    .topFiveHeader {
         font-size: 20px;
     }
 }
-@media only screen and (max-width: 500px){
-    .topFiveHeader{
+
+@media only screen and (max-width: 500px) {
+    .topFiveHeader {
         font-size: 18px;
     }
 }
-@media only screen and (max-width: 330px){
-    .topFiveHeader{
+
+@media only screen and (max-width: 330px) {
+    .topFiveHeader {
         font-size: 12px;
     }
 }
 
-.topFiveHeader{
+.topFiveHeader {
     margin-top: 30px;
     margin-bottom: 30px;
     color: #065e61;
     text-align: center;
 }
 
-#backToFirstStatistics{
+#backToFirstStatistics {
     margin-left: 20px;
     margin-top: 10px;
     margin-bottom: 10px;

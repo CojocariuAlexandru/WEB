@@ -477,60 +477,61 @@ function move() {
     }
 }
 
-
 // https://html2canvas.hertzen.com/
 // https://www.youtube.com/watch?v=IEKEV02TVew
-function downloadImageAs(imageType, className){
+function downloadImageAs(imageType, className) {
     console.log('exporting image...');
     let imageToBePrinted = document.getElementsByClassName(className)[0];
     html2canvas(imageToBePrinted).then(canvas => {
         canvas.toBlob(
-            function(blob){
+            function (blob) {
                 saveAs(blob, "raport." + imageType);
-                }
-            , "image/" + imageType);
+            }, "image/" + imageType);
     });
 
-    
+
 }
 
-function createCSV(){
-    let csvArray = [["id", 
-    "date", 
-    "extended",
-    "region",
-    "country",
-    "city",
-    "attackType",
-    "success",
-    "suicide",
-    "targType",
-    "terrCount",
-    "weaponType",
-    "killsCount",
-    "woundedCount",
-    "propExtent"]];
+function createCSV() {
+    let csvArray = [
+        ["id",
+            "date",
+            "extended",
+            "region",
+            "country",
+            "city",
+            "attackType",
+            "success",
+            "suicide",
+            "targType",
+            "terrCount",
+            "weaponType",
+            "killsCount",
+            "woundedCount",
+            "propExtent"
+        ]
+    ];
 
     let arrayLength = parsed1.length;
     let i;
     for (i = 0; i < arrayLength; i++) {
-        let attackArray= [];
-        let j=0;
+        let attackArray = [];
+        let j = 0;
         for (let [key, value] of Object.entries(parsed1[i])) {
-            if (j==15) break;
+            if (j == 15) break;
             attackArray.push(value);
             j++;
-          }
+        }
         csvArray.push(attackArray);
     }
     return csvArray;
 }
 
 // https://stackoverflow.com/questions/14964035/how-to-export-javascript-array-info-to-csv-on-client-side
-function downloadCsv(){
+function downloadCsv() {
     console.log(parsed1);
     let rows = createCSV();
-    
+
     let csvContent = "data:text/csv;charset=utf-8," + rows.map(e => e.join(",")).join("\n");
 
     var encodedUri = encodeURI(csvContent);

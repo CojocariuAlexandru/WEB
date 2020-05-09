@@ -146,5 +146,4 @@ function generateAttackUpdateObject() {
     }, (error) => {
         //ALERT
     });
-
 }
