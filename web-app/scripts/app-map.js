@@ -522,3 +522,4 @@ function getCountryCoordinates(countryName) {
         return countriesDict[countryName];
       }
   }
+  

@@ -77,6 +77,10 @@ class AttacksController
         } else if (sizeof($uri) > 3) {
             $response = $this->iAttacksService->getFiltered($decoded, $uri[3]);
         } else {
+            if (!$this->isAuthorized()) {
+                $response['status_code_header'] = 'HTTP/1.1 401 Not Authorized';
+                return $response;
+            }
             $response = $this->iAttacksService->insert($decoded);
         }
 
@@ -90,6 +94,10 @@ class AttacksController
         $rawData = file_get_contents("php://input");
         $decoded = json_decode($rawData, true);
         if (sizeof($uri) > 3) {
+            if (!$this->isAuthorized()) {
+                $response['status_code_header'] = 'HTTP/1.1 401 Not Authorized';
+                return $response;
+            }
             $response = $this->iAttacksService->update($decoded, $uri[3]);
         } else {
             $response['status_code_header'] = 'HTTP/1.1 404 Not Found';
@@ -100,7 +108,52 @@ class AttacksController
 
     private function solveDELETERequests($uri)
     {
+        if (!$this->isAuthorized()) {
+            $response['status_code_header'] = 'HTTP/1.1 401 Not Authorized';
+            return $response;
+        }
         $response = $this->iAttacksService->deleteById($uri[3]);
         return $response;
+    }
+
+    private function isAuthorized()
+    {
+        $jwt = $this->getJwtFromHeader();
+        if ($jwt === '') {
+            return false;
+        }
+        $SECRET_KEY = getenv('SECRET');
+
+        try {
+            $decoded = \Firebase\JWT\JWT::decode($jwt, $SECRET_KEY, array('HS256'));
+            $decoded = (array) $decoded;
+
+            if ($decoded["admin"] == 0) {
+                return false;
+            }
+        } catch (\Firebase\JWT\ExpiredException $e) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private function getJwtFromHeader()
+    {
+        if (!isset($_SERVER['HTTP_AUTHORIZATION'])) {
+            return '';
+        }
+
+        $header = $_SERVER['HTTP_AUTHORIZATION'];
+        if (substr($header, 0, 7) !== 'Bearer ') {
+            return '';
+        }
+
+        $jwt = explode(' ', $header);
+        if (sizeof($jwt) < 2) {
+            return '';
+        }
+
+        return $jwt[1];
     }
 }

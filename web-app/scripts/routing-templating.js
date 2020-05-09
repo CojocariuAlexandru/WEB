@@ -209,6 +209,11 @@ function updateMainContentRecursive(node, pathParts, index) {
 }
 
 function updateMainContent(pathName) {
+    if (tokenIsExpired()) {
+        userLogout();
+        return;
+    }
+
     let pathParts = pathName.split('/');
     let redirect = false;
 
@@ -220,6 +225,7 @@ function updateMainContent(pathName) {
     } else {
         redirect = true;
     }
+
     if (redirect && webapp) {
         navigateRoot('/home');
     }

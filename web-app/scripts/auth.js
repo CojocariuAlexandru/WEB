@@ -1,7 +1,15 @@
 let login = true; // boolean flag, true = display login widget, false = display register widget
 
-function getDecodedUserToken() {
+function getUserToken() {
     let token = localStorage.getItem('Token');
+    if (token == null) {
+        return null;
+    }
+    return token;
+}
+
+function getDecodedUserToken() {
+    let token = getUserToken();
     if (token == null) {
         return null;
     }
@@ -144,4 +152,16 @@ function userIsAdmin() {
         return false;
     }
     return (decodedToken.admin == 1);
+}
+
+function tokenIsExpired() {
+    let decodedToken = getDecodedUserToken();
+    if (decodedToken == null) {
+        return true;
+    }
+
+    if (Date.now() >= decodedToken.exp * 1000) {
+        return true;
+    }
+    return false;
 }
