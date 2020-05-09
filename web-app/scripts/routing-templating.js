@@ -167,6 +167,14 @@ const root = new RouteBuilder('/app', false)
     ])
     .build();
 
+const allowedRedirectionPages = ["home", "statistics", "map", "attacks", "attacks/1"];
+
+const allowedRedirectCallbacks = {
+    'get-statistics': fillInTheFormAndSubmitIt
+};
+
+function fillInTheFormAndSubmitIt() {}
+
 // ------------------ Routing logic -------------------------
 
 function checkGuards(node) {
