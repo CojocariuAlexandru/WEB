@@ -3,22 +3,22 @@
         flex-direction: column;
         height: 110px;
     }
-    #searchText{
+    .searchText{
         margin-bottom: 10px;
     }
-    #plusSearch{
+    .plusSearch{
         margin-right: 10px;
         margin-left: 6px;
     }
 }
 @media only screen and (min-width: 1000px){
-    #searchText{
+    .searchText{
         margin: 0 20px;
     }
     .sortList{
         height: 90px;
     }
-    #plusSearch {
+    .plusSearch {
         margin-right: 30px;
      }
 }
@@ -85,16 +85,11 @@ div.recordList {
     display: table-row;
 }
 
-#attacksTable > .headingRecordList > th{
+.attacksTable > .headingRecordList > th{
     cursor: pointer;
 }
 
-#locationID{
-    
-}
-
 .tableCellData{
-    text-align: justify;
     width: 22.75%;
     text-align: center;
 }
@@ -108,7 +103,6 @@ div.recordList {
 }
 
 .tableCellDataAttack{
-    text-align: justify;
     width: 26.75%;
     text-align: left;
 }
@@ -140,7 +134,7 @@ div.recordList {
     align-items: center;
 }
 
-#searchText {
+.searchText {
     display: flex;
     flex: 3;
     height: 50px;
@@ -148,13 +142,13 @@ div.recordList {
     border-radius: 40px;
 }
 
-input#searchText {
+input.searchText {
     padding: 0 30px;
     color: #065e61;
     width: 100%;
 }
 
-#advancedSearch {
+.advancedSearch {
     display: flex;
     flex: 2;
     height: 50px;
@@ -164,24 +158,23 @@ input#searchText {
     align-items: center;
     margin: 0 20px;
     cursor: pointer;
-    align-items: center;
     align-self: center;
 
     transition: all .2s;
 }
 
-#advancedSearch:hover {
+.advancedSearch:hover {
     background-color: #065e61;
     font-size: 22px;
     padding-left: 30px;
 }
 
-#advancedSearch:active .advancedFields {
+.advancedSearch:active .advancedFields {
     display: block;
     position: relative;
 }
 
-#advancedSearchText {
+.advancedSearchText {
     color: #eee;
     width: 100%;
     text-align: center;
@@ -214,7 +207,6 @@ input#searchText {
     font-size: 26px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     text-align: center;
-    font-size:22px;
 }
 
 
