@@ -50,23 +50,23 @@ html {
 
 @keyframes alert-appearence {
     from {
-        bottom: 0px;
+        bottom: 0;
         opacity: 0;
     }
 
     to {
         bottom: 40px;
-        opacity: 100%;
+        opacity: 1;
     }
 }
 
-#app-alert {
+.app-alert {
     position: fixed;
 
     left: 50%;
     transform: translateX(-50%);
     bottom: 40px;
-    opacity: 100%;
+    opacity: 1;
 
     /* https://www.w3schools.com/css/css3_shadows.asp */
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -79,11 +79,11 @@ html {
     animation-duration: 2s;
 }
 
-#app-alert .success {
+.app-alert .success {
     background-color: #5cb85c;
 }
 
-#app-alert .error {
+.app-alert .error {
     background-color: #d9534f;
 }
 
@@ -98,6 +98,7 @@ html {
     border-radius: 10px;
     font-size: 24px;
     padding: 12px;
+    box-sizing: border-box;
 }
 
 .app-alert-body i {

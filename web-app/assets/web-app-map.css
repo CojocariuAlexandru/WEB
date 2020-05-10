@@ -18,7 +18,7 @@
     overflow-y: scroll;
 }
 
-#mapDiv {
+.mapDiv {
     grid-area: mapPageMap;
     background-color: transparent;
 
@@ -26,6 +26,7 @@
 
     border: 1px dotted black;
     border-radius: 15px;
+    box-sizing: border-box;
 }
 
 .dateIntervalInput {
@@ -64,5 +65,7 @@
 
         border: 0;
         padding: 20px;
+
+        box-sizing: border-box;
     }
 }
