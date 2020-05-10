@@ -42,7 +42,8 @@ h1 {
     margin-bottom: 20px;
 }
 
-table.attacksTable {
+table.attacksTable,
+table.attacksTable tbody {
     /* border-collapse: collapse; */
     border-radius: 20px;
     overflow: hidden;
@@ -82,13 +83,15 @@ div.recordList {
     background-color: #076064c9;
 }
 
-.attacksTable {
+.attacksTable, 
+.attacksTable tbody {
     table-layout: auto;
     width: 100%;
     display: table-row;
 }
 
-#attacksTable>.headingRecordList>th {
+#attacksTable>.headingRecordList>th,
+#attacksTable .headingRecordList>th {
     cursor: pointer;
 }
 

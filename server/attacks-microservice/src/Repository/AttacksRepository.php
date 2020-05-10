@@ -31,7 +31,7 @@ class AttacksRepository implements iAttacksRepository
     {
         $pageIndexInDB = ($pageId - 1) * $onPage;
         $statement = "
-                    SELECT country, latitude, longitude, region, id
+                    SELECT id, country, region, date, attackType, targType
                     FROM attacks
                     ORDER BY ID LIMIT " . $onPage . " OFFSET " . $pageIndexInDB . ";";
 
