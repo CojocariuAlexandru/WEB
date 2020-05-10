@@ -721,7 +721,7 @@ body .presentation .grid-container {
 }
 
 @media only screen and (max-width: 360px) {
-    .presentation .about-header {
+    .presentation .about {
         display: none;
     }
 

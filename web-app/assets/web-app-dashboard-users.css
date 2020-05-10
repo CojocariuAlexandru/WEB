@@ -77,7 +77,7 @@ table.users-table tr .table-button {
 }
 
 table.users-table tr:hover td {
-    background-color: #065e6109;
+    background-color: #d5e1e2;
     cursor: pointer;
 }
 

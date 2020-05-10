@@ -56,7 +56,7 @@
 #home .mid-container:hover,
 #home .right-container:hover {
     cursor: pointer;
-    border: dashed 2px #00acb567;
+    border: dashed 2px #45898d;
     border-radius: 16px;
     color: #065e61;
 }

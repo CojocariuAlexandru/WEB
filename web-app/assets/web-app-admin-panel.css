@@ -55,9 +55,9 @@
 }
 
 .buttons-container:hover {
-    border: dashed 2px #00acb567;
+    border: dashed 2px #85999b;
     border-radius: 16px;
-    color: #065e61;
+    background-color: #e5ecec;
 }
 
 .button-cards {

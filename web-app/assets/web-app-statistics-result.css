@@ -137,7 +137,7 @@
 /* FIELDS */
 
 .fields .container-fields {
-  background: linear-gradient(90deg, #05494dc4 26%, #065e6180 71%, #065e6142 100%);
+  background: linear-gradient(90deg, #3b6264 26%, #81afaf 71%, #b5c7c7 100%);
   border-radius: 26px 0 0 26px;
   padding: 22px;
   color: #eee;
@@ -150,7 +150,7 @@
   padding: 22px;
   color: #054a4d;
   font-weight: bold;
-  background: linear-gradient(90deg, #065e6142 30%, #065e618c 63%, #05494db7 92%);
+  background: linear-gradient(90deg, #b5c7c7 30%, #81afaf 63%, #3b6264 92%);
 }
 
 .container-fields ul li,
@@ -172,7 +172,7 @@
   display: flex;
   flex-direction: column;
   margin: 20px 60px 60px 60px;
-  background-color: #065e6142;
+  background-color: #a1bebe;
   border-radius: 16px;
   padding: 20px;
 }
@@ -223,12 +223,12 @@
 }
 
 .damage-bar-border .damage-bar-2 {
-  background-color: #065e6191;
+  background-color: #3d8a8d;
   border-radius: 0;
 }
 
 .damage-bar-border .damage-bar-3 {
-  background-color: #065e613d;
+  background-color: #6fb5b8;
   border-radius: 0 30px 30px 0;
 }
 
@@ -314,7 +314,7 @@
   color: #eee;
   box-shadow: 0 0 20px #eee;
   border-radius: 30px;
-  background: linear-gradient(to right, #05494dc4 26%, #065e6180 71%, #065e6142 100%);
+  background: linear-gradient(to right, #1e6669 26%, #166b6e 71%, #5f8a8b 100%);
   transition: all 1s;
   background-size: 200%;
 }

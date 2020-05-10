@@ -35,7 +35,7 @@ input.dataForm1,
     border: 1px solid #097a75;
     border-radius: 16px;
     background-color: #eee;
-    box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 3px 6px rgb(124, 123, 123);
     padding: 16px 10px;
     text-align: center;
 }
@@ -95,7 +95,7 @@ input.dataForm1,
     flex-direction: column;
     align-items: center;
 
-    border: dashed 2px #065e6141;
+    border: dashed 2px #a9b8b6;
     border-radius: 15px;
     transition: color 0.5s linear, border 0.5s linear, background-color 0.5s linear;
 
@@ -120,10 +120,10 @@ input.dataForm1,
 .statisticsFormGrid>div:not(.statisticsFormHeading):hover,
 .mapPageGrid>div:not(.mapVisualizationHeader):hover,
 .grid-container-update>div:not(.update-header):hover {
-    background-color: #f1f1f16b;
+    background-color: #f1f1f1;
     display: flex;
     border: dashed 2px #065e61;
-    background-color: #065e6109;
+    background-color: #d9e4e4;
     /* box-shadow: 1px 2px 4px; */
 }
 
@@ -161,7 +161,7 @@ input.dataForm1,
 /* https://www.youtube.com/watch?v=BrpiNUf2XCk */
 .slider {
     -webkit-appearance: none;
-    background: linear-gradient(90deg, #097a746c 20%, #b955557a);
+    background: linear-gradient(90deg, #6da7a5 20%, #c29393);
     width: 60%;
     height: 30px;
     transition: opacity 0.2s;

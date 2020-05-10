@@ -145,7 +145,7 @@
 
 
 .attackAbout ul li:hover {
-  background-color: #0a919627;
+  background-color: #c0dbdb;
 }
 
 .attackAbout ul span {
@@ -160,7 +160,7 @@
   grid-area: attackAbout;
   flex-direction: column;
   margin: 0 40px 16px 40px;
-  background-color: #065e6121;
+  background-color: #d3e1e2;
   border-radius: 10px;
   padding: 20px 40px;
 }
@@ -274,7 +274,7 @@
 .attackDetailText3,
 .attackOtherDetails p {
   margin: 20px 30px 20px 30px;
-  background-color: #065e6121;
+  background-color: #d3e1e2;
   border-radius: 10px;
   padding: 16px;
   text-align: justify;

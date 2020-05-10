@@ -33,7 +33,7 @@
   background-color: #eee;
   border-color: #eee;
   color: rgb(1, 80, 80);
-  text-shadow: rgba(47, 156, 156, 0.568) 1px 1px 6px;
+  text-shadow: rgb(148, 207, 207) 1px 1px 6px;
 }
 
 .update-header {
@@ -145,7 +145,7 @@ textarea {
   border-color: #eee;
   background-color: #eee;
   font-family: Rubik;
-  box-shadow: inset rgba(4, 114, 105, 0.322) 2px 2px 5px;
+  box-shadow: inset rgb(111, 168, 164) 2px 2px 5px;
   padding: 10px;
   color: rgb(9, 104, 99);
   font-style: italic;

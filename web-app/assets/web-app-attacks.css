@@ -43,14 +43,14 @@
     height: 480px;
     overflow: hidden;
 
-    border: dashed 2px #065e6141;
+    border: dashed 2px #93a5a7;
     border-radius: 15px;
     transition: color 0.5s linear, border 0.5s linear, background-color 0.5s linear;
 }
 
 .attacks-page-card:hover {
     border: dashed 2px #065e61;
-    background-color: #065e6109;
+    background-color: #e7e9e9;
     cursor: pointer;
 }
 
