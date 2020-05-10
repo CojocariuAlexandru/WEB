@@ -142,12 +142,14 @@ div.recordList {
 }
 
 input.searchText {
+    box-sizing: border-box;
     padding: 0 30px;
     color: #065e61;
     width: 100%;
 }
 
 .advancedSearch {
+    box-sizing: border-box;
     display: flex;
     flex: 2;
     height: 50px;
@@ -187,8 +189,10 @@ input.searchText {
 }
 
 /* ADVANCED SEARCH */
-#advancedForm,
-#advancedFormSmallScreen {
+.advancedForm,
+.advancedFormSmallScreen {
+    box-sizing: border-box;
+
     display: flex;
     flex-direction: column;
     margin: 0 50px;
@@ -200,8 +204,8 @@ input.searchText {
     height: 120px;
 }
 
-#searchCriteriaAdvancedForm,
-#searchCriteriaAdvancedInput {
+.searchCriteriaAdvancedForm,
+.searchCriteriaAdvancedInput {
     display: flex;
     color: #eee;
     font-size: 26px;
@@ -209,52 +213,53 @@ input.searchText {
     text-align: center;
 }
 
-#searchCriteriaAdvancedForm>p {
+.searchCriteriaAdvancedForm>p {
     font-weight: bold;
 }
 
-#searchCriteriaAdvancedInput {
+.searchCriteriaAdvancedInput {
     display: flex;
 }
 
-#searchCriteriaAdvancedInput>input[type='text'] {
+.searchCriteriaAdvancedInput>input[type='text'] {
+    box-sizing: border-box;
     height: 30px;
     margin-right: 6px;
     border: 1px solid black;
     border-radius: 10px;
 }
 
-#advancedIdInput {
+.advancedIdInput {
     flex: 1;
     width: 50px;
 }
 
-#advancedLocationInput,
-#advancedDateInput,
-#advancedTargetInput,
-#advancedAttackInput {
+.advancedLocationInput,
+.advancedDateInput,
+.advancedTargetInput,
+.advancedAttackInput {
     flex: 2;
 }
 
-#advancedID {
+.advancedID {
     flex: 1;
 }
 
-#advancedLocation,
-#advancedDate,
-#advancedTarget,
-#advancedAttack {
+.advancedLocation,
+.advancedDate,
+.advancedTarget,
+.advancedAttack {
     flex: 2;
 }
 
-#submitAdvancedInput {
+.submitAdvancedInput {
     border: 2px solid black;
     border-radius: 10px;
     font-size: 20px;
 }
 
-#submitAdvancedInput,
-#advancedFiller {
+.submitAdvancedInput,
+.advancedFiller {
     flex: 1;
 }
 
@@ -306,17 +311,8 @@ input.searchText {
         font-size: 20px;
     }
 
-    .attackTypeForm h3,
-    .weaponTypeForm h3,
-    .targetTypeForm h3,
-    .damageForm h3,
-    .regionForm h3,
-    .countryForm h3 {
 
-        font-size: 16px;
-    }
-
-    input.dataForm1,
+    .dataForm1,
     .firstRow2 input {
         width: 100px;
     }

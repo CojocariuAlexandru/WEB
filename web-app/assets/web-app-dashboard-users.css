@@ -1,4 +1,5 @@
 .dashboard-users-wrapper {
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -10,12 +11,10 @@
     padding: 10px 50px;
 }
 
-.dashboard-users-wrapper h1 {
+h1 {
     text-align: center;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    padding: 0px;
     color: #065e61;
-    margin-top: 0px;
     margin-bottom: 10px;
 }
 
@@ -45,6 +44,8 @@ table.users-table .small-col {
 }
 
 table.users-table thead tr {
+    box-sizing: border-box;
+
     font-size: 30px;
     height: 80px;
 
