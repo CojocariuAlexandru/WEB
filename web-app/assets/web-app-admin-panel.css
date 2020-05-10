@@ -1,0 +1,125 @@
+.admin-panel-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+
+    border: 1px solid black;
+}
+
+.admin-panel-wrapper h1 {
+    margin-top: 10px;
+    color: #065e61;
+}
+
+.admin-panel-body-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+
+    width: calc(100% - 100px);
+    height: 100%;
+
+    margin: 0 50px;
+}
+
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 46%;
+    min-height: calc(96% - 40px);
+
+    border: dashed 2px #eee;
+    border-radius: 15px;
+    transition: color 0.5s linear, border 0.5s linear;
+
+    margin: 40px 8px 0;
+}
+
+.buttons-container .title {
+    color: #065e61;
+    font-size: 30px;
+    background-color: #eee;
+    margin: 16px;
+    padding: 16px 20px;
+    border-radius: 40px;
+    border: 2px dashed #065e61;
+    text-align: center;
+}
+
+.buttons-container:hover {
+    border: dashed 2px #00acb567;
+    border-radius: 16px;
+    color: #065e61;
+}
+
+.button-cards {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 92%;
+    height: 100%;
+
+    margin-top: 32px;
+}
+
+.button-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 12px;
+    height: 60px;
+    width: 80%;
+
+    font-size: 22px;
+    color: #eee;
+    background-color: #065e61;
+
+    border-radius: 16px;
+    border: 2px solid #065e61;
+    transition: color 0.5s linear, border 0.5 linear, background-color 2s linear;
+    -webkit-transition: color 0.5s linear, border 0.5 linear, background-color 2s linear;
+    -o-transition: color 0.5s linear, border 0.5 linear, background-color 2s linear;
+    -moz-transition: color 0.5s linear, border 0.5 linear, background-color 2s linear;
+}
+
+.button-card:hover {
+    cursor: pointer;
+
+    color: #065e61;
+    background-color: #eee;
+    border: 2px dashed #065e61;
+}
+
+@media screen and (max-width: 932px) {
+    .admin-panel-wrapper {
+        border: 0;
+    }
+
+    .admin-panel-body-wrapper {
+        flex-direction: column;
+        justify-content: flex-start;
+
+        width: 96%;
+        margin: 0 8px;
+    }
+
+    .buttons-container {
+        width: 96%;
+        min-height: auto;
+        padding-bottom: 12px;
+
+        margin: 20px 8px;
+    }
+}
