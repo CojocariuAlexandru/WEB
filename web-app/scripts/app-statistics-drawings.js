@@ -347,33 +347,35 @@ function showAdvancedForm() {
     if (advancedFormOn == 0) {
         let advancedForm = document.createElement('div');
         advancedForm.setAttribute('id', 'advancedForm');
+        advancedForm.setAttribute('class', 'advancedForm');
+
         advancedForm.innerHTML =
             `
-        <div id = 'searchCriteriaAdvancedForm'>
-            <p id='advancedID'>       ID          </p>
-            <p id='advancedLocation'> Location    </p>
-            <p id='advancedDate'>     Date        </p>
-            <p id='advancedAttack'>   Attack type </p>
-            <p id='advancedTarget'>   Target type </p>
-            <p id='advancedFiller'></p>
+        <div id = 'searchCriteriaAdvancedForm' class = 'searchCriteriaAdvancedForm'>
+            <p id='advancedID' class='advancedID'>       ID          </p>
+            <p id='advancedLocation' class='advancedLocation'> Location    </p>
+            <p id='advancedDate' class='advancedDate'>     Date        </p>
+            <p id='advancedAttack' class='advancedAttack'>   Attack type </p>
+            <p id='advancedTarget' class='advancedTarget'>   Target type </p>
+            <p id='advancedFiller' class='advancedFiller'></p>
         </div>
-        <div id = 'searchCriteriaAdvancedInput'>
-            <input type='text' id='advancedIdInput'>
-            <input type='text' id='advancedLocationInput'>
-            <div id = 'advancedDateInput'>
+        <div id = 'searchCriteriaAdvancedInput' class = 'searchCriteriaAdvancedInput'>
+            <input type='text' id='advancedIdInput' class='advancedIdInput'>
+            <input type='text' id='advancedLocationInput' class='advancedLocationInput'>
+            <div id = 'advancedDateInput' class = 'advancedDateInput'>
                 <input class='dataForm1' type='date' id='dateInputStart'></input>
                 <span>-</span>
                 <input class='dataForm1' type='date' id='dateInputFinal'></input>
             </div>
-            <input type='text' id='advancedAttackInput'>
-            <input type='text' id='advancedTargetInput'>
-            <input type='button' id='submitAdvancedInput' value='Send' onclick='showRecordsByWidth()'>
+            <input type='text' id='advancedAttackInput' class='advancedAttackInput'>
+            <input type='text' id='advancedTargetInput' class='advancedTargetInput'>
+            <input type='button' id='submitAdvancedInput' class='submitAdvancedInput' value='Send' onclick='showRecordsByWidth()'>
         </div>
         `;
-        listOfAttacksPage.insertBefore(advancedForm, listOfAttacksPage.children[2]);
+        listOfAttacksPage.insertBefore(advancedForm, listOfAttacksPage.children[3]);
         advancedFormOn = 1;
     } else {
-        listOfAttacksPage.removeChild(listOfAttacksPage.children[2]);
+        listOfAttacksPage.removeChild(listOfAttacksPage.children[3]);
         advancedFormOn = 0;
     }
 }

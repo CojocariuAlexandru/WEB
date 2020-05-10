@@ -10,7 +10,7 @@ body .web-app {
     font-size: 20px;
 }
 
-.web-app #web-app-sidebar {
+.web-app .web-app-sidebar {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -20,7 +20,7 @@ body .web-app {
     height: 100%;
 }
 
-.web-app #web-app-sidebar #sidebar {
+.web-app .web-app-sidebar .sidebar {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -35,7 +35,7 @@ body .web-app {
     background-size: cover;
 }
 
-.web-app #web-app-sidebar #grey-part {
+.web-app .web-app-sidebar .grey-part {
     display: none;
 }
 
@@ -178,6 +178,7 @@ body .web-app {
     width: 2px;
 
     border-left: 2px dotted #eee;
+    box-sizing: border-box;
 }
 
 .web-app .main-wrapper header .logout-button {
@@ -231,6 +232,7 @@ body .web-app {
     width: 120px;
     height: 120px;
     animation: spin 2s linear infinite;
+    box-sizing: border-box;
 }
 
 
@@ -252,14 +254,14 @@ body .web-app {
         height: 100%;
     }
 
-    .web-app #web-app-sidebar {
+    .web-app .web-app-sidebar {
         position: absolute;
         display: none;
 
         z-index: 5;
     }
 
-    .web-app #web-app-sidebar #grey-part {
+    .web-app .web-app-sidebar .grey-part {
         display: block;
 
         width: calc(100% - 160px);

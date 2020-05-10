@@ -109,7 +109,7 @@ function toggleSidebar() {
     if (getPageWidth() > 520) {
         return;
     }
-    let sidebar = document.querySelector('#web-app-sidebar');
+    let sidebar = document.querySelector('.web-app-sidebar');
     if (sidebar.style.display === 'flex') {
         sidebar.removeAttribute('style');
     } else {
@@ -127,7 +127,7 @@ function handleResize() {
         return;
     }
     if (getPageWidth() > 520) {
-        let sidebar = document.querySelector('#web-app-sidebar');
+        let sidebar = document.querySelector('.web-app-sidebar');
         sidebar.removeAttribute('style');
     }
 }
@@ -155,6 +155,7 @@ function showAlert(message, type, time, callback) {
     let root = document.querySelector('body');
 
     let alert = document.createElement('div');
+    alert.className = 'app-alert';
     alert.id = 'app-alert';
     alert.innerHTML = getAlertHTML(message, type);
 

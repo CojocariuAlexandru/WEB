@@ -1,4 +1,6 @@
 .admin-panel-wrapper {
+    box-sizing: border-box;
+
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -10,7 +12,7 @@
     border: 1px solid black;
 }
 
-.admin-panel-wrapper h1 {
+h1 {
     margin-top: 10px;
     color: #065e61;
 }
@@ -28,6 +30,8 @@
 }
 
 .buttons-container {
+    box-sizing: border-box;
+
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -73,6 +77,8 @@
 }
 
 .button-card {
+    box-sizing: border-box;
+
     display: flex;
     flex-direction: row;
     align-items: center;
