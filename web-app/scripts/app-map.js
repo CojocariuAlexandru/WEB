@@ -3,7 +3,7 @@ var markersArray = [];
 function mapPageInit(node) {
     mainContent.innerHTML = loadPage(node.template);
 
-    let el = document.querySelector("#mapDiv");
+    let el = document.querySelector(".mapDiv");
     map = new google.maps.Map(el, {
         center: {
             lat: 30,

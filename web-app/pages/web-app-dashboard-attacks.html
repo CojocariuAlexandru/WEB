@@ -18,8 +18,10 @@
                 <th id="targetTypeHeader" class="tableCellData">
                     Target Type
                 </th>
+                <th class="tableCellDataID">
+                </th>
             </tr>
-            {{#each this}}
+            {{#each attacks}}
             <tr class="particularRecord attacks-dashboard-row">
                 <td id="attackID" class="tableCellDataID">
                     {{id}}
@@ -36,11 +38,55 @@
                 <td id="targetType" class="tableCellData">
                     {{targType}}
                 </td>
+                <td class="tableCellDataID buttons-cell">
+                    <div class="row-button" onclick="dashboardPageAttacksUpdate('{{@index}}')">
+                        <i class="fa fa-edit"></i>
+                    </div>
+                    <div class="row-button" onclick="dashboardPageAttacksDelete('{{@index}}')">
+                        <i class="fa fa-remove"></i>
+                    </div>
+                </td>
             </tr>
             {{/each}}
         </table>
     </div>
     <div class="paging">
-        1
+        {{#if type1}}
+        <div class="current-button">
+            {{page}},
+        </div>
+        <div class="navigation-button" onclick="changePage('{{nextPage}}')">
+            {{nextPage}}
+        </div>
+        <div class="page-signs">
+            >>
+        </div>
+        {{else if type2}}
+        <div class="page-signs">
+            &lt&lt
+        </div>
+        <div class="navigation-button" onclick="changePage('{{previousPage}}')">
+            {{previousPage}},
+        </div>
+        <div class="current-button">
+            {{page}},
+        </div>
+        <div class="navigation-button" onclick="changePage('{{nextPage}}')">
+            {{nextPage}}
+        </div>
+        <div class="page-signs">
+            >>
+        </div>
+        {{else if type3}}
+        <div class="page-signs">
+            &lt&lt
+        </div>
+        <div class="navigation-button" onclick="changePage('{{previousPage}}')">
+            {{previousPage}},
+        </div>
+        <div class="current-button">
+            {{page}}
+        </div>
+        {{/if}}
     </div>
 </div>

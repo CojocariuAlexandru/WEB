@@ -23,8 +23,31 @@
 
 .dashboard-attacks-wrapper .dashboard-attack-table {
     margin-top: 40px;
+    width: 92%;
+}
+
+.dashboard-attacks-wrapper .dashboard-attack-table table {
+    display: flex;
 }
 
 .dashboard-attacks-wrapper .paging {
+    display: flex;
     margin: 20px 0;
+}
+
+.dashboard-attacks-wrapper .navigation-button,
+.dashboard-attacks-wrapper .page-signs {
+    margin: 0 4px;
+}
+
+.dashboard-attacks-wrapper .navigation-button:hover {
+    cursor: pointer;
+}
+
+.dashboard-attacks-wrapper .attacksTable .particularRecord .buttons-cell {
+    visibility: hidden;
+}
+
+.dashboard-attacks-wrapper .attacksTable .particularRecord:hover .buttons-cell {
+    visibility: visible;
 }
