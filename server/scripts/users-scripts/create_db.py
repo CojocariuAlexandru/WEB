@@ -4,24 +4,24 @@ db_name = "TeVi_Auth"
 db_table_name = "Users"
 
 # Use this function to connect to the docker container
+#def get_db_connection(db):
+#    return mysql.connector.connect(
+#        host = "157.245.121.183",
+#	    port = "5005",
+#        user = "root",
+#        password = "password",
+#        database = db,
+#	    auth_plugin='mysql_native_password'
+#    )
+
 def get_db_connection(db):
     return mysql.connector.connect(
-        host = "157.245.121.183",
-	    port = "5005",
+        host = "localhost",
         user = "root",
-        password = "password",
-        database = db,
-	    auth_plugin='mysql_native_password'
+        password = "",
+        port = "3306",
+        database = db
     )
-
-# def get_db_connection(db):
-#     return mysql.connector.connect(
-#         host = "localhost",
-#         user = "root",
-#         password = "password",
-# 	      port = "5005",
-#         database = db
-#     )
 
 mydb = get_db_connection("")
 mycursor = mydb.cursor()

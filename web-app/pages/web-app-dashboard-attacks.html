@@ -1,0 +1,46 @@
+<div class="dashboard-attacks-wrapper">
+    <h1>Manage Attacks</h1>
+    <div class="recordList dashboard-attack-table">
+        <table id="attacksTable" class="attacksTable">
+            <tr class="headingRecordList">
+                <th id="attackIDHeader" class="tableCellDataID">
+                    ID
+                </th>
+                <th id="locationIDHeader" class="tableCellDataAttack">
+                    Location
+                </th>
+                <th id="dateIDHeader" class="tableCellData">
+                    Date
+                </th>
+                <th id="attackTypeHeader" class="tableCellData">
+                    Attack Type
+                </th>
+                <th id="targetTypeHeader" class="tableCellData">
+                    Target Type
+                </th>
+            </tr>
+            {{#each this}}
+            <tr class="particularRecord attacks-dashboard-row">
+                <td id="attackID" class="tableCellDataID">
+                    {{id}}
+                </td>
+                <td id="locationID" class="tableCellDataAttack">
+                    {{country}}, {{region}}
+                </td>
+                <td id="dateID" class="tableCellData">
+                    {{date}}
+                </td>
+                <td id="attackType" class="tableCellData">
+                    {{attackType}}
+                </td>
+                <td id="targetType" class="tableCellData">
+                    {{targType}}
+                </td>
+            </tr>
+            {{/each}}
+        </table>
+    </div>
+    <div class="paging">
+        1
+    </div>
+</div>

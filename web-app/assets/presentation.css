@@ -36,7 +36,7 @@ body .presentation #empty {
 body .presentation .grid-container {
     margin: 0 auto;
     display: grid;
-    grid-template-columns: fr fr fr fr fr fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: auto auto auto auto auto auto;
     grid-template-areas: "login login login art art art"
         "about about about about about about"
@@ -301,7 +301,7 @@ body .presentation .grid-container {
 
 .presentation .about p,
 .presentation .us p {
-    border-style: solid 2px black;
+    /* border: solid 2px black; */
     margin-bottom: 8px;
 }
 
@@ -506,7 +506,7 @@ body .presentation .grid-container {
     body .presentation .grid-container {
         margin: 0 auto;
         display: grid;
-        grid-template-columns: fr fr fr fr fr fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
         grid-template-rows: auto auto auto auto auto auto;
         grid-template-areas: "login login login login login login"
             "about about about about about about"
@@ -566,7 +566,7 @@ body .presentation .grid-container {
     body .presentation .grid-container {
         margin: 0 auto;
         display: grid;
-        grid-template-columns: fr fr fr fr fr fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
         grid-template-rows: auto auto auto auto auto auto auto auto auto auto;
         grid-template-areas: "login login login login login login"
             "about about about about about about"
@@ -655,7 +655,7 @@ body .presentation .grid-container {
     body .presentation .grid-container {
         margin: 0 auto;
         display: grid;
-        grid-template-columns: fr fr fr fr fr fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
         grid-template-rows: auto auto auto auto auto auto auto auto auto auto;
         grid-template-areas: "login login login login login login"
             "about about about about about about"

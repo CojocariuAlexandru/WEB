@@ -1,5 +1,5 @@
-@media only screen and (max-width: 999px){
-    .sortList{
+@media only screen and (max-width: 999px) {
+    .sortList {
         flex-direction: column;
         height: 110px;
     }
@@ -15,12 +15,13 @@
     .searchText{
         margin: 0 20px;
     }
-    .sortList{
+
+    .sortList {
         height: 90px;
     }
     .plusSearch {
         margin-right: 30px;
-     }
+    }
 }
 
 .listOfAttacks {
@@ -37,7 +38,8 @@ h1 {
     margin-bottom: 20px;
 }
 
-table.attacksTable {
+table.attacksTable,
+table.attacksTable tbody {
     /* border-collapse: collapse; */
     border-radius: 20px;
     overflow: hidden;
@@ -47,7 +49,7 @@ table.attacksTable {
 .recordList {
     display: flex;
     flex-direction: column;
-    overflow-x:auto;
+    overflow-x: auto;
 }
 
 div.recordList {
@@ -72,14 +74,13 @@ div.recordList {
 }
 
 .headingRecordList {
-
     color: #eee;
     font-size: 26px;
     background-color: #076064c9;
-
 }
 
-.attacksTable{
+.attacksTable, 
+.attacksTable tbody {
     table-layout: auto;
     width: 100%;
     display: table-row;
@@ -94,7 +95,7 @@ div.recordList {
     text-align: center;
 }
 
-.tableCellDataID{
+.tableCellDataID {
     width: 5%;
     margin-right: 50px;
     margin-left: 10px;
@@ -107,16 +108,14 @@ div.recordList {
     text-align: left;
 }
 
-.attackInformation{
+.attackInformation {
     width: 100%;
     align-items: center;
 }
 
-.smallScreenHeader{
+.smallScreenHeader {
     font-weight: bold;
 }
-
-
 
 .otherLists {
     margin-top: 20px;
@@ -181,7 +180,6 @@ input.searchText {
     margin-right: 6px;
 }
 
-
 .advancedFields {
     display: none;
     position: absolute;
@@ -189,7 +187,8 @@ input.searchText {
 }
 
 /* ADVANCED SEARCH */
-#advancedForm, #advancedFormSmallScreen{
+#advancedForm,
+#advancedFormSmallScreen {
     display: flex;
     flex-direction: column;
     margin: 0 50px;
@@ -201,60 +200,69 @@ input.searchText {
     height: 120px;
 }
 
-#searchCriteriaAdvancedForm, #searchCriteriaAdvancedInput{
+#searchCriteriaAdvancedForm,
+#searchCriteriaAdvancedInput {
     display: flex;
-    color : #eee;
+    color: #eee;
     font-size: 26px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     text-align: center;
 }
 
-
-#searchCriteriaAdvancedForm > p{
+#searchCriteriaAdvancedForm>p {
     font-weight: bold;
 }
-#searchCriteriaAdvancedInput{
-    display:flex;
+
+#searchCriteriaAdvancedInput {
+    display: flex;
 }
 
-#searchCriteriaAdvancedInput > input[type = 'text']{
-    height:30px;
+#searchCriteriaAdvancedInput>input[type='text'] {
+    height: 30px;
     margin-right: 6px;
     border: 1px solid black;
     border-radius: 10px;
 }
 
-#advancedIdInput{
-    flex:1;
+#advancedIdInput {
+    flex: 1;
     width: 50px;
 }
 
-#advancedLocationInput, #advancedDateInput, #advancedTargetInput, #advancedAttackInput{
-    flex:2;
-}
-#advancedID{
-    flex:1;
-} 
-#advancedLocation, #advancedDate, #advancedTarget, #advancedAttack{
-    flex:2;
+#advancedLocationInput,
+#advancedDateInput,
+#advancedTargetInput,
+#advancedAttackInput {
+    flex: 2;
 }
 
-#submitAdvancedInput{
+#advancedID {
+    flex: 1;
+}
+
+#advancedLocation,
+#advancedDate,
+#advancedTarget,
+#advancedAttack {
+    flex: 2;
+}
+
+#submitAdvancedInput {
     border: 2px solid black;
     border-radius: 10px;
     font-size: 20px;
 }
-#submitAdvancedInput, #advancedFiller{
-    flex:1;
-}
 
+#submitAdvancedInput,
+#advancedFiller {
+    flex: 1;
+}
 
 /* LIST OF RECORDS */
 
 .changePage {
     cursor: pointer;
 }
-
 
 @media screen and (max-width:1200px) {
 
@@ -277,14 +285,14 @@ input.searchText {
             "cityForm cityForm cityForm cityForm"
             "targTypeSelect targTypeSelect targSubtypeSelect targSubtypeSelect"
             "weaponTypeSelect weaponTypeSelect weaponSubtypeSelect weaponSubtypeSelect"
-            
+
             "specificParagraph specificParagraph specificParagraph specificParagraph"
             "specificTargetName specificTargetName specificTargetNat specificTargetNat"
             "specificGroup specificGroup specificGroup specificGroup"
 
             "fourthRow fourthRow fourthRow fourthRow"
             "button-1 button-1 button-2 button-2"
-            "submitForm submitForm submitForm submitForm";
+            "statistici-buton statistici-buton statistici-buton statistici-buton";
     }
 
     .attackTypeForm div,
@@ -350,13 +358,12 @@ input.searchText {
             "fourthRow"
             "button-1"
             "button-2"
-            "submitForm";
+            "statistici-buton";
         box-sizing: border-box;
         border: 1px solid black;
         padding: 10px;
         font-size: 12px;
         width: 100%;
-
 
         overflow-y: scroll;
     }
@@ -370,4 +377,8 @@ input.searchText {
     .fourthRow #label1 {
         font-size: 16px;
     }
+}
+
+#submitButton3.statistics-2d-button.submit-button-drawings-page {
+    margin: 12px auto 40px;
 }

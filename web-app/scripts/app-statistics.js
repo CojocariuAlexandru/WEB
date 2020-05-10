@@ -22,7 +22,7 @@ function statisticsPageInit(node) {
   sliderFunction();
 }
 
-var parsed1;
+var parsed1 = null;
 var filters;
 
 function sendStatisticsRequest() {
@@ -124,19 +124,16 @@ function sendStatisticsRequest() {
     extended: `${extendedInput.checked}`,
     suicide: `${suicideFormInput.checked}`
   };
-  console.log(filters);
   filters = JSON.stringify(filters);
 
-  httpPOST(URL_MICROSERVICE_ATTACKS + "/api/attacks", filters, (result) => {
+  httpPOST(URL_MICROSERVICE_ATTACKS + "/api/attacks/filters", filters, (result) => {
     parsed1 = JSON.parse(result.res);
-    if (parsed1.length == 0) {
-      mainContent.innerHTML = '<div class="attackDetailText2">  <p> No attacks found </p> </div>'
-    } else {
-      navigateRoot('/statistics-results');
-    }
+    navigateRoot('/statistics-results');
   }, (eroare) => {
-
+    console.log(eroare);
   });
+
+  mainContent.innerHTML = getLoaderHTML();
 }
 
 function generateWeapons() {
@@ -398,4 +395,11 @@ function hiddenMoreDetails(displayType) {
   elem7[0].style.display = displayType;
   elem8[0].style.display = displayType;
   elem9[0].style.display = displayType;
+}
+
+function serverAttacksNotNull() {
+  if (parsed1 == null) {
+    return false;
+  }
+  return true;
 }

@@ -1,162 +1,221 @@
 .grid-container-update {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: auto auto auto auto auto auto auto auto auto;
-    grid-template-areas: 
-    "update-header update-header update-header update-header update-header update-header" 
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto auto auto auto auto auto auto auto auto;
+  grid-template-areas:
+    "update-header update-header update-header update-header update-header update-header"
     "update-date update-date update-date update-date update-date update-date"
     "update-region update-region update-country update-country update-city update-city"
-     "update-latitude update-latitude update-latitude update-longitude update-longitude update-longitude" 
-     "update-killsCount update-killsCount update-terrCount update-terrCount update-woundedCount update-woundedCount" 
-     "update-targType update-targType update-attackType update-attackType update-weaponType update-weaponType" 
-     "update-targSubtype update-targSubtype update-groupName update-groupName update-weaponSubtype update-weaponSubtype" 
-     "update-check update-check update-check update-check update-check update-check" 
-     "update-propExtent update-propExtent update-propExtent update-propComment update-propComment update-propComment"
-     "update-weaponDetails update-weaponDetails update-targetName update-targetName update-targetNat update-targetNat"
+    "update-latitude update-latitude update-latitude update-longitude update-longitude update-longitude"
+    "update-killsCount update-killsCount update-terrCount update-terrCount update-woundedCount update-woundedCount"
+    "update-targType update-targType update-attackType update-attackType update-weaponType update-weaponType"
+    "update-targSubtype update-targSubtype update-groupName update-groupName update-weaponSubtype update-weaponSubtype"
+    "update-check update-check update-check update-check update-check update-check"
+    "update-propExtent update-propExtent update-propExtent update-propComment update-propComment update-propComment"
+    "update-weaponDetails update-weaponDetails update-targetName update-targetName update-targetNat update-targetNat"
     "update-summary update-summary update-summary update-summary update-summary update-summary"
     "update-motive update-motive update-motive update-motive update-motive update-motive"
     "update-notes update-notes update-notes update-notes update-notes update-notes"
     "update-scite1 update-scite1 update-scite1 update-scite1 update-scite1 update-scite1"
     "update-scite2 update-scite2 update-scite2 update-scite2 update-scite2 update-scite2"
     "update-scite3 update-scite3 update-scite3 update-scite3 update-scite3 update-scite3"
-     "updateButton updateButton updateButton updateButton updateButton updateButton " 
-    ;
-     box-sizing: border-box;
-     border: 1px solid black;
-     background: #eee;
-     padding: 20px;
-     font-size: 16px;
-     width: 100%;
-  }
-  .grid-container-update h3{
-    font-family: Rubik;
-    background-color: #eee;
-    border-color: #eee;
-    color: rgb(1, 80, 80);
-    text-shadow: rgba(47, 156, 156, 0.568) 1px 1px 6px;
-  }
-  
-  .update-header { 
-      grid-area: update-header;
-      margin: 0 10px;
+    "updateButton updateButton updateButton updateButton updateButton updateButton ";
+  box-sizing: border-box;
+  border: 1px solid black;
+  background: #eee;
+  padding: 20px;
+  font-size: 16px;
+  width: 100%;
 }
-.update-date { 
-    grid-area: update-date;
+
+.grid-container-update h3 {
+  font-family: Rubik;
+  background-color: #eee;
+  border-color: #eee;
+  color: rgb(1, 80, 80);
+  text-shadow: rgba(47, 156, 156, 0.568) 1px 1px 6px;
 }
-.updateButton{
+
+.update-header {
+  grid-area: update-header;
+  margin: 0 10px;
+}
+
+.update-date {
+  grid-area: update-date;
+}
+
+.updateButton {
   grid-area: updateButton;
 }
-  
-  .update-region { grid-area: update-region;}
-  
-  .update-country { grid-area: update-country; }
-  
-  .update-city { grid-area: update-city;  }
-  
-  .update-latitude { grid-area: update-latitude;  }
-  
-  .update-longitude { grid-area: update-longitude; }
-  
-  .update-killsCount { grid-area: update-killsCount; }
-  
-  .update-terrCount { grid-area: update-terrCount; }
-  
-  .update-woundedCount { grid-area: update-woundedCount; }
-  
-  .update-targType { grid-area: update-targType; }
-  
-  .update-targSubtype { grid-area: update-targSubtype; }
-  
-  .update-attackType { grid-area: update-attackType; }
-  
-  .update-groupName { grid-area: update-groupName; }
-  
-  .update-weaponType { grid-area: update-weaponType; }
-  
-  .update-weaponSubtype { grid-area: update-weaponSubtype; }
-  
-  .update-check { grid-area: update-check; }
-  
-  .update-weaponDetails { grid-area: update-weaponDetails; }
-  
-  .update-targetName { grid-area: update-targetName; }
-  
-  .update-targetNat { grid-area: update-targetNat; }
-  
-  .update-propExtent { grid-area: update-propExtent; }
-  
-  .update-propValue { grid-area: update-propValue; }
-  
-  .update-propComment { grid-area: update-propComment; }
 
-  .update-summary { grid-area: update-summary; }
-
-  /* .submitForm{grid-area: submitForm;} */
-
-  textarea{
-    width : 100%;
-    border-radius: 4px;
-    border-color: #eee;
-    background-color: #eee;
-    font-family: Rubik;
-    box-shadow: inset rgba(4, 114, 105, 0.322) 2px 2px 5px;
-    padding: 10px;
-    color: rgb(9, 104, 99);
-    font-style: italic;
-    
-  }
-  .update-motive { grid-area: update-motive; }
-  .update-notes { grid-area: update-notes; }
-  .update-scite1 { grid-area: update-scite1; }
-  .update-scite2 { grid-area: update-scite2; }
-  .update-scite3 { grid-area: update-scite3; }
-
-  .update-check div{
-    padding:10px;
-  }
-.grid-container-update input{
-  background-color: transparent;
-    border-style: none;
-    border-bottom: 1px rgb(9, 104, 99) solid;
-    color:  rgb(9, 104, 99);
+.update-region {
+  grid-area: update-region;
 }
 
+.update-country {
+  grid-area: update-country;
+}
 
-@media screen and (max-width:1000px){
+.update-city {
+  grid-area: update-city;
+}
+
+.update-latitude {
+  grid-area: update-latitude;
+}
+
+.update-longitude {
+  grid-area: update-longitude;
+}
+
+.update-killsCount {
+  grid-area: update-killsCount;
+}
+
+.update-terrCount {
+  grid-area: update-terrCount;
+}
+
+.update-woundedCount {
+  grid-area: update-woundedCount;
+}
+
+.update-targType {
+  grid-area: update-targType;
+}
+
+.update-targSubtype {
+  grid-area: update-targSubtype;
+}
+
+.update-attackType {
+  grid-area: update-attackType;
+}
+
+.update-groupName {
+  grid-area: update-groupName;
+}
+
+.update-weaponType {
+  grid-area: update-weaponType;
+}
+
+.update-weaponSubtype {
+  grid-area: update-weaponSubtype;
+}
+
+.update-check {
+  grid-area: update-check;
+}
+
+.update-weaponDetails {
+  grid-area: update-weaponDetails;
+}
+
+.update-targetName {
+  grid-area: update-targetName;
+}
+
+.update-targetNat {
+  grid-area: update-targetNat;
+}
+
+.update-propExtent {
+  grid-area: update-propExtent;
+}
+
+.update-propValue {
+  grid-area: update-propValue;
+}
+
+.update-propComment {
+  grid-area: update-propComment;
+}
+
+.update-summary {
+  grid-area: update-summary;
+}
+
+/* .submitForm{grid-area: submitForm;} */
+
+textarea {
+  width: 100%;
+  border-radius: 4px;
+  border-color: #eee;
+  background-color: #eee;
+  font-family: Rubik;
+  box-shadow: inset rgba(4, 114, 105, 0.322) 2px 2px 5px;
+  padding: 10px;
+  color: rgb(9, 104, 99);
+  font-style: italic;
+
+}
+
+.update-motive {
+  grid-area: update-motive;
+}
+
+.update-notes {
+  grid-area: update-notes;
+}
+
+.update-scite1 {
+  grid-area: update-scite1;
+}
+
+.update-scite2 {
+  grid-area: update-scite2;
+}
+
+.update-scite3 {
+  grid-area: update-scite3;
+}
+
+.update-check div {
+  padding: 10px;
+}
+
+.grid-container-update input {
+  background-color: transparent;
+  border-style: none;
+  border-bottom: 1px rgb(9, 104, 99) solid;
+  color: rgb(9, 104, 99);
+}
+
+@media screen and (max-width:1000px) {
   .grid-container-update {
     grid-template-columns: 1fr;
-      grid-template-areas:
-          "update-header"
-          "update-date"
-          "update-region" 
-          "update-country"
-          "update-city"  
-          "update-latitude"
-          "update-longitude"
-          "update-killsCount"
-          "update-terrCount"
-          "update-woundedCount"
-          "update-targType"
-          "update-targSubtype"
-          "update-targetName"
-          "update-targetNat"
-          "update-attackType"
-          "update-groupName"
-          "update-weaponType"
-          "update-weaponSubtype"
-          "update-weaponDetails"
-          "update-check"
-          "update-propExtent"
-          "update-propComment"
-          "update-summary"
-          "update-motive"
-          "update-notes"
-          "update-scite1"
-          "update-scite2"
-          "update-scite3"
-          "updateButton"
-
-          ;
-      overflow-y: scroll;
+    grid-template-areas:
+      "update-header"
+      "update-date"
+      "update-region"
+      "update-country"
+      "update-city"
+      "update-latitude"
+      "update-longitude"
+      "update-killsCount"
+      "update-terrCount"
+      "update-woundedCount"
+      "update-targType"
+      "update-targSubtype"
+      "update-targetName"
+      "update-targetNat"
+      "update-attackType"
+      "update-groupName"
+      "update-weaponType"
+      "update-weaponSubtype"
+      "update-weaponDetails"
+      "update-check"
+      "update-propExtent"
+      "update-propComment"
+      "update-summary"
+      "update-motive"
+      "update-notes"
+      "update-scite1"
+      "update-scite2"
+      "update-scite3"
+      "updateButton";
+    overflow-y: scroll;
   }
 }

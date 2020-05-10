@@ -7,7 +7,7 @@
         <h4> About </h4>
         <ul>
             <li>
-                <div class="key"><span>  City:</span></div>
+                <div class="key"><span> City:</span></div>
                 <div class="value"> <span>{{city}}</span> </div>
             </li>
             <li>
@@ -15,13 +15,13 @@
                 <div class="value"> <span>{{country}}</span> </div>
             </li>
             <li>
-                <div class="key"><span>  Region:</span></div>
+                <div class="key"><span> Region:</span></div>
                 <div class="value"> <span>{{region}}</span> </div>
             </li>
 
             {{#if terrCount}}
             <li>
-                <div class="key"><span>  Number of terrorists: </span></div>
+                <div class="key"><span> Number of terrorists: </span></div>
                 <div class="value"><span id='terroristsData'>{{terrCount}}</span></div>
             </li>
             {{/if}}
@@ -30,11 +30,11 @@
                 <div class="value"> <span id='killsData'>{{killsCount}}</span></div>
             </li>
             <li>
-                <div class="key"><span>  Number of wounded: </span></div>
+                <div class="key"><span> Number of wounded: </span></div>
                 <div class="value"><span id='woundedData'>{{woundedCount}}</span></div>
             </li>
             <li>
-                <div class="key"><span>  Succesful attack:</span></div>
+                <div class="key"><span> Succesful attack:</span></div>
                 <div class="value"> <span id='succesfulAttack'>{{success}}</span></div>
             </li>
             <li>
@@ -46,60 +46,60 @@
                 <div class="value"> <span id='extended'>{{extended}}</span></div>
             </li>
             {{#if attackType}}
-           <li>
-            <div class="key"><span> Attack type: </span></div>
-            <div class="value"> <span>{{attackType}}</span></div>
-           </li>
-           {{/if}}
+            <li>
+                <div class="key"><span> Attack type: </span></div>
+                <div class="value"> <span>{{attackType}}</span></div>
+            </li>
+            {{/if}}
 
             {{#if weaponType}}
             <li>
-                 <div class="key"><span>  Weapons used:</span></div>
-                <div class="value"><span >{{weaponType}}</span></div>
-           </li>
-           {{/if}}
+                <div class="key"><span> Weapons used:</span></div>
+                <div class="value"><span>{{weaponType}}</span></div>
+            </li>
+            {{/if}}
 
-           {{#if weaponSubtype}}
+            {{#if weaponSubtype}}
             <li>
-                 <div class="key"><span>  Weapon subtype:</span></div>
-                <div class="value"><span >{{weaponSubtype}}</span></div>
-           </li>
-           {{/if}}
+                <div class="key"><span> Weapon subtype:</span></div>
+                <div class="value"><span>{{weaponSubtype}}</span></div>
+            </li>
+            {{/if}}
 
-           {{#if targType}}
-           <li>
-            <div class="key"><span> Target type: </span></div>
-            <div class="value"> <span>{{targType}}</span></div>
-           </li>
-           {{/if}}
-
-           {{#if groupName}}
-           <li>
-            <div class="key"><span> Group name: </span></div>
-            <div class="value"> <span>{{groupName}}</span></div>
-           </li>
-           {{/if}}
-
-
-           {{#if propExtent}}
+            {{#if targType}}
             <li>
-                 <div class="key"><span>  Damages:</span></div>
-                <div class="value"><span >{{propExtent}}</span></div>
-           </li>
-           {{/if}}
+                <div class="key"><span> Target type: </span></div>
+                <div class="value"> <span>{{targType}}</span></div>
+            </li>
+            {{/if}}
+
+            {{#if groupName}}
+            <li>
+                <div class="key"><span> Group name: </span></div>
+                <div class="value"> <span>{{groupName}}</span></div>
+            </li>
+            {{/if}}
+
+
+            {{#if propExtent}}
+            <li>
+                <div class="key"><span> Damages:</span></div>
+                <div class="value"><span>{{propExtent}}</span></div>
+            </li>
+            {{/if}}
         </ul>
     </div>
-    
+
     <div class='mapAttack1'>
         <div id='mapAttack'>
-            
+
         </div>
         <div class="ripple-loader" id="ripple-loader-id">
             <div></div>
             <div></div>
-          </div>
+        </div>
     </div>
-    
+
     <div class='attackDetailTitle1'>
         <h3>Target details</h3>
     </div>
@@ -109,13 +109,13 @@
     <div class='attackDetailTitle3'>
         <h3>Damages</h3>
     </div>
-    
+
     {{#if targSubtype}}
     <div class='attackDetailText1'>
         <p><b>Target subtype</b>: {{targSubtype}}</p>
 
         {{#if targetName}}
-         <p><b>Target name</b>: {{targetName}}</p>
+        <p><b>Target name</b>: {{targetName}}</p>
         {{/if}}
 
         {{#if targetNat}}
@@ -127,7 +127,7 @@
         <p>Unknown</p>
     </div>
     {{/if}}
-    
+
     {{#if weaponDetail}}
     <div class='attackDetailText2'>
         <p>{{weaponDetail}}</p>
@@ -141,47 +141,48 @@
     {{#if propComment}}
     <div class='attackDetailText3'>
         <p>{{propComment}}</p>
-     </div>
-     {{else}}
+    </div>
+    {{else}}
     <div class='attackDetailText3'>
         <p>Unknown</p>
     </div>
     {{/if}}
 
-     <div class='attackOtherDetailsHeading'>
+    <div class='attackOtherDetailsHeading'>
         <h2>Other details</h2>
     </div>
 
     <div class="attackOtherDetails">
         {{#if summary}}
-       <p><b>Summary</b>: {{summary}}</p>
-       {{/if}}
+        <p><b>Summary</b>: {{summary}}</p>
+        {{/if}}
 
-       {{#if motive}}
-       <p><b>Motive</b>: {{motive}}</p>
-       {{/if}}
+        {{#if motive}}
+        <p><b>Motive</b>: {{motive}}</p>
+        {{/if}}
 
 
-       {{#if addNotes}}
-       <p><b>Notes</b>: {{addNotes}}</p>
-       {{/if}}
+        {{#if addNotes}}
+        <p><b>Notes</b>: {{addNotes}}</p>
+        {{/if}}
 
-       {{#if sCite1}}
-       <p>{{sCite1}}</p>
-       {{/if}}
+        {{#if sCite1}}
+        <p>{{sCite1}}</p>
+        {{/if}}
 
-       {{#if sCite2}}
-       <p>{{sCite2}}</p>
-       {{/if}}
+        {{#if sCite2}}
+        <p>{{sCite2}}</p>
+        {{/if}}
 
-       {{#if sCite3}}
-       <p>{{sCite3}}</p>
-       {{/if}}
+        {{#if sCite3}}
+        <p>{{sCite3}}</p>
+        {{/if}}
 
-       <p>There are no other details</p>
+        <p>There are no other details</p>
     </div>
 
-    <section class='submitForm' onclick="navigateToUpdate({{id}})">
+    {{#if admin}}
+    <section class='submitForm updateForm' onclick="navigateToUpdate()">
         <div id='submitButton2'>
             <input type='button' value='Update' id='submitButton'>
             <span id='span1'></span>
@@ -200,5 +201,6 @@
             <span id='span4'></span>
         </div>
     </section>
+    {{/if}}
 
 </div>

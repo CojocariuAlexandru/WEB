@@ -4,7 +4,6 @@ namespace Src\System;
 
 class DatabaseConnector
 {
-
     private $dbConnection = null;
 
     public function __construct()
@@ -21,7 +20,7 @@ class DatabaseConnector
                 $user,
                 $pass
             );
-        } catch (\PDOException $e) {   
+        } catch (\PDOException $e) {
             exit($e->getMessage());
         }
     }

@@ -4,7 +4,6 @@ function attackUpdateIdPageInit(node, id) {
         // cod in caz de success
         let parsed = JSON.parse(res.res)[0];
         let compiledTemplate = Handlebars.compile(loadPage(node.template));
-        // console.log(parsed);
         if (parsed.succes == "0")
             parsed.succes = "";
         if (parsed.extended == "0")
@@ -58,7 +57,6 @@ function generateUpdate(listOfValues, selected, selectClass, name, id, input) {
     optionChoose.setAttribute('id', id);
 
     let values = Object.keys(listOfValues);
-    // console.log(values);
     divElement.innerHTML = divElement.innerHTML + input;
     let index = 0;
     for (index = 0; index < values.length; index++)
@@ -134,17 +132,14 @@ function generateAttackUpdateObject() {
     if (filters["date"] == "")
         filters["date"] = "0000-00-00"
     filters = JSON.stringify(filters);
-    console.log(filters);
 
     let currentURL = window.location.href; //get current URL
     let currentAttackID = currentURL.split("/"); //get current attack ID - currentAttackID[5]
-    console.log(URL_MICROSERVICE_ATTACKS + "/api/attacks/" + currentAttackID[5]);
 
     httpPUT(URL_MICROSERVICE_ATTACKS + "/api/attacks/" + currentAttackID[5], filters, (result) => {
-        console.log(result.res);
         navigateRoot('/attacks/' + currentAttackID[5]);
     }, (error) => {
         //ALERT
+        console.log(error);
     });
-
 }

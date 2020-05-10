@@ -4,6 +4,7 @@ var targTypes;
 var regions;
 var dateFrequency;
 var weaponTypes;
+var damages;
 
 function fillField(filters1, name) {
     if (filters1[name] == "") {
@@ -15,6 +16,7 @@ function fillField(filters1, name) {
 
 function getFilters() {
     let resultFilters = {};
+    let oldFilters = filters;
     filters = JSON.parse(filters);
     if (filters["dateStart"] == "") {
         resultFilters["dateStart"] = "01/01/1970";
@@ -41,13 +43,20 @@ function getFilters() {
     resultFilters["killsCount"] = filters["killsCount"];
     resultFilters["woundedCount"] = filters["woundedCount"];
 
+    resultFilters["success"] = filters["success"];
+    resultFilters["extended"] = filters["extended"];
+    resultFilters["suicide"] = filters["suicide"];
+
     resultFilters["attackType"] = attackTypes[1][0];
     resultFilters["targType"] = targTypes[1][0];
+    resultFilters["weaponType"] = weaponTypes[1][0];
 
-    console.log(resultFilters);
+    resultFilters["damage"] = damages[2][0];
 
+    filters = oldFilters;
     return resultFilters;
 }
+
 
 function constructParagraf(countries, name, title, exclude) {
     let elem = document.querySelector(name);
@@ -73,6 +82,11 @@ function constructParagraf(countries, name, title, exclude) {
 }
 
 function statisticsResultsPageInit(node) {
+    if (parsed1.length == 0) {
+        mainContent.innerHTML = '<div class="attackDetailText2">  <p> No attacks found </p> </div>'
+        return;
+    }
+
     countries = getData('Country', 'Most frequently attacked', "country");
     sort(countries);
     attackTypes = getData('AttackType', 'Most frequently attackTypes', "attackType");
@@ -84,7 +98,8 @@ function statisticsResultsPageInit(node) {
     sort(regions);
     weaponTypes = getData('weaponType', 'Most frequently used weapons', 'weaponType');
     sort(weaponTypes);
-    console.log(weaponTypes);
+    damages = getData('damages', 'Most frequently used weapons', 'propExtent');
+    sort(damages);
 
     dateFrequency = [];
     let i;
@@ -92,23 +107,26 @@ function statisticsResultsPageInit(node) {
         dateFrequency[i] = 0;
     }
     for (attack in parsed1) {
-        dateFrequency[parseInt(parsed1[attack][1].substring(0, 4))] = dateFrequency[parseInt(parsed1[attack][1].substring(0, 4))] + 1;
+        if (parsed1[attack]["date"] != null) {
+            dateFrequency[parseInt(parsed1[attack]["date"].substring(0, 4))] = dateFrequency[parseInt(parsed1[attack]["date"].substring(0, 4))] + 1;
+        }
     }
     resultFilters = getFilters();
 
     let compiledTemplate = Handlebars.compile(loadPage(node.template));
     mainContent.innerHTML = compiledTemplate(resultFilters);
 
-    console.log(parsed1);
-
     addPiechart();
     addPiechart2();
     addPiechart3();
+    addPiechart4();
+
     addColumnChart();
 
     constructParagraf(countries, ".details-1", "Most frequently attacked", "Country");
     constructParagraf(attackTypes, ".details-2", "Most frequently attackTypes", "AttackType");
     constructParagraf(targTypes, ".details-3", "Most frequently targetTyes", "TargetType");
+    constructParagraf(weaponTypes, ".details-4", "Most frequently weaponTypes", "WeaponType");
 }
 
 function getData(name, details, field) {
@@ -205,6 +223,31 @@ function addPiechart3() {
 
     function drawChart() {
         var data = google.visualization.arrayToDataTable(targTypes);
+        var options = {
+            // 'title' : 'Most used attack',
+            'fontSize': 10,
+            'colors': ['#054a4d', '#065e61', '#0da3a8', '#09865d', '#062a61'],
+            'width': '100%',
+            'height': 300,
+            'is3D': true,
+            'backgroundColor': 'transparent',
+            'margin': '0 auto'
+        };
+        var chart = new google.visualization.PieChart(piechartDivision);
+        chart.draw(data, options);
+    }
+}
+
+function addPiechart4() {
+    let piechartDivision = document.querySelector('.pie-4');
+
+    google.charts.load('current', {
+        'packages': ['corechart']
+    });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable(weaponTypes);
         var options = {
             // 'title' : 'Most used attack',
             'fontSize': 10,
@@ -335,10 +378,6 @@ function getDamageMade() {
 
     damageType1[2][1] = 100 - (rate1 + rate2);
 
-    console.log(damageType1[0][1]);
-    console.log(damageType1[1][1]);
-    console.log(damageType1[2][1]);
-
     return damageType1;
 }
 
@@ -434,4 +473,70 @@ function move() {
             elem3.innerHTML = `<p>` + valueExtendRate + '% </p>';
         }
     }
+}
+
+// https://html2canvas.hertzen.com/
+// https://www.youtube.com/watch?v=IEKEV02TVew
+function downloadImageAs(imageType, className) {
+    let imageToBePrinted = document.getElementsByClassName(className)[0];
+    html2canvas(imageToBePrinted).then(canvas => {
+        canvas.toBlob(
+            function (blob) {
+                saveAs(blob, "raport." + imageType);
+            }, "image/" + imageType);
+    });
+
+
+}
+
+function createCSV() {
+    let csvArray = [
+        ["id",
+            "date",
+            "extended",
+            "region",
+            "country",
+            "city",
+            "attackType",
+            "success",
+            "suicide",
+            "targType",
+            "terrCount",
+            "weaponType",
+            "killsCount",
+            "woundedCount",
+            "propExtent"
+        ]
+    ];
+
+    let arrayLength = parsed1.length;
+    let i;
+    for (i = 0; i < arrayLength; i++) {
+        let attackArray = [];
+        let j = 0;
+        for (let [key, value] of Object.entries(parsed1[i])) {
+            if (j == 15) break;
+            attackArray.push(value);
+            j++;
+        }
+        csvArray.push(attackArray);
+    }
+    return csvArray;
+}
+
+// https://stackoverflow.com/questions/14964035/how-to-export-javascript-array-info-to-csv-on-client-side
+function downloadCsv() {
+    let rows = createCSV();
+
+    let csvContent = "data:text/csv;charset=utf-8," + rows.map(e => e.join(",")).join("\n");
+
+    var encodedUri = encodeURI(csvContent);
+    window.open(encodedUri);
+    var encodedUri = encodeURI(csvContent);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "atacks.csv");
+    document.body.appendChild(link); // Required for FF
+
+    link.click();
 }

@@ -4,3 +4,6 @@
 **/distinct_values.txt
 **/cloud
 **/build
+**/node_modules
+**/package-lock.json
+**/*.pem

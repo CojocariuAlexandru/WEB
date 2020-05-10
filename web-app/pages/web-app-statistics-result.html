@@ -1,4 +1,4 @@
-<div class="grid-container">
+<div class="grid-container-result">
     <div class="title-stat">
         <h2>Statistics result</h2>
     </div>
@@ -17,7 +17,9 @@
                 <li>Weapon type</li>
                 <li>Amount of damage</li>
                 <li>Successful attack</li>
-                <li>It is known who attacked</li>
+                <li>Extended over 24h</li>
+                <li>Suicide</li>
+
             </ul>
 
         </div>
@@ -34,74 +36,114 @@
                 <li>{{woundedCount}}</li>
                 <li>{{attackType}}</li>
                 <li>{{targType}}</li>
-                <li>Weapon type</li>
-                <li>10000000$</li>
-                <li>YES</li>
-                <li>YES</li>
+                <li>{{weaponType}}</li>
+                <li>{{damage}}</li>
+                <li>{{success}}</li>
+                <li>{{extended}}</li>
+                <li>{{suicide}}</li>
             </ul>
 
         </div>
     </div>
     <div class="details-1" id="countriesList">
     </div>
+
     <div class="pie-1">
     </div>
+
     <div class="attack-rate">
         <h3>Attack-rate</h3>
         <div class="attack-bar-border">
-            <div id="myBar" class="attack-bar"><p>0%</p></div>
+            <div id="myBar" class="attack-bar">
+                <p>0%</p>
+            </div>
         </div>
     </div>
+
     <div class="damage-made">
         <h3>Damage-made</h3>
         <div class="damage-bar-border">
-            <div id="myBar2" class="damage-bar"><p>0%</p></div>
-            <div id="myBar2-2" class="damage-bar-2"><p>0%</p></div>
-            <div id="myBar2-3" class="damage-bar-3"><p>0%</p></div>
+            <div id="myBar2" class="damage-bar">
+                <p>0%</p>
+            </div>
+            <div id="myBar2-2" class="damage-bar-2">
+                <p>0%</p>
+            </div>
+            <div id="myBar2-3" class="damage-bar-3">
+                <p>0%</p>
+            </div>
         </div>
     </div>
+
     <div class="extended24">
         <h3>Rate extented over 24h</h3>
         <div class="extended-bar-border">
-            <div id="myBar3" class="extended-bar"><p>0%</p></div>
+            <div id="myBar3" class="extended-bar">
+                <p>0%</p>
+            </div>
         </div>
         <div id='button-container'>
-            <button class="button-get-all" onclick="move()">Get rates</button> 
+            <button class="button-get-all" onclick="move()">Get rates</button>
             <span id='span1'></span>
             <span id='span2'></span>
             <span id='span3'></span>
             <span id='span4'></span>
         </div>
     </div>
-    
+
     <div class="pie-2"></div>
-    <div class="details-2" id="attacksList">
+    <div class="details-2">
     </div>
+
     <div class="pie-3"></div>
-    <div class="details-3" id="targetsList">
+    <div class="details-3">
+    </div>
+
+    <div class="pie-4"></div>
+    <div class="details-4">
     </div>
 
     <div class="world-map">
         <div class="world-map-element"></div>
     </div>
 
+</div>
 
-    <div class="button-1">
-        <a href="" class="button-link1">SVG</a>
+<div class="grid-container-result-buttons no-margin">
+    <div class="export button-1" onclick="downloadImageAs('svg', 'grid-container-result')">
+        <span href="" class="button-link1">SVG</span>
     </div>
-    <div class="button-2">
-        <a href="" class="button-link2">PNG</a>
+    <div class="export button-2" onclick="downloadImageAs('png', 'grid-container-result')">
+        <span href="" class="button-link2">PNG</span>
     </div>
-    <div class="button-3">
-        <a href="" class="button-link3">CSV</a>
+    <div class="export button-3" onclick="downloadImageAs('jpg', 'grid-container-result')">
+        <span href="" class="button-link3">JPG</span>
+    </div>
+    <div class="export button-4" onclick="downloadCsv();">
+        <span href="" class="button-link1">CSV</span>
+    </div>
+    <div class="export button-5" onclick="downloadPdf()">
+        <span href="" class="button-link2">PDF</span>
+    </div>
+    <div class="export button-6" onclick="downloadImageAs('bmp', 'grid-container-result')">
+        <span href="" class="button-link3">BMP</span>
     </div>
 
-    <div class="view-table">
-        <p> Check the attacks that we used to generate your statistics <a onclick="navigateRoot('/statistics-drawings')">HERE</a> &#9786;</p>
-    </div>
-    <div class="morePlots">
-        <p>Also, feel free to visualize some 2D generated plots based on your search: <a onclick="navigateRoot('/statistics-results-2D')">HERE</a></p>
-    </div>
-  </div>
+    <section class='table submitForm'>
+        <div id='submitButton2' class="modified" onclick="navigateRoot('/statistics-results-2D')">
+            <input type='button' value='More statistics' id='submitButton'>
+            <span id='span1'></span>
+            <span id='span2'></span>
+            <span id='span3'></span>
+            <span id='span4'></span>
+        </div>
 
- 
+        <div id='submitButton3' class="modified" onclick="navigateRoot('/statistics-drawings')">
+            <input type='button' value='View Filtered Attacks' id='submitButton'>
+            <span id='span1'></span>
+            <span id='span2'></span>
+            <span id='span3'></span>
+            <span id='span4'></span>
+        </div>
+    </section>
+</div>

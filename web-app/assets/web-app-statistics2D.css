@@ -1,26 +1,42 @@
-@media only screen and (max-width: 800px){
-    .topFiveHeader{
+.statistics-2d-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    height: auto;
+}
+
+.statistics-2d-wrapper .grid-container-result-buttons {
+    margin-bottom: 0px;
+}
+
+@media only screen and (max-width: 800px) {
+    .topFiveHeader {
         font-size: 20px;
     }
 }
-@media only screen and (max-width: 500px){
-    .topFiveHeader{
+
+@media only screen and (max-width: 500px) {
+    .topFiveHeader {
         font-size: 18px;
     }
 }
-@media only screen and (max-width: 330px){
-    .topFiveHeader{
+
+@media only screen and (max-width: 330px) {
+    .topFiveHeader {
         font-size: 12px;
     }
 }
 
-.topFiveHeader{
+.topFiveHeader {
     margin-top: 30px;
     margin-bottom: 30px;
     color: #065e61;
     text-align: center;
 }
 
+<<<<<<< HEAD
 .backToFirstStatistics{
     margin-left: 20px;
     margin-top: 10px;
@@ -30,4 +46,8 @@
     font-size: 20px;
     border: 2px solid black;
     background-color: #065e61;
+=======
+#submitButton3.statistics-2d-button {
+    margin: 0 40px 0;
+>>>>>>> 1a49adec839879e56017aa134aef31892d899169
 }

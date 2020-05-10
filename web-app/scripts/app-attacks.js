@@ -2,7 +2,7 @@ let attacksPageInput;
 let previewAttacks = null;
 
 function attacksPageInit(node) {
-    mainContent.innerHTML = '';
+    mainContent.innerHTML = getLoaderHTML();
 
     if (previewAttacks == null) {
         httpGET(URL_MICROSERVICE_ATTACKS + "/api/attacks?preview=true", (response) => {

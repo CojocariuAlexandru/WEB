@@ -7,11 +7,18 @@ const URL_MICROSERVICE_ATTACKS = "http://localhost:8001";
 function httpRequest(url, httpVerb, body, res, err) {
     let xmlhttp = new XMLHttpRequest();
     xmlhttp.open(httpVerb, url);
+
+    let userToken = getUserToken();
+    if (userToken != null) {
+        xmlhttp.setRequestHeader('Authorization', 'Bearer ' + userToken);
+    }
+
     if (body) {
         xmlhttp.send(body);
     } else {
         xmlhttp.send();
     }
+
     xmlhttp.onreadystatechange = function () {
         if (this.readyState == 4) {
             if (this.status >= 200 && this.status < 300) {

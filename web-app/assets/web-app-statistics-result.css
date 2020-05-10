@@ -1,486 +1,632 @@
-.grid-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1auto, 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto;
-    grid-template-areas: "title-stat title-stat title-stat title-stat title-stat title-stat"
-    "fields fields fields values values values" 
-    "pie-1 pie-1 pie-1 details-1 details-1 details-1" 
-    "attack-rate attack-rate attack-rate attack-rate attack-rate attack-rate" 
-    "damage-made damage-made damage-made damage-made damage-made damage-made" 
-    "extended24 extended24 extended24 extended24 extended24 extended24" 
-    "details-2 details-2 details-2 pie-2 pie-2 pie-2" 
-    "pie-3 pie-3 pie-3 details-3 details-3 details-3" 
-    "world-map world-map world-map world-map world-map world-map" 
-    "button-1 button-1 button-2 button-2 button-3 button-3" 
-    "view-table view-table view-table view-table view-table view-table"
-    "more-plots more-plots more-plots more-plots more-plots more-plots";
-    width: 100%;
-  }
+.grid-container-result {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1auto, 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto;
+  grid-template-areas: "title-stat title-stat title-stat title-stat title-stat title-stat"
+    "fields fields fields values values values"
+    "pie-1 pie-1 pie-1 details-1 details-1 details-1"
+    "attack-rate attack-rate attack-rate attack-rate attack-rate attack-rate"
+    "damage-made damage-made damage-made damage-made damage-made damage-made"
+    "extended24 extended24 extended24 extended24 extended24 extended24"
+    "details-2 details-2 details-2 pie-2 pie-2 pie-2"
+    "pie-3 pie-3 pie-3 details-3 details-3 details-3"
+    "details-4 details-4 details-4 pie-4 pie-4 pie-4"
+    "world-map world-map world-map world-map world-map world-map";
+  width: 100%;
+  margin-bottom: 40px;
+}
 
-.title-stat { grid-area: title-stat; display: flex;}
-  
-.fields { grid-area: fields; }
+.grid-container-result-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto;
+  grid-template-areas:
+    "button-1 button-2 button-3 button-4 button-5 button-6"
+    "table table table table table table";
+  width: 100%;
+  margin-bottom: 40px;
+}
 
-.values { grid-area: values; }
+.grid-container-result-buttons.no-margin {
+  margin-bottom: 10px;
+}
 
-.world-map { grid-area: world-map; }
+.title-stat {
+  grid-area: title-stat;
+  display: flex;
+}
 
-.details-1 { grid-area: details-1; }
+.fields {
+  grid-area: fields;
+}
 
-.pie-1 { grid-area: pie-1;}
+.values {
+  grid-area: values;
+}
 
-.attack-rate { grid-area: attack-rate; }
+.world-map {
+  grid-area: world-map;
+}
 
-.damage-made { grid-area: damage-made;  }
+.details-1 {
+  grid-area: details-1;
+}
 
-.extended24 { grid-area: extended24;
+.pie-1 {
+  grid-area: pie-1;
+}
+
+.attack-rate {
+  grid-area: attack-rate;
+}
+
+.damage-made {
+  grid-area: damage-made;
+}
+
+.extended24 {
+  grid-area: extended24;
   padding-bottom: 40px;
-  border-bottom: #054a4d dashed 2px; }
+  border-bottom: #054a4d dashed 2px;
+}
 
-.pie-2 { grid-area: pie-2; }
+.pie-2 {
+  grid-area: pie-2;
+}
 
-.details-2 { grid-area: details-2; }
+.details-2 {
+  grid-area: details-2;
+}
 
-.pie-3 { grid-area: pie-3; }
+.pie-4 {
+  grid-area: pie-4;
+}
 
-.details-3 { grid-area: details-3; }
+.pie-3 {
+  grid-area: pie-3;
+}
 
-.button-1 { grid-area: button-1; }
+.details-3 {
+  grid-area: details-3;
+}
 
-.button-2 { grid-area: button-2; }
+.details-4 {
+  grid-area: details-4;
+}
 
-.button-3 { grid-area: button-3; }
+.button-1 {
+  grid-area: button-1;
+}
 
-.view-table { grid-area: view-table; }
+.button-2 {
+  grid-area: button-2;
+}
 
-.morePlots{ grid-area: more-plots;}
+.button-3 {
+  grid-area: button-3;
+}
+
+.button-4 {
+  grid-area: button-4;
+}
+
+.button-5 {
+  grid-area: button-5;
+}
+
+.button-6 {
+  grid-area: button-6;
+}
+
+.table {
+  grid-area: table;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 /* TITLE-STAT */
-.title-stat h2{
-    font-size:30px;
-    color:#063d61;
-    padding: 30px 20px;
-    width: 100%;
+.title-stat h2 {
+  font-size: 30px;
+  color: #063d61;
+  padding: 30px 20px;
+  width: 100%;
 }
 
 /* FIELDS */
 
-.fields .container-fields{
-    background: linear-gradient(90deg, #05494dc4 26%, #065e6180 71%, #065e6142 100%);
-    border-radius: 26px 0 0 26px;
-    padding: 22px;
-    color: #eee;
-    margin:0 0 0 60px;
-}
-.values .container-values{
-    margin: 0 60px 0 0;
-    border-radius: 0 26px 26px 0;
-    padding: 22px;
-    color: #054a4d;
-    font-weight: bold;
-    background: linear-gradient(90deg,#065e6142 30%, #065e618c 63%, #05494db7 92%);
+.fields .container-fields {
+  background: linear-gradient(90deg, #05494dc4 26%, #065e6180 71%, #065e6142 100%);
+  border-radius: 26px 0 0 26px;
+  padding: 22px;
+  color: #eee;
+  margin: 0 0 0 60px;
 }
 
-.container-fields ul li, .container-values ul li{
-    border-bottom: dashed #065e61 1px;
-    transition: all .5s;
-    padding: 2px;
+.values .container-values {
+  margin: 0 60px 0 0;
+  border-radius: 0 26px 26px 0;
+  padding: 22px;
+  color: #054a4d;
+  font-weight: bold;
+  background: linear-gradient(90deg, #065e6142 30%, #065e618c 63%, #05494db7 92%);
 }
-.container-fields ul li:hover, .container-values ul li:hover{
-    background-color: #065e612a;
-    padding-left:8px;
+
+.container-fields ul li,
+.container-values ul li {
+  border-bottom: dashed #065e61 1px;
+  transition: all .5s;
+  padding: 2px;
+}
+
+.container-fields ul li:hover,
+.container-values ul li:hover {
+  background-color: #065e612a;
+  padding-left: 8px;
 }
 
 /* DETAILS-1 DETAILS-2*/
 
-.details-1, .details-2, .details-3{
-    display: flex;
-    flex-direction: column;
-    margin: 20px 60px 60px 60px;
-    background-color: #065e6142;
-    border-radius: 16px;
-    padding: 20px;
+.details-1,
+.details-2,
+.details-3,
+.details-4 {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 60px 60px 60px;
+  background-color: #065e6142;
+  border-radius: 16px;
+  padding: 20px;
 }
 
-
-.details-1 ul, .details-2 ul, .details-3 ul{
-    columns: 2;
+.details-1 ul,
+.details-2 ul,
+.details-3 ul,
+.details-4 ul {
+  columns: 2;
   -webkit-columns: 2;
   -moz-columns: 2;
-    margin:20px 10px 20px 60px;
-    font-size: 16px;
-    color:#054a4d
-
+  margin: 20px 10px 20px 60px;
+  font-size: 16px;
+  color: #054a4d
 }
-
 
 .details-1 ul li::before,
 .details-2 ul li::before,
-.details-3 ul li::before {
-    content: "\2022";
-    color:#054a4d;
-    font-weight: bolder;
-    margin-right: 10px;
-    margin-left: -6px;
-  }
-.details-1 h3, .details-2 h3, .details-3 h3{
-    color:#eee;
-    font-size:22px;
-    text-align: center;
-    background-color: #065e61;
-    display: inline;
-    margin: 10px 20px 10px 20px;
-    padding: 10px;
-    border-radius: 15px;
-  }
-  
-  /* ATTACK-RATE */
-
-  .attack-bar-border .attack-bar,
-  .damage-bar-border .damage-bar,
-  .extended-bar-border .extended-bar,
-  .damage-bar-border .damage-bar-2,
-  .damage-bar-border .damage-bar-3
-  {
-    width:0%;
-    height: 100%;
-    background-color: #065e61;
-    border-radius: 30px;
-  }
-  .damage-bar-border .damage-bar{
-    border-radius: 30px 0 0 30px;
-  }
-  .damage-bar-border .damage-bar-2{
-    background-color: #065e6191;
-    border-radius: 0;
-  }
-  .damage-bar-border .damage-bar-3{
-    background-color: #065e613d;
-    border-radius: 0 30px  30px 0;
-  }
-
-  .attack-bar-border .attack-bar p,
-  .damage-bar-border .damage-bar p,
-  .damage-bar-border .damage-bar-2 p,
-  .damage-bar-border .damage-bar-3 p,
-  .extended-bar-border .extended-bar p{
-    display: inline;
-    padding: 4px 20px;
-    color:#eee;
-    font-weight: bold;
-    height: 100%;
-  }
-
-  .attack-bar-border,
-  .damage-bar-border,
-  .extended-bar-border {
-      position: relative;
-      margin: 0 60px 20px 60px;
-      width:calc( 100% - 120px);
-      height: 32px;
-      border-radius: 30px;
-      border: solid 2px grey;
-  }
-  .attack-rate h3,
-  .damage-made h3,
-  .extended24 h3{
-    color:#065e61;
-    font-size:24px;
-    text-align: center;
-    padding: 10px;
-    border-radius: 30px;
-  }
-  .attack-rate{
-      border-top: #065e61 dashed 2px;
-      padding-top:40px
-  }
-  .extended24{
-      margin-bottom: 40px;
-  }
-  #myBar2, #myBar2-2, #myBar2-3{
-      position: absolute;
-  }
-
-  /* BUTTON GET RATES */
-
-
-  .button-get-all{
-    width: 100%;
-    height: 100%;
-    background-color: transparent;
-    border:none;
-    text-decoration: none;
-    font-size: large;
-    color:#065e61;
-    z-index: 100;
-    cursor: pointer;
-    transition: color 0.3s linear;
+.details-3 ul li::before,
+.details-4 ul li::before {
+  content: "\2022";
+  color: #054a4d;
+  font-weight: bolder;
+  margin-right: 10px;
+  margin-left: -6px;
 }
 
-#button-container{
-    color:#065e61;
-    font-size: 16px;
-    border: 2px solid #065e61;
-    border-radius: 30px;
-    width: 300px;
-    height: 40px;
-    text-align: center;
-    position: relative;
-    z-index: 1;
-    transition:all 0.5s;
-    margin: 0 auto;
-    overflow: hidden;
+.details-1 h3,
+.details-2 h3,
+.details-3 h3,
+.details-4 h3 {
+  color: #eee;
+  font-size: 22px;
+  text-align: center;
+  background-color: #065e61;
+  display: inline;
+  margin: 10px 20px 10px 20px;
+  padding: 10px;
+  border-radius: 15px;
+}
+
+/* ATTACK-RATE */
+
+.attack-bar-border .attack-bar,
+.damage-bar-border .damage-bar,
+.extended-bar-border .extended-bar,
+.damage-bar-border .damage-bar-2,
+.damage-bar-border .damage-bar-3 {
+  width: 0%;
+  height: 100%;
+  background-color: #065e61;
+  border-radius: 30px;
+}
+
+.damage-bar-border .damage-bar {
+  border-radius: 30px 0 0 30px;
+}
+
+.damage-bar-border .damage-bar-2 {
+  background-color: #065e6191;
+  border-radius: 0;
+}
+
+.damage-bar-border .damage-bar-3 {
+  background-color: #065e613d;
+  border-radius: 0 30px 30px 0;
+}
+
+.attack-bar-border .attack-bar p,
+.damage-bar-border .damage-bar p,
+.damage-bar-border .damage-bar-2 p,
+.damage-bar-border .damage-bar-3 p,
+.extended-bar-border .extended-bar p {
+  display: inline;
+  padding: 4px 20px;
+  color: #eee;
+  font-weight: bold;
+  height: 100%;
+}
+
+.attack-bar-border,
+.damage-bar-border,
+.extended-bar-border {
+  position: relative;
+  margin: 0 60px 20px 60px;
+  width: calc(100% - 120px);
+  height: 32px;
+  border-radius: 30px;
+  border: solid 2px grey;
+
+}
+
+.attack-rate h3,
+.damage-made h3,
+.extended24 h3 {
+  color: #065e61;
+  font-size: 24px;
+  text-align: center;
+  padding: 10px;
+  border-radius: 30px;
+}
+
+.attack-rate {
+  border-top: #065e61 dashed 2px;
+  padding-top: 40px
+}
+
+.extended24 {
+  margin-bottom: 40px;
+}
+
+#myBar2,
+#myBar2-2,
+#myBar2-3 {
+  position: absolute;
+}
+
+/* BUTTON GET RATES */
+
+.button-get-all {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border: none;
+  text-decoration: none;
+  font-size: large;
+  color: #065e61;
+  z-index: 100;
+  cursor: pointer;
+  transition: color 0.3s linear;
+}
+
+#button-container {
+  color: #065e61;
+  font-size: 16px;
+  border: 2px solid #065e61;
+  border-radius: 30px;
+  width: 300px;
+  height: 40px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  transition: all 0.5s;
+  margin: 0 auto;
+  overflow: hidden;
 }
 
 #button-container span {
-    position: absolute;
-    width: 25%;
-    height: 100%;
-    background-color:#065e61;
-    transform: translateY(56px);
-/*   Le duce mai jos */
-    border-radius: 100px;
-    transition: 0.5s;
-    z-index: -1;
+  position: absolute;
+  width: 25%;
+  height: 100%;
+  background-color: #065e61;
+  transform: translateY(56px);
+  /*   Le duce mai jos */
+  border-radius: 100px;
+  transition: 0.5s;
+  z-index: -1;
 }
 
 .button-get-all:hover {
-    color:#eee;
+  color: #eee;
 }
 
 #button-container:hover span {
-    transform: translateY(0) scale(2);
-}
-#button-container #span1 {
-    transition-delay: 0;
-      left:0;
-}
-#button-container #span2 {
-    transition-delay: 0.2s;
-      left: 25%;
-}
-#button-container #span3{
-     transition-delay: 0.4s;
-      left: 50%;
-}
-#button-container #span4 {
-     transition-delay: 0.6s;
-      left: 75%;
+  transform: translateY(0) scale(2);
 }
 
+#button-container #span1 {
+  transition-delay: 0;
+  left: 0;
+}
+
+#button-container #span2 {
+  transition-delay: 0.2s;
+  left: 25%;
+}
+
+#button-container #span3 {
+  transition-delay: 0.4s;
+  left: 50%;
+}
+
+#button-container #span4 {
+  transition-delay: 0.6s;
+  left: 75%;
+}
 
 /* BUTTON-1 BUTTON-2 BUTTON-3 */
 
-.button-1, .button-2, .button-3{
-    text-align: center;
-    margin: 40px auto;
-    width: 80%;
+.export {
+  text-align: center;
+  margin: 40px auto;
+  width: 80%;
 }
-.button-1{
-  margin-left:60px;
+
+.button-link1,
+.button-link2,
+.button-link3 {
+  height: 40px;
+  width: 100%;
+  font-weight: bolder;
+  display: block;
+  text-align: center;
+  padding-top: 8px;
+  color: #eee;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 30px;
+  background: linear-gradient(to right, #05494dc4 26%, #065e6180 71%, #065e6142 100%);
+  transition: all 1s;
+  background-size: 200%;
 }
-.button-3{
-  margin-right:60px;
-}
-  
-  .button-link1,   .button-link2,   .button-link3 {
-    height: 40px;
-    width:100%;
-    font-weight: bolder;
-    display: block;
-    text-align: center;
-    padding-top: 8px;
-    color:#eee;
-    box-shadow: 0 0 20px #eee;
-    border-radius: 30px;
-    background:  linear-gradient(to right, #05494dc4 26%, #065e6180 71%, #065e6142 100%);
-    transition: all 1s;
-    background-size: 200%;
-}
+
 /* the secret for this link */
-  .button-link1:hover,   .button-link2:hover,   .button-link3:hover {
-      color:#054a4d;
-    background-position: right center; 
-    cursor: pointer;
-  }
-
-
+.button-link1:hover,
+.button-link2:hover,
+.button-link3:hover {
+  color: #054a4d;
+  background-position: right center;
+  cursor: pointer;
+}
 
 /* COLUMN CHART */
 
-.world-map-element{
+.world-map-element {
   min-height: 400px;
-  width : calc(100% - 120px);
+  width: calc(100% - 120px);
   margin: 0 auto;
-  border: dashed 2px #16aeb6; 
-  padding:30px;
+  border: dashed 2px #16aeb6;
+  padding: 30px;
   background-color: #393e46;
   border-radius: 30px;
-  font-size:20px;
-}
-
-
-.view-table p{
-  margin: 30px 60px 60px 60px;
-  color: #054a4d;
-  font-size:22px;
-}
-
-.view-table a{
-  color: #16aeb6;
+  font-size: 20px;
 }
 
 /* PIE CHARTS */
 
-.pie-1, .pie-2, .pie-3{
+.pie-1,
+.pie-2,
+.pie-3 {
   margin: 0 auto;
-  width:calc( 100% - 120px);
+  width: calc(100% - 120px);
 }
 
-.pie-1, .pie-3{
+.pie-1,
+.pie-3 {
   margin-left: 60px;
 }
-.pie-2{
+
+.pie-2 {
   margin-right: 60px;
 }
 
 /* RESPONSIVE */
 
 @media only screen and (max-width: 1200px) {
-  .details-1 ul, .details-2 ul, .details-3 ul{
-    columns:1;
-    font-size:16px;
-  }
-  .details-1 h3, .details-2 h3, .details-3 h3{
-    font-size:18px;
-  }
-  .fields .container-fields{
-    font-size:18px;
+
+  .details-1 ul,
+  .details-2 ul,
+  .details-3 ul,
+  .details-4 ul {
+    columns: 1;
+    font-size: 16px;
   }
 
-    .values .container-values{
-      font-size: 18px;
+  .details-1 h3,
+  .details-2 h3,
+  .details-3 h3,
+  .details-4 h3 {
+    font-size: 18px;
+  }
 
-    }
+  .fields .container-fields {
+    font-size: 18px;
+  }
 
+  .values .container-values {
+    font-size: 18px;
+
+  }
 }
 
-
 @media only screen and (max-width: 1000px) {
-  .grid-container {
-     grid-template-columns: fr fr fr fr fr fr;
+  .grid-container-result {
+    grid-template-columns: fr fr fr fr fr fr;
     grid-template-rows: 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto;
     grid-template-areas: "title-stat title-stat title-stat title-stat title-stat title-stat"
-    "fields fields fields values values values" 
-    "details-1 details-1 details-1 details-1 details-1 details-1" 
-    "pie-1 pie-1 pie-1 pie-1 pie-1 pie-1"
-    "attack-rate attack-rate attack-rate attack-rate attack-rate attack-rate" 
-    "damage-made damage-made damage-made damage-made damage-made damage-made" 
-    "extended24 extended24 extended24 extended24 extended24 extended24" 
-    "details-2 details-2 details-2 details-2 details-2 details-2"
-    "pie-2 pie-2 pie-2 pie-2 pie-2 pie-2" 
-    "details-3 details-3 details-3 details-3 details-3 details-3" 
-    "pie-3 pie-3 pie-3 pie-3 pie-3 pie-3"
-    "world-map world-map world-map world-map world-map world-map" 
-    "button-1 button-1 button-2 button-2 button-3 button-3" 
-    "view-table view-table view-table view-table view-table view-table";
+      "fields fields fields values values values"
+      "details-1 details-1 details-1 details-1 details-1 details-1"
+      "pie-1 pie-1 pie-1 pie-1 pie-1 pie-1"
+      "attack-rate attack-rate attack-rate attack-rate attack-rate attack-rate"
+      "damage-made damage-made damage-made damage-made damage-made damage-made"
+      "extended24 extended24 extended24 extended24 extended24 extended24"
+      "details-2 details-2 details-2 details-2 details-2 details-2"
+      "pie-2 pie-2 pie-2 pie-2 pie-2 pie-2"
+      "details-3 details-3 details-3 details-3 details-3 details-3"
+      "pie-3 pie-3 pie-3 pie-3 pie-3 pie-3"
+      "details-4 details-4 details-4 details-4 details-4 details-4"
+      "pie-4 pie-4 pie-4 pie-4 pie-4 pie-4"
+      "world-map world-map world-map world-map world-map world-map";
   }
-  .details-1 ul, .details-2 ul, .details-3 ul{
+
+  .grid-container-result-buttons {
+    grid-template-areas: "button-1 button-1 button-2 button-2 button-3 button-3"
+      "button-4 button-4 button-5 button-5 button-6 button-6"
+      "table table table table table table";
+  }
+
+  .details-1 ul,
+  .details-2 ul,
+  .details-3 ul,
+  .details-4 ul {
     display: none;
   }
-  .details-1, .details-2, .details-3{
+
+  .details-1,
+  .details-2,
+  .details-3,
+  .details-4 {
     margin: 60px 60px 0 60px;
     font-size: 20px;
   }
-  .extended24{
+
+  .extended24 {
     margin-bottom: 0;
   }
-  .pie-2{
+
+  div.pie-2,
+  div.pie-3 {
     border-bottom: dashed 2px #054a4d;
   }
-  .button-1, .button-2, .button-3{
-    width:60%;
+
+  .export {
+    width: 80%;
   }
 
 }
 
 @media only screen and (max-width: 810px) {
-  .fields .container-fields{
-    font-size:12px;
+  .fields .container-fields {
+    font-size: 12px;
   }
 
-    .values .container-values{
-      font-size: 12px;
-    }
-    .details-1 h3, .details-2 h3, .details-3 h3{
-      font-size:14px;
-    }
-    .attack-rate h3,
+  .values .container-values {
+    font-size: 12px;
+  }
+
+  .details-1 h3,
+  .details-2 h3,
+  .details-3 h3,
+  .details-4 h3 {
+    font-size: 14px;
+  }
+
+  .attack-rate h3,
   .damage-made h3,
-  .extended24 h3{
-    font-size:16px;
+  .extended24 h3 {
+    font-size: 16px;
   }
 }
 
 @media only screen and (max-width: 660px) {
-  .grid-container {
-     grid-template-columns: fr fr fr fr fr fr;
+  .grid-container-result {
+    grid-template-columns: fr fr fr fr fr fr;
     grid-template-rows: 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto 1auto;
     grid-template-areas: "title-stat title-stat title-stat title-stat title-stat title-stat"
-    "fields fields fields fields values values" 
-    "details-1 details-1 details-1 details-1 details-1 details-1" 
-    "pie-1 pie-1 pie-1 pie-1 pie-1 pie-1"
-    "attack-rate attack-rate attack-rate attack-rate attack-rate attack-rate" 
-    "damage-made damage-made damage-made damage-made damage-made damage-made" 
-    "extended24 extended24 extended24 extended24 extended24 extended24" 
-    "details-2 details-2 details-2 details-2 details-2 details-2"
-    "pie-2 pie-2 pie-2 pie-2 pie-2 pie-2" 
-    "details-3 details-3 details-3 details-3 details-3 details-3" 
-    "pie-3 pie-3 pie-3 pie-3 pie-3 pie-3"
-    "world-map world-map world-map world-map world-map world-map" 
-    "button-1 button-1 button-2 button-2 button-3 button-3" 
-    "view-table view-table view-table view-table view-table view-table";
+      "fields fields fields fields values values"
+      "details-1 details-1 details-1 details-1 details-1 details-1"
+      "pie-1 pie-1 pie-1 pie-1 pie-1 pie-1"
+      "attack-rate attack-rate attack-rate attack-rate attack-rate attack-rate"
+      "damage-made damage-made damage-made damage-made damage-made damage-made"
+      "extended24 extended24 extended24 extended24 extended24 extended24"
+      "details-2 details-2 details-2 details-2 details-2 details-2"
+      "pie-2 pie-2 pie-2 pie-2 pie-2 pie-2"
+      "details-3 details-3 details-3 details-3 details-3 details-3"
+      "pie-3 pie-3 pie-3 pie-3 pie-3 pie-3"
+      "world-map world-map world-map world-map world-map world-map"
+      "button-1 button-1 button-2 button-2 button-3 button-3"
+      "button-4 button-4 button-5 button-5 button-6 button-6"
+      "table table table table table table";
   }
-  .fields .container-fields{
-    display:none;
+
+  .fields .container-fields {
+    display: none;
   }
-  .values .container-values{
-    display:none;
+
+  .values .container-values {
+    display: none;
   }
-  .details-1, .details-2, .details-3{
+
+  .details-1,
+  .details-2,
+  .details-3,
+  .details-4 {
     margin: 20px;
   }
-  .view-table p{
-    font-size:14px;
-  }
-  .world-map .world-map-element{
-    padding:10px;
-    width : calc(100% - 40px);
+
+  .world-map .world-map-element {
+    padding: 10px;
+    width: calc(100% - 40px);
 
   }
-  .button-1, .damage-bar-border, .attack-bar-border, .extended-bar-border{
-    margin-left:20px;
+
+  .damage-bar-border,
+  .attack-bar-border,
+  .extended-bar-border {
+    margin-left: 20px;
   }
-  .button-3, .damage-bar-border, .attack-bar-border, .extended-bar-border{
+
+  .damage-bar-border,
+  .attack-bar-border,
+  .extended-bar-border {
     margin-right: 20px;
   }
-  .button-1, .button-2, .button-3{
-    width:80%;
+
+  .pie-1,
+  .pie-3 {
+    margin-left: 20px;
   }
-  .pie-1, .pie-3{
-    margin-left:20px;
-  }
-  .pie-2{
+
+  .pie-2 {
     margin-right: 20px;
   }
-  .pie-1, .pie-2, .pie-3{
+
+  .pie-1,
+  .pie-2,
+  .pie-3 {
     margin: 0 auto;
-    width:calc( 100% - 40px);
-  }
-  .attack-bar, .damage-bar, .damage-bar-2, .damage-bar-3, .extended-bar{
-    font-size:14px;
-  }
-  .damage-bar-border, .attack-bar-border, .extended-bar-border{
     width: calc(100% - 40px);
+  }
+
+  .attack-bar,
+  .damage-bar,
+  .damage-bar-2,
+  .damage-bar-3,
+  .extended-bar {
+    font-size: 14px;
+  }
+
+  .damage-bar-border,
+  .attack-bar-border,
+  .extended-bar-border {
+    width: calc(100% - 40px);
+  }
+
+  .table {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  #submitButton3.modified {
+    margin-top: 12px;
   }
 }

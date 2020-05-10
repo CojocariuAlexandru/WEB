@@ -1,30 +1,31 @@
-var attacksTypes = {"Hostage Taking (Kidnapping)":[],
- "Assassination":[], 
- "Bombing/Explosion":[], 
- "Facility/Infrastructure Attack":[],
- "Armed Assault":[],
- "Hijacking":[],
-"Unknown":[],
-"Unarmed Assault":[],
-"Hostage Taking (Barricade Incident)":[] 
+var attacksTypes = {
+  "Hostage Taking (Kidnapping)": [],
+  "Assassination": [],
+  "Bombing/Explosion": [],
+  "Facility/Infrastructure Attack": [],
+  "Armed Assault": [],
+  "Hijacking": [],
+  "Unknown": [],
+  "Unarmed Assault": [],
+  "Hostage Taking (Barricade Incident)": []
 };
 
-var propExtent={
- " Minor Damage":[],
-"Major Damage" :[],
-"Catastrophic damages" :[],
-"Unknown damages":[]
+var propExtent = {
+  " Minor Damage": [],
+  "Major Damage": [],
+  "Catastrophic damages": [],
+  "Unknown damages": []
 };
 
-var emptyObject={};
+var emptyObject = {};
 
 
-var weaponSubtypes ={
-  'Biological' : [""],
-  'Chemical' : [ "","Explosive","Poisoning"],
-  'Explosives' : [ "","Dynamite/TNT","Grenade","Landmine","Letter Bomb","Other Explosive Type","Pipe Bomb","Pressure Trigger","Projectile (rockets, mortars, RPGs, etc.)","Remote Trigger","Sticky Bomb","Suicide (carried bodily by human being)","Time Fuse","Unknown Explosive Type","Unknown Gun Type","Vehicle"],
-  'Fake Weapons' : [ ""],
-  'Firearms' : [ "","Automatic or Semi-Automatic Rifle","Handgun","Other Gun Type"]
+var weaponSubtypes = {
+  'Biological': [""],
+  'Chemical': ["", "Explosive", "Poisoning"],
+  'Explosives': ["", "Dynamite/TNT", "Grenade", "Landmine", "Letter Bomb", "Other Explosive Type", "Pipe Bomb", "Pressure Trigger", "Projectile (rockets, mortars, RPGs, etc.)", "Remote Trigger", "Sticky Bomb", "Suicide (carried bodily by human being)", "Time Fuse", "Unknown Explosive Type", "Unknown Gun Type", "Vehicle"],
+  'Fake Weapons': [""],
+  'Firearms': ["", "Automatic or Semi-Automatic Rifle", "Handgun", "Other Gun Type"]
 };
 
 var targetSubtypes = {

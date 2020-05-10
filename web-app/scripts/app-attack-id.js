@@ -1,30 +1,24 @@
 function attackIdPageBefore(node, id) {
     mainContent.innerHTML = '';
 
-    let xmlhttp = new XMLHttpRequest();
-    let apiPath = URL_MICROSERVICE_ATTACKS + "/api/attacks/" + id;
-    xmlhttp.open("GET", apiPath);
-    xmlhttp.send();
-    xmlhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            let attack = JSON.parse(xmlhttp.responseText);
-            let currentAttack = attack[0];
-            console.log(currentAttack);
-            prepareAttack(currentAttack);
+    httpGET(URL_MICROSERVICE_ATTACKS + "/api/attacks/" + id, (res) => {
+        let attack = JSON.parse(res.res);
+        let currentAttack = attack[0];
+        prepareAttack(currentAttack);
 
-            mainContent.innerHTML = attackIdPageTemplate(node.template, currentAttack);
-            attackIdPageInit(currentAttack);
-        } else if (this.readyState == 4 && this.status == 404) {
-            mainContent.innerHTML = '<div class="attackDetailText2">  <p> Page not found! </p> </div>'
-        }
-    }
-    return null;
+        mainContent.innerHTML = attackIdPageTemplate(node.template, currentAttack);
+        attackIdPageInit(currentAttack);
+    }, (err) => {
+        mainContent.innerHTML = '<div class="attackDetailText2">  <p> Page not found! </p> </div>'
+    })
 }
 
-function navigateToUpdate(pageID) {
+function navigateToUpdate() {
+    let currentURL = window.location.href; //get current URL
+    let currentAttackID = currentURL.split("/"); //get current attack ID - currentAttackID[5]
     let urlToAttack;
     urlToAttack = '/attacks-update/';
-    urlToAttack = urlToAttack + pageID;
+    urlToAttack = urlToAttack + currentAttackID[5];
     navigateRoot(urlToAttack);
 }
 
@@ -57,6 +51,7 @@ function prepareAttack(currentAttack) {
 
 function attackIdPageTemplate(templateName, attack) {
     let compiledTemplate = Handlebars.compile(loadPage(templateName));
+    attack.admin = getDecodedUserToken().admin;
     return compiledTemplate(attack);
 }
 
@@ -123,13 +118,12 @@ function areYouSure() {
     if (result == true) {
         let currentURL = window.location.href; //get current URL
         let currentAttackID = currentURL.split("/"); //get current attack ID - currentAttackID[5]
-        console.log(URL_MICROSERVICE_ATTACKS + "/api/attacks/" + currentAttackID[5]);
 
         httpDELETE(URL_MICROSERVICE_ATTACKS + "/api/attacks/" + currentAttackID[5], (result) => {
-            console.log(result.res);
             navigateRoot('');
         }, (error) => {
             //ALERT
+            console.log(error);
         });
     }
 }

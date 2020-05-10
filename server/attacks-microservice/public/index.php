@@ -1,8 +1,6 @@
 <?php
 require "../bootstrap.php";
 
-use Src\Controller\AttacksController;
-
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE");
@@ -18,6 +16,4 @@ if ($uri[1] !== 'api' || $uri[2] !== 'attacks') {
 }
 
 $requestMethod = $_SERVER["REQUEST_METHOD"];
-
-$controller = new AttacksController($dbConnection, $requestMethod);
-$controller->processRequest($uri);
+$attacksController->processRequest($uri, $requestMethod);

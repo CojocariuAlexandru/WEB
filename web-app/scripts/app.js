@@ -25,8 +25,13 @@ function navigateRootSidebar(pathName) {
 
 function initPage() {
     rootForContent = document.querySelector('#root');
+
+    if (checkRedirect()) {
+        return;
+    }
+
     if (userIsLoggedIn()) {
-        setWebAppTemplateAsSite();
+        setWebAppTemplateAsSite(null);
     } else {
         window.history.pushState({},
             root.url + '/presentation',
@@ -68,15 +73,15 @@ function setPresentationTemplateAsSiteInit() {
     })
 }
 
-function setWebAppTemplateAsSite() {
+function setWebAppTemplateAsSite(callback) {
     if (pageIsLoaded('web-app')) {
-        setWebAppTemplateAsSiteAsync();
+        setWebAppTemplateAsSiteAsync(callback);
     } else {
-        asyncLoadPage('web-app', setWebAppTemplateAsSiteAsync);
+        asyncLoadPage('web-app', setWebAppTemplateAsSiteAsync, callback);
     }
 }
 
-function setWebAppTemplateAsSiteAsync() {
+function setWebAppTemplateAsSiteAsync(callback) {
     let compiledTemplate = Handlebars.compile(loadPage('web-app'));
     let userDetails = getDecodedUserToken();
 
@@ -88,7 +93,11 @@ function setWebAppTemplateAsSiteAsync() {
     webapp = true;
     rootForContent.className = "root web-app";
     mainContent = document.querySelector('#content');
-    navigate(window.location.pathname);
+    if (callback == null) {
+        navigate(window.location.pathname);
+    } else {
+        callback();
+    }
 }
 
 document.addEventListener('DOMContentLoaded', initPage);
@@ -132,15 +141,15 @@ function getPageHeight() {
     return window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 }
 
-function showSuccess(message, time) {
-    showAlert(message, 'success', time);
+function showSuccess(message, time, callback) {
+    showAlert(message, 'success', time, callback);
 }
 
-function showError(message, time) {
-    showAlert(message, 'error', time);
+function showError(message, time, callback) {
+    showAlert(message, 'error', time, callback);
 }
 
-function showAlert(message, type, time) {
+function showAlert(message, type, time, callback) {
     removeAlertIfExists();
 
     let root = document.querySelector('body');
@@ -151,11 +160,14 @@ function showAlert(message, type, time) {
 
     root.appendChild(alert);
 
-    setTimeout((alert) => {
+    setTimeout((alert, callback) => {
         if (alert != null && alert.parentNode != null) {
             alert.parentNode.removeChild(alert);
         }
-    }, time, alert);
+        if (callback != null) {
+            callback();
+        }
+    }, time, alert, callback);
 }
 
 function removeAlertIfExists() {
@@ -170,4 +182,67 @@ function getAlertHTML(message, type) {
         <i class="fa fa-remove" onclick="removeAlertIfExists()"></i>
         ${message}
         </div>`
+}
+
+function getLoaderHTML() {
+    return '<div class="loader-wrapper"> <div class="loader"></div> </div>';
+}
+
+function validateString(str, minLen, maxLen) {
+    if (str == null) {
+        return false;
+    }
+    if (str.length < minLen || str.length > maxLen) {
+        return false;
+    }
+    return true;
+}
+
+// ---------------- web.dev/measure tests ------------------------------------------------------------------------------
+
+function checkRedirect() {
+    let redirectStr = '/app/redirect-to/';
+    let runStr = '/run/';
+    let currentUrl = window.location.pathname;
+    let functionToRun;
+    let functionCallback;
+
+    if (!currentUrl.startsWith(redirectStr)) {
+        return false;
+    }
+
+    let redirectPage = currentUrl.substring(redirectStr.length);
+
+    if (redirectPage.indexOf(runStr) !== -1) {
+        let parts = redirectPage.split(runStr);
+        if (parts.length >= 2) {
+            redirectPage = parts[0];
+            functionToRun = parts[1];
+        }
+    }
+
+    let allowedRoute = false;
+    for (let i = 0; i < allowedRedirectionPages.length; ++i) {
+        if (allowedRedirectionPages[i] == redirectPage) {
+            allowedRoute = true;
+            break;
+        }
+    }
+    if (!allowedRoute) {
+        return false;
+    }
+
+    if (functionToRun in allowedRedirectCallbacks) {
+        functionCallback = allowedRedirectCallbacks[functionToRun];
+    }
+
+    localStorage.setItem('Token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFsZXgiLCJhZG1pbiI6MSwiaWF0IjoxNTg5MDYzNjY2LCJleHAiOjE2MjUwNjM2NjZ9.M5CxztXtSH70s-6x5FHCo2qgOfwpkyV8NSx0z-s6-3k');
+    setWebAppTemplateAsSite(() => {
+        navigateRoot('/' + redirectPage);
+
+        if (functionCallback != null) {
+            functionCallback();
+        }
+    });
+    return true;
 }

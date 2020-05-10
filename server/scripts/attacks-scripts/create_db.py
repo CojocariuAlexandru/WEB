@@ -25,11 +25,11 @@ distinct_values_file = 'distinct_values.txt'
 
 def get_db_connection(db):
 	return mysql.connector.connect(
-          host = "localhost",
-          user = "root",
- 	  port = "3306",
-          password = "",
-          database = db
+        host = "localhost",
+        user = "root",
+ 	    port = "3306",
+        password = "",
+        database = db
 	)
 
 mydb = get_db_connection("")
@@ -142,43 +142,42 @@ with open(csv_file_name, mode='r') as attacks_file:
     csv_reader = csv.DictReader(attacks_file)
     line_count = 0
     for row in csv_reader:
-        print(line_count)
-        if line_count > 200:
-            break
-        if line_count > 0:
-            values = (
-                process_date(row, 'iyear', 'imonth', 'iday'),
-                process_boolean(row, 'extended'),
-                process_varchar(row, 'region_txt'),
-                process_varchar(row, 'country_txt'),
-                process_varchar(row, 'provstate'),
-                process_varchar(row, 'city'),
-                process_float(row, 'latitude'),
-                process_float(row, 'longitude'),
-                process_varchar(row, 'summary'),
-                process_varchar(row, 'attacktype1_txt'),
-                process_boolean(row, 'success'),
-                process_boolean(row, 'suicide'),
-                process_varchar(row, 'targtype1_txt'),
-                process_varchar(row, 'targsubtype1_txt'),
-                process_varchar(row, 'target1'),
-                process_varchar(row, 'natlty1_txt'),
-                process_varchar(row, 'gname'),
-                process_varchar(row, 'motive'),
-                process_int(row, 'nperps'),
-                process_varchar(row, 'weaptype1_txt'),
-                process_varchar(row, 'weapsubtype1_txt'),
-                process_varchar(row, 'weapdetail'),
-                process_int(row, 'nkill'),
-                process_int(row, 'nwound'),
-                process_varchar(row, 'propextent_txt'),
-                process_varchar(row, 'propcomment'),
-                process_varchar(row, 'addnotes'),
-                process_varchar(row, 'scite1'),
-                process_varchar(row, 'scite2'),
-                process_varchar(row, 'scite3')
-            )
-            mycursor.execute(insert_attack_query, values)
+        #print(line_count)
+        #if line_count > 200:
+        #    break
+        values = (
+            process_date(row, 'iyear', 'imonth', 'iday'),
+            process_boolean(row, 'extended'),
+            process_varchar(row, 'region_txt'),
+            process_varchar(row, 'country_txt'),
+            process_varchar(row, 'provstate'),
+            process_varchar(row, 'city'),
+            process_float(row, 'latitude'),
+            process_float(row, 'longitude'),
+            process_varchar(row, 'summary'),
+            process_varchar(row, 'attacktype1_txt'),
+            process_boolean(row, 'success'),
+            process_boolean(row, 'suicide'),
+            process_varchar(row, 'targtype1_txt'),
+            process_varchar(row, 'targsubtype1_txt'),
+            process_varchar(row, 'target1'),
+            process_varchar(row, 'natlty1_txt'),
+            process_varchar(row, 'gname'),
+            process_varchar(row, 'motive'),
+            process_int(row, 'nperps'),
+            process_varchar(row, 'weaptype1_txt'),
+            process_varchar(row, 'weapsubtype1_txt'),
+            process_varchar(row, 'weapdetail'),
+            process_int(row, 'nkill'),
+            process_int(row, 'nwound'),
+            process_varchar(row, 'propextent_txt'),
+            process_varchar(row, 'propcomment'),
+            process_varchar(row, 'addnotes'),
+            process_varchar(row, 'scite1'),
+            process_varchar(row, 'scite2'),
+            process_varchar(row, 'scite3')
+        )
+        mycursor.execute(insert_attack_query, values)
         line_count += 1
     print(f"Inserted {line_count-1} attacks in the database!")
         

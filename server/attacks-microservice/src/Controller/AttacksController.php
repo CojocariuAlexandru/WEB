@@ -2,64 +2,19 @@
 
 namespace Src\Controller;
 
-use Src\TableGateways\AttacksGateway;
-
 class AttacksController
 {
-    private $requestMethod;
-    private $attacksGateway;
+    private $iAttacksService;
 
-    public function __construct($db, $requestMethod)
+    public function __construct($iAttacksService)
     {
-        $this->requestMethod = $requestMethod;
-
-        $this->attacksGateway = new AttacksGateway($db);
+        $this->iAttacksService = $iAttacksService;
     }
 
-    public function processRequest($uri)
+    public function processRequest($uri, $requestMethod)
     {
-        switch ($this->requestMethod) {
-            case 'GET':
+        $response = $this->solveRequest($uri, $requestMethod);
 
-                //Attacks dashboard case: (pageId, onPage) => returns the attack which is the onPage-th in the page with ID 'pageId'
-                if (strcmp($uri[3], "attacks-dashboard") == 0 )
-                    {
-                        $response = $this->getAttackByPlaceInPage($_GET["pageId"], $_GET["onPage"]);
-                        break;
-                    }
-
-                if (isset($_GET["preview"]) && $_GET["preview"] == "true") {
-                    $response = $this->getAttacksPreview();
-                } else if (sizeof($uri) > 3) {
-                    $response = $this->getById($uri[3]);
-                } else {
-                    $response = $this->getFirst(1000);
-                }
-               
-                break;
-            case 'OPTIONS':
-                break;
-            case 'POST':    
-                $rawData = file_get_contents("php://input");
-                $decoded = json_decode($rawData, true);
-                if (isset($_GET["mapPage"]) && $_GET["mapPage"] == "true") {
-                    $response = $this->getMapPageAttacks($decoded);
-                } else if (sizeof($uri) > 3) {
-                    $response = $this->insertAttack($decoded);
-                } else {
-                    $response = $this->getGoodAttacks($decoded);
-                }
-                break;
-            case 'PUT':
-                $rawData = file_get_contents("php://input");
-                $decoded = json_decode($rawData, true);
-                if (sizeof($uri) > 3)
-                    $response = $this->setAttack($decoded, $uri[3]);
-                else $response['status_code_header'] = 'HTTP/1.1 404 Not Found';
-                break;
-            case 'DELETE':
-                $response = $this->deleteById($uri[3]);
-        }
         if (isset($response['status_code_header'])) {
             header($response['status_code_header']);
         }
@@ -69,182 +24,136 @@ class AttacksController
             }
         }
     }
-    private function deleteById($id){
-        if (is_numeric($id) && intval($id) >= 0/* && intval($id) <= 180000*/) {
-            $result = $this->attacksGateway->deleteById($id);
-            $response['status_code_header'] = 'HTTP/1.1 200 OK';
-            $response['body'] = json_encode($result);
-        } else {
-            $response['status_code_header'] = 'HTTP/1.1 404 Not Found';
-            $response['body'] = json_encode("eroare");
+
+    private function solveRequest($uri, $requestMethod)
+    {
+        $response = null;
+
+        switch ($requestMethod) {
+            case 'GET':
+                $response = $this->solveGETRequests($uri);
+                break;
+            case 'POST':
+                $response = $this->solvePOSTRequests($uri);
+                break;
+            case 'PUT':
+                $response = $this->solvePUTRequests($uri);
+                break;
+            case 'DELETE':
+                $response = $this->solveDELETERequests($uri);
+                break;
         }
+
         return $response;
     }
 
-    private function insertAttack($decoded){
-        $this->prepareUpdate($decoded, $transformed);
-        $result = $this->attacksGateway->insertAttack($transformed);
-        $response['status_code_header'] = 'HTTP/1.1 200 OK';
-        $response['body'] = json_encode($result);
-        return $response;
-    }
-
-
-    private function setAttack($decoded, $id){
-        $this->prepareUpdate($decoded, $transformed);
-        $result = $this->attacksGateway->updateAttack($transformed, $id);
-        if ($result == "err")
-           $response['status_code_header'] = 'HTTP/1.1 500 Internal Server Error';
-        else
-           $response['status_code_header'] = 'HTTP/1.1 200 OK';
-        $response['body'] = json_encode($result);
-        return $response;
-    }
-
-    private function prepareUpdate($decoded, &$transformed){
-    
-        foreach((array)$decoded as $key => $value)
-            if ($value!="") 
-                $transformed[$key]=$value;
-        
-        $this->setValueBool($decoded, $transformed, "suicide");
-        $this->setValueBool($decoded, $transformed, "extended");
-        $this->setValueBool($decoded, $transformed, "success");       
-    }
-
-    private function getGoodAttacks($decoded)
+    private function solveGETRequests($uri)
     {
-        $transformed = [];
+        $response = null;
 
-        $this->getStartDate($decoded, $transformed);
-        $this->getEndDate($decoded, $transformed);
-        $this->setArrays($decoded, $transformed, "weaponType");
-        $this->setArrays($decoded, $transformed, "attackType");
-        $this->setArrays($decoded, $transformed, "targType");
-        $this->setArrays($decoded, $transformed, "propExtent");
-
-        $this->setValue($decoded, $transformed, "terrCount");
-        $this->setValue($decoded, $transformed, "killsCount");
-        $this->setValue($decoded, $transformed, "woundedCount");
-        $this->setValueBool($decoded, $transformed, "success");
-        $this->setValueBool($decoded, $transformed, "suicide");
-        $this->setValueBool($decoded, $transformed, "extended");
-        $this->setIfExists($decoded, $transformed, "region");
-        $this->setIfExists($decoded, $transformed, "country");
-        $this->setIfExists($decoded, $transformed, "city");
-        $this->setIfExists($decoded, $transformed, "groupName");
-        $this->setIfExists($decoded, $transformed, "targetNat");
-        $this->setIfExists($decoded, $transformed, "targetName");
-        $this->setIfExists($decoded, $transformed, "targSubtype");
-        $this->setIfExists($decoded, $transformed, "weaponSubtype");
-
-
-        $result = $this->attacksGateway->getStatistics($transformed);
-        $response['status_code_header'] = 'HTTP/1.1 200 OK';
-        $response['body'] = json_encode($result);
-        return $response;
-    }
-    private function setIfExists($decoded, &$transformed, $name)
-    {
-        if ($decoded[$name] != "")
-            $transformed[$name] = $decoded[$name];
-    }
-    private function setValueBool($decoded, &$transformed, $name)
-    {
-        if ($decoded[$name] == "true")
-            $transformed[$name] = "1";
-        else
-            $transformed[$name] = "0";
-    }
-
-    private function setValue($decoded, &$transformed, $name)
-    {
-        $transformed[$name] = $decoded[$name];
-    }
-
-    private function getStartDate($decoded, &$transformed)
-    {
-        if ($decoded["dateStart"] == "") {
-            $transformed["startDate"] = "1970-01-01";
+        //Attacks dashboard case: (pageId, onPage) => returns the attack which is the onPage-th in the page with ID 'pageId'
+        if (sizeof($uri) > 3 && strcmp($uri[3], "attacks-dashboard") == 0) {
+            $response = $this->iAttacksService->getByPlaceInPage($_GET["pageId"], $_GET["onPage"]);
+        } else if (isset($_GET["preview"]) && $_GET["preview"] == "true") {
+            $response = $this->iAttacksService->getPreview();
+        } else if (sizeof($uri) > 3) {
+            $response = $this->iAttacksService->getById($uri[3]);
         } else {
-            $transformed["startDate"] = $decoded["dateStart"];
+            $response = $this->iAttacksService->getFirst(1000);
         }
+
+        return $response;
     }
 
-    private function getEndDate($decoded, &$transformed)
+    private function solvePOSTRequests($uri)
     {
-        if ($decoded["dateFinal"] == "") {
-            $transformed["finalDate"] = "sysdate";
+        $response = null;
+
+        $rawData = file_get_contents("php://input");
+        $decoded = json_decode($rawData, true);
+
+        if (isset($_GET["mapPage"]) && $_GET["mapPage"] == "true") {
+            $response = $this->iAttacksService->getMapPageAttacks($decoded);
+        } else if (sizeof($uri) > 3) {
+            $response = $this->iAttacksService->getFiltered($decoded, $uri[3]);
         } else {
-            $transformed["finalDate"] = $decoded["dateFinal"];
-        }
-    }
-
-    private function setArrays($decoded, &$transformed, $name){
-
-        if ($decoded[$name]!=""){
-            $i=0;
-            $exploded = explode(",", $decoded[$name]);
-            foreach ($exploded as $value){
-                $transformed[$name][$i]=$value;
-                $i++;
+            if (!$this->isAuthorized()) {
+                $response['status_code_header'] = 'HTTP/1.1 401 Not Authorized';
+                return $response;
             }
+            $response = $this->iAttacksService->insert($decoded);
         }
-    }
 
-    private function getFirst($first)
-    {
-        $result = $this->attacksGateway->getFirst($first);
-        $response['status_code_header'] = 'HTTP/1.1 200 OK';
-        $response['body'] = json_encode($result);
         return $response;
     }
 
-
-    private function getAttackByPlaceInPage($pageId, $onPage){
-        $result = $this->attacksGateway->getAttackByPlaceInPage($pageId, $onPage);
-        $response['status_code_header'] = 'HTTP/1.1 200 OK';
-        $response['body'] = json_encode($result);
-        return $response;
-    }
-
-    private function getById($id)
+    private function solvePUTRequests($uri)
     {
-        if (is_numeric($id) && intval($id) >= 0/* && intval($id) <= 180000*/) {
-            $result = $this->attacksGateway->getById($id);
-            if ($result!=[])
-                $response['status_code_header'] = 'HTTP/1.1 200 OK';
-            else
-                $response['status_code_header'] = 'HTTP/1.1 404 Not Found';
-            $response['body'] = json_encode($result);
+        $response = [];
+
+        $rawData = file_get_contents("php://input");
+        $decoded = json_decode($rawData, true);
+        if (sizeof($uri) > 3) {
+            if (!$this->isAuthorized()) {
+                $response['status_code_header'] = 'HTTP/1.1 401 Not Authorized';
+                return $response;
+            }
+            $response = $this->iAttacksService->update($decoded, $uri[3]);
         } else {
             $response['status_code_header'] = 'HTTP/1.1 404 Not Found';
-            $response['body'] = json_encode("eroare");
         }
+
         return $response;
     }
 
-    private function getAttacksPreview()
+    private function solveDELETERequests($uri)
     {
-        $result = $this->attacksGateway->getPreview();
-        $response['status_code_header'] = 'HTTP/1.1 200 OK';
-        $response['body'] = json_encode($result);
+        if (!$this->isAuthorized()) {
+            $response['status_code_header'] = 'HTTP/1.1 401 Not Authorized';
+            return $response;
+        }
+        $response = $this->iAttacksService->deleteById($uri[3]);
         return $response;
     }
 
-    private function getMapPageAttacks($body)
+    private function isAuthorized()
     {
-        $filters = [];
+        $jwt = $this->getJwtFromHeader();
+        if ($jwt === '') {
+            return false;
+        }
+        $SECRET_KEY = getenv('SECRET');
 
-        $this->getStartDate($body, $filters);
-        $this->getEndDate($body, $filters);
-        $this->setIfExists($body, $filters, "region");
-        $this->setIfExists($body, $filters, "country");
-        $this->setIfExists($body, $filters, "city");
+        try {
+            $decoded = \Firebase\JWT\JWT::decode($jwt, $SECRET_KEY, array('HS256'));
+            $decoded = (array) $decoded;
 
-        $result = $this->attacksGateway->getAttacksInfoForMapPage($filters);
-        $response['status_code_header'] = 'HTTP/1.1 200 OK';
-        $response['body'] = json_encode($result);
-        return $response;
+            if ($decoded["admin"] == 0) {
+                return false;
+            }
+        } catch (\Firebase\JWT\ExpiredException $e) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private function getJwtFromHeader()
+    {
+        if (!isset($_SERVER['HTTP_AUTHORIZATION'])) {
+            return '';
+        }
+
+        $header = $_SERVER['HTTP_AUTHORIZATION'];
+        if (substr($header, 0, 7) !== 'Bearer ') {
+            return '';
+        }
+
+        $jwt = explode(' ', $header);
+        if (sizeof($jwt) < 2) {
+            return '';
+        }
+
+        return $jwt[1];
     }
 }

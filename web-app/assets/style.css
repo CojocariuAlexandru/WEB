@@ -97,13 +97,14 @@ html {
 
     border-radius: 10px;
     font-size: 24px;
+    padding: 12px;
 }
 
 .app-alert-body i {
     position: absolute;
 
-    right: 6px;
-    top: 6px;
+    right: 4px;
+    top: 4px;
 
     font-size: 22px;
 }

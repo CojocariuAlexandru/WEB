@@ -212,6 +212,37 @@ body .web-app {
     overflow-y: auto;
 }
 
+.web-app .loader-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+}
+
+/* https://www.w3schools.com/howto/howto_css_loader.asp */
+.web-app .loader-wrapper .loader {
+    border: 16px solid #eee;
+    /* Light grey */
+    border-top: 16px solid #065e61;
+    /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 @media only screen and (max-width: 520px) {
     body .web-app {
         display: block;

@@ -46,6 +46,7 @@ class RouteGuard {
 }
 
 const adminGuard = new RouteGuard(userIsAdmin, '/home');
+const statisticsGuard = new RouteGuard(serverAttacksNotNull, '/statistics');
 
 class RouteBuilder {
     constructor(url, leaf) {
@@ -95,16 +96,19 @@ const statisticsFormRoute = new RouteBuilder('statistics', true)
 const statisticsResultRoute = new RouteBuilder('statistics-results', true)
     .setTemplate('web-app-statistics-result')
     .setInitCallback(statisticsResultsPageInit)
+    .setGuards([statisticsGuard])
     .build();
 
 const statistics2DResultsRoute = new RouteBuilder('statistics-results-2D', true)
     .setTemplate('web-app-statistics-result2D')
     .setInitCallback(initStatisticsResult2D)
+    .setGuards([statisticsGuard])
     .build();
 
 const statisticsDrawingsRoute = new RouteBuilder('statistics-drawings', true)
     .setTemplate('web-app-statistics-drawings')
     .setInitCallback(statisticsDrawingsPageInit)
+    .setGuards([statisticsGuard])
     .build();
 
 const mapRoute = new RouteBuilder('map', true)
@@ -151,11 +155,25 @@ const usersDashboardRoute = new RouteBuilder('users-dashboard', true)
     .setGuards([adminGuard])
     .build();
 
+const attacksDashboardRoute = new RouteBuilder('attacks-dashboard', true)
+    .setTemplate('web-app-dashboard-attacks')
+    .setInitCallback(attacksDashboardInit)
+    .setGuards([adminGuard])
+    .build();
+
 const root = new RouteBuilder('/app', false)
     .setChildren([homeRoute, statisticsFormRoute, statisticsResultRoute, statistics2DResultsRoute, statisticsDrawingsRoute,
-        mapRoute, attacksPageRoute, attackIdUpdateRouteParent, attacksInsertRoute, adminPanelRoute, usersDashboardRoute
+        mapRoute, attacksPageRoute, attackIdUpdateRouteParent, attacksInsertRoute, adminPanelRoute, usersDashboardRoute, attacksDashboardRoute
     ])
     .build();
+
+const allowedRedirectionPages = ["home", "statistics", "map", "attacks", "attacks/1"];
+
+const allowedRedirectCallbacks = {
+    'get-statistics': fillInTheFormAndSubmitIt
+};
+
+function fillInTheFormAndSubmitIt() {}
 
 // ------------------ Routing logic -------------------------
 
@@ -163,38 +181,55 @@ function checkGuards(node) {
     if (node.guards != null) {
         for (let i = 0; i < node.guards.length; ++i) {
             if (!node.guards[i].guardCallback()) {
-                return false;
+                return {
+                    "flag": false,
+                    "url": node.guards[i].redirectTo
+                };
             }
         }
     }
-    return true;
+    return {
+        "flag": true
+    };
 }
 
 function updateMainContentRecursive(node, pathParts, index) {
     // Leaf route with parameter
     if (node.url && node.url[0] == ':' && index == pathParts.length && node.leaf === true) {
-        if (checkGuards(node)) {
+        let checkResult = checkGuards(node);
+        if (checkResult['flag']) {
             if (pageIsLoaded(node.template)) {
                 node.initCallback(node, pathParts[index - 1]);
             } else {
                 asyncLoadPage(node.template, node.initCallback, node, pathParts[index - 1]);
             }
-            return false;
+            return {
+                "flag": false
+            };
         } else {
-            return true;
+            return {
+                "flag": true,
+                "url": checkResult['url']
+            };
         }
     }
     // Leaf route with no parameter
-    if (index == pathParts.length && node.leaf === true && checkGuards(node)) {
-        if (checkGuards(node)) {
+    if (index == pathParts.length && node.leaf === true) {
+        let checkResult = checkGuards(node);
+        if (checkResult['flag']) {
             if (pageIsLoaded(node.template)) {
                 node.initCallback(node);
             } else {
                 asyncLoadPage(node.template, node.initCallback, node);
             }
-            return false;
+            return {
+                "flag": false
+            };
         } else {
-            return true;
+            return {
+                "flag": true,
+                "url": checkResult['url']
+            };
         }
     }
     if (node.children != null) {
@@ -205,12 +240,22 @@ function updateMainContentRecursive(node, pathParts, index) {
         }
     }
     // No match, redirect
-    return true;
+    return {
+        "flag": true,
+        "url": "/home"
+    };
 }
 
 function updateMainContent(pathName) {
+    if (tokenIsExpired()) {
+        userLogout();
+        return;
+    }
+
     let pathParts = pathName.split('/');
-    let redirect = false;
+    let redirect = {
+        "flag": false
+    };
 
     let rootAdd = getPathToAdd();
     let toMatch = getPathToMatch();
@@ -218,10 +263,14 @@ function updateMainContent(pathName) {
     if (pathParts[0 + rootAdd] === toMatch) {
         redirect = updateMainContentRecursive(root, pathParts, 1 + rootAdd);
     } else {
-        redirect = true;
+        redirect = {
+            "flag": true,
+            "url": '/home'
+        }
     }
-    if (redirect && webapp) {
-        navigateRoot('/home');
+
+    if (redirect['flag'] && webapp) {
+        navigateRoot(redirect['url']);
     }
 }
 
