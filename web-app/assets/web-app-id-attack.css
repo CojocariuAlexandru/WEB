@@ -44,9 +44,7 @@
     overflow-y: scroll;
   }
 
-  .attackDetailText1,
-  .attackDetailText2,
-  .attackDetailText3 {
+  .title1 {
     margin-bottom: 30px;
   }
 
@@ -173,7 +171,7 @@
   position: relative;
 }
 
-#mapAttack {
+.mapAttack {
   text-align: center;
   min-height: calc(100% - 20px);
   height: auto;
@@ -187,11 +185,14 @@
 /* RIPPLE LOADER (CSS 30 seconds)*/
 .ripple-loader {
   position: absolute;
-  /* top:200px; */
-  /* left:300px; */
   width: 64px;
   height: 64px;
   z-index: 100;
+}
+
+#ripple-loader-id{
+  left : calc(50% - 32px);
+  top: calc(50% - 32px);
 }
 
 .ripple-loader div {
@@ -237,9 +238,7 @@
   grid-area: attackDetailTitle3;
 }
 
-.attackDetailTitle1,
-.attackDetailTitle2,
-.attackDetailTitle3 {
+.title1{
   text-align: center;
   border-top: #064244 2px dashed;
   margin: 20px 0 20px 0;
@@ -247,9 +246,7 @@
 
 }
 
-.attackDetailTitle1 h3,
-.attackDetailTitle2 h3,
-.attackDetailTitle3 h3 {
+.title1 h3{
   display: inline;
   font-size: 22px;
   text-align: center;

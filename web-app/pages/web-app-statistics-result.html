@@ -45,14 +45,14 @@
 
         </div>
     </div>
-    <div class="details-1" id="countriesList">
+    <div class="details details-1" id="countriesList">
     </div>
 
     <div class="pie-1">
     </div>
 
-    <div class="attack-rate">
-        <h3>Attack-rate</h3>
+    <div class="attack-rate bars">
+        <h4>Attack-rate</h4>
         <div class="attack-bar-border">
             <div id="myBar" class="attack-bar">
                 <p>0%</p>
@@ -60,8 +60,8 @@
         </div>
     </div>
 
-    <div class="damage-made">
-        <h3>Damage-made</h3>
+    <div class="damage-made bars">
+        <h4>Damage-made</h4>
         <div class="damage-bar-border">
             <div id="myBar2" class="damage-bar">
                 <p>0%</p>
@@ -75,32 +75,32 @@
         </div>
     </div>
 
-    <div class="extended24">
-        <h3>Rate extented over 24h</h3>
+    <div class="extended24 bars">
+        <h4>Rate extented over 24h</h4>
         <div class="extended-bar-border">
             <div id="myBar3" class="extended-bar">
                 <p>0%</p>
             </div>
         </div>
-        <div id='button-container'>
+        <div class='submitButton2'>
             <button class="button-get-all" onclick="move()">Get rates</button>
-            <span id='span1'></span>
-            <span id='span2'></span>
-            <span id='span3'></span>
-            <span id='span4'></span>
+            <span class='span1'></span>
+            <span class='span2'></span>
+            <span class='span3'></span>
+            <span class='span4'></span>
         </div>
     </div>
 
     <div class="pie-2"></div>
-    <div class="details-2">
+    <div class="details details-2">
     </div>
 
     <div class="pie-3"></div>
-    <div class="details-3">
+    <div class="details details-3">
     </div>
 
     <div class="pie-4"></div>
-    <div class="details-4">
+    <div class="details details-4">
     </div>
 
     <div class="world-map">
@@ -114,36 +114,36 @@
         <span href="" class="button-link1">SVG</span>
     </div>
     <div class="export button-2" onclick="downloadImageAs('png', 'grid-container-result')">
-        <span href="" class="button-link2">PNG</span>
+        <span href="" class="button-link1">PNG</span>
     </div>
     <div class="export button-3" onclick="downloadImageAs('jpg', 'grid-container-result')">
-        <span href="" class="button-link3">JPG</span>
+        <span href="" class="button-link1">JPG</span>
     </div>
     <div class="export button-4" onclick="downloadCsv();">
         <span href="" class="button-link1">CSV</span>
     </div>
     <div class="export button-5" onclick="downloadPdf()">
-        <span href="" class="button-link2">PDF</span>
+        <span href="" class="button-link1">PDF</span>
     </div>
     <div class="export button-6" onclick="downloadImageAs('bmp', 'grid-container-result')">
-        <span href="" class="button-link3">BMP</span>
+        <span href="" class="button-link1">BMP</span>
     </div>
 
     <section class='table submitForm'>
-        <div id='submitButton2' class="modified" onclick="navigateRoot('/statistics-results-2D')">
-            <input type='button' value='More statistics' id='submitButton'>
-            <span id='span1'></span>
-            <span id='span2'></span>
-            <span id='span3'></span>
-            <span id='span4'></span>
+        <div class='submitButton2 modified' onclick="navigateRoot('/statistics-results-2D')">
+            <input type='button' value='More statistics' class='submitButton'>
+            <span class='span1'></span>
+            <span class='span2'></span>
+            <span class='span3'></span>
+            <span class='span4'></span>
         </div>
 
-        <div id='submitButton3' class="modified" onclick="navigateRoot('/statistics-drawings')">
-            <input type='button' value='View Filtered Attacks' id='submitButton'>
-            <span id='span1'></span>
-            <span id='span2'></span>
-            <span id='span3'></span>
-            <span id='span4'></span>
+        <div class='submitButton2 modified' onclick="navigateRoot('/statistics-drawings')">
+            <input type='button' value='View Filtered Attacks' class='submitButton'>
+            <span class='span1'></span>
+            <span class='span2'></span>
+            <span class='span3'></span>
+            <span class='span4'></span>
         </div>
     </section>
 </div>

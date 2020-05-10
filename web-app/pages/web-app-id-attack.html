@@ -91,7 +91,7 @@
     </div>
 
     <div class='mapAttack1'>
-        <div id='mapAttack'>
+        <div id='mapAttack' class='mapAttack'>
 
         </div>
         <div class="ripple-loader" id="ripple-loader-id">
@@ -100,13 +100,13 @@
         </div>
     </div>
 
-    <div class='attackDetailTitle1'>
+    <div class='attackDetailTitle1 title1'>
         <h3>Target details</h3>
     </div>
-    <div class='attackDetailTitle2'>
+    <div class='attackDetailTitle2 title1'>
         <h3>Weapon de details</h3>
     </div>
-    <div class='attackDetailTitle3'>
+    <div class='attackDetailTitle3 title1'>
         <h3>Damages</h3>
     </div>
 
@@ -183,22 +183,22 @@
 
     {{#if admin}}
     <section class='submitForm updateForm' onclick="navigateToUpdate()">
-        <div id='submitButton2'>
-            <input type='button' value='Update' id='submitButton'>
-            <span id='span1'></span>
-            <span id='span2'></span>
-            <span id='span3'></span>
-            <span id='span4'></span>
+        <div class='submitButton2'>
+            <input type='button' value='Update' class='submitButton'>
+            <span class='span1'></span>
+            <span class='span2'></span>
+            <span class='span3'></span>
+            <span class='span4'></span>
         </div>
     </section>
 
     <section class='submitForm deleteForm' onclick="areYouSure()">
-        <div class="deleteButton" id='submitButton2'>
-            <input type='button' value='Delete' id='submitButton'>
-            <span id='span1'></span>
-            <span id='span2'></span>
-            <span id='span3'></span>
-            <span id='span4'></span>
+        <div class="deleteButton submitButton2">
+            <input type='button' value='Delete' class='submitButton'>
+            <span class='span1'></span>
+            <span class='span2'></span>
+            <span class='span3'></span>
+            <span class='span4'></span>
         </div>
     </section>
     {{/if}}

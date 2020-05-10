@@ -7,7 +7,7 @@ body .presentation {
     font-size: 10px;
 }
 
-body .presentation #empty {
+body .presentation .empty {
     height: 60px;
     width: 100%;
 }
@@ -15,10 +15,9 @@ body .presentation #empty {
 .presentation h2 {
     display: block;
     font-size: 30px;
-    margin-bottom: 50px;
 }
 
-.presentation h3 {
+.presentation h5 {
     font-size: 20px;
 }
 
@@ -43,7 +42,12 @@ body .presentation .grid-container {
         "col-1 col-1 col-2 col-2 col-3 col-3"
         "us us us us us us"
         "profil1 profil1 profil2 profil2 profil3 profil3"
-        "links links links links contact contact";
+        "footer footer footer footer footer footer";
+}
+
+.footer{
+    grid-area: footer;
+    display: flex;
 }
 
 .presentation .login {
@@ -87,18 +91,18 @@ body .presentation .grid-container {
 }
 
 .presentation .links {
-    grid-area: links;
+    width : 66.6%;
 }
 
 .presentation .contact {
-    grid-area: contact;
+    width: 33%;
 }
 
 .presentation .nav {
     display: flex;
     position: fixed;
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
     min-height: 60px;
     background-color: #035e63;
     box-shadow: 2px 5px 15px 10px #035e63;
@@ -134,12 +138,11 @@ body .presentation .grid-container {
     display: block;
 }
 
-.presentation header h3 {
+.presentation h1 {
     display: inline;
     font-size: 30px;
     padding: 10px 10px;
     margin-right: auto;
-    margin-top: 10px;
     color: #eeeeee;
 }
 
@@ -288,8 +291,7 @@ body .presentation .grid-container {
     background-color: #eeeeee;
 }
 
-.presentation .about h2,
-.presentation .us h2 {
+.presentation h3 {
     display: inline-flex;
     margin: 50px 50px 20px 60px;
     padding: 0 10px 0 10px;
@@ -297,6 +299,7 @@ body .presentation .grid-container {
     color: #eeeeee;
     background-color: #175053;
     box-shadow: #175053 2px 0 5px 10px;
+    font-size: 30px;
 }
 
 .presentation .about p,
@@ -419,6 +422,7 @@ body .presentation .grid-container {
     background-color: #035e63;
     padding: 30px 50px;
     border-top: #eeeeee 2px dashed;
+    color: #eeeeee;
 }
 
 .presentation .links ul {
@@ -446,9 +450,6 @@ body .presentation .grid-container {
     margin-right: 10px;
 }
 
-.presentation .links h3 {
-    color: #eeeeee;
-}
 
 /************** CONTACT ***********************************/
 .presentation .grid-container .links,
@@ -462,7 +463,7 @@ body .presentation .grid-container {
     position: relative;
 }
 
-.presentation .contact h3 {
+.presentation .contact h5 {
     padding: 20px 50px;
     color: #035e63;
 }
@@ -513,8 +514,9 @@ body .presentation .grid-container {
             "col-1 col-1 col-2 col-2 col-3 col-3"
             "us us us us us us"
             "profil1 profil1 profil2 profil2 profil3 profil3"
-            "links links links links contact contact";
+            "footer footer footer footer footer footer";
     }
+
 
     .presentation .col-1 img,
     .presentation .col-2 img,
@@ -580,7 +582,7 @@ body .presentation .grid-container {
             "profil2 profil2 profil2 profil2 profil2 profil2"
             "profil3 profil3 profil3 profil3 profil3 profil3"
 
-            "links links links links contact contact";
+            "footer footer footer footer footer footer ";
     }
 
     .presentation .profil1 .background1 {
@@ -619,7 +621,7 @@ body .presentation .grid-container {
     .presentation .col-1,
     .presentation .col-2,
     .presentation .col-3 {
-        margin: 0 0px;
+        margin: 0;
         padding: 40px 50px;
         border-top: dashed 2px #175053;
     }
@@ -669,8 +671,16 @@ body .presentation .grid-container {
             "profil2 profil2 profil2 profil2 profil2 profil2"
             "profil3 profil3 profil3 profil3 profil3 profil3"
 
-            "links links links contact contact contact";
+            "footer footer footer footer footer footer ";
     }
+    .presentation .links {
+        width : 50%;
+    }
+    
+    .presentation .contact {
+        width: 50%;
+    }
+
 
     .presentation .links {
         padding-left: 20px;
@@ -698,7 +708,7 @@ body .presentation .grid-container {
         min-width: 80%;
     }
 
-    .presentation #signup {
+    .presentation .signup-header {
         display: none;
     }
 }
@@ -711,7 +721,7 @@ body .presentation .grid-container {
 }
 
 @media only screen and (max-width: 360px) {
-    .presentation #about {
+    .presentation .about-header {
         display: none;
     }
 
@@ -735,8 +745,7 @@ body .presentation .grid-container {
         font-size: 14px
     }
 
-    .presentation .contact h3,
-    .presentation .links h3 {
+    .presentation h5{
         font-size: 14px;
     }
 
@@ -760,11 +769,11 @@ body .presentation .grid-container {
         font-size: 12px;
     }
 
-    .presentation #adresa {
+    .presentation .adress {
         display: none;
     }
 
-    .presentation #icon {
+    .presentation .icon {
         left: 60px;
     }
 }

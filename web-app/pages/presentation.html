@@ -1,19 +1,19 @@
 <header>
     <div class="nav">
         <img src="/img/icon.webp" alt="icon">
-        <h3>
+        <h1>
             TeVi
-        </h3>
+        </h1>
         <ul>
             <li onclick="changeLogin()"><a>Login</a></li>
-            <li id="signup" onclick="changeSignUp()"><a>SignUp</a></li>
-            <li id="about"><a href="#about-us">About</a></li>
+            <li class="signup-header" id="signup" onclick="changeSignUp()"><a>SignUp</a></li>
+            <li class="about-header" id="about"><a href="#about-us">About</a></li>
             <li><a href="#contact-info">Contact</a></li>
         </ul>
     </div>
 </header>
 
-<div id="empty">
+<div class="empty">
 </div>
 
 <div class="grid-container" id="login-signup">
@@ -51,10 +51,10 @@
     <div class="art">
         <!-- <img src="img/img2.svg" alt="imagine">  -->
     </div>
-    <div class="about" id="about-us">
-        <h2 class="title">
+    <section class="about" id="about-us">
+        <h3 class="title">
             Abous us
-        </h2>
+        </h3>
         <div class='about-body'>
             <p>
                 <span></span> We devised a Web application for visualizing and creating statistics based on terrorist
@@ -70,7 +70,7 @@
             </p>
         </div>
 
-    </div>
+    </section>
     <div class="col-1">
         <img src="/img/image2.webp" alt="">
         <p><span></span> These powerful illustrations can be really handy for understanding any patterns involving
@@ -93,9 +93,9 @@
     </div>
 
     <div class="us">
-        <h2 class="title">
+        <h3 class="title">
             Our team
-        </h2>
+        </h3>
         <div class='us-body'>
             <p>
                 <span></span> We are the best team eveeer! Three students at FII.
@@ -103,60 +103,61 @@
         </div>
 
     </div>
-    <div class="profil1">
-        <span class="background1"></span>
-        <img src="/img/ramo.webp" alt="">
-        <p>“Creativity Is Intelligence Having Fun.”
-        </p>
-        <p>Ramona Albert
-            <a href="https://www.facebook.com/albert.ramona">
-                <i class="fa fa-facebook-square"></i>
-            </a>
-            <a class="mail" href="mailto:albert.ramona99@gmail.com">
-                <i class="fa fa-envelope"></i>
-            </a>
-        </p>
-    </div>
-    <div class="profil2">
-        <img src="/img/olo.webp" alt="Oloieri Alexandru">
-        <p>"Push yourself, because no one else is going to do it for you."
-        </p>
-        <p>Oloieri Alexandru
-            <a href="https://www.facebook.com/alexandru.oloieri.3">
-                <i class="fa fa-facebook-square"></i>
-            </a>
-            <a class="mail" href="mailto:alexoloieri2014@gmail.com">
-                <i class="fa fa-envelope"></i>
-            </a>
-        </p>
+        <div class="profil1">
+            <span class="background1"></span>
+            <img src="/img/ramo.webp" alt="">
+            <p>“Creativity Is Intelligence Having Fun.”
+            </p>
+            <p>Ramona Albert
+                <a href="https://www.facebook.com/albert.ramona">
+                    <i class="fa fa-facebook-square"></i>
+                </a>
+                <a class="mail" href="mailto:albert.ramona99@gmail.com">
+                    <i class="fa fa-envelope"></i>
+                </a>
+            </p>
+        </div>
+        <div class="profil2">
+            <img src="/img/olo.webp" alt="Oloieri Alexandru">
+            <p>"Push yourself, because no one else is going to do it for you."
+            </p>
+            <p>Oloieri Alexandru
+                <a href="https://www.facebook.com/alexandru.oloieri.3">
+                    <i class="fa fa-facebook-square"></i>
+                </a>
+                <a class="mail" href="mailto:alexoloieri2014@gmail.com">
+                    <i class="fa fa-envelope"></i>
+                </a>
+            </p>
 
-    </div>
-    <div class="profil3">
-        <img src="/img/alex.webp" alt="">
-        <p>"Do not be overheard complaining. Not even to yourself."</p>
-        <p>Cojocariu Alexandru
-            <a href="https://www.facebook.com/profile.php?id=100014694300615">
-                <i class="fa fa-facebook-square"></i>
-            </a>
-            <a class="mail" href="mailto:cojocariualexandru1@gmail.com">
-                <i class="fa fa-envelope"></i>
-            </a>
-        </p>
-    </div>
-
-    <div class="links">
-        <h3>Links:</h3>
-        <ul>
-            <li><i class="fa fa-database"></i> <a href="https://www.kaggle.com/START-UMD/gtd">Data base</a></li>
-            <li><i class="fa fa-desktop"></i> <a href="https://www.info.uaic.ro/">Faculty of Computer Science</a></li>
-        </ul>
-    </div>
-    <div class="contact" id="contact-info">
-        <h3>Contact:</h3>
-        <ul>
-            <li><i id="icon" class="fa fa-briefcase"></i><span class="number">+40 232 201090</span></li>
-            <li id="adresa" class="adress"><i class="fa fa-mobile"></i>Faculty of Computer Science, General Berthelor
-                Street, nr. 16, IAŞI, Postal Code 700483, ROMANIA</li>
-        </ul>
-    </div>
+        </div>
+        <div class="profil3">
+            <img src="/img/alex.webp" alt="">
+            <p>"Do not be overheard complaining. Not even to yourself."</p>
+            <p>Cojocariu Alexandru
+                <a href="https://www.facebook.com/profile.php?id=100014694300615">
+                    <i class="fa fa-facebook-square"></i>
+                </a>
+                <a class="mail" href="mailto:cojocariualexandru1@gmail.com">
+                    <i class="fa fa-envelope"></i>
+                </a>
+            </p>
+        </div>
+    <footer class="footer">
+        <div class="links">
+            <h5>Links:</h5>
+            <ul>
+                <li><i class="fa fa-database"></i> <a href="https://www.kaggle.com/START-UMD/gtd">Data base</a></li>
+                <li><i class="fa fa-desktop"></i> <a href="https://www.info.uaic.ro/">Faculty of Computer Science</a></li>
+            </ul>
+        </div>
+        <div class="contact" id="contact-info">
+            <h5>Contact:</h5>
+            <ul>
+                <li><i class="icon fa fa-briefcase"></i><span class="number">+40 232 201090</span></li>
+                <li class="adress"><i class="fa fa-mobile"></i>Faculty of Computer Science, General Berthelor
+                    Street, nr. 16, IAŞI, Postal Code 700483, ROMANIA</li>
+            </ul>
+        </div>
+    </footer>
 </div>

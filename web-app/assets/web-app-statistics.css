@@ -19,10 +19,7 @@
         "fourthRow fourthRow fourthRow fourthRow"
         "button-1 button-1 button-2 button-2"
         "statistici-buton statistici-buton statistici-buton statistici-buton";
-    box-sizing: border-box;
-    border: 1px solid black;
     background: #eee;
-    padding: 20px;
     font-size: 20px;
     width: 100%;
 
@@ -39,7 +36,6 @@ input.dataForm1,
     border-radius: 16px;
     background-color: #eee;
     box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
-    width: 160px;
     padding: 16px 10px;
     text-align: center;
 }
@@ -112,15 +108,12 @@ input.dataForm1,
     padding: 10px 50px;
 }
 
-.web-app .statisticsFormGrid h1,
-.web-app .mapPageGrid h1,
-#attacks-page .attacks-page-header h1,
-.web-app .grid-container-update .update-header h1 {
+.web-app h1{
     text-align: center;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    padding: 0px;
+    font-family:  'Open Sans', sans-serif;
+    padding: 0;
     color: #065e61;
-    margin-top: 0px;
+    margin-top: 0;
     margin-bottom: 10px;
 }
 
@@ -161,15 +154,12 @@ input.dataForm1,
     margin: 5px 0;
 }
 
-#dateInputStart,
-#dateInputFinal {
+.dataForm1{
     height: 20px;
 }
 
 /* https://www.youtube.com/watch?v=BrpiNUf2XCk */
-#rangeTerr.slider,
-#rangeDeaths.slider,
-#rangeWound.slider {
+.slider {
     -webkit-appearance: none;
     background: linear-gradient(90deg, #097a746c 20%, #b955557a);
     width: 60%;
@@ -195,9 +185,7 @@ input.dataForm1,
     font-weight: bold;
 }
 
-#rangeTerr.slider::before,
-#rangeDeaths.slider::before,
-#rangeWound.slider::before {
+.slider::before {
     content: "0";
     color: #065e61;
     position: absolute;
@@ -206,9 +194,7 @@ input.dataForm1,
     left: -20px;
 }
 
-#rangeTerr.slider::after,
-#rangeDeaths.slider::after,
-#rangeWound.slider::after {
+.slider::after {
     content: "25000";
     color: #065e61;
     position: absolute;
@@ -217,23 +203,19 @@ input.dataForm1,
     right: -48px;
 }
 
-#rangeTerr.slider:hover,
-#rangeDeaths.slider:hover,
-#rangeWound.slider:hover {
+.slider:hover {
     cursor: pointer;
 }
 
-#rangeDeaths.slider::after {
+.rangeDeaths::after {
     content: "2000";
 }
 
-#rangeWound.slider::after {
+.rangeWound::after {
     content: "10000";
 }
 
-#rangeTerr.slider::-webkit-slider-thumb,
-#rangeDeaths.slider::-webkit-slider-thumb,
-#rangeWound.slider::-webkit-slider-thumb {
+.slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     height: 26px;
@@ -243,9 +225,7 @@ input.dataForm1,
 }
 
 /* Work in Mozilla Firefox browser */
-#rangeTerr.slider::-moz-range-thumb,
-#rangeDeaths.slider::-moz-range-thumb,
-#rangeWound.slider::-moz-range-thumb {
+.slider::-moz-range-thumb{
     height: 26px;
     width: 26px;
     border-radius: 16px;
@@ -281,21 +261,7 @@ input.dataForm1,
     margin-right: 10px;
 } */
 
-.attackTypeForm h3,
-.weaponTypeForm h3,
-.targetTypeForm h3,
-.damageForm h3,
-.regionForm h3,
-.cityForm h3,
-.targTypeSelect h3,
-.targSubtypeSelect h3,
-.weaponTypeSelect h3,
-.weaponSubtypeSelect h3,
-.specificParagraph h3,
-.specificTargetName h3,
-.specificTargetNat h3,
-.specificGroup h3,
-.countryForm h3,
+.statisticsFormGrid h3,
 .grid-container-update h3 {
     color: #eee;
     font-size: 20px;
@@ -381,7 +347,7 @@ input.dataForm1,
     font-weight: bold;
 }
 
-#label1 {
+.label1 {
     font-size: 20px;
     font-weight: bold;
 }
@@ -412,10 +378,6 @@ input.dataForm1,
 
 }
 
-#dateInput {
-    height: 20px;
-}
-
 /* CHECKBOX */
 
 /* Inspired by a tutorial */
@@ -425,7 +387,7 @@ input[type="checkbox"] {
 
 input[type="checkbox"]+label {
     display: block;
-    border-radius: 0px;
+    border-radius: 0;
     position: relative;
     padding-left: 35px;
     margin-bottom: 0;
@@ -458,7 +420,7 @@ input[type="checkbox"]:checked+label::before {
 
 /* SUBMIT FORM */
 
-#submitButton {
+.submitButton {
     width: 100%;
     height: 100%;
     background-color: transparent;
@@ -470,8 +432,7 @@ input[type="checkbox"]:checked+label::before {
     transition: color 0.3s linear;
 }
 
-#submitButton2,
-#submitButton3 {
+.submitButton2 {
     color: #065e61;
     font-size: 16px;
     border: 2px solid #065e61;
@@ -486,13 +447,11 @@ input[type="checkbox"]:checked+label::before {
     overflow: hidden;
 }
 
-#submitButton2.modified,
-#submitButton3.modified {
+.submitButton2.modified{
     margin: 0 12px;
 }
 
-#submitButton2 span,
-#submitButton3 span {
+.submitButton2 span {
     position: absolute;
     width: 25%;
     height: 100%;
@@ -504,35 +463,30 @@ input[type="checkbox"]:checked+label::before {
     z-index: -1;
 }
 
-#submitButton:hover {
+.submitButton:hover {
     color: #eee;
 }
 
-#submitButton2:hover span,
-#submitButton3:hover span {
+.submitButton2:hover span {
     transform: translateY(0) scale(2);
 }
 
-#submitButton2 #span1,
-#submitButton3 #span1 {
+.submitButton2 .span1 {
     transition-delay: 0;
     left: 0;
 }
 
-#submitButton2 #span2,
-#submitButton3 #span2 {
+.submitButton2 .span2 {
     transition-delay: 0.2s;
     left: 25%;
 }
 
-#submitButton2 #span3,
-#submitButton3 #span3 {
+.submitButton2 .span3 {
     transition-delay: 0.4s;
     left: 50%;
 }
 
-#submitButton2 #span4,
-#submitButton3 #span4 {
+.submitButton2 .span4 {
     transition-delay: 0.6s;
     left: 75%;
 }

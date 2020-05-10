@@ -65,9 +65,6 @@ function attackIdPageInit(attack) {
         zoom: 8
     });
 
-    document.getElementById("ripple-loader-id").style.left = `calc(50% - 32px)`;
-    document.getElementById("ripple-loader-id").style.top = `calc(50% - 32px)`;
-
     map.setOptions({
         draggable: false
     });
