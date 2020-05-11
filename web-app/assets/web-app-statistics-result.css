@@ -52,7 +52,7 @@
   grid-area: details-1;
 }
 
-.pie-1 {
+.piee-1 {
   grid-area: pie-1;
 }
 
@@ -70,7 +70,7 @@
   border-bottom: #054a4d dashed 2px;
 }
 
-.pie-2 {
+.piee-2 {
   grid-area: pie-2;
 }
 
@@ -78,11 +78,11 @@
   grid-area: details-2;
 }
 
-.pie-4 {
+.piee-4 {
   grid-area: pie-4;
 }
 
-.pie-3 {
+.piee-3 {
   grid-area: pie-3;
 }
 
@@ -343,7 +343,8 @@
 
 .pie-1,
 .pie-2,
-.pie-3 {
+.pie-3,
+.pie-4 {
   margin: 0 auto;
   width: calc(100% - 120px);
 }
@@ -353,8 +354,26 @@
   margin-left: 60px;
 }
 
-.pie-2 {
+.pie-2,
+.pie-4 {
   margin-right: 60px;
+}
+
+.csv-button-left{
+  position: relative;
+  margin-top:-60px;
+  width:170px;
+  margin-left:184px;
+  z-index: 100;
+}
+
+
+.csv-button-right{
+  position: relative;
+  margin-top:-60px;
+  width:170px;
+  margin-left:184px;
+  z-index: 100;
 }
 
 /* RESPONSIVE */
@@ -377,6 +396,17 @@
   .values .container-values {
     font-size: 18px;
 
+  }
+
+  .csv-button-left{
+    margin-top:-50px;
+    margin-left:100px;
+  }
+  
+  
+  .csv-button-right{
+    margin-top:-50px;
+    margin-left:100px;
   }
 }
 
@@ -426,6 +456,19 @@
 
   .export {
     width: 80%;
+  }
+
+  .csv-button-left{
+    margin-top:-50px;
+    margin-left:100px;
+    width:100px;
+  }
+  
+  
+  .csv-button-right{
+    margin-top:-50px;
+    margin-left:100px;
+    width:100px;
   }
 
 }
@@ -502,13 +545,15 @@
     margin-left: 20px;
   }
 
-  .pie-2 {
+  .pie-2,
+  .pie-4 {
     margin-right: 20px;
   }
 
   .pie-1,
   .pie-2,
-  .pie-3 {
+  .pie-3,
+  .pie-4 {
     margin: 0 auto;
     width: calc(100% - 40px);
   }
@@ -534,3 +579,5 @@
   }
 
 }
+
+

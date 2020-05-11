@@ -445,10 +445,11 @@ input[type="checkbox"]:checked+label::before {
     transition: all 0.5s;
     margin: 0 auto;
     overflow: hidden;
+
 }
 
 .submitButton2.modified{
-    margin: 0 12px;
+    margin:12px;
 }
 
 .submitButton2 span {

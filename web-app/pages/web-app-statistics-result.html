@@ -48,7 +48,11 @@
     <div class="details details-1" id="countriesList">
     </div>
 
-    <div class="pie-1">
+    <div class="piee-1">
+        <div class="pie-1"></div>
+        <div class="export csv-button-left" onclick="downloadCsv('countries')">
+            <span href="" class="button-link1">CSV</span>
+        </div>
     </div>
 
     <div class="attack-rate bars">
@@ -91,15 +95,33 @@
         </div>
     </div>
 
-    <div class="pie-2"></div>
+    <div class="piee-2">
+        <div class="pie-2"></div>
+        <div class="export csv-button-right" onclick="downloadCsv('attackTypes')">
+            <span href="" class="button-link1">CSV</span>
+        </div>
+    </div>
+
     <div class="details details-2">
     </div>
 
-    <div class="pie-3"></div>
+
+    <div class="piee-3">
+        <div class="pie-3"></div>
+        <div class="export csv-button-left" onclick="downloadCsv('targetTypes')">
+            <span href="" class="button-link1">CSV</span>
+        </div>
+    </div>
+
     <div class="details details-3">
     </div>
 
-    <div class="pie-4"></div>
+    <div class="piee-4">
+        <div class="pie-4"></div>
+        <div class="export csv-button-right" onclick="downloadCsv('weaponTypes')">
+            <span href="" class="button-link1">CSV</span>
+        </div>
+    </div>
     <div class="details details-4">
     </div>
 
@@ -119,7 +141,7 @@
     <div class="export button-3" onclick="downloadImageAs('jpg', 'grid-container-result')">
         <span href="" class="button-link1">JPG</span>
     </div>
-    <div class="export button-4" onclick="downloadCsv();">
+    <div class="export button-4" onclick="downloadCsv('allAttacks');">
         <span href="" class="button-link1">CSV</span>
     </div>
     <div class="export button-5" onclick="downloadPdf()">
