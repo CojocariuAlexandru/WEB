@@ -540,3 +540,4 @@ function downloadCsv() {
 
     link.click();
 }
+

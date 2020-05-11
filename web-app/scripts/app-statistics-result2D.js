@@ -5,6 +5,7 @@ var frequencyOfTargets;
 var frequencyOfAttacks;
 var frequencyOfWeaponType;
 var windowWidth;
+var toggleCSV = 0;
 
 function initStatisticsResult2D(node) {
     mainContent.innerHTML = loadPage(node.template);
@@ -103,6 +104,127 @@ function getFrequencies() {
             frequencyOfSuccess[yearOccured] = frequencyOfSuccess[yearOccured] + 1;
         }
     }
+}
+
+function createCSVCountries() {
+    let csvArray = [
+        ["Year",
+        "Country",
+        "Number_of_attacks"
+        ]
+    ];
+
+    let i, j;
+    console.log(frequencyOfCountries);
+    for (i = 1; i < countries.length; i++) {
+        for (j = 1970; j <= 2015; j++) {
+            csvArray.push([j, countries[i][0], frequencyOfCountries[countries[i][0]][j]]);
+        }
+    }
+    return csvArray;
+}
+
+function createCSVRegions() {
+    let csvArray = [
+        ["Year",
+        "Regions",
+        "Number_of_attacks"
+        ]
+    ];
+
+    let i, j;
+    console.log(frequencyOfRegions);
+    for (i = 1; i < regions.length; i++) {
+        for (j = 1970; j <= 2015; j++) {
+            csvArray.push([j, regions[i][0], frequencyOfRegions[regions[i][0]][j]]);
+        }
+    }
+    return csvArray;
+}
+
+function createCSVTargetType() {
+    let csvArray = [
+        ["Year",
+        "Target_type",
+        "Number_of_attacks"
+        ]
+    ];
+
+    let i, j;
+    console.log(frequencyOfTargets);
+    for (i = 1; i < targTypes.length; i++) {
+        for (j = 1970; j <= 2015; j++) {
+            csvArray.push([j, targTypes[i][0], frequencyOfTargets[targTypes[i][0]][j]]);
+        }
+    }
+    return csvArray;
+}
+
+function createCSVAttackType() {
+    let csvArray = [
+        ["Year",
+        "Attack_type",
+        "Number_of_attacks"
+        ]
+    ];
+
+    let i, j;
+    console.log(frequencyOfAttacks);
+    for (i = 1; i < attackTypes.length; i++) {
+        for (j = 1970; j <= 2015; j++) {
+            csvArray.push([j, attackTypes[i][0], frequencyOfAttacks[attackTypes[i][0]][j]]);
+        }
+    }
+    return csvArray;
+}
+
+function createCSVWeaponType() {
+    let csvArray = [
+        ["Year",
+        "Weapon_type",
+        "Number_of_attacks"
+        ]
+    ];
+
+    let i, j;
+    console.log(frequencyOfWeaponType);
+    for (i = 1; i < weaponTypes.length; i++) {
+        for (j = 1970; j <= 2015; j++) {
+            csvArray.push([j, weaponTypes[i][0], frequencyOfWeaponType[weaponTypes[i][0]][j]]);
+        }
+    }
+    return csvArray;
+}
+
+function downloadCsv2D(whichRaport) {
+    let rows;
+    if(whichRaport.localeCompare('country') == 0){
+        rows = createCSVCountries();
+        }
+        else if(whichRaport.localeCompare('region') == 0){
+            rows = createCSVRegions();
+        }
+        else if(whichRaport.localeCompare('target') == 0){
+            rows = createCSVTargetType();
+        }
+        else if(whichRaport.localeCompare('attack') == 0){
+            rows = createCSVAttackType();
+        }
+        else{
+            rows = createCSVWeaponType();
+        }
+
+    let csvContent = "data:text/csv;charset=utf-8," + rows.map(e => e.join(",")).join("\n");
+
+    var encodedUri = encodeURI(csvContent);
+    window.open(encodedUri);
+    var encodedUri = encodeURI(csvContent);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "countries.csv");
+    document.body.appendChild(link); // Required for FF
+
+    link.click();
 }
 
 function addCountryPreferences() {
@@ -290,6 +412,19 @@ function addWeaponTypePreferences() {
         };
         var chart = new google.visualization.LineChart(countryTargetDocument);
         chart.draw(dataForChart, options);
+    }
+}
+
+function toggleCSVList(){
+    console.log(frequencyOfAttacks);
+    let csvList = document.querySelector('.optionsCSV'); 
+    toggleCSV = 1 - toggleCSV;
+    console.log(toggleCSV);
+    if(toggleCSV == 0){
+        csvList.style.display = "none";
+    }
+    else{
+        csvList.style.display = "block";
     }
 }
 
