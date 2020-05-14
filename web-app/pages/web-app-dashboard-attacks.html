@@ -1,6 +1,6 @@
 <div class="dashboard-attacks-wrapper">
-    <h1>Manage Attacks</h1>
     <div class="recordList dashboard-attack-table">
+        <h1>Manage Attacks</h1>
         <table id="attacksTable" class="attacksTable">
             <tr class="headingRecordList">
                 <th id="attackIDHeader" class="tableCellDataID">
@@ -49,44 +49,44 @@
             </tr>
             {{/each}}
         </table>
-    </div>
-    <div class="paging">
-        {{#if type1}}
-        <div class="current-button">
-            {{page}},
+        <div class="paging">
+            {{#if type1}}
+            <div class="current-button">
+                {{page}},
+            </div>
+            <div class="navigation-button" onclick="changePage('{{nextPage}}')">
+                {{nextPage}}
+            </div>
+            <div class="page-signs">
+                >>
+            </div>
+            {{else if type2}}
+            <div class="page-signs">
+                &lt&lt
+            </div>
+            <div class="navigation-button" onclick="changePage('{{previousPage}}')">
+                {{previousPage}},
+            </div>
+            <div class="current-button">
+                {{page}},
+            </div>
+            <div class="navigation-button" onclick="changePage('{{nextPage}}')">
+                {{nextPage}}
+            </div>
+            <div class="page-signs">
+                >>
+            </div>
+            {{else if type3}}
+            <div class="page-signs">
+                &lt&lt
+            </div>
+            <div class="navigation-button" onclick="changePage('{{previousPage}}')">
+                {{previousPage}},
+            </div>
+            <div class="current-button">
+                {{page}}
+            </div>
+            {{/if}}
         </div>
-        <div class="navigation-button" onclick="changePage('{{nextPage}}')">
-            {{nextPage}}
-        </div>
-        <div class="page-signs">
-            >>
-        </div>
-        {{else if type2}}
-        <div class="page-signs">
-            &lt&lt
-        </div>
-        <div class="navigation-button" onclick="changePage('{{previousPage}}')">
-            {{previousPage}},
-        </div>
-        <div class="current-button">
-            {{page}},
-        </div>
-        <div class="navigation-button" onclick="changePage('{{nextPage}}')">
-            {{nextPage}}
-        </div>
-        <div class="page-signs">
-            >>
-        </div>
-        {{else if type3}}
-        <div class="page-signs">
-            &lt&lt
-        </div>
-        <div class="navigation-button" onclick="changePage('{{previousPage}}')">
-            {{previousPage}},
-        </div>
-        <div class="current-button">
-            {{page}}
-        </div>
-        {{/if}}
     </div>
 </div>

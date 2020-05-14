@@ -156,7 +156,7 @@ class AttacksRepository implements iAttacksRepository
     public function getStatistics($transformed)
     {
         $statement = "
-            SELECT id, date, extended, region, country, city, 
+            SELECT id, date, latitude, longitude, extended, region, country, city, 
             attackType, success, suicide, targType, terrCount, weaponType, 
             killsCount, woundedCount, propExtent
             FROM attacks WHERE ";

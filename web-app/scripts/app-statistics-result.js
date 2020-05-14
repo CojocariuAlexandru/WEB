@@ -11,6 +11,8 @@ var dateFrequency;
 var weaponTypes;
 var damages;
 
+var markersVisible;
+
 function fillField(filters1, name) {
     if (filters1[name] == "") {
         return "All";
@@ -57,7 +59,7 @@ function getFilters() {
     resultFilters["weaponType"] = weaponTypes[1][0];
 
     console.log(damages);
-    if (damages.length>2)
+    if (damages.length > 2)
         resultFilters["damage"] = damages[2][0];
     else
         resultFilters["damage"] = "Unknown";
@@ -136,6 +138,32 @@ function statisticsResultsPageInit(node) {
     constructParagraf(attackTypes, ".details-2", "Most frequently attackTypes", "AttackType");
     constructParagraf(targTypes, ".details-3", "Most frequently targetTyes", "TargetType");
     constructParagraf(weaponTypes, ".details-4", "Most frequently weaponTypes", "weaponType");
+
+    initWorldMap();
+}
+
+function initWorldMap() {
+    markersVisible = false;
+    let worldMapDiv = document.querySelector('.google-maps');
+    map = new google.maps.Map(worldMapDiv, {
+        center: {
+            lat: 30,
+            lng: 0
+        },
+        scrollwheel: false,
+        zoom: 2,
+        styles: getMapNightModeStyle()
+    });
+}
+
+function toggleMarkersVisibility() {
+    if (markersVisible) {
+        removeAttacksFromMap();
+    } else {
+        removeAttacksFromMap();
+        displayAttacksOnMap(parsed1);
+    }
+    markersVisible = !markersVisible;
 }
 
 function getData(name, details, field, fieldType) {
@@ -534,52 +562,62 @@ function createCSV() {
     }
     return csvArray;
 }
-function createCSVcountries(){
-    let csvArray = [["country",  "procentage"]];
+
+function createCSVcountries() {
+    let csvArray = [
+        ["country", "procentage"]
+    ];
     for (country in countries) {
-        if (countries[country][0]!="Country"){
+        if (countries[country][0] != "Country") {
             let attackArray = [];
             attackArray.push(countries[country][0]);
             console.log(numberFields[0]);
-            attackArray.push(countries[country][1]*100/numberFields[0]);
+            attackArray.push(countries[country][1] * 100 / numberFields[0]);
             csvArray.push(attackArray);
         }
     }
     return csvArray;
 }
-function createCSVattackTypes(){
-    let csvArray = [["Attack Type",  "procentage"]];
+
+function createCSVattackTypes() {
+    let csvArray = [
+        ["Attack Type", "procentage"]
+    ];
     for (index in attackTypes) {
-        if (attackTypes[index][0]!="AttackType"){
+        if (attackTypes[index][0] != "AttackType") {
             let attackArray = [];
             attackArray.push(attackTypes[index][0]);
-            attackArray.push(attackTypes[index][1]*100/numberFields[1]);
+            attackArray.push(attackTypes[index][1] * 100 / numberFields[1]);
             csvArray.push(attackArray);
         }
     }
     return csvArray;
 }
 
-function createCSVtargetTypes(){
-    let csvArray = [["Target Type",  "procentage"]];
+function createCSVtargetTypes() {
+    let csvArray = [
+        ["Target Type", "procentage"]
+    ];
     for (index in targTypes) {
-        if (targTypes[index][0]!="TargetType"){
+        if (targTypes[index][0] != "TargetType") {
             let attackArray = [];
             attackArray.push(targTypes[index][0]);
-            attackArray.push(targTypes[index][1]*100/numberFields[2]);
+            attackArray.push(targTypes[index][1] * 100 / numberFields[2]);
             csvArray.push(attackArray);
         }
     }
     return csvArray;
 }
 
-function createCSVweaponTypes(){
-    let csvArray = [["Weapon Type",  "procentage"]];
+function createCSVweaponTypes() {
+    let csvArray = [
+        ["Weapon Type", "procentage"]
+    ];
     for (index in weaponTypes) {
-        if (weaponTypes[index][0]!="weaponType"){
+        if (weaponTypes[index][0] != "weaponType") {
             let attackArray = [];
             attackArray.push(weaponTypes[index][0]);
-            attackArray.push(weaponTypes[index][1]*100/numberFields[3]);
+            attackArray.push(weaponTypes[index][1] * 100 / numberFields[3]);
             csvArray.push(attackArray);
         }
     }
@@ -590,14 +628,14 @@ function createCSVweaponTypes(){
 // https://stackoverflow.com/questions/14964035/how-to-export-javascript-array-info-to-csv-on-client-side
 function downloadCsv(name) {
     let rows;
-    if (name.localeCompare('countries')==0)
-         rows = createCSVcountries();
-    else if (name.localeCompare('attackTypes')==0)
-         rows = createCSVattackTypes();
-    else if (name.localeCompare('targetTypes')==0)
-         rows = createCSVtargetTypes();
-    else if (name.localeCompare('weaponTypes')==0)
-         rows = createCSVweaponTypes();
+    if (name.localeCompare('countries') == 0)
+        rows = createCSVcountries();
+    else if (name.localeCompare('attackTypes') == 0)
+        rows = createCSVattackTypes();
+    else if (name.localeCompare('targetTypes') == 0)
+        rows = createCSVtargetTypes();
+    else if (name.localeCompare('weaponTypes') == 0)
+        rows = createCSVweaponTypes();
     else rows = createCSV();
 
 
@@ -613,4 +651,3 @@ function downloadCsv(name) {
 
     link.click();
 }
-

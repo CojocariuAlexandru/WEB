@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     width: 100%;
 
     padding: 10px 0;
@@ -17,16 +17,27 @@
     margin-bottom: 10px;
 }
 
+.dashboard-attacks-wrapper .line-wrapper {
+    display: flex;
+    justify-content: center;
+
+    width: 100%;
+}
+
 .attacks-dashboard-row:nth-of-type(2n+1) {
     background-color: #222831;
 }
 
 .dashboard-attacks-wrapper .dashboard-attack-table {
-    margin-top: 40px;
+    margin-top: 12px;
     width: 92%;
+    min-width: 1200px;
+    overflow-x: scroll;
+    align-items: center;
 }
 
 .dashboard-attacks-wrapper .dashboard-attack-table table {
+    margin-top: 28px;
     display: flex;
 }
 

@@ -11,7 +11,8 @@
     "details-2 details-2 details-2 pie-2 pie-2 pie-2"
     "pie-3 pie-3 pie-3 details-3 details-3 details-3"
     "details-4 details-4 details-4 pie-4 pie-4 pie-4"
-    "world-map world-map world-map world-map world-map world-map";
+    "world-map world-map world-map world-map world-map world-map"
+    "google-map google-map google-map google-map google-map google-map";
   width: 100%;
   margin-bottom: 40px;
 }
@@ -186,7 +187,7 @@
   color: #054a4d
 }
 
-.details ul li::before{
+.details ul li::before {
   content: "\2022";
   color: #054a4d;
   font-weight: bolder;
@@ -267,7 +268,7 @@
 
 .attack-rate {
   border-top: #065e61 dashed 2px;
-  padding-top: 40px
+  padding-top: 40px;
 }
 
 .extended24 {
@@ -280,7 +281,8 @@
 
 /* BUTTON GET RATES */
 
-.button-get-all {
+.button-get-all,
+.button-view-markers {
   width: 100%;
   height: 100%;
   background-color: transparent;
@@ -293,7 +295,8 @@
   transition: color 0.3s linear;
 }
 
-.button-get-all:hover {
+.button-get-all:hover,
+.button-view-markers:hover {
   color: #eee;
 }
 
@@ -304,13 +307,19 @@
   margin: 40px auto;
   width: 80%;
 }
-.export1{
+
+.export1 {
   text-align: center;
   margin: 10px auto;
-  width:50%;
+  width: 50%;
 }
 
-.button-link1, .button-link2, .button-link3, .button-link4, .button-link5, .button-link6{
+.button-link1,
+.button-link2,
+.button-link3,
+.button-link4,
+.button-link5,
+.button-link6 {
   height: 40px;
   width: 100%;
   font-weight: bolder;
@@ -326,7 +335,12 @@
 }
 
 /* the secret for this link */
-.button-link1:hover, .button-link2:hover, .button-link3:hover, .button-link4:hover, .button-link5:hover, .button-link6:hover{
+.button-link1:hover,
+.button-link2:hover,
+.button-link3:hover,
+.button-link4:hover,
+.button-link5:hover,
+.button-link6:hover {
   color: #054a4d;
   background-position: right center;
   cursor: pointer;
@@ -343,6 +357,38 @@
   background-color: #393e46;
   border-radius: 30px;
   font-size: 20px;
+}
+
+.google-maps-container {
+  grid-area: google-map;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  height: 768px;
+  width: 100%;
+
+  margin: 36px auto 0;
+  border-top: #065e61 dashed 2px;
+  padding-top: 40px;
+  border-bottom: #065e61 dashed 2px;
+  padding-bottom: 40px;
+
+  box-sizing: border-box;
+}
+
+.google-maps-container .submitButton2 {
+  margin-top: 20px;
+}
+
+.google-maps {
+  width: calc(100% - 120px);
+  height: 640px;
+
+  border: 1px dashed #16aeb6;
+  border-radius: 15px;
 }
 
 /* PIE CHARTS */
@@ -365,20 +411,20 @@
   margin-right: 60px;
 }
 
-.csv-button-left{
+.csv-button-left {
   position: relative;
-  margin-top:-60px;
-  width:170px;
-  margin-left:184px;
+  margin-top: -60px;
+  width: 170px;
+  margin-left: 184px;
   z-index: 100;
 }
 
 
-.csv-button-right{
+.csv-button-right {
   position: relative;
-  margin-top:-60px;
-  width:170px;
-  margin-left:184px;
+  margin-top: -60px;
+  width: 170px;
+  margin-left: 184px;
   z-index: 100;
 }
 
@@ -386,7 +432,7 @@
 
 @media only screen and (max-width: 1200px) {
 
-  .details ul{
+  .details ul {
     columns: 1;
     font-size: 16px;
   }
@@ -404,15 +450,15 @@
 
   }
 
-  .csv-button-left{
-    margin-top:-50px;
-    margin-left:100px;
+  .csv-button-left {
+    margin-top: -50px;
+    margin-left: 100px;
   }
-  
-  
-  .csv-button-right{
-    margin-top:-50px;
-    margin-left:100px;
+
+
+  .csv-button-right {
+    margin-top: -50px;
+    margin-left: 100px;
   }
 }
 
@@ -466,17 +512,17 @@
 
 
 
-  .csv-button-left{
-    margin-top:-50px;
-    margin-left:100px;
-    width:100px;
+  .csv-button-left {
+    margin-top: -50px;
+    margin-left: 100px;
+    width: 100px;
   }
-  
-  
-  .csv-button-right{
-    margin-top:-50px;
-    margin-left:100px;
-    width:100px;
+
+
+  .csv-button-right {
+    margin-top: -50px;
+    margin-left: 100px;
+    width: 100px;
   }
 
 }
@@ -494,7 +540,7 @@
     font-size: 14px;
   }
 
-  .bars h4{
+  .bars h4 {
     font-size: 16px;
   }
 }
@@ -504,18 +550,18 @@
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: auto auto auto auto auto auto auto auto auto auto auto auto auto auto;
     grid-template-areas: "title-stat title-stat title-stat title-stat title-stat title-stat"
-    "details-1 details-1 details-1 details-1 details-1 details-1"
-    "pie-1 pie-1 pie-1 pie-1 pie-1 pie-1"
-    "attack-rate attack-rate attack-rate attack-rate attack-rate attack-rate"
-    "damage-made damage-made damage-made damage-made damage-made damage-made"
-    "extended24 extended24 extended24 extended24 extended24 extended24"
-    "details-2 details-2 details-2 details-2 details-2 details-2"
-    "pie-2 pie-2 pie-2 pie-2 pie-2 pie-2"
-    "details-3 details-3 details-3 details-3 details-3 details-3"
-    "pie-3 pie-3 pie-3 pie-3 pie-3 pie-3"
-    "details-4 details-4 details-4 details-4 details-4 details-4"
-    "pie-4 pie-4 pie-4 pie-4 pie-4 pie-4"
-    "world-map world-map world-map world-map world-map world-map";
+      "details-1 details-1 details-1 details-1 details-1 details-1"
+      "pie-1 pie-1 pie-1 pie-1 pie-1 pie-1"
+      "attack-rate attack-rate attack-rate attack-rate attack-rate attack-rate"
+      "damage-made damage-made damage-made damage-made damage-made damage-made"
+      "extended24 extended24 extended24 extended24 extended24 extended24"
+      "details-2 details-2 details-2 details-2 details-2 details-2"
+      "pie-2 pie-2 pie-2 pie-2 pie-2 pie-2"
+      "details-3 details-3 details-3 details-3 details-3 details-3"
+      "pie-3 pie-3 pie-3 pie-3 pie-3 pie-3"
+      "details-4 details-4 details-4 details-4 details-4 details-4"
+      "pie-4 pie-4 pie-4 pie-4 pie-4 pie-4"
+      "world-map world-map world-map world-map world-map world-map";
   }
 
   .fields .container-fields {
@@ -587,5 +633,3 @@
   }
 
 }
-
-
