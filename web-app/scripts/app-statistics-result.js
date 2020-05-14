@@ -56,7 +56,11 @@ function getFilters() {
     resultFilters["targType"] = targTypes[1][0];
     resultFilters["weaponType"] = weaponTypes[1][0];
 
-    resultFilters["damage"] = damages[2][0];
+    console.log(damages);
+    if (damages.length>2)
+        resultFilters["damage"] = damages[2][0];
+    else
+        resultFilters["damage"] = "Unknown";
 
     filters = oldFilters;
     return resultFilters;
@@ -536,6 +540,7 @@ function createCSVcountries(){
         if (countries[country][0]!="Country"){
             let attackArray = [];
             attackArray.push(countries[country][0]);
+            console.log(numberFields[0]);
             attackArray.push(countries[country][1]*100/numberFields[0]);
             csvArray.push(attackArray);
         }
