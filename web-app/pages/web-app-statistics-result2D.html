@@ -25,8 +25,16 @@
         <div class="export button-3" onclick="downloadImageAs('jpg', 'plots2D')">
             <span class="button-link1">JPG</span>
         </div>
-        <div class="export button-4" onclick="downloadCsv();">
-            <span class="button-link1">CSV</span>
+        <div class="export button-4">
+            <!-- <span href="" class="button-link1">CSV</span> -->
+            <div class="button-link1" onclick="toggleCSVList();">CSV</div>
+            <div class="optionsCSV">
+                <span onclick="downloadCsv2D('country');">Countries</span> <br>
+                <span onclick="downloadCsv2D('region');">Regions</span> <br>
+                <span onclick="downloadCsv2D('target');">Attack target</span> <br>
+                <span onclick="downloadCsv2D('attack');">Attack method</span> <br>
+                <span onclick="downloadCsv2D('weapon');">Weapons</span> <br>
+            </div>
         </div>
         <div class="export button-5" onclick="downloadPdf()">
             <span class="button-link1">PDF</span>
@@ -46,4 +54,3 @@
         </div>
     </section>
 </div>
-

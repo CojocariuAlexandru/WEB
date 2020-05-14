@@ -310,7 +310,7 @@
   width:50%;
 }
 
-.button-link1{
+.button-link1, .button-link2, .button-link3, .button-link4, .button-link5, .button-link6{
   height: 40px;
   width: 100%;
   font-weight: bolder;
@@ -326,7 +326,7 @@
 }
 
 /* the secret for this link */
-.button-link1:hover{
+.button-link1:hover, .button-link2:hover, .button-link3:hover, .button-link4:hover, .button-link5:hover, .button-link6:hover{
   color: #054a4d;
   background-position: right center;
   cursor: pointer;

@@ -39,3 +39,18 @@
 .submitButton2.statistics-2d-button {
     margin: 0 40px 0;
 }
+
+.optionsCSV{
+    display: none;
+    margin-top: 10px;
+}
+.optionsCSV > span{
+    display:block;
+    background-color: #098185;
+    color: white;
+    border:1px solid black
+}
+.optionsCSV > span:hover{
+    cursor: pointer;
+    background-color: #07676a;
+}
