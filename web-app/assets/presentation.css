@@ -45,7 +45,7 @@ body .presentation .grid-container {
         "footer footer footer footer footer footer";
 }
 
-.footer{
+.footer {
     grid-area: footer;
     display: flex;
 }
@@ -91,7 +91,7 @@ body .presentation .grid-container {
 }
 
 .presentation .links {
-    width : 66.6%;
+    width: 66.6%;
 }
 
 .presentation .contact {
@@ -673,10 +673,11 @@ body .presentation .grid-container {
 
             "footer footer footer footer footer footer ";
     }
+
     .presentation .links {
-        width : 50%;
+        width: 50%;
     }
-    
+
     .presentation .contact {
         width: 50%;
     }
@@ -745,7 +746,7 @@ body .presentation .grid-container {
         font-size: 14px
     }
 
-    .presentation h5{
+    .presentation h5 {
         font-size: 14px;
     }
 

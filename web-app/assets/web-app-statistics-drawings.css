@@ -3,22 +3,26 @@
         flex-direction: column;
         height: 110px;
     }
-    .searchText{
+
+    .searchText {
         margin-bottom: 10px;
     }
-    .plusSearch{
+
+    .plusSearch {
         margin-right: 10px;
         margin-left: 6px;
     }
 }
-@media only screen and (min-width: 1000px){
-    .searchText{
+
+@media only screen and (min-width: 1000px) {
+    .searchText {
         margin: 0 20px;
     }
 
     .sortList {
         height: 90px;
     }
+
     .plusSearch {
         margin-right: 30px;
     }
@@ -79,18 +83,18 @@ div.recordList {
     background-color: #075f64;
 }
 
-.attacksTable, 
+.attacksTable,
 .attacksTable tbody {
     table-layout: auto;
     width: 100%;
     display: table-row;
 }
 
-.attacksTable > .headingRecordList > th{
+.attacksTable>.headingRecordList>th {
     cursor: pointer;
 }
 
-.tableCellData{
+.tableCellData {
     width: 22.75%;
     text-align: center;
 }
@@ -103,7 +107,7 @@ div.recordList {
     align-items: center;
 }
 
-.tableCellDataAttack{
+.tableCellDataAttack {
     width: 26.75%;
     text-align: left;
 }
@@ -209,7 +213,7 @@ input.searchText {
     display: flex;
     color: #eee;
     font-size: 26px;
-    font-family:  'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
     text-align: center;
 }
 

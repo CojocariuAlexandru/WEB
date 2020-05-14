@@ -190,8 +190,8 @@
   z-index: 100;
 }
 
-#ripple-loader-id{
-  left : calc(50% - 32px);
+#ripple-loader-id {
+  left: calc(50% - 32px);
   top: calc(50% - 32px);
 }
 
@@ -238,7 +238,7 @@
   grid-area: attackDetailTitle3;
 }
 
-.title1{
+.title1 {
   text-align: center;
   border-top: #064244 2px dashed;
   margin: 20px 0 20px 0;
@@ -246,7 +246,7 @@
 
 }
 
-.title1 h3{
+.title1 h3 {
   display: inline;
   font-size: 22px;
   text-align: center;

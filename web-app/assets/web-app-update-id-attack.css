@@ -149,7 +149,7 @@ textarea {
   padding: 10px;
   color: rgb(9, 104, 99);
   font-style: italic;
-
+  box-sizing: border-box;
 }
 
 .update-motive {

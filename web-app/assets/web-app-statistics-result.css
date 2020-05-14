@@ -357,6 +357,7 @@
   background-color: #393e46;
   border-radius: 30px;
   font-size: 20px;
+  overflow-x: scroll;
 }
 
 .google-maps-container {
@@ -479,7 +480,8 @@
       "pie-3 pie-3 pie-3 pie-3 pie-3 pie-3"
       "details-4 details-4 details-4 details-4 details-4 details-4"
       "pie-4 pie-4 pie-4 pie-4 pie-4 pie-4"
-      "world-map world-map world-map world-map world-map world-map";
+      "world-map world-map world-map world-map world-map world-map"
+      "google-map google-map google-map google-map google-map google-map";
   }
 
   .grid-container-result-buttons {
@@ -561,7 +563,8 @@
       "pie-3 pie-3 pie-3 pie-3 pie-3 pie-3"
       "details-4 details-4 details-4 details-4 details-4 details-4"
       "pie-4 pie-4 pie-4 pie-4 pie-4 pie-4"
-      "world-map world-map world-map world-map world-map world-map";
+      "world-map world-map world-map world-map world-map world-map"
+      "google-map google-map google-map google-map google-map google-map";
   }
 
   .fields .container-fields {
