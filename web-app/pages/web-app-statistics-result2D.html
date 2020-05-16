@@ -1,17 +1,15 @@
 <div class="statistics-2d-wrapper">
     <div id="scroll-to"></div>
     <div class='plots2D' id='linePlots'>
-        <h1 class='topFiveHeader'>Top 5 attacked countries</h1>
+        <h1 class='topFiveHeader' id='headerCountries'>Top 5 attacked countries</h1>
         <div class='plotCountry'></div>
-        <h1 class='topFiveHeader'>Top 5 attacked globe regions</h1>
+        <h1 class='topFiveHeader' id='headerRegions'>Top 5 attacked globe regions</h1>
         <div class='plotRegion'></div>
-        <h1 class='topFiveHeader'>Number of successful terrorist attacks</h1>
-        <div class='plotSuccess'></div>
-        <h1 class='topFiveHeader'>Top 5 attack targets by number of attacks</h1>
+        <h1 class='topFiveHeader' id='headerTargets'>Top 5 attack targets by number of attacks</h1>
         <div class='plotTargets'></div>
-        <h1 class='topFiveHeader'>Top 5 attack methods by number of attacks</h1>
+        <h1 class='topFiveHeader' id='headerAttacks'>Top 5 attack methods by number of attacks</h1>
         <div class='plotAttacks'></div>
-        <h1 class='topFiveHeader'>Top 5 weapons used by number of attacks</h1>
+        <h1 class='topFiveHeader' id='headerWeapons'>Top 5 weapons used by number of attacks</h1>
         <div class='plotWeaponType'></div>
     </div>
 
@@ -27,13 +25,15 @@
         </div>
         <div class="export button-4">
             <!-- <span href="" class="button-link1">CSV</span> -->
-            <div class="button-link1" onclick="toggleCSVList();">CSV</div>
-            <div class="optionsCSV">
-                <span onclick="downloadCsv2D('country');">Countries</span> <br>
-                <span onclick="downloadCsv2D('region');">Regions</span> <br>
-                <span onclick="downloadCsv2D('target');">Attack target</span> <br>
-                <span onclick="downloadCsv2D('attack');">Attack method</span> <br>
-                <span onclick="downloadCsv2D('weapon');">Weapons</span> <br>
+            <div class='dropdownWrapper'>
+                <div class="button-link1" onclick="toggleCSVList();">&#8595 CSV &#8595</div>
+                <div class="optionsCSV">
+                    <span onclick="downloadCsv2D('country');">Countries</span>
+                    <span onclick="downloadCsv2D('region');">Regions</span>
+                    <span onclick="downloadCsv2D('target');">Attack target</span>
+                    <span onclick="downloadCsv2D('attack');">Attack method</span>
+                    <span onclick="downloadCsv2D('weapon');">Weapons</span>
+                </div>
             </div>
         </div>
         <div class="export button-5" onclick="downloadPdf()">
