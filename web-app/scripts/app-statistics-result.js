@@ -517,6 +517,11 @@ function move() {
 // https://html2canvas.hertzen.com/
 // https://www.youtube.com/watch?v=IEKEV02TVew
 function downloadImageAs(imageType, className) {
+    let buttons = document.getElementsByClassName("export");
+    let i;
+    for(i = 0; i < buttons.length; i++){
+        buttons[i].style.visibility = "hidden";
+    }
     let imageToBePrinted = document.getElementsByClassName(className)[0];
     html2canvas(imageToBePrinted).then(canvas => {
         canvas.toBlob(
@@ -525,7 +530,9 @@ function downloadImageAs(imageType, className) {
             }, "image/" + imageType);
     });
 
-
+    for(i = 0; i < buttons.length; i++){
+        buttons[i].style.visibility = "visible";
+    }
 }
 
 function createCSV() {
