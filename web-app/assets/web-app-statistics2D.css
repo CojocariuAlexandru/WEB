@@ -42,15 +42,33 @@
 
 .optionsCSV{
     display: none;
-    margin-top: 10px;
+    border-radius: 10px;
+    z-index:2;
+}
+
+.optionsCSV{
+    background-color: #065c5f;
+    width: 185px;
+
 }
 .optionsCSV > span{
     display:block;
-    background-color: #098185;
+    background-color: #0d959a;
     color: white;
-    border:1px solid black
+    border:1px solid black;
+    border-radius: 6px;
+    margin-top:4px;
 }
 .optionsCSV > span:hover{
     cursor: pointer;
     background-color: #07676a;
+}
+
+.dropdownWrapper{
+    z-index: 2;
+}
+
+.dropdownWrapper:hover .optionsCSV{
+    display: block;
+    position: relative;
 }

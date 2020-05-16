@@ -27,13 +27,15 @@
         </div>
         <div class="export button-4" >
             <!-- <span href="" class="button-link1">CSV</span> -->
-            <div class="button-link1" onclick="toggleCSVList();">CSV</div>
-            <div class="optionsCSV">
-                <span onclick="downloadCsv2D('country');">Countries</span> <br>
-                <span onclick="downloadCsv2D('region');">Regions</span> <br>
-                <span onclick="downloadCsv2D('target');">Attack target</span> <br>
-                <span onclick="downloadCsv2D('attack');">Attack method</span> <br>
-                <span onclick="downloadCsv2D('weapon');">Weapons</span> <br>
+            <div class='dropdownWrapper'>
+                <div class="button-link1" onclick="toggleCSVList();">&#8595 CSV &#8595</div>
+                <div class="optionsCSV">
+                    <span onclick="downloadCsv2D('country');">Countries</span>
+                    <span onclick="downloadCsv2D('region');">Regions</span>
+                    <span onclick="downloadCsv2D('target');">Attack target</span>
+                    <span onclick="downloadCsv2D('attack');">Attack method</span>
+                    <span onclick="downloadCsv2D('weapon');">Weapons</span>
+                </div>
             </div>
         </div>
         <div class="export button-5" onclick="downloadPdf()">
