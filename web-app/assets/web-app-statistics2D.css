@@ -51,7 +51,6 @@
     width: 185px;
 
 }
-<<<<<<< HEAD
 .optionsCSV > span{
     display:block;
     background-color: #0d959a;
@@ -59,14 +58,6 @@
     border:1px solid black;
     border-radius: 6px;
     margin-top:4px;
-=======
-
-.optionsCSV>span {
-    display: block;
-    background-color: #098185;
-    color: white;
-    border: 1px solid black
->>>>>>> 08cbd625347ac0128e2054d2705c0ccdda587e30
 }
 
 .optionsCSV>span:hover {

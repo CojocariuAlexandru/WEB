@@ -17,16 +17,52 @@ function initStatisticsResult2D(node) {
 }
 
 function drawAllCharts() {
+    let headingStatistics2D;
     windowWidth = window.innerWidth;
     if (windowWidth <= 520) {
         windowWidth = windowWidth + 160;
     }
-    addCountryPreferences();
-    addRegionsPreferences();
-    addSuccessRate();
-    addTargetPreferences();
-    addAttackPreferences();
-    addWeaponTypePreferences();
+    if(countries.length > 5){
+        addCountryPreferences();
+    }
+    else{
+        headingStatistics2D = document.querySelector('#headerCountries');
+        headingStatistics2D.remove();
+    }
+
+    if(regions.length > 5){
+
+        addRegionsPreferences();
+    }
+    else{
+        headingStatistics2D = document.querySelector('#headerRegions');
+        headingStatistics2D.remove();
+    }
+
+    if(targTypes.length > 5){
+        addTargetPreferences();
+    }
+    else{
+        headingStatistics2D = document.querySelector('#headerTargets');
+        headingStatistics2D.remove();
+    }
+
+    console.log(attackTypes.length);
+    if(attackTypes.length > 5){
+        addAttackPreferences();
+    }
+    else{
+        headingStatistics2D = document.querySelector('#headerAttacks');
+        headingStatistics2D.remove();
+    }
+
+    if(weaponTypes.length > 5){
+        addWeaponTypePreferences();
+    }
+    else{
+        headingStatistics2D = document.querySelector('#headerWeapons');
+        headingStatistics2D.remove();
+    }
 }
 
 // stackoverflow.com/questions/8301400/how-do-you-easily-create-empty-matrices-javascript
