@@ -1,9 +1,11 @@
+var currentAttack;
+
 function attackIdPageBefore(node, id) {
     mainContent.innerHTML = '';
 
     httpGET(URL_MICROSERVICE_ATTACKS + "/api/attacks/" + id, (res) => {
         let attack = JSON.parse(res.res);
-        let currentAttack = attack[0];
+        currentAttack = attack[0];
         prepareAttack(currentAttack);
 
         mainContent.innerHTML = attackIdPageTemplate(node.template, currentAttack);
@@ -109,7 +111,6 @@ function attackIdPageInit(attack) {
     }
 }
 
-
 function areYouSure() {
     let result = confirm("Are you sure?");
     if (result == true) {
@@ -123,4 +124,44 @@ function areYouSure() {
             console.log(error);
         });
     }
+}
+
+function showWiki() {
+    console.log(currentAttack["weaponType"]);
+
+    let url = "https://en.wikipedia.org/w/api.php";
+    let wikiId;
+    let wikiURL;
+
+    if (currentAttack["weaponType"] == "Unknown") {
+        alert("Weapon type is unknown");
+    } else {
+        let params = {
+            action: "query",
+            list: "search",
+            srsearch: currentAttack["weaponType"],
+            format: "json"
+        };
+
+        url = url + "?origin=*";
+        Object.keys(params).forEach(function (key) {
+            url += "&" + key + "=" + params[key];
+        });
+
+        fetch(url)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (response) {
+                wikiId = response.query.search[0].pageid;
+                wikiURL = 'https://en.wikipedia.org/wiki/';
+                wikiURL = wikiURL.concat(response.query.search[0].title.replace(" ", "_"));
+                console.log(wikiURL);
+                window.open(wikiURL);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
 }

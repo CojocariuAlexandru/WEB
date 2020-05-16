@@ -109,8 +109,8 @@ function getFrequencies() {
 function createCSVCountries() {
     let csvArray = [
         ["Year",
-        "Country",
-        "Number_of_attacks"
+            "Country",
+            "Number_of_attacks"
         ]
     ];
 
@@ -127,8 +127,8 @@ function createCSVCountries() {
 function createCSVRegions() {
     let csvArray = [
         ["Year",
-        "Regions",
-        "Number_of_attacks"
+            "Regions",
+            "Number_of_attacks"
         ]
     ];
 
@@ -145,8 +145,8 @@ function createCSVRegions() {
 function createCSVTargetType() {
     let csvArray = [
         ["Year",
-        "Target_type",
-        "Number_of_attacks"
+            "Target_type",
+            "Number_of_attacks"
         ]
     ];
 
@@ -163,8 +163,8 @@ function createCSVTargetType() {
 function createCSVAttackType() {
     let csvArray = [
         ["Year",
-        "Attack_type",
-        "Number_of_attacks"
+            "Attack_type",
+            "Number_of_attacks"
         ]
     ];
 
@@ -181,8 +181,8 @@ function createCSVAttackType() {
 function createCSVWeaponType() {
     let csvArray = [
         ["Year",
-        "Weapon_type",
-        "Number_of_attacks"
+            "Weapon_type",
+            "Number_of_attacks"
         ]
     ];
 
@@ -198,21 +198,17 @@ function createCSVWeaponType() {
 
 function downloadCsv2D(whichRaport) {
     let rows;
-    if(whichRaport.localeCompare('country') == 0){
+    if (whichRaport.localeCompare('country') == 0) {
         rows = createCSVCountries();
-        }
-        else if(whichRaport.localeCompare('region') == 0){
-            rows = createCSVRegions();
-        }
-        else if(whichRaport.localeCompare('target') == 0){
-            rows = createCSVTargetType();
-        }
-        else if(whichRaport.localeCompare('attack') == 0){
-            rows = createCSVAttackType();
-        }
-        else{
-            rows = createCSVWeaponType();
-        }
+    } else if (whichRaport.localeCompare('region') == 0) {
+        rows = createCSVRegions();
+    } else if (whichRaport.localeCompare('target') == 0) {
+        rows = createCSVTargetType();
+    } else if (whichRaport.localeCompare('attack') == 0) {
+        rows = createCSVAttackType();
+    } else {
+        rows = createCSVWeaponType();
+    }
 
     let csvContent = "data:text/csv;charset=utf-8," + rows.map(e => e.join(",")).join("\n");
 
@@ -415,15 +411,14 @@ function addWeaponTypePreferences() {
     }
 }
 
-function toggleCSVList(){
+function toggleCSVList() {
     console.log(frequencyOfAttacks);
-    let csvList = document.querySelector('.optionsCSV'); 
+    let csvList = document.querySelector('.optionsCSV');
     toggleCSV = 1 - toggleCSV;
     console.log(toggleCSV);
-    if(toggleCSV == 0){
+    if (toggleCSV == 0) {
         csvList.style.display = "none";
-    }
-    else{
+    } else {
         csvList.style.display = "block";
     }
 }

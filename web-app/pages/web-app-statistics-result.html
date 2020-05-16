@@ -48,7 +48,11 @@
     <div class="details details-1" id="countriesList">
     </div>
 
-    <div class="pie-1">
+    <div class="piee-1">
+        <div class="pie-1"></div>
+        <div class="export csv-button-left" onclick="downloadCsv('countries')">
+            <span class="button-link1">CSV</span>
+        </div>
     </div>
 
     <div class="attack-rate bars">
@@ -91,15 +95,33 @@
         </div>
     </div>
 
-    <div class="pie-2"></div>
+    <div class="piee-2">
+        <div class="pie-2"></div>
+        <div class="export csv-button-right" onclick="downloadCsv('attackTypes')">
+            <span class="button-link1">CSV</span>
+        </div>
+    </div>
+
     <div class="details details-2">
     </div>
 
-    <div class="pie-3"></div>
+
+    <div class="piee-3">
+        <div class="pie-3"></div>
+        <div class="export csv-button-left" onclick="downloadCsv('targetTypes')">
+            <span class="button-link1">CSV</span>
+        </div>
+    </div>
+
     <div class="details details-3">
     </div>
 
-    <div class="pie-4"></div>
+    <div class="piee-4">
+        <div class="pie-4"></div>
+        <div class="export csv-button-right" onclick="downloadCsv('weaponTypes')">
+            <span class="button-link1">CSV</span>
+        </div>
+    </div>
     <div class="details details-4">
     </div>
 
@@ -107,26 +129,39 @@
         <div class="world-map-element"></div>
     </div>
 
+    <div class="google-maps-container">
+        <div class="google-maps">
+        </div>
+
+        <div class='submitButton2'>
+            <button class="button-view-markers" onclick="toggleMarkersVisibility()">Show markers</button>
+            <span class='span1'></span>
+            <span class='span2'></span>
+            <span class='span3'></span>
+            <span class='span4'></span>
+        </div>
+    </div>
+
 </div>
 
 <div class="grid-container-result-buttons no-margin">
     <div class="export button-1" onclick="downloadImageAs('svg', 'grid-container-result')">
-        <span href="" class="button-link1">SVG</span>
+        <span class="button-link1">SVG</span>
     </div>
     <div class="export button-2" onclick="downloadImageAs('png', 'grid-container-result')">
-        <span href="" class="button-link1">PNG</span>
+        <span class="button-link1">PNG</span>
     </div>
     <div class="export button-3" onclick="downloadImageAs('jpg', 'grid-container-result')">
-        <span href="" class="button-link1">JPG</span>
+        <span class="button-link1">JPG</span>
     </div>
-    <div class="export button-4" onclick="downloadCsv();">
-        <span href="" class="button-link1">CSV</span>
+    <div class="export button-4" onclick="downloadCsv('allAttacks');">
+        <span class="button-link1">CSV</span>
     </div>
     <div class="export button-5" onclick="downloadPdf()">
-        <span href="" class="button-link1">PDF</span>
+        <span class="button-link1">PDF</span>
     </div>
     <div class="export button-6" onclick="downloadImageAs('bmp', 'grid-container-result')">
-        <span href="" class="button-link1">BMP</span>
+        <span class="button-link1">BMP</span>
     </div>
 
     <section class='table submitForm'>

@@ -6,7 +6,7 @@
     <div class="update-date">
         <div class='dateForm'>
             <label for='dateInput' id='textDateInterval'><b>Date:</b></label>
-            <input class='dataForm1' type='date' id='dateInput' value={{date}}></input>
+            <input class='dataForm1' type='date' id='dateInput' value={{date}}>
         </div>
     </div>
 
@@ -16,11 +16,11 @@
 
     <div class="update-latitude">
         <h3>Latitude</h3>
-        <input type=number step=0.00001 value={{latitude}} id='latitudeInput'></input>
+        <input type=number step=0.00001 value={{latitude}} id='latitudeInput'>
     </div>
     <div class="update-longitude">
         <h3>Longitude</h3>
-        <input type=number step=0.00001 value={{longitude}} id='longitudeInput'> </input>
+        <input type=number step=0.00001 value={{longitude}} id='longitudeInput'>
     </div>
 
     <div class="update-killsCount">
@@ -46,28 +46,28 @@
     <div class="update-check">
         <div class='input1'>
             {{#if success}}
-            <input type='checkbox' id='succesInput' checked></input>
+            <input type='checkbox' id='succesInput' checked>
             {{else}}
-            <input type='checkbox' id='succesInput'></input>
+            <input type='checkbox' id='succesInput'>
             {{/if}}
-            <label for='succesInput' id='label1'>Successfull attack</label>
+            <label for='succesInput'>Successfull attack</label>
         </div>
         <div class='input1'>
             {{#if extended}}
-            <input type='checkbox' id='extendedInput' checked></input>
+            <input type='checkbox' id='extendedInput' checked>
             {{else}}
-            <input type='checkbox' id='extendedInput'></input>
+            <input type='checkbox' id='extendedInput'>
             {{/if}}
-            <label for='extendedInput' id='label1'>Extended attack (over 24h)</label>
+            <label for='extendedInput'>Extended attack (over 24h)</label>
         </div>
 
         <div class='input1'>
             {{#if suicide}}
-            <input type='checkbox' id='suicideInput' checked></input>
+            <input type='checkbox' id='suicideInput' checked>
             {{else}}
-            <input type='checkbox' id='suicideInput'></input>
+            <input type='checkbox' id='suicideInput'>
             {{/if}}
-            <label for='suicideInput' id='label1'>It was a suicide</label>
+            <label for='suicideInput'>It was a suicide</label>
         </div>
     </div>
     <div class="update-weaponDetails">

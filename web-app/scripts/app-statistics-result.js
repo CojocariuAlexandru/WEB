@@ -1,10 +1,17 @@
 var countries;
+
+var numberFields = [0, 0, 0, 0];
+
 var attackTypes;
 var targTypes;
+
 var regions;
 var dateFrequency;
+
 var weaponTypes;
 var damages;
+
+var markersVisible;
 
 function fillField(filters1, name) {
     if (filters1[name] == "") {
@@ -51,7 +58,11 @@ function getFilters() {
     resultFilters["targType"] = targTypes[1][0];
     resultFilters["weaponType"] = weaponTypes[1][0];
 
-    resultFilters["damage"] = damages[2][0];
+    console.log(damages);
+    if (damages.length > 2)
+        resultFilters["damage"] = damages[2][0];
+    else
+        resultFilters["damage"] = "Unknown";
 
     filters = oldFilters;
     return resultFilters;
@@ -87,16 +98,16 @@ function statisticsResultsPageInit(node) {
         return;
     }
 
-    countries = getData('Country', 'Most frequently attacked', "country");
+    countries = getData('Country', 'Most frequently attacked', "country", 0);
     sort(countries);
-    attackTypes = getData('AttackType', 'Most frequently attackTypes', "attackType");
+    attackTypes = getData('AttackType', 'Most frequently attackTypes', "attackType", 1);
     sort(attackTypes);
-    targTypes = getData('TargetType', 'Most frequently types of target', "targType");
+    targTypes = getData('TargetType', 'Most frequently types of target', "targType", 2);
     sort(targTypes);
     datesAppearing = getData('date', 'Most frequent dates', 'date');
     regions = getData('region', 'Most frequently attacked regions', 'region');
     sort(regions);
-    weaponTypes = getData('weaponType', 'Most frequently used weapons', 'weaponType');
+    weaponTypes = getData('weaponType', 'Most frequently used weapons', 'weaponType', 3);
     sort(weaponTypes);
     damages = getData('damages', 'Most frequently used weapons', 'propExtent');
     sort(damages);
@@ -126,10 +137,36 @@ function statisticsResultsPageInit(node) {
     constructParagraf(countries, ".details-1", "Most frequently attacked", "Country");
     constructParagraf(attackTypes, ".details-2", "Most frequently attackTypes", "AttackType");
     constructParagraf(targTypes, ".details-3", "Most frequently targetTyes", "TargetType");
-    constructParagraf(weaponTypes, ".details-4", "Most frequently weaponTypes", "WeaponType");
+    constructParagraf(weaponTypes, ".details-4", "Most frequently weaponTypes", "weaponType");
+
+    initWorldMap();
 }
 
-function getData(name, details, field) {
+function initWorldMap() {
+    markersVisible = false;
+    let worldMapDiv = document.querySelector('.google-maps');
+    map = new google.maps.Map(worldMapDiv, {
+        center: {
+            lat: 30,
+            lng: 0
+        },
+        scrollwheel: false,
+        zoom: 2,
+        styles: getMapNightModeStyle()
+    });
+}
+
+function toggleMarkersVisibility() {
+    if (markersVisible) {
+        removeAttacksFromMap();
+    } else {
+        removeAttacksFromMap();
+        displayAttacksOnMap(parsed1);
+    }
+    markersVisible = !markersVisible;
+}
+
+function getData(name, details, field, fieldType) {
     let data = [
         [name, details]
     ];
@@ -140,10 +177,12 @@ function getData(name, details, field) {
         for (country in data) {
             if (data[country][0] == parsed1[attack][field]) {
                 data[country][1]++;
+                numberFields[fieldType]++;
                 ok = 1;
             }
         }
         if (ok == 0) {
+            numberFields[fieldType]++;
             data.push([parsed1[attack][field], 1]);
         }
     }
@@ -524,9 +563,81 @@ function createCSV() {
     return csvArray;
 }
 
+function createCSVcountries() {
+    let csvArray = [
+        ["country", "procentage"]
+    ];
+    for (country in countries) {
+        if (countries[country][0] != "Country") {
+            let attackArray = [];
+            attackArray.push(countries[country][0]);
+            console.log(numberFields[0]);
+            attackArray.push(countries[country][1] * 100 / numberFields[0]);
+            csvArray.push(attackArray);
+        }
+    }
+    return csvArray;
+}
+
+function createCSVattackTypes() {
+    let csvArray = [
+        ["Attack Type", "procentage"]
+    ];
+    for (index in attackTypes) {
+        if (attackTypes[index][0] != "AttackType") {
+            let attackArray = [];
+            attackArray.push(attackTypes[index][0]);
+            attackArray.push(attackTypes[index][1] * 100 / numberFields[1]);
+            csvArray.push(attackArray);
+        }
+    }
+    return csvArray;
+}
+
+function createCSVtargetTypes() {
+    let csvArray = [
+        ["Target Type", "procentage"]
+    ];
+    for (index in targTypes) {
+        if (targTypes[index][0] != "TargetType") {
+            let attackArray = [];
+            attackArray.push(targTypes[index][0]);
+            attackArray.push(targTypes[index][1] * 100 / numberFields[2]);
+            csvArray.push(attackArray);
+        }
+    }
+    return csvArray;
+}
+
+function createCSVweaponTypes() {
+    let csvArray = [
+        ["Weapon Type", "procentage"]
+    ];
+    for (index in weaponTypes) {
+        if (weaponTypes[index][0] != "weaponType") {
+            let attackArray = [];
+            attackArray.push(weaponTypes[index][0]);
+            attackArray.push(weaponTypes[index][1] * 100 / numberFields[3]);
+            csvArray.push(attackArray);
+        }
+    }
+    return csvArray;
+}
+
+
 // https://stackoverflow.com/questions/14964035/how-to-export-javascript-array-info-to-csv-on-client-side
-function downloadCsv() {
-    let rows = createCSV();
+function downloadCsv(name) {
+    let rows;
+    if (name.localeCompare('countries') == 0)
+        rows = createCSVcountries();
+    else if (name.localeCompare('attackTypes') == 0)
+        rows = createCSVattackTypes();
+    else if (name.localeCompare('targetTypes') == 0)
+        rows = createCSVtargetTypes();
+    else if (name.localeCompare('weaponTypes') == 0)
+        rows = createCSVweaponTypes();
+    else rows = createCSV();
+
 
     let csvContent = "data:text/csv;charset=utf-8," + rows.map(e => e.join(",")).join("\n");
 
@@ -540,4 +651,3 @@ function downloadCsv() {
 
     link.click();
 }
-

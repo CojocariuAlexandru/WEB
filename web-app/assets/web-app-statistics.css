@@ -108,9 +108,9 @@ input.dataForm1,
     padding: 10px 50px;
 }
 
-.web-app h1{
+.web-app h1 {
     text-align: center;
-    font-family:  'Open Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     padding: 0;
     color: #065e61;
     margin-top: 0;
@@ -154,7 +154,7 @@ input.dataForm1,
     margin: 5px 0;
 }
 
-.dataForm1{
+.dataForm1 {
     height: 20px;
 }
 
@@ -225,7 +225,7 @@ input.dataForm1,
 }
 
 /* Work in Mozilla Firefox browser */
-.slider::-moz-range-thumb{
+.slider::-moz-range-thumb {
     height: 26px;
     width: 26px;
     border-radius: 16px;
@@ -445,10 +445,11 @@ input[type="checkbox"]:checked+label::before {
     transition: all 0.5s;
     margin: 0 auto;
     overflow: hidden;
+
 }
 
-.submitButton2.modified{
-    margin: 0 12px;
+.submitButton2.modified {
+    margin: 12px;
 }
 
 .submitButton2 span {
