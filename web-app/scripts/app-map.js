@@ -53,7 +53,7 @@ function getMapCoordinates() {
 function sendMapVisualizationRequest() {
     let filters = mapPageGetFilterObject();
 
-    httpPOST(URL_MICROSERVICE_ATTACKS + '/api/attacks?mapPage=true', JSON.stringify(filters), (result) => {
+    httpPOST(URL_MICROSERVICE_ATTACKS + '/api/attacks/map', JSON.stringify(filters), (result) => {
         parsed = JSON.parse(result.res);
         removeAttacksFromMap();
         mapPageScrollUp();

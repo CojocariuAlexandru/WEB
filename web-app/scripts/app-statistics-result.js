@@ -134,10 +134,10 @@ function statisticsResultsPageInit(node) {
 
     addColumnChart();
 
-    constructParagraf(countries, ".details-1", "Most frequently attacked", "Country");
-    constructParagraf(attackTypes, ".details-2", "Most frequently attackTypes", "AttackType");
-    constructParagraf(targTypes, ".details-3", "Most frequently targetTyes", "TargetType");
-    constructParagraf(weaponTypes, ".details-4", "Most frequently weaponTypes", "weaponType");
+    constructParagraf(countries, ".details-1", "The most frequently attacked countries", "Country");
+    constructParagraf(attackTypes, ".details-2", "The most frequent types of attack", "AttackType");
+    constructParagraf(targTypes, ".details-3", "The most attacked targets", "TargetType");
+    constructParagraf(weaponTypes, ".details-4", "The most commonly used weapons", "weaponType");
 
     initWorldMap();
 }
