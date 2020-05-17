@@ -329,7 +329,10 @@ function addColumnChart() {
             colors: ['#5b9a9e', 'tomato'],
             chartArea: {
                 width: '80%',
-                height: '50%'
+                height: '50%',
+                backgroundColor: 'lightgrey',
+                color: 'lightgrey',
+                opacity: 0.7
             },
             bar: {
                 groupWidth: '20%'
@@ -348,7 +351,7 @@ function addColumnChart() {
                 },
                 textStyle: {
                     fontSize: 12,
-                    color: '#71c9ce'
+                    color: '71c9ce'
                 }
             },
             legend: {
@@ -357,6 +360,8 @@ function addColumnChart() {
                     color: '#71c9ce'
                 }
             }
+            ,
+            is3D: true
         };
 
         var chart = new google.charts.Bar(columnCharDivision);

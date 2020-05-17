@@ -6,8 +6,8 @@
 
     <!-- The search attacks form is inspired from https://ratings.fide.com/-->
     <div class='sortList'>
-        <input type='text' id='searchText' class='searchText'>
-        <div id='advancedSearch' class='advancedSearch' onclick='showAdvancedForm()'>
+        <input type='text' id='searchText' class='searchText' onkeydown='basicFormSearch()'>
+        <div id='advancedSearch' class='advancedSearch' onclick='showAdvancedForm(window.innerWidth)'>
             <p id='advancedSearchText' class='advancedSearchText'><span id='plusSearch' class='plusSearch'>+</span>
                 Advanced search</p>
         </div>

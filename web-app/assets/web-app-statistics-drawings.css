@@ -382,3 +382,7 @@ input.searchText {
 #submitButton3.statistics-2d-button.submit-button-drawings-page {
     margin: 12px auto 40px;
 }
+
+.smallAdvancedForm{
+    height: 500px;
+}

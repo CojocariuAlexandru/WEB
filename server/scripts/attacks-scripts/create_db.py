@@ -7,12 +7,13 @@ import mysql.connector
 
 import csv
 
-db_name = "TeVi"
+#db_name = "heroku_df85912d4f27ad5"
+db_name = "Tevi"
 db_table_name = "Attacks"
 csv_file_name = "data.csv"
 distinct_values_file = 'distinct_values.txt'
 
-#Use this function to connect to the docker container
+# Use this function to connect to the docker container
 # def get_db_connection(db):
 #    return mysql.connector.connect(
 #       host = "157.245.121.183",
@@ -31,6 +32,16 @@ def get_db_connection(db):
         password = "",
         database = db
 	)
+
+# Use this to connect to Heroku database
+# 
+# def get_db_connection(db):
+#     return mysql.connector.connect(
+#         host = "us-cdbr-east-06.cleardb.net",
+#         user = "b82d4194cd7030",
+#         password = "2b45691e",
+#         database = "heroku_df85912d4f27ad5"
+#     )
 
 mydb = get_db_connection("")
 mycursor = mydb.cursor()
@@ -142,9 +153,9 @@ with open(csv_file_name, mode='r') as attacks_file:
     csv_reader = csv.DictReader(attacks_file)
     line_count = 0
     for row in csv_reader:
-        #print(line_count)
-        #if line_count > 200:
-        #    break
+        print(line_count)
+        if line_count > 200:
+           break
         values = (
             process_date(row, 'iyear', 'imonth', 'iday'),
             process_boolean(row, 'extended'),

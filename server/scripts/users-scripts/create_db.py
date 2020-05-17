@@ -1,5 +1,6 @@
 import mysql.connector
 
+# db_name = "heroku_a3c53cb6e83619f"
 db_name = "TeVi_Auth"
 db_table_name = "Users"
 
@@ -22,6 +23,15 @@ def get_db_connection(db):
         port = "3306",
         database = db
     )
+
+# Use this function to connect to Heroku database
+# def get_db_connection(db):
+#     return mysql.connector.connect(
+#         host = "us-cdbr-east-06.cleardb.net",
+#         user = "b251147b1d5604",
+#         password = "06e269f1",
+# 	    database = "heroku_a3c53cb6e83619f"
+#     )
 
 mydb = get_db_connection("")
 mycursor = mydb.cursor()
