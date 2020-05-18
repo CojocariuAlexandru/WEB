@@ -65,7 +65,7 @@ class AttacksService implements iAttacksService
         $this->prepareUpdate($decoded, $transformed);
         $result = $this->iAttacksRepository->insert($transformed);
 
-        $response['status_code_header'] = 'HTTP/1.1 200 OK';
+        $response['status_code_header'] = 'HTTP/1.1 201 Created';
         $response['body'] = json_encode($result);
         return $response;
     }
