@@ -10,6 +10,7 @@ class AttacksService implements iAttacksService
     {
         $this->iAttacksRepository = $iAttacksRepository;
     }
+    
 
     public function getFirst($first)
     {
