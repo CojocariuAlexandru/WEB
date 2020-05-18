@@ -4,9 +4,9 @@ function statisticsPageInit(node) {
   generateWeapons();
   generateAttacks();
   generateTargets();
-  generate(regions, ".regionForm", "Region of the attack", "allRegions", `<input list='allRegions' id='allRegionsInput' onchange=populate('allRegionsInput','.countryForm') >`);
-  generate(emptyObject, ".countryForm", 'Country', 'allCountries', `<input list='allCountries' id='allCountriesInput'>`);
-  generate(emptyObject, '.cityForm', 'City', 'allCities', `<input list='allCities' id='allCitiesInput'>`);
+  generate(regions, ".regionForm", "Region of the attack", "allRegions", `<label for="allRegionsInput"></label><input list='allRegions' id='allRegionsInput' onchange=populate('allRegionsInput','.countryForm') >`);
+  generate(emptyObject, ".countryForm", 'Country', 'allCountries', `<label for="allCountriesInput"></label><input list='allCountries' id='allCountriesInput'>`);
+  generate(emptyObject, '.cityForm', 'City', 'allCities', `<label for="allCitiesInput"></label><input list='allCities' id='allCitiesInput'>`);
   generate(targetSubtypes, '.targTypeSelect', 'TargetType', 'allTargets', `<input list='allTargets' id='allTargetsInput' onchange=populateTargetSubtypes('allTargetsInput', '.targSubtypeSelect')>`);
   generate(emptyObject, '.targSubtypeSelect', 'TargetSubtype', 'allSubTargets', `<input list='allSubTargets' id='allSubTargetsInput'>`);
   generate(weaponSubtypes, '.weaponTypeSelect', 'WeaponType', 'allWeapons', `<input list='allWeapons' id='allWeaponsInput' onchange=populateWeaponsSubtypes('allWeaponsInput','.weaponSubtypeSelect')>`);

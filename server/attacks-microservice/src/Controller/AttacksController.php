@@ -72,7 +72,7 @@ class AttacksController
         $rawData = file_get_contents("php://input");
         $decoded = json_decode($rawData, true);
 
-        if (isset($_GET["mapPage"]) && $_GET["mapPage"] == "true") {
+        if (sizeof($uri) > 3 && strcmp($uri[3], "map") == 0) {
             $response = $this->iAttacksService->getMapPageAttacks($decoded);
         } else if (sizeof($uri) > 3) {
             $response = $this->iAttacksService->getFiltered($decoded, $uri[3]);
