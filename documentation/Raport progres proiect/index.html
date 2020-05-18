@@ -12,6 +12,210 @@
     <header>
         <h1>TeVi - Progresul proiectului</h1>
     </header>
+    <section role="doc-toc">
+        <h2>
+            Cuprins
+        </h2>
+        <ol>
+            <li>Introducere</li>
+            <li>Pagina de prezentare și o primă variantă a aplicației web</li>
+            <li>Primul microserviciul - microserviciul ce se ocupă de atacuri și integrarea sa în statisticile din
+                aplicația client</li>
+            <li>Microserviciul ce se ocupă de utilizatori, modulul de administrație, mai multe statici și exportul lor
+            </li>
+            <li>Finalizarea implementării. Faza de refactorizare, îmbunătățire a codului și rezolvare
+                de buguri</li>
+            <li>Funcționalitățile finale ale proiectului</li>
+            <li>Maniera de folosire a GitHub-ului. Statistici</li>
+            <li>Membrii echipei</li>
+            <li>Concluzie</li>
+        </ol>
+    </section>
+    <section role="doc-introduction">
+        <h2>
+            1. Introducere
+        </h2>
+        <p>
+            În acest raport va fi prezentat progresul proiectului TeVi, realizat de către studenții Albert Ramona
+            Georgiana, Cojocariu Alexandru și Oloieri Alexandru, în timpul celui de-al doilea semestru al anului
+            universitar 2019-2020, Facultatea de Informatică Iași.
+        </p>
+        <p>
+            În realizarea acestui raport vor fi folosite date și/sau informații preluate din istoricul commit-urilor de
+            pe <a href="https://github.com/CojocariuAlexandru/WEB">pagina GitHub a proiectului</a>.
+        </p>
+        <p>
+            Privind acum în urmă, lucrul nostru la proiect poate fi împărțit în 4 etape, fiecare dintre acestea urmând a
+            fi descrise într-o secțiune separată a acestui document. Totuși, nu se poate trece la descrierea etapei de
+            dezvoltare a aplicației fără să fie oferite detalii despre modul în care aceasta a fost gândită înainte de
+            începerea implementării.
+        </p>
+        <p>
+            În urma unor discuții ce au avut loc înainte de publicarea temelor pentru proiecte, am decis să mergem pe
+            dezvoltarea unei aplicații web moderne: serverul (care mai apoi a fost divizat în două, deci putem vorbi în
+            acest moment despre o arhitectură a back-endului ce utilizează microservicii) să ofere endpoint-uri ce pot
+            fi apelate prin HTTP, nu și pagini statice, utilizatorul interacționând cu aplicația prin intermediul unui
+            web-app scris în Javascript care să utilizeze, prin intermediul AJAX, serviciile puse la dispoziție de
+            servere.
+        </p>
+    </section>
+    <section role="doc-part">
+        <h2>
+            2. Pagina de prezentare și o primă variantă a aplicației web
+            (4 martie - 25 martie 2020)
+        </h2>
+        <p>
+            După cum a fost precizat și în introducere, clientul interacționează cu aplicația noastră prin intermediul
+            web-app-ului (la care se va face referire în continuare prin „aplicație web), iar în această etapă a fost
+            implementată o primă variantă a acesteia (niște sisteme simple pentru rutare a paginilor și templating). Tot
+            în această perioadă am găsit soluția pentru „servirea” aplicației, soluție ce este folosită și acum, <a
+                href="https://www.npmjs.com/package/serve">pachetul npm serve</a>.
+        </p>
+        <p>
+            Deși nu era în cerință, am ajuns la concluzia că adăugarea unei „pagini de destinație” (landing page), ar
+            îmbogăți experiența celui ce folosește aplicația. Astfel, în această primă etapă Ramona a făcut designul
+            și a implementat implementat
+            „pagina de destinație” ca o pagină statică, urmând ca mai apoi să fie integrată în structura aplicației web.
+        </p>
+        <p>
+            Pentru a oferi utilizatorului pagini cu informații cât mai diverse, am hotărât să avem în aplicație o pagină
+            în care să fie afișate toate informațiile unui atac (identificat după un id ce îi este atribuit atunci când
+            este inserat în baza de date), iar o primă variantă a acestei pagini a fost scrisă în această etapă de către
+            Alexandru C., iar Alexandru O. a terminat structura aplicației web (sidebar + structura fișierelor).
+        </p>
+        <p>
+            Alte pagini care au fost implementate în această etapă (pagini ce au fost apoi îmbunătățite/ modificate): o
+            primă variantă a formularului pentru statistici, o primă variantă a paginii cu statistici și o primă
+            variantă a paginii în care pot fi văzute atacurile folosite la crearea statisticilor, pe baza informațiilor
+            din formular.
+        </p>
+    </section>
+    <section role="doc-part">
+        <h2>
+            3. Primul microserviciul - microserviciul ce se ocupă de atacuri și integrarea sa în statisticile din
+            aplicația client
+            (26 martie - 22 aprilie 2020)
+        </h2>
+        <p>
+            Această etapă a presupus lucrul la primul server din proiect - microserviciul ce se ocupă de atacuri. Odată
+            cu crearea acestuia, pe baza unui <a
+                href="https://dzone.com/articles/develop-a-rest-api-in-php">tutorial</a> sugerat de domnul profesor
+            Panu, a fost creat și un script de inițializare a bazei de date.
+        </p>
+        <p>
+            A fost adăugat Handlebars pe proiect, pentru templating, au fost îmbunătățite sistemul de rutare și de
+            preluare a paginilor HTML statice, dar mai important, s-a lucrat la funționalitatea principală a
+            aplicației (care este de fapt și cerința), crearea de statistici pe baza unor atacuri filtrare pe baza unor
+            criterii. Deoarece era o cerință complexă, aceasta a fost împărțită în două: pe front-end crearea obiectului
+            javascript ce reprezintă filtrele (folosite pentru luarea atacurilor din baza de date), obiect realizat prin
+            manipularea elementelor din arborele DOM cu ajutorul funcțiilor puse la dispoziție de obiectul „document”,
+            de acest lucru s-a ocupat Alexandru Cojocariu, și crearea unui end-point în server care să permită
+            trimiterea acelor filtre și
+            crearea în mod dinamic a unui query SQL ce le folosește (ceea ce a presupus crearea unor funcții care să
+            permită construirea pe baza unor argumente a mai multor tipuri de condiții din clauza WHERE), task de care
+            s-a ocupat Ramona
+            Albert.
+        </p>
+        <p>
+            O altă pagină a aplicației care permite vizualizarea atacurilor pe hartă a fost dezvoltată în această etapă
+            de către Alexandru Oloieri. Deși atacurile pot fi vizualizate pe hartă și în pagina principală cu
+            statistici, în această pagină separată criteriile de filtrare sunt mai puține (dată, regiune, țară, oraș),
+            și nu se face nici o redirectare după trimiterea request-ului (se rămâne pe pagină și se face centrarea
+            hărții pe regiunea selectată), ceea ce poate fi util în multe cazuri.
+        </p>
+        <p>
+            Alte funcționalități care au fost adăugate în această etapă: au fost adăugate modalități de filtrare și
+            sortare a atacurilor în pagina de vizualizare a atacurilor folosite pentru crearea statisticilor și a fost
+            îmbunătățit cu mult tot ce ține de responsive din aplicația web.
+        </p>
+    </section>
+    <section role="doc-part">
+        <h2>
+            4. Microserviciul ce se ocupă de utilizatori, modulul de administrație, mai multe statici și exportul lor
+            (23 aprilie - 10 mai 2020)
+        </h2>
+        <p>
+            Aceasta este cu siguranță etapa în care echipa noastră a reușit să implementeze cele mai multe
+            funcționalități, acest lucru fiind datorat și faptului că toți membrii echipei se acomodaseră cu modul de
+            preluare a informațiilor de pe server: se trimite un request HTTP din aplicația web, se scrie un end-point
+            ce returnează un răspuns pe back-end, iar apoi se procesează răspunsul pe front-end.
+        </p>
+        <p>
+
+        </p>
+    </section>
+    <section role="doc-part">
+        <h2>5. Finalizarea implementării. Faza de refactorizare, îmbunătățire a codului și rezolvare de
+            buguri
+            (11 mai - 19 mai 2020)
+        </h2>
+    </section>
+    <section role="doc-part">
+        <h2>6. Funcționalitățile finale ale proiectului
+        </h2>
+    </section>
+    <section role="doc-part">
+        <h2>7. Maniera de folosire a GitHub-ului. Statistici
+        </h2>
+        <p>
+            Echipa noastră a folosit constant GitHub, iar modul în care am procedat a fost următorul: deși inițial ne-am
+            propus să lucrăm fiecare pe un branch separat, după prima săptămână am renunțat la această idee și Cojocariu
+            Alexandru și Oloieri Alexandru au lucrat pe master, iar Ramona Albert a lucrat pe un branch separat,
+            ramona-albert, odată la câteva zile fiind realizat un merge a tuturor funcționalităților implementate.
+        </p>
+        <p>
+            Echipa noastră a depus efort constant, iar conform statisticilor realizate de GitHub, nu a existat nici o
+            săptămână (dintre cele 12 în care am avut timp să lucrăm la proiect) în care nici un membru al echipei să nu
+            facă un commit. În ultimele 4 săptămâni (cele în care am depus cel mai mare efort), media a fost de 20.75
+            commit-uri/săptămână, excluzând merge-urile.
+        </p>
+    </section>
+    <section typeof="sa:AuthorsList">
+        <h2>8. Membrii echipei</h2>
+        <ul>
+            <li typeof="sa:ContributorRole" property="schema:author">
+                <span typeof="schema:Person">
+                    <meta property="schema:givenName" content="Ramona">
+                    <meta property="schema:additionalName" content="Georgiana">
+                    <meta property="schema:familyName" content="Albert">
+                    <span property="schema:name">Albert Ramona Georgiana</span>
+                </span>
+                <ul>
+                    <li property="schema:roleContactPoint" typeof="schema:ContactPoint">
+                        <a href="mailto:albert.ramona99@gmail.com" property="schema:email">albert.ramona99@gmail.com</a>
+                    </li>
+                </ul>
+            </li>
+            <li typeof="sa:ContributorRole" property="schema:author">
+                <span typeof="schema:Person">
+                    <meta property="schema:givenName" content="Alexandru">
+                    <meta property="schema:familyName" content="Cojocariu">
+                    <span property="schema:name">Alexandru Cojocariu</span>
+                </span>
+                <ul>
+                    <li property="schema:roleContactPoint" typeof="schema:ContactPoint">
+                        <a href="mailto:cojocariualexandru1@gmail.com"
+                            property="schema:email">cojocariualexandru1@gmail.com</a>
+                    </li>
+                </ul>
+            </li>
+            <li typeof="sa:ContributorRole" property="schema:author">
+                <span typeof="schema:Person">
+                    <meta property="schema:givenName" content="Alexandru">
+                    <meta property="schema:familyName" content="Oloieri">
+                    <span property="schema:name">Alexandru Oloieri</span>
+                </span>
+                <ul>
+                    <li property="schema:roleContactPoint" typeof="schema:ContactPoint">
+                        <a href="mailto:alexoloieri2014@gmail.com" property="schema:email">alexoloieri2014@gmail.com</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+    <section role="doc-conclusion">
+        <h2>9. Concluzie</h2>
+    </section>
 </body>
 
 </html>
