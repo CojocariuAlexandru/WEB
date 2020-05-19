@@ -332,7 +332,6 @@ class AttacksRepository implements iAttacksRepository
         $statement = "
             SELECT id, latitude, longitude, country, attackType, killsCount, woundedCount 
             FROM attacks
-            ORDER BY killsCount DESC
             LIMIT 12;";
 
         try {
