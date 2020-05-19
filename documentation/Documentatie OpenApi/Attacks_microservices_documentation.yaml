@@ -1,49 +1,47 @@
----
-swagger: "2.0"
+swagger: '2.0'
 info:
   description: This is the TeVi API
   version: 1.0.0
   title: TeVi API
+  # put the contact info for your development or API team
   contact:
     email: albert.ramona99@gmail.com
+
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-host: tevi-attacks-microservice.herokuapp.com
-basePath: /
+
+# tags are used for organizing operations
 tags:
 - name: attacks
   description: Operations available to terrorist attacks
-schemes:
-- https
-- http
+
 paths:
   /api/attacks:
     get:
       tags:
       - attacks
       summary: returns all terrorist attacks
+      operationId: getAttacks
       description: |
         You can get all the attacks to make your own statistics
-      operationId: getAttacks
       produces:
       - application/json
-      parameters: []
       responses:
-        "200":
+        200:
           description: search results matching criteria
           schema:
             type: array
             items:
               $ref: '#/definitions/Attack'
-        "400":
+        400:
           description: bad input parameter
     post:
       tags:
       - attacks
       summary: adds an attack
-      description: Adds an attack to the system
       operationId: insertAttack
+      description: Adds an attack to the system
       consumes:
       - application/json
       produces:
@@ -55,19 +53,19 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/AttackToInsert'
-      - name: Authorization
-        in: header
+      - in: header
+        name: Authorization
         description: Authorization key for having required privileges
-        required: true
         type: string
+        required: true
       responses:
-        "201":
+        201:
           description: attack created
-        "400":
+        400:
           description: invalid input, object invalid
-        "401":
+        401:
           description: Not Authorized
-        "403":
+        403:
           description: Access forbidden
   /api/attacks/{attackId}:
     get:
@@ -78,18 +76,19 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: attackId
-        in: path
+      - in: path
+        name: attackId
         description: Attack id from database
         required: true
         type: integer
       responses:
-        "200":
+        200:
           description: Attack updated
-        "403":
+        403:
           description: Access forbidden
-        "404":
+        404:
           description: Not found
+
     put:
       tags:
       - attacks
@@ -105,23 +104,23 @@ paths:
         description: Attack to update with
         required: true
         schema:
-          $ref: '#/definitions/AttackToInsert'
-      - name: attackId
-        in: path
+            $ref: '#/definitions/AttackToInsert'
+      - in: path
+        name: attackId
         description: Attack id from database
         required: true
         type: integer
-      - name: Authorization
-        in: header
+      - in: header
+        name: Authorization
         description: Authorization key for having required privileges
-        required: true
         type: string
+        required: true
       responses:
-        "200":
+        200:
           description: Attack updated
-        "401":
+        401:
           description: Not Authorized
-        "403":
+        403:
           description: Access forbidden
     delete:
       tags:
@@ -131,47 +130,49 @@ paths:
       produces:
       - text
       parameters:
-      - name: attackId
-        in: path
+      - in: path
+        name: attackId
         description: Attack id from database
         required: true
         type: integer
-      - name: Authorization
-        in: header
+      - in: header
+        name: Authorization
         description: Authorization key for having required privileges
-        required: true
         type: string
+        required: true
       responses:
-        "200":
+        200:
           description: deleted attack
-        "403":
+        403:
           description: Access forbidden
+    
   /api/attacks/attacks-dashboard:
     get:
       tags:
       - attacks
       summary: updates an attack
       description: Updates the attack with the specified id
+
       produces:
       - application/json
       parameters:
-      - name: pageId
-        in: query
-        description: The id of current page
-        required: true
-        type: integer
-      - name: onPage
-        in: query
-        description: The number of attacks to return
-        required: true
-        type: integer
+        - in: query
+          name: pageId
+          type: integer
+          description: The id of current page
+          required: true
+        - in: query
+          name: onPage
+          type: integer
+          description: The number of attacks to return
+          required: true
       responses:
-        "200":
+        200:
           description: Ok
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/Attack'
+              type: array
+              items:
+                 $ref: '#/definitions/Attack'
   /api/attacks/map:
     post:
       tags:
@@ -183,19 +184,22 @@ paths:
       produces:
       - application/json
       parameters:
-      - in: body
-        name: MapFilters
-        description: Terrorist attack to add
-        required: true
-        schema:
-          type: object
+        - in: body
+          name: MapFilters
+          description: Terrorist attack to add
+          required: true
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/MapFilters'
+            
       responses:
-        "200":
+        200:
           description: Ok
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/Attack'
+              type: array
+              items:
+                 $ref: '#/definitions/Attack'
   /api/attacks/filters:
     post:
       tags:
@@ -207,37 +211,41 @@ paths:
       produces:
       - application/json
       parameters:
-      - in: body
-        name: StatisticsFilters
-        description: Filters for statistics
-        required: true
-        schema:
-          type: object
+        - in: body
+          name: StatisticsFilters
+          description: Filters for statistics
+          required: true
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/StatisticsFilters'
+            
       responses:
-        "200":
+        200:
           description: Ok
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/Attack'
+              type: array
+              items:
+                 $ref: '#/definitions/Attack'
+                
 definitions:
   MapFilters:
     type: object
     required:
-    - city
-    - country
-    - dateFinal
     - dateStart
+    - dateFinal
     - region
+    - country
+    - city
     properties:
       dateStart:
-        type: string
-        format: date
-        example: 1970-06-12
+          type: string
+          format: date
+          example: "1970-06-12"
       dateFinal:
-        type: string
-        format: date
-        example: 2020-06-12
+          type: string
+          format: date
+          example: "2020-06-12"
       region:
         type: string
         example: North Africa
@@ -250,43 +258,40 @@ definitions:
   AttackToInsert:
     type: object
     required:
-    - addNotes
-    - attackType
-    - city
-    - country
+    - date
     - extended
-    - groupName
-    - killsCount
+    - region
+    - country
+    - city
     - latitude
     - longitude
+    - summary
+    - attackType
+    - success
+    - suicide
+    - targType
+    - targSubtype
+    - targetName
+    - targetNat
+    - groupName
     - motive
-    - propComment
+    - terrCount
+    - weaponType
+    - weaponSubtype
+    - weaponDetail
+    - killsCount
+    - woundedCount
     - propExtent
-    - region
+    - propComment
+    - addNotes
     - sCite1
     - sCite2
     - sCite3
-    - success
-    - suicide
-    - summary
-    - targSubtype
-    - targType
-    - targetName
-    - targetNat
-    - terrCount
-    - weaponDetail
-    - weaponSubtype
-    - weaponType
-    - woundedCount
     properties:
-      dateStart:
+      date:
         type: string
         format: date
-        example: 1970-05-20
-      dateFinal:
-        type: string
-        format: date
-        example: 2020-05-20
+        example: "1970-05-20"
       region:
         type: string
         example: Middle East & North Africa
@@ -303,10 +308,10 @@ definitions:
       longitude:
         type: number
         format: double
-        example: 43.66838
+        example: "43.66838"
       summary:
         type: string
-        example: '06/12/2014: Assailants abducted approximately 1686 soldiers from Camp Speicher in Tikrit city, Saladin governorate, Iraq. Two captives escaped custody and at least 1570, if not all of the remaining victims, are presumed dead. The Islamic State of Iraq and the Levant (ISIL) claimed responsibility and stated that the attacks were in revenge for the killing of ISIL leader Abdul-Rahman al-Beilawy.'
+        example: "06/12/2014: Assailants abducted approximately 1686 soldiers from Camp Speicher in Tikrit city, Saladin governorate, Iraq. Two captives escaped custody and at least 1570, if not all of the remaining victims, are presumed dead. The Islamic State of Iraq and the Levant (ISIL) claimed responsibility and stated that the attacks were in revenge for the killing of ISIL leader Abdul-Rahman al-Beilawy."
       extended:
         type: string
         format: boolean
@@ -382,35 +387,36 @@ definitions:
   StatisticsFilters:
     type: object
     required:
-    - attackType
-    - city
-    - country
-    - dateFinal
     - dateStart
+    - dateFinal
     - extended
-    - groupName
-    - killsCount
-    - propExtent
     - region
+    - country
+    - city
+    - attackType
     - success
     - suicide
-    - targSubtype
     - targType
+    - targSubtype
     - targetName
     - targetNat
+    - groupName
     - terrCount
-    - weaponSubtype
     - weaponType
+    - weaponSubtype
+    - killsCount
     - woundedCount
+    - propExtent
+
     properties:
       dateStart:
         type: string
         format: date
-        example: 2020-05-20
+        example: "2020-05-20"
       dateFinal:
         type: string
         format: date
-        example: 1970-05-20
+        example: "1970-05-20"
       region:
         type: string
         example: North Africa
@@ -437,7 +443,7 @@ definitions:
         example: ""
       targType:
         type: string
-        example: Airports & Aircraft,Business,Educational institution,Government (General),Military,Police,,Other
+        example: "Airports & Aircraft,Business,Educational institution,Government (General),Military,Police,,Other"
       targSubtype:
         type: string
         example: ""
@@ -474,36 +480,36 @@ definitions:
   Attack:
     type: object
     required:
-    - addNotes
-    - attackType
-    - city
-    - country
+    - id
     - date
     - extended
-    - groupName
-    - id
-    - killsCount
+    - region
+    - country
+    - city
     - latitude
     - longitude
+    - summary
+    - attackType
+    - success
+    - suicide
+    - targType
+    - targSubtype
+    - targetName
+    - targetNat
+    - groupName
     - motive
-    - propComment
+    - terrCount
+    - weaponType
+    - weaponSubtype
+    - weaponDetail
+    - killsCount
+    - woundedCount
     - propExtent
-    - region
+    - propComment
+    - addNotes
     - sCite1
     - sCite2
     - sCite3
-    - success
-    - suicide
-    - summary
-    - targSubtype
-    - targType
-    - targetName
-    - targetNat
-    - terrCount
-    - weaponDetail
-    - weaponSubtype
-    - weaponType
-    - woundedCount
     properties:
       id:
         type: integer
@@ -511,7 +517,7 @@ definitions:
       date:
         type: string
         format: date
-        example: 2014-06-12
+        example: "2014-06-12"
       region:
         type: string
         example: Middle East & North Africa
@@ -531,7 +537,7 @@ definitions:
         example: 43.66838
       summary:
         type: string
-        example: '06/12/2014: Assailants abducted approximately 1686 soldiers from Camp Speicher in Tikrit city, Saladin governorate, Iraq. Two captives escaped custody and at least 1570, if not all of the remaining victims, are presumed dead. The Islamic State of Iraq and the Levant (ISIL) claimed responsibility and stated that the attacks were in revenge for the killing of ISIL leader Abdul-Rahman al-Beilawy.'
+        example: "06/12/2014: Assailants abducted approximately 1686 soldiers from Camp Speicher in Tikrit city, Saladin governorate, Iraq. Two captives escaped custody and at least 1570, if not all of the remaining victims, are presumed dead. The Islamic State of Iraq and the Levant (ISIL) claimed responsibility and stated that the attacks were in revenge for the killing of ISIL leader Abdul-Rahman al-Beilawy."
       extended:
         type: integer
         minimum: 0
@@ -585,8 +591,10 @@ definitions:
         example: 0
       propExtent:
         type: string
+        example: 
       propComment:
         type: string
+        example: 
       addNotes:
         type: string
         example: Casualty numbers for this incident conflict across sources. Following GTD protocol, the most reliable estimates are reported here. Approximately 70 bodies were discovered in a mass grave on March 18, 2018.
@@ -599,3 +607,10 @@ definitions:
       sCite3:
         type: string
         example: Iraq Empties Mass Graves in Search for Cadets Killed by ISIS, The New York Times, April 7, 2015.
+        
+
+host: tevi-attacks-microservice.herokuapp.com
+basePath: /
+
+schemes:
+ - https
