@@ -98,32 +98,34 @@ function statisticsResultsPageInit(node) {
         return;
     }
 
-    countries = getData('Country', 'Most frequently attacked', "country", 0);
+    let resultArray = [countries, attackTypes, targTypes, regions, weaponTypes, damages];
+
+    dateFrequency = new Array(2030).fill(0);
+
+    computeDataArrs([
+        ['Country', 'The most frequently attacked countries', "country", 0],
+        ['AttackType', 'The most frequent types of attack', "attackType", 1],
+        ['TargetType', 'The most attacked targets', "targType", 2],
+        ['region', 'Most frequently attacked regions', 'region'],
+        ['weaponType', 'Most frequently used weapons', 'weaponType', 3],
+        ['damages', 'The most commonly used weapons', 'propExtent']
+    ], resultArray);
+
+    countries = resultArray[0];
+    attackTypes = resultArray[1];
+    targTypes = resultArray[2];
+    regions = resultArray[3];
+    weaponTypes = resultArray[4];
+    damages = resultArray[5];
+
     sort(countries);
-    attackTypes = getData('AttackType', 'Most frequently attackTypes', "attackType", 1);
     sort(attackTypes);
-    targTypes = getData('TargetType', 'Most frequently types of target', "targType", 2);
     sort(targTypes);
-    datesAppearing = getData('date', 'Most frequent dates', 'date');
-    regions = getData('region', 'Most frequently attacked regions', 'region');
     sort(regions);
-    weaponTypes = getData('weaponType', 'Most frequently used weapons', 'weaponType', 3);
     sort(weaponTypes);
-    damages = getData('damages', 'Most frequently used weapons', 'propExtent');
     sort(damages);
 
-    dateFrequency = [];
-    let i;
-    for (i = 0; i <= 2030; i++) {
-        dateFrequency[i] = 0;
-    }
-    for (attack in parsed1) {
-        if (parsed1[attack]["date"] != null) {
-            dateFrequency[parseInt(parsed1[attack]["date"].substring(0, 4))] = dateFrequency[parseInt(parsed1[attack]["date"].substring(0, 4))] + 1;
-        }
-    }
     resultFilters = getFilters();
-
     let compiledTemplate = Handlebars.compile(loadPage(node.template));
     mainContent.innerHTML = compiledTemplate(resultFilters);
 
@@ -166,42 +168,51 @@ function toggleMarkersVisibility() {
     markersVisible = !markersVisible;
 }
 
-function getData(name, details, field, fieldType) {
-    let data = [
-        [name, details]
-    ];
-    let ok;
+/* dataArrArg = [
+    [name, details, field, fieldType],
+    [name, details, field, fieldType],
+    ...
+]
+*/
+function computeDataArrs(dataArrArg, resultArrs) {
+    let dataMap = [];
+    for (let i = 0; i < dataArrArg.length; ++i) {
+        resultArrs[i] = [
+            [dataArrArg[i][0], dataArrArg[i][1]]
+        ];
+        dataMap.push({});
+    }
 
-    for (attack in parsed1) {
-        ok = 0;
-        for (country in data) {
-            if (data[country][0] == parsed1[attack][field]) {
-                data[country][1]++;
-                numberFields[fieldType]++;
-                ok = 1;
+    for (attack of parsed1) {
+        for (let i = 0; i < dataArrArg.length; ++i) {
+            // dataArr[i][2] = field
+            let value = attack[dataArrArg[i][2]];
+            if (value in dataMap[i]) {
+                ++dataMap[i][value];
+            } else {
+                dataMap[i][value] = 1;
             }
         }
-        if (ok == 0) {
-            numberFields[fieldType]++;
-            data.push([parsed1[attack][field], 1]);
+
+        if (attack["date"] != null) {
+            ++dateFrequency[parseInt(attack["date"].substring(0, 4))];
         }
     }
-    return data;
+
+    for (let i = 0; i < dataMap.length; ++i) {
+        for (let mapObj in dataMap[i]) {
+            resultArrs[i].push([mapObj, dataMap[i][mapObj]]);
+        }
+        if (dataArrArg[i][3] != undefined) {
+            numberFields[dataArrArg[i][3]] = parsed1.length;
+        }
+    }
 }
 
 function sort(arrayOfArrays) {
-    let aux;
-    let i;
-    let j;
-    for (i = 1; i < arrayOfArrays.length - 1; i++) {
-        for (j = i + 1; j < arrayOfArrays.length; j++) {
-            if (arrayOfArrays[i][1] < arrayOfArrays[j][1]) {
-                aux = arrayOfArrays[i];
-                arrayOfArrays[i] = arrayOfArrays[j];
-                arrayOfArrays[j] = aux;
-            }
-        }
-    }
+    arrayOfArrays.sort((a, b) => {
+        a[1] > b[1];
+    });
 }
 
 function addPiechart() {
@@ -359,8 +370,7 @@ function addColumnChart() {
                     fontSize: 12,
                     color: '#71c9ce'
                 }
-            }
-            ,
+            },
             is3D: true
         };
 
@@ -524,7 +534,7 @@ function move() {
 function downloadImageAs(imageType, className) {
     let buttons = document.getElementsByClassName("export");
     let i;
-    for(i = 0; i < buttons.length; i++){
+    for (i = 0; i < buttons.length; i++) {
         buttons[i].style.visibility = "hidden";
     }
     let imageToBePrinted = document.getElementsByClassName(className)[0];
@@ -535,7 +545,7 @@ function downloadImageAs(imageType, className) {
             }, "image/" + imageType);
     });
 
-    for(i = 0; i < buttons.length; i++){
+    for (i = 0; i < buttons.length; i++) {
         buttons[i].style.visibility = "visible";
     }
 }

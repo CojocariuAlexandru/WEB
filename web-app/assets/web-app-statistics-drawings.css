@@ -223,6 +223,7 @@ input.searchText {
 
 .searchCriteriaAdvancedInput {
     display: flex;
+    align-items: center;
 }
 
 .searchCriteriaAdvancedInput>input[type='text'] {

@@ -22,44 +22,39 @@ function drawAllCharts() {
     if (windowWidth <= 520) {
         windowWidth = windowWidth + 160;
     }
-    if(countries.length > 5){
+    if (countries.length > 5) {
         addCountryPreferences();
-    }
-    else{
+    } else {
         headingStatistics2D = document.querySelector('#headerCountries');
         headingStatistics2D.remove();
     }
 
-    if(regions.length > 5){
+    if (regions.length > 5) {
 
         addRegionsPreferences();
-    }
-    else{
+    } else {
         headingStatistics2D = document.querySelector('#headerRegions');
         headingStatistics2D.remove();
     }
 
-    if(targTypes.length > 5){
+    if (targTypes.length > 5) {
         addTargetPreferences();
-    }
-    else{
+    } else {
         headingStatistics2D = document.querySelector('#headerTargets');
         headingStatistics2D.remove();
     }
 
     console.log(attackTypes.length);
-    if(attackTypes.length > 5){
+    if (attackTypes.length > 5) {
         addAttackPreferences();
-    }
-    else{
+    } else {
         headingStatistics2D = document.querySelector('#headerAttacks');
         headingStatistics2D.remove();
     }
 
-    if(weaponTypes.length > 5){
+    if (weaponTypes.length > 5) {
         addWeaponTypePreferences();
-    }
-    else{
+    } else {
         headingStatistics2D = document.querySelector('#headerWeapons');
         headingStatistics2D.remove();
     }
