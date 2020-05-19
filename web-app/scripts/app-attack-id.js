@@ -127,8 +127,6 @@ function areYouSure() {
 }
 
 function showWiki() {
-    console.log(currentAttack["weaponType"]);
-
     let url = "https://en.wikipedia.org/w/api.php";
     let wikiId;
     let wikiURL;
@@ -156,7 +154,6 @@ function showWiki() {
                 wikiId = response.query.search[0].pageid;
                 wikiURL = 'https://en.wikipedia.org/wiki/';
                 wikiURL = wikiURL.concat(response.query.search[0].title.replace(" ", "_"));
-                console.log(wikiURL);
                 window.open(wikiURL);
             })
             .catch(function (error) {

@@ -378,7 +378,6 @@ function showAdvancedForm(windowWidth) {
         </div>
         `;
     } else {
-        console.log('here');
         advancedForm.innerHTML =
             `
             <p id='advancedID' class='advancedID'>       ID          </p>

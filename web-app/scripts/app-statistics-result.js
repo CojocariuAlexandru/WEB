@@ -13,6 +13,8 @@ var damages;
 
 var markersVisible;
 
+var newAttacks = true;
+
 function fillField(filters1, name) {
     if (filters1[name] == "") {
         return "All";
@@ -58,7 +60,6 @@ function getFilters() {
     resultFilters["targType"] = targTypes[1][0];
     resultFilters["weaponType"] = weaponTypes[1][0];
 
-    console.log(damages);
     if (damages.length > 2)
         resultFilters["damage"] = damages[2][0];
     else
@@ -98,34 +99,39 @@ function statisticsResultsPageInit(node) {
         return;
     }
 
-    let resultArray = [countries, attackTypes, targTypes, regions, weaponTypes, damages];
+    if (newAttacks == true) {
+        newAttacks = false;
 
-    dateFrequency = new Array(2030).fill(0);
+        let resultArray = [countries, attackTypes, targTypes, regions, weaponTypes, damages];
 
-    computeDataArrs([
-        ['Country', 'The most frequently attacked countries', "country", 0],
-        ['AttackType', 'The most frequent types of attack', "attackType", 1],
-        ['TargetType', 'The most attacked targets', "targType", 2],
-        ['region', 'Most frequently attacked regions', 'region'],
-        ['weaponType', 'Most frequently used weapons', 'weaponType', 3],
-        ['damages', 'The most commonly used weapons', 'propExtent']
-    ], resultArray);
+        dateFrequency = new Array(2030).fill(0);
 
-    countries = resultArray[0];
-    attackTypes = resultArray[1];
-    targTypes = resultArray[2];
-    regions = resultArray[3];
-    weaponTypes = resultArray[4];
-    damages = resultArray[5];
+        computeDataArrs([
+            ['Country', 'The most frequently attacked countries', "country", 0],
+            ['AttackType', 'The most frequent types of attack', "attackType", 1],
+            ['TargetType', 'The most attacked targets', "targType", 2],
+            ['region', 'Most frequently attacked regions', 'region'],
+            ['weaponType', 'Most frequently used weapons', 'weaponType', 3],
+            ['damages', 'The most commonly used weapons', 'propExtent']
+        ], resultArray);
 
-    sort(countries);
-    sort(attackTypes);
-    sort(targTypes);
-    sort(regions);
-    sort(weaponTypes);
-    sort(damages);
+        countries = resultArray[0];
+        attackTypes = resultArray[1];
+        targTypes = resultArray[2];
+        regions = resultArray[3];
+        weaponTypes = resultArray[4];
+        damages = resultArray[5];
 
-    resultFilters = getFilters();
+        sort(countries);
+        sort(attackTypes);
+        sort(targTypes);
+        sort(regions);
+        sort(weaponTypes);
+        sort(damages);
+
+        resultFilters = getFilters();
+    }
+
     let compiledTemplate = Handlebars.compile(loadPage(node.template));
     mainContent.innerHTML = compiledTemplate(resultFilters);
 
@@ -532,7 +538,7 @@ function move() {
 // https://html2canvas.hertzen.com/
 // https://www.youtube.com/watch?v=IEKEV02TVew
 function downloadImageAs(imageType, className) {
-    let buttons = document.getElementsByClassName("export");
+    let buttons = document.getElementsByClassName("export-hide");
     let i;
     for (i = 0; i < buttons.length; i++) {
         buttons[i].style.visibility = "hidden";
@@ -593,7 +599,6 @@ function createCSVcountries() {
         if (countries[country][0] != "Country") {
             let attackArray = [];
             attackArray.push(countries[country][0]);
-            console.log(numberFields[0]);
             attackArray.push(countries[country][1] * 100 / numberFields[0]);
             csvArray.push(attackArray);
         }

@@ -44,7 +44,6 @@ function drawAllCharts() {
         headingStatistics2D.remove();
     }
 
-    console.log(attackTypes.length);
     if (attackTypes.length > 5) {
         addAttackPreferences();
     } else {
@@ -146,7 +145,6 @@ function createCSVCountries() {
     ];
 
     let i, j;
-    console.log(frequencyOfCountries);
     for (i = 1; i < countries.length; i++) {
         for (j = 1970; j <= 2015; j++) {
             csvArray.push([j, countries[i][0], frequencyOfCountries[countries[i][0]][j]]);
@@ -164,7 +162,6 @@ function createCSVRegions() {
     ];
 
     let i, j;
-    console.log(frequencyOfRegions);
     for (i = 1; i < regions.length; i++) {
         for (j = 1970; j <= 2015; j++) {
             csvArray.push([j, regions[i][0], frequencyOfRegions[regions[i][0]][j]]);
@@ -182,7 +179,6 @@ function createCSVTargetType() {
     ];
 
     let i, j;
-    console.log(frequencyOfTargets);
     for (i = 1; i < targTypes.length; i++) {
         for (j = 1970; j <= 2015; j++) {
             csvArray.push([j, targTypes[i][0], frequencyOfTargets[targTypes[i][0]][j]]);
@@ -200,7 +196,6 @@ function createCSVAttackType() {
     ];
 
     let i, j;
-    console.log(frequencyOfAttacks);
     for (i = 1; i < attackTypes.length; i++) {
         for (j = 1970; j <= 2015; j++) {
             csvArray.push([j, attackTypes[i][0], frequencyOfAttacks[attackTypes[i][0]][j]]);
@@ -218,7 +213,6 @@ function createCSVWeaponType() {
     ];
 
     let i, j;
-    console.log(frequencyOfWeaponType);
     for (i = 1; i < weaponTypes.length; i++) {
         for (j = 1970; j <= 2015; j++) {
             csvArray.push([j, weaponTypes[i][0], frequencyOfWeaponType[weaponTypes[i][0]][j]]);
@@ -443,10 +437,8 @@ function addWeaponTypePreferences() {
 }
 
 function toggleCSVList() {
-    console.log(frequencyOfAttacks);
     let csvList = document.querySelector('.optionsCSV');
     toggleCSV = 1 - toggleCSV;
-    console.log(toggleCSV);
     if (toggleCSV == 0) {
         csvList.style.display = "none";
     } else {
