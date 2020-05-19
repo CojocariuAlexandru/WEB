@@ -78,12 +78,22 @@ function removeAttacksFromMap() {
     }
 }
 
+// https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+}
+
 // https://stackoverflow.com/questions/1544739/google-maps-api-v3-how-to-remove-all-markers
 function displayAttacksOnMap(attacks) {
     for (let i = 0; i < attacks.length; ++i) {
         let pos = {
-            lat: parseInt(attacks[i].latitude),
-            lng: parseInt(attacks[i].longitude)
+            lat: parseFloat(attacks[i].latitude),
+            lng: parseFloat(attacks[i].longitude)
         };
 
         markersArray.push(new google.maps.Marker({

@@ -573,6 +573,7 @@ function downloadImageAs(imageType, className) {
     for (i = 0; i < buttons.length; i++) {
         buttons[i].style.visibility = "hidden";
     }
+
     let imageToBePrinted = document.getElementsByClassName(className)[0];
     html2canvas(imageToBePrinted).then(canvas => {
         canvas.toBlob(
@@ -584,6 +585,38 @@ function downloadImageAs(imageType, className) {
     for (i = 0; i < buttons.length; i++) {
         buttons[i].style.visibility = "visible";
     }
+}
+
+function roundTo5Decimal(num) {
+    return Math.round((num + Number.EPSILON) * 100000) / 100000;
+}
+
+function roundTo3Decimal(num) {
+    return Math.round((num + Number.EPSILON) * 1000) / 1000;
+}
+
+function downloadMapAsImage(imageType) {
+    let zoom = map.getZoom();
+    let lat = roundTo5Decimal(map.getCenter().lat());
+    let lon = roundTo5Decimal(map.getCenter().lng());
+
+    let url = `https://maps.googleapis.com/maps/api/staticmap?format=${imageType}&center=${lat},${lon}&zoom=${zoom}&size=1800x800&scale=4`;
+
+    // https://stackoverflow.com/questions/2906427/how-to-get-all-visible-markers-on-current-zoom-level
+    if (markersArray.length > 0) {
+        shuffleArray(markersArray);
+        let bounds = map.getBounds();
+        url += '&markers=color:blue';
+        for (let i = 0; i < markersArray.length && url.length < 8050; ++i) {
+            if (bounds.contains(markersArray[i].getPosition())) {
+                url += '|';
+                url += `|${roundTo3Decimal(markersArray[i].getPosition().lat())},${roundTo3Decimal(markersArray[i].getPosition().lng())}`;
+            }
+        }
+    }
+    url += '&key=AIzaSyArmUBaQ5YHtD4pd1omfn4m6i4wlVkmsTA';
+
+    saveAs(url, `map.${imageType}`);
 }
 
 function createCSV() {
