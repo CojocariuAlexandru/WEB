@@ -74,5 +74,12 @@
 .dropdownWrapper:hover .optionsCSV {
     display: block;
     position: absolute;
+}
+
+.dropdownWrapper:hover .optionsCSV.five-options {
     top: -146px;
+}
+
+.dropdownWrapper:hover .optionsCSV.four-options {
+    top: -117px;
 }

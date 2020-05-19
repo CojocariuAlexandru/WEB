@@ -15,6 +15,8 @@ var markersVisible;
 
 var newAttacks = true;
 
+var svgObjectArrays = {}
+
 function fillField(filters1, name) {
     if (filters1[name] == "") {
         return "All";
@@ -118,6 +120,12 @@ function constructParagraf(countries, name, title, exclude) {
     elem.appendChild(list);
 }
 
+function removeStrFromArrOfArr() {
+    for (let i = 0; i < svgObjectArrays.weaponTypes[0].length; ++i) {
+        svgObjectArrays.weaponTypes[0][i] = svgObjectArrays.weaponTypes[0][i].replace("(not to include vehicle-borne explosives, i.e., car or truck bombs)", "");
+    }
+}
+
 function statisticsResultsPageInit(node) {
     if (parsed1.length == 0) {
         mainContent.innerHTML = '<div class="attackDetailText2">  <p> No attacks found </p> </div>'
@@ -128,6 +136,22 @@ function statisticsResultsPageInit(node) {
         newAttacks = false;
 
         let resultArray = [countries, attackTypes, targTypes, regions, weaponTypes, damages];
+        svgObjectArrays.countries = [
+            [],
+            []
+        ];
+        svgObjectArrays.attackTypes = [
+            [],
+            []
+        ];
+        svgObjectArrays.targTypes = [
+            [],
+            []
+        ];
+        svgObjectArrays.weaponTypes = [
+            [],
+            []
+        ];
 
         dateFrequency = new Array(2030).fill(0);
 
@@ -138,7 +162,9 @@ function statisticsResultsPageInit(node) {
             ['region', 'Most frequently attacked regions', 'region'],
             ['weaponType', 'Most frequently used weapons', 'weaponType', 3],
             ['damages', 'The most commonly used weapons', 'propExtent']
-        ], resultArray);
+        ], resultArray, ['countries', 'attackTypes', 'targTypes', 'weaponTypes']);
+
+        removeStrFromArrOfArr();
 
         countries = resultArray[0];
         attackTypes = resultArray[1];
@@ -205,7 +231,7 @@ function toggleMarkersVisibility() {
     ...
 ]
 */
-function computeDataArrs(dataArrArg, resultArrs) {
+function computeDataArrs(dataArrArg, resultArrs, svgObjectProperties) {
     let dataMap = [];
     for (let i = 0; i < dataArrArg.length; ++i) {
         resultArrs[i] = [
@@ -231,11 +257,22 @@ function computeDataArrs(dataArrArg, resultArrs) {
     }
 
     for (let i = 0; i < dataMap.length; ++i) {
-        for (let mapObj in dataMap[i]) {
-            resultArrs[i].push([mapObj, dataMap[i][mapObj]]);
+        let id = dataArrArg[i][3],
+            mapO;
+        if (id == undefined) {
+            for (let mapObj in dataMap[i]) {
+                resultArrs[i].push([mapObj, dataMap[i][mapObj]]);
+            }
+        } else {
+            for (let mapObj in dataMap[i]) {
+                mapO = dataMap[i][mapObj];
+                resultArrs[i].push([mapObj, mapO]);
+                svgObjectArrays[svgObjectProperties[id]][0].push(mapObj);
+                svgObjectArrays[svgObjectProperties[id]][1].push(mapO);
+            }
         }
-        if (dataArrArg[i][3] != undefined) {
-            numberFields[dataArrArg[i][3]] = parsed1.length;
+        if (id != undefined) {
+            numberFields[id] = parsed1.length;
         }
     }
 }
@@ -272,7 +309,7 @@ function addPiechart() {
         if (hiddenButton != null) {
             hiddenButton.className = "export export-hide csv-button-left";
         }
-    }  
+    }
 }
 
 function addPiechart2() {
@@ -742,28 +779,27 @@ function downloadCsv(name) {
     link.click();
 }
 
-function downloadSVG(){
-    let piechart = document.querySelector('svg:first-child');
-    var serializer = new XMLSerializer();
-    var source = serializer.serializeToString(piechart);
+function downloadSVG(pieChart) {
+    var data = [{
+        values: svgObjectArrays[pieChart][1],
+        labels: svgObjectArrays[pieChart][0],
+        type: 'pie',
+        textinfo: "label+percent",
+        textposition: "outside",
+        automargin: true
+    }];
 
-    if(!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)){
-        source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
-    }
-    if(!source.match(/^<svg[^>]+"http\:\/\/www\.w3\.org\/1999\/xlink"/)){
-        source = source.replace(/^<svg/, '<svg xmlns:xlink="http://www.w3.org/1999/xlink"');
-    }
-    source = '<?xml version="1.0" standalone="no"?>\r\n' + source;
+    var layout = {
+        height: 700,
+        width: 900,
+        showLegend: false
+    };
 
-    var svgContent = "data:image/svg+xml;charset=utf-8,"+encodeURIComponent(source);
-
-    var encodedUri = encodeURI(svgContent);
-    window.open(encodedUri);
-    var encodedUri = encodeURI(svgContent);
-    var link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "attacksSVG.svg");
-    document.body.appendChild(link); // Required for FF
-
-    link.click();
+    let el = document.createElement('div');
+    Plotly.newPlot(el, data, layout).then(function (gd) {
+        Plotly.downloadImage(gd, {
+            format: 'svg',
+            filename: pieChart
+        });
+    });
 }

@@ -8,6 +8,7 @@ var windowWidth;
 var toggleCSV = 0;
 
 function initStatisticsResult2D(node) {
+    parsed1Copy = parsed1;
     mainContent.innerHTML = loadPage(node.template);
     createMatrices();
     getFrequencies();

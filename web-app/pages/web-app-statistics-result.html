@@ -155,8 +155,16 @@
 </div>
 
 <div class="grid-container-result-buttons no-margin">
-    <div class="export export-hide button-1" onclick="downloadSVG()">
-        <span class="button-link1">SVG</span>
+    <div class="export export-hide button-1">
+        <div class='dropdownWrapper'>
+            <div class="optionsCSV"> <!-- four-options -->
+                <span onclick="downloadSVG('targTypes')">Countries</span>
+                <span onclick="downloadSVG('attackTypes')">Attack method</span>
+                <span onclick="downloadSVG('targTypes')">Attack target</span>
+                <span onclick="downloadSVG('weaponTypes')">Weapons</span>
+            </div>
+            <div class="button-link1" onclick="toggleCSVList();">&#8593; SVG &#8593;</div>
+        </div>
     </div>
     <div class="export export-hide button-2" onclick="downloadImageAs('png', 'grid-container-result')">
         <span class="button-link1">PNG</span>
