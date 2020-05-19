@@ -10,8 +10,165 @@
 
 <body prefix="schema: http://schema.org">
     <header>
-        <h1>TeVi - Interfata si interactiunea cu utilizatorul</h1>
+        <h1>TeVi - Functionalitati ale aplicatiei</h1>
     </header>
+    <section role="doc-toc">
+        <h2>
+            Cuprins
+        </h2>
+        <ol>
+            <li>Introducere</li>
+            <li>Motivație</li>
+            <li>Autorizare și autentificare</li>
+            <li>Vizualizare de statistici privind atacuri teroriste, obținute pe baza unor filtre</li>
+            <li>Export statistici în diverse formate</li>
+            <li>Vizualizare detaliată a datelor unui atac</li>
+            <li>Vizualizarea atacurilor pe hartă</li>
+            <li>Gestiunea atacurilor și a userilor (pentru admini)</li>
+
+      </ol>
+    </section>
+
+    <section role="doc-introduction">
+        <h2>
+            1. Introducere
+        </h2>
+        <p>
+            Acest raport conține o prezentare a funcționalitaților oferite de aplicația Tevi,
+            realizată de către studenții Albert Ramona Georgiana, Cojocariu Alexandru și Oloieri Alexandru,
+            în timpul celui de-al doilea semestru al anului universitar 2019-2020,
+            Facultatea de Informatică Iași. Această aplicație are ca scop usurința vizualizării atacurilor
+            teroriste de către useri, oferind diverse statistici focusate asupra anumitor tipuri de atacuri
+            precum și facilitați de export a informațiilor obținute.
+        </p>
+    </section>
+    <section role="doc-part">
+        <h2>
+            2. Motivație
+        </h2>
+        <p>
+            Terorismul reprezinta folosirea intenționata a violenței in scopuri politice sau religioase.
+            Acest tip de atac face abuz de unul dintre sentimentele de baza ale ființei umane: frica/teroarea.
+            Instinctul fricii este adânc înrădăcinat în noi din vremuri străvechi, când era necesar pentru
+            supraviețuire.
+        </p>
+        <p>
+            Am observat un trend ascendent ale acestor tipuri de atacuri și din acest motiv, este de datoria
+            noastră să fim informați și sa putem prezice cât mai bine viitoarele atacuri pe baza datelor
+            pe care le avem deja. Tevi este un instrument care ne ajută in acest scop, făcând simplă vizualizarea
+            atacurilor teroriste in funcție de anumite criterii cum ar fi o anumită țară sau regiune.
+        </p>
+    </section>
+    <section role="doc-part">
+        <h2>
+            3. Autorizare si autentificare
+        </h2>
+        <p>
+            Aplicația Țevi dispune de un sistem de autorizare și autentificare. Astfel, un user obișnuit
+            va trebui să-și creeze un cont înainte de a folosi aplicația. Odată creat un cont, userul
+            își poate introduce datele în secțiunea de logare. După logare, va putea folosi în continuare
+            aplicația că orice alt user obișnuit.
+        </p>
+        <p>
+            Aceast proces este necesar pentru a deosebi userii obișnuiți de userii cu drept de administrator
+            (adminii). Adminii au drepturi suplimentare în cadrul aplicației cum ar fi gestiunea atacurilor
+            sau a userilor. Îi poate șterge sau le pot actualiza informațiile: în cazul unui user drepturile
+            acestuia și în cadrul unui atac datele propriu-zise.
+        </p>
+        <p>
+            Această funcționalitate este implementată cu Javascript Web Tokens (JWT).
+        </p>
+        
+    </section>
+    <section role="doc-part">
+        <h2>
+            4. Vizualizare de statistici privind atacuri teroriste, obținute pe baza unor filtre
+        </h2>
+        <p>
+            Orice tip de user are acces la această funcționalitate de baza a aplicației. Un user va completă
+            un formular privind ce atacuri vrea să fie procesate. De exemplu, dacă userul selectează regiunea
+            "Asia" și tipul de armă folosită "grenadă" atunci vor fi procesate atacurile din baza de date ce
+            au avut loc în Asia și în care s-au folosit grenade. Aplicația dispune de zeci de astfel de filtre
+            iar userul poate alege dacă vrea să le folosească sau nu.
+        </p>
+        <p>
+            Odată completat formularul și extrase atacurile corespunzătoare, se poate începe crearea statisticilor.
+            User-ul va primi statistici precum piechart-uri, bar chart-uri, grafice 2D pe care le poate exportă
+            local, într-un format disponibil. Exemple de astfel de statistici sunt: frecvența țărilor atacate,
+            evoluția frecvenței atacurilor în funcție de timp, ce procent din atacuri au fost finalizate cu succes etc.
+        </p>
+        <p>
+            De asemenea, nu doar statiscile pot fi vizualizate, ci și atacurile rezultate în sine. Userul poate
+            solicită vizualizarea unui tabel în care sunt afișate toate atacurile rezultate după aplicarea filtrelor
+            impuse. Mai mult, aceste atacuri pot fi sortate după diverse criterii alese de utilizator (ID, locație etc.)
+            sau pot fi filtrate cu ajutorul unui form după bunul plac al utilizatorului.
+        </p>
+    </section>
+
+    <section role="doc-part">
+        <h2>
+            5. Export statistici în diverse formate
+        </h2>
+        <p>
+            Orice statistică oferită de aplicația Țevi poate fi exportată în unul dintre formatele disponibile.
+            Userul nu trebuie decât să apese pe butonul de export specific imaginii pe care și-o dorește, după
+            care trebuie să selecteze un format.
+        </p>
+        <p>
+            Formatele oferite de aplicația noastră sunt: SVG, PNG, JPG, GIF, BMP, CSV. În cazul în care s-a
+            selectat formatul CSV, nu se va downloada o imagine cu un fișier text formatat și cu extensia CSV.
+        </p>
+    </section>
+
+    <section role="doc-part">
+        <h2>
+            6. Vizualizare detaliată a datelor unui atac
+        </h2>
+        <p>
+            Fiecare atac poate fi văzut îndeaproape pe o pagină dedicată, generată cu ajutorul unui template.
+            Aici pot fi văzute toate datele de care dispunem în baza de date precum locație, număr de ranini,
+            număr de decese, un rezumat, citate de la față locului etc.
+        </p>
+        <p>
+            Dacă userul este admin, pe această pagină îi va apărea și un buton de 'update attack' prin care poate
+            actualiza datele despre acel atac dacă vrea să schimbe ceva.
+        </p>
+
+    </section>
+
+    <section role="doc-part">
+        <h2>
+            7. Vizualizarea atacurilor pe hartă
+        </h2>
+        <p>
+            Locația unui atac din baza noastră de date poate fi vizualizată pe harta. Această facilitate
+            o realizăm cu ajutorul serviciului Google Maps. Importand acest serviciu, atacurile pot fi
+            văzute în detaliu pe harta, cu toate facilitățile oferite cu Google Maps: vedere din satelit,
+            street view etc. Design-ul hărții a fost modificat astfel încât să se potrivească aspectului
+            site-ului nostru.
+        </p>
+    </section>
+
+    <section role="doc-part">
+        <h2>
+            8. Gestiunea atacurilor și a userilor (pentru admini)
+        </h2>
+        <p>
+            Aceasta facilitate este disponibila exclusiv adminilor sistemului.
+        </p>
+        <p>
+            Toate atacurile bazei de date pot fi gestionate din aplicație. Această înseamnă, modificarea
+            datelor sau ștergerea respectivului atac. Modificările rămân permanente până când se decide
+            din nou modificarea respectivului atac de către un admin. Toate modificările făcute asupra
+            atacurilor sunt luate în considerare atunci când sunt generate statisticile.
+        </p>
+        <p>
+            De asemenea, și userii pot fi gestionați din cadrul aplicației. Un adimistrator poate intră
+            pe pagină dedicată 'users-dashboard' în care poate oferi sau lua drepturile altor useri.
+            Un tabel cu useri îi va fi oferit cu numele și drepturile fiecărui user din sistem.
+        </p>
+    </section>
 </body>
 
 </html>
+țăîșâ
