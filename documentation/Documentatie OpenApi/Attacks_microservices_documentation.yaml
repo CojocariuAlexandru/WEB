@@ -1,0 +1,601 @@
+---
+swagger: "2.0"
+info:
+  description: This is the TeVi API
+  version: 1.0.0
+  title: TeVi API
+  contact:
+    email: albert.ramona99@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+host: tevi-attacks-microservice.herokuapp.com
+basePath: /
+tags:
+- name: attacks
+  description: Operations available to terrorist attacks
+schemes:
+- https
+- http
+paths:
+  /api/attacks:
+    get:
+      tags:
+      - attacks
+      summary: returns all terrorist attacks
+      description: |
+        You can get all the attacks to make your own statistics
+      operationId: getAttacks
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        "200":
+          description: search results matching criteria
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Attack'
+        "400":
+          description: bad input parameter
+    post:
+      tags:
+      - attacks
+      summary: adds an attack
+      description: Adds an attack to the system
+      operationId: insertAttack
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: AttackToInsert
+        description: Terrorist attack to add
+        required: true
+        schema:
+          $ref: '#/definitions/AttackToInsert'
+      - name: Authorization
+        in: header
+        description: Authorization key for having required privileges
+        required: true
+        type: string
+      responses:
+        "201":
+          description: attack created
+        "400":
+          description: invalid input, object invalid
+        "401":
+          description: Not Authorized
+        "403":
+          description: Access forbidden
+  /api/attacks/{attackId}:
+    get:
+      tags:
+      - attacks
+      summary: returns an attack
+      description: get an attacks with the specified id
+      produces:
+      - application/json
+      parameters:
+      - name: attackId
+        in: path
+        description: Attack id from database
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: Attack updated
+        "403":
+          description: Access forbidden
+        "404":
+          description: Not found
+    put:
+      tags:
+      - attacks
+      summary: updates an attack
+      description: Updates the attack with the specified id
+      consumes:
+      - application/json
+      produces:
+      - text
+      parameters:
+      - in: body
+        name: AttackToUpdate
+        description: Attack to update with
+        required: true
+        schema:
+          $ref: '#/definitions/AttackToInsert'
+      - name: attackId
+        in: path
+        description: Attack id from database
+        required: true
+        type: integer
+      - name: Authorization
+        in: header
+        description: Authorization key for having required privileges
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Attack updated
+        "401":
+          description: Not Authorized
+        "403":
+          description: Access forbidden
+    delete:
+      tags:
+      - attacks
+      summary: deletes an attack
+      description: Deletes the attack with the specified id
+      produces:
+      - text
+      parameters:
+      - name: attackId
+        in: path
+        description: Attack id from database
+        required: true
+        type: integer
+      - name: Authorization
+        in: header
+        description: Authorization key for having required privileges
+        required: true
+        type: string
+      responses:
+        "200":
+          description: deleted attack
+        "403":
+          description: Access forbidden
+  /api/attacks/attacks-dashboard:
+    get:
+      tags:
+      - attacks
+      summary: updates an attack
+      description: Updates the attack with the specified id
+      produces:
+      - application/json
+      parameters:
+      - name: pageId
+        in: query
+        description: The id of current page
+        required: true
+        type: integer
+      - name: onPage
+        in: query
+        description: The number of attacks to return
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: Ok
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Attack'
+  /api/attacks/map:
+    post:
+      tags:
+      - attacks
+      summary: gets attacks for map
+      description: Gets attacks for marking the map with them
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: MapFilters
+        description: Terrorist attack to add
+        required: true
+        schema:
+          type: object
+      responses:
+        "200":
+          description: Ok
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Attack'
+  /api/attacks/filters:
+    post:
+      tags:
+      - attacks
+      summary: gets attacks for statistics
+      description: Gets attacks for interesting statistics (also 2D)
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: StatisticsFilters
+        description: Filters for statistics
+        required: true
+        schema:
+          type: object
+      responses:
+        "200":
+          description: Ok
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Attack'
+definitions:
+  MapFilters:
+    type: object
+    required:
+    - city
+    - country
+    - dateFinal
+    - dateStart
+    - region
+    properties:
+      dateStart:
+        type: string
+        format: date
+        example: 1970-06-12
+      dateFinal:
+        type: string
+        format: date
+        example: 2020-06-12
+      region:
+        type: string
+        example: North Africa
+      country:
+        type: string
+        example: ""
+      city:
+        type: string
+        example: ""
+  AttackToInsert:
+    type: object
+    required:
+    - addNotes
+    - attackType
+    - city
+    - country
+    - extended
+    - groupName
+    - killsCount
+    - latitude
+    - longitude
+    - motive
+    - propComment
+    - propExtent
+    - region
+    - sCite1
+    - sCite2
+    - sCite3
+    - success
+    - suicide
+    - summary
+    - targSubtype
+    - targType
+    - targetName
+    - targetNat
+    - terrCount
+    - weaponDetail
+    - weaponSubtype
+    - weaponType
+    - woundedCount
+    properties:
+      dateStart:
+        type: string
+        format: date
+        example: 1970-05-20
+      dateFinal:
+        type: string
+        format: date
+        example: 2020-05-20
+      region:
+        type: string
+        example: Middle East & North Africa
+      country:
+        type: string
+        example: Iraq
+      city:
+        type: string
+        example: Saladin
+      latitude:
+        type: string
+        format: double
+        example: "34.62152"
+      longitude:
+        type: number
+        format: double
+        example: 43.66838
+      summary:
+        type: string
+        example: '06/12/2014: Assailants abducted approximately 1686 soldiers from Camp Speicher in Tikrit city, Saladin governorate, Iraq. Two captives escaped custody and at least 1570, if not all of the remaining victims, are presumed dead. The Islamic State of Iraq and the Levant (ISIL) claimed responsibility and stated that the attacks were in revenge for the killing of ISIL leader Abdul-Rahman al-Beilawy.'
+      extended:
+        type: string
+        format: boolean
+        example: "true"
+      suicide:
+        type: string
+        format: boolean
+        example: "false"
+      success:
+        type: string
+        format: boolean
+        example: "true"
+      attackType:
+        type: string
+        example: Hostage Taking (Kidnapping)
+      targType:
+        type: string
+        example: Military
+      targSubtype:
+        type: string
+        example: Military Personnel (soldiers, troops, officers, forces)
+      targetName:
+        type: string
+        example: Soldiers
+      targetNat:
+        type: string
+        example: Iraq
+      groupName:
+        type: string
+        example: Islamic State of Iraq and the Levant (ISIL)
+      motive:
+        type: string
+        example: The Islamic State of Iraq and the Levant (ISIL) claimed responsibility and stated that the attacks were in revenge for the killing of ISIL leader Abdul-Rahman al-Beilawy.
+      weaponType:
+        type: string
+        example: Firearms
+      weaponSubtype:
+        type: string
+        example: Unknown Gun Type
+      weaponDetail:
+        type: string
+        example: Unknown
+      terrCount:
+        type: string
+        format: integer
+        example: "1"
+      killsCount:
+        type: string
+        format: integer
+        example: "100"
+      woundedCount:
+        type: string
+        format: integer
+        example: "1000"
+      propExtent:
+        type: string
+        example: ""
+      propComment:
+        type: string
+        example: ""
+      addNotes:
+        type: string
+        example: Casualty numbers for this incident conflict across sources. Following GTD protocol, the most reliable estimates are reported here. Approximately 70 bodies were discovered in a mass grave on March 18, 2018.
+      sCite1:
+        type: string
+        example: Iraq exhumes 470 bodies of 'ISIL massacre victims', Al Jazeera, May 28, 2015
+      sCite2:
+        type: string
+        example: Scene of Iraqi Massacre Becomes Shiite Pilgrimage Site, The New York Times, May 6, 2015.
+      sCite3:
+        type: string
+        example: Iraq Empties Mass Graves in Search for Cadets Killed by ISIS, The New York Times, April 7, 2015.
+  StatisticsFilters:
+    type: object
+    required:
+    - attackType
+    - city
+    - country
+    - dateFinal
+    - dateStart
+    - extended
+    - groupName
+    - killsCount
+    - propExtent
+    - region
+    - success
+    - suicide
+    - targSubtype
+    - targType
+    - targetName
+    - targetNat
+    - terrCount
+    - weaponSubtype
+    - weaponType
+    - woundedCount
+    properties:
+      dateStart:
+        type: string
+        format: date
+        example: 2020-05-20
+      dateFinal:
+        type: string
+        format: date
+        example: 1970-05-20
+      region:
+        type: string
+        example: North Africa
+      country:
+        type: string
+        example: ""
+      city:
+        type: string
+        example: ""
+      extended:
+        type: string
+        format: boolean
+        example: "true"
+      suicide:
+        type: string
+        format: boolean
+        example: "false"
+      success:
+        type: string
+        format: boolean
+        example: "true"
+      attackType:
+        type: string
+        example: ""
+      targType:
+        type: string
+        example: Airports & Aircraft,Business,Educational institution,Government (General),Military,Police,,Other
+      targSubtype:
+        type: string
+        example: ""
+      targetName:
+        type: string
+        example: ""
+      targetNat:
+        type: string
+        example: ""
+      groupName:
+        type: string
+        example: ""
+      weaponType:
+        type: string
+        example: ""
+      weaponSubtype:
+        type: string
+        example: ""
+      terrCount:
+        type: string
+        format: integer
+        example: "1"
+      killsCount:
+        type: string
+        format: integer
+        example: "100"
+      woundedCount:
+        type: string
+        format: integer
+        example: "1000"
+      propExtent:
+        type: string
+        example: ""
+  Attack:
+    type: object
+    required:
+    - addNotes
+    - attackType
+    - city
+    - country
+    - date
+    - extended
+    - groupName
+    - id
+    - killsCount
+    - latitude
+    - longitude
+    - motive
+    - propComment
+    - propExtent
+    - region
+    - sCite1
+    - sCite2
+    - sCite3
+    - success
+    - suicide
+    - summary
+    - targSubtype
+    - targType
+    - targetName
+    - targetNat
+    - terrCount
+    - weaponDetail
+    - weaponSubtype
+    - weaponType
+    - woundedCount
+    properties:
+      id:
+        type: integer
+        example: 133518
+      date:
+        type: string
+        format: date
+        example: 2014-06-12
+      region:
+        type: string
+        example: Middle East & North Africa
+      country:
+        type: string
+        example: Iraq
+      city:
+        type: string
+        example: Saladin
+      latitude:
+        type: number
+        format: double
+        example: 34.62152
+      longitude:
+        type: number
+        format: double
+        example: 43.66838
+      summary:
+        type: string
+        example: '06/12/2014: Assailants abducted approximately 1686 soldiers from Camp Speicher in Tikrit city, Saladin governorate, Iraq. Two captives escaped custody and at least 1570, if not all of the remaining victims, are presumed dead. The Islamic State of Iraq and the Levant (ISIL) claimed responsibility and stated that the attacks were in revenge for the killing of ISIL leader Abdul-Rahman al-Beilawy.'
+      extended:
+        type: integer
+        minimum: 0
+        maximum: 1
+      suicide:
+        type: integer
+        minimum: 0
+        maximum: 1
+      success:
+        type: integer
+        minimum: 0
+        maximum: 1
+      attackType:
+        type: string
+        example: Hostage Taking (Kidnapping)
+      targType:
+        type: string
+        example: Military
+      targSubtype:
+        type: string
+        example: Military Personnel (soldiers, troops, officers, forces)
+      targetName:
+        type: string
+        example: Soldiers
+      targetNat:
+        type: string
+        example: Iraq
+      groupName:
+        type: string
+        example: Islamic State of Iraq and the Levant (ISIL)
+      motive:
+        type: string
+        example: The Islamic State of Iraq and the Levant (ISIL) claimed responsibility and stated that the attacks were in revenge for the killing of ISIL leader Abdul-Rahman al-Beilawy.
+      weaponType:
+        type: string
+        example: Firearms
+      weaponSubtype:
+        type: string
+        example: Unknown Gun Type
+      weaponDetail:
+        type: string
+        example: Unknown
+      terrCount:
+        type: integer
+        example: 0
+      killsCount:
+        type: integer
+        example: 1570
+      woundedCount:
+        type: integer
+        example: 0
+      propExtent:
+        type: string
+      propComment:
+        type: string
+      addNotes:
+        type: string
+        example: Casualty numbers for this incident conflict across sources. Following GTD protocol, the most reliable estimates are reported here. Approximately 70 bodies were discovered in a mass grave on March 18, 2018.
+      sCite1:
+        type: string
+        example: Iraq exhumes 470 bodies of 'ISIL massacre victims', Al Jazeera, May 28, 2015
+      sCite2:
+        type: string
+        example: Scene of Iraqi Massacre Becomes Shiite Pilgrimage Site, The New York Times, May 6, 2015.
+      sCite3:
+        type: string
+        example: Iraq Empties Mass Graves in Search for Cadets Killed by ISIS, The New York Times, April 7, 2015.
