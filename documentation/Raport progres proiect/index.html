@@ -111,8 +111,11 @@
             manipularea elementelor din arborele DOM cu ajutorul funcțiilor puse la dispoziție de obiectul „document”,
             de acest lucru s-a ocupat Alexandru Cojocariu, și crearea unui end-point în server care să permită
             trimiterea acelor filtre și
-            crearea în mod dinamic a unui query SQL ce le folosește (ceea ce a presupus crearea unor funcții care să
-            permită construirea pe baza unor argumente a mai multor tipuri de condiții din clauza WHERE), task de care
+            crearea în mod dinamic a unui query SQL ce le folosește (ceea ce a presupus implementarea unor funcții care
+            să
+            permită construirea, pe baza unor argumente, mai multe tipuri de condiții din clauza WHERE, de exemplu dacă
+            se doresc statistici doar pentru atacurile dintr-o anumită țară ar trebui adăugat la query-ul SELECT
+            principal condiția „WHERE country = '{{nume_tara}}'”), task de care
             s-a ocupat Ramona
             Albert.
         </p>
@@ -132,7 +135,7 @@
     <section role="doc-part">
         <h2>
             4. Microserviciul ce se ocupă de utilizatori, modulul de administrație, mai multe statici și exportul lor
-            (23 aprilie - 10 mai 2020)
+            (23 aprilie - 9 mai 2020)
         </h2>
         <p>
             Aceasta este cu siguranță etapa în care echipa noastră a reușit să implementeze cele mai multe
@@ -141,18 +144,134 @@
             ce returnează un răspuns pe back-end, iar apoi se procesează răspunsul pe front-end.
         </p>
         <p>
-
+            La începutul acestei etape efortul încă era îndreptat înspre formular pentru statistici și pagina principală
+            de statistici, iar după finalizarea acesteia s-a început și implementarea modulului de administrare a
+            aplicației: după terminarea completă a rutei de preluare a atacurilor pentru statistici (adică îmbunătățirea
+            codului, previnirea SQL injection și adăugarea mai multor filtre), Ramona a lucrat la rutele ce permit
+            crearea, modificarea și ștergerea
+            unui atac (POST/ PUT/
+            DELETE), precum și la design-ul și implementarea paginilor de pe care să fie apelate aceste operații, iar
+            Alexandru
+            C. a făcut inițial construirea în aplicația web a obiectelor JSON trimise la acele
+            rute, iar apoi s-a ocupat de o nouă pagini de statistici, în care sunt afișate diferite grafice 2D,
+            finalizarea altor statistici pe pagina principală și finalizarea completă a paginii în care pot fi văzute
+            atacurile corespunzătoare statisticilor. Cum paginile erau aproape gata, Ramona și Alexandru C.
+            au început să lucreze la exportul diferitelor statistici în mai multe formate: PNG, JPG, BMP, SVG și CSV,
+            pentru ca toate cerințele obligatorii ale proiectului să fie implementate.
+        </p>
+        <p>
+            Tot pe partea de statistici, este finalizată de către Alexandru O. interacțiunea aplicație web - server a
+            paginii în care pot fi văzute mai ușor atacurile pe hartă, ceea ce a presupus crearea unei rute în care să
+            fie trimise filtre, și să fie returnate coordonatele acelor atacuri care respectă criteriile.
+        </p>
+        <p>
+            O altă funcționalitate importantă adăugată în această etapă a fost implementarea microserviciului ce se
+            ocupă de utilizatori și introducerea diferitelor tipuri de utilizatori (admin și user normal). Faptul că în
+            aplicație se putea distinge în cod între un admin și un utilizator normal a dus la începerea „ascunderii”
+            anumitor pagini: se crează pagina „Admin Panel” din care pot fi accesate pagini de tip dashboard, dar care
+            sunt vizibile doar pentru admini. În acest timp Ramona finalizează paginile ce permit inserarea și
+            modificarea unui atac direct din aplicație, iar acestea au fost și ele „ascunse”, și se începe lucrul la
+            paginile „Users dashboard” și „Attacks dashboard”. De prima s-a ocupat Alexandru O., iar fiindcă ce-a dea
+            doua era mai complexă (întrucât trebuia implementată și paginare), pe partea de back-end Alexandru C. a
+            creat ruta ce întoarce atacuri paginat, iar pe front-end Alexandru O. a creat o pagină cu același design ca
+            și pagina de vizualizare a atacurilor pe baza cărora au fost construite statistici.
+        </p>
+        <p>
+            Alte schimbări aduse aplicației în această etapă: posibilitatea înregistrării și logării în aplicație
+            (autentificarea se face cu tokenuri JWT), se poate naviga fără erori între paginile ce țin de statistici, se
+            implementează o componentă ce permite afișarea de notificări (succes, eroare) și sunt rezolvate multe
+            bug-uri și probleme ce țineau de partea responsive a aplicației.
         </p>
     </section>
     <section role="doc-part">
         <h2>5. Finalizarea implementării. Faza de refactorizare, îmbunătățire a codului și rezolvare de
             buguri
-            (11 mai - 19 mai 2020)
+            (10 mai - 19 mai 2020)
         </h2>
+        <p>
+            În această ultimă etapă (care a fost mai scurtă decât celelalte), ne-am axat pe îmbunătățirea calității
+            codului. Acest lucru a fost realizat în mai multe etape și prin mai multe metode. Am rezolvat warning-urile
+            css din toate fișierele din proiect, warning-uri sugerate de acest <a href="http://csslint.net/">instrument
+                on-line</a>. Am îmbunătățit semantica fișierelor html cu ajutorul acestui <a href="">instrument
+                on-line</a>
+        </p>
+        <p>
+            Pe partea de server, ambele microservicii au fost refactorizate pentru a respecta câteva pattern-uri de
+            construirea a unui server ce oferă servicii web. Mai exact, în momentul curent, acestea sunt împărțite pe 3
+            nivele: Controllers, Services și Repositories (o arhitectură des folosită în industrie, mai ales în
+            proiectele care folosesc tehnologii Microsoft - <a
+                href="https://exceptionnotfound.net/the-repository-service-pattern-with-dependency-injection-and-asp-net-core/">ASP.NET
+                Core WEB API</a> - acest lucru este menționat aici doar ca fapt divers, în timpul implementării
+            arhitecturii pe proiect nefiind folosit nici un tutorial)
+        </p>
+        <p>
+            Tot în această etapă ne-am ocupat de ultimele două cerințe din secțiunea bonus a <a
+                href="https://profs.info.uaic.ro/~busaco/teach/courses/web/web-projects.html">site-ului dedicat
+                proiectului</a>, după cum urmează: Ramona și Alex C. au creat specificații OpenAPI pentru cele două
+            microservicii, iar Alex O. a rezolvat sugestiile oferite de <a href="https://web.dev/measure/">site-ul
+                indicat în cerință, web.dev</a>.
+        </p>
+        <p>
+            Alte sarcini pe care le-am rezolvat în această etapă: crearea diagramelor proiectului (UML, C4 Level 2, Use
+            case), scrierea documentației, scrierea câtorva Unit teste în serviciul ce se ocupă de atacuri, rezolvarea
+            unor probleme la culori (nu se vedeau bine pe unele navigatoare Web, de exemplu pe Microsoft Edge),
+            rezolvarea unor probleme la exportul statisticilor și rezolvarea completă a problemelor ce țin de partea
+            responsive a aplicației.
+        </p>
     </section>
     <section role="doc-part">
         <h2>6. Funcționalitățile finale ale proiectului
         </h2>
+        <p>
+            În această secțiune vor fi doar amintite, grupate (deci fără detalii), funcționalitățile finale ale
+            aplicației (aplicație web + 2 microservicii), mai multe detalii găsindu-se în <a
+                href="../Ghidul de utilizare a aplicatiei/index.html">ghidul de utilizare</a> și <a
+                href="../Raport interfata si interactiunea cu utilizatorul/index.html">raportul privind interfața și
+                interacțiunea cu utilizatorul</a>
+        </p>
+        <ul>
+            <li>
+                O „pagină de destinație” de pe care utilizatorul își poate crea un cont sau se poate loga
+            </li>
+            <li>
+                Patru pagini dedicate funcționalității principale a site-ului, vizualizarea și generarea de statistici
+                pe baza mai multor criterii:
+                <ol>
+                    <li>
+                        O pagină cu un formular complex în care utilizatorul poate specifica o mulțime de criterii pe
+                        baza cărora să fie filtrate atacurile din baza de date
+                    </li>
+                    <li>
+                        Două pagini în care vor fi afișate statistici despre atacurile filtrare. Una dintre ele conține
+                        pie charts, bar charts (și altele) și una conține grafice 2D, ambele având butoane ce permit
+                        descărcarea acelor statistici ca și fișiere (csv, png, jpg).
+                    </li>
+                    <li>
+                        O pagină în care pot fi vizualizate într-un tabel (și filtrate/sortate pe baza mai multor
+                        criterii) atacurile utilizate în crearea statisticilor.
+                    </li>
+                </ol>
+            </li>
+            <li>
+                O pagină ce are în centrul ei o hartă pe care vor fi afișate atacuri filtrate pe baza unor criterii -
+                dată, regiune, țară și oraș.
+            </li>
+            <li>
+                O pagină pe care vor fi afișate, sub forma unor carduri, 12 atacuri din baza de date.
+            </li>
+            <li>
+                O pagină în care sunt afișate informații despre un atac specific (identificat printr-un id).
+            </li>
+            <li>
+                O pagină care permite inserarea unui nou atac și o pagină care permite actualizarea informațiilor unui
+                atac (ambele fiind accesibile numai unui utilizator admin).
+            </li>
+            <li>
+                O pagină „Admin Panel” din care pot fi accesate două pagini de tip dashboard („Attacks Dashboard” și
+                „Users Dashboard”), din care un utilizator admin poate șterge sau modifica (direct sau după o
+                redirectare pe altă pagină) informații despre atacurile și utilizatorii din aplicație.
+            </li>
+        </ul>
     </section>
     <section role="doc-part">
         <h2>7. Maniera de folosire a GitHub-ului. Statistici
@@ -215,6 +334,11 @@
     </section>
     <section role="doc-conclusion">
         <h2>9. Concluzie</h2>
+        <p>
+            Datorită faptului că echipa a fost formată doar din studenți motivați să lucreze și pasionați de ceea ce
+            fac, proiectul a evoluat constant (după cum se poate vedea și din cele descrierea progresului de mai sus) și,
+            fiindcă nu au existat pauze, am terminat la timp toate cerințele.
+        </p>
     </section>
 </body>
 
