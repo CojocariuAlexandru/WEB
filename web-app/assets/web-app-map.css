@@ -4,6 +4,7 @@
     grid-template-rows: auto auto auto auto auto auto;
     grid-template-areas: "mapVisualizationHeader mapVisualizationHeader"
         "mapPageMap mapPageMap"
+        "mapDownloadDiv mapDownloadDiv"
         "mapPageDateInput mapPageDateInput"
         "regionForm countryForm"
         "cityForm cityForm"
@@ -36,6 +37,19 @@ h1 {
     grid-area: mapVisualizationHeader;
 }
 
+.web-app .main-wrapper .mapPageGrid .map-download-div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    grid-area: mapDownloadDiv;
+}
+
+.web-app .main-wrapper .mapPageGrid .map-download-div .export-map-right {
+    margin-left: 16px;
+}
+
 .mapVisualizationHeader {
     width: 100%;
 }
@@ -53,6 +67,7 @@ h1 {
         grid-template-rows: auto auto auto auto auto auto auto;
         grid-template-areas: "mapVisualizationHeader"
             "mapPageMap"
+            "mapDownloadDiv"
             "mapPageDateInput"
             "regionForm"
             "countryForm"
@@ -65,5 +80,18 @@ h1 {
         padding: 20px;
 
         box-sizing: border-box;
+    }
+
+    .web-app .main-wrapper .mapPageGrid .map-download-div {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+
+        min-height: auto;
+    }
+
+    .web-app .main-wrapper .mapPageGrid .map-download-div .export-map-right {
+        margin-left: 0;
+        margin-top: 16px;
     }
 }

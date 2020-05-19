@@ -135,12 +135,22 @@
     <div class="google-maps">
     </div>
 
-    <div class='submitButton2'>
-        <button class="button-view-markers" onclick="toggleMarkersVisibility()">Toggle Markers Visibility</button>
-        <span class='span1'></span>
-        <span class='span2'></span>
-        <span class='span3'></span>
-        <span class='span4'></span>
+    <div class="google-maps-wrapper">
+        <div class="export-map button-1" onclick="downloadMapAsImage('jpg')">
+            <span class="button-link1">Export map as JPG</span>
+        </div>
+
+        <div class='submitButton2'>
+            <button class="button-view-markers" onclick="toggleMarkersVisibility()">Toggle Markers Visibility</button>
+            <span class='span1'></span>
+            <span class='span2'></span>
+            <span class='span3'></span>
+            <span class='span4'></span>
+        </div>
+
+        <div class="export-map button-1" onclick="downloadMapAsImage('png')">
+            <span class="button-link1">Export map as PNG</span>
+        </div>
     </div>
 </div>
 

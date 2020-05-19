@@ -1,7 +1,7 @@
 var currentAttack;
 
 function attackIdPageBefore(node, id) {
-    mainContent.innerHTML = '';
+    mainContent.innerHTML = getLoaderHTML();
 
     httpGET(URL_MICROSERVICE_ATTACKS + "/api/attacks/" + id, (res) => {
         let attack = JSON.parse(res.res);
