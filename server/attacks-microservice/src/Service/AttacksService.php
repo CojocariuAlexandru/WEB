@@ -171,6 +171,8 @@ class AttacksService implements iAttacksService
 
     private function setValueBool($decoded, &$transformed, $name)
     {
+        if ($decoded[$name]=="truefalse" || $decoded[$name]=="")
+            return;
         if ($decoded[$name] == "true") {
             $transformed[$name] = "1";
         } else {
