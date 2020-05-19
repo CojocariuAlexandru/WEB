@@ -1,0 +1,389 @@
+@media only screen and (max-width: 999px) {
+    .sortList {
+        flex-direction: column;
+        height: 110px;
+    }
+
+    .searchText {
+        margin-bottom: 10px;
+    }
+
+    .plusSearch {
+        margin-right: 10px;
+        margin-left: 6px;
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    .searchText {
+        margin: 0 20px;
+    }
+
+    .sortList {
+        height: 90px;
+    }
+
+    .plusSearch {
+        margin-right: 30px;
+    }
+}
+
+.listOfAttacks {
+    width: 100%;
+}
+
+h1 {
+    color: #222831;
+}
+
+.listHeading {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+table.attacksTable,
+table.attacksTable tbody {
+    /* border-collapse: collapse; */
+    border-radius: 20px;
+    overflow: hidden;
+    border: 2px solid #286e70;
+}
+
+.recordList {
+    display: flex;
+    flex-direction: column;
+    overflow-x: auto;
+}
+
+div.recordList {
+    border-radius: 20px;
+    margin: 0 50px;
+}
+
+.particularRecord,
+.headingRecordList {
+    display: flex;
+    background-color: #393e46;
+
+    padding: 8px;
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #eee;
+}
+
+.particularRecord:hover {
+    /*https://stackoverflow.com/questions/1625681/dynamically-change-color-to-lighter-or-darker-by-percentage-css-javascript*/
+    filter: brightness(110%);
+    cursor: pointer;
+}
+
+.headingRecordList {
+    color: #eee;
+    font-size: 26px;
+    background-color: #075f64;
+}
+
+.attacksTable,
+.attacksTable tbody {
+    table-layout: auto;
+    width: 100%;
+    display: table-row;
+}
+
+.attacksTable>.headingRecordList>th {
+    cursor: pointer;
+}
+
+.tableCellData {
+    width: 22.75%;
+    text-align: center;
+}
+
+.tableCellDataID {
+    width: 5%;
+    margin-right: 50px;
+    margin-left: 10px;
+    text-align: center;
+    align-items: center;
+}
+
+.tableCellDataAttack {
+    width: 26.75%;
+    text-align: left;
+}
+
+.attackInformation {
+    width: 100%;
+    align-items: center;
+}
+
+.smallScreenHeader {
+    font-weight: bold;
+}
+
+.otherLists {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.sortList {
+    display: flex;
+    background-color: #393e46;
+    margin: 0 50px 40px 50px;
+    border-radius: 16px;
+    padding: 10px;
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+    align-items: center;
+}
+
+.searchText {
+    display: flex;
+    flex: 3;
+    height: 50px;
+    font-size: 20px;
+    border-radius: 40px;
+}
+
+input.searchText {
+    box-sizing: border-box;
+    padding: 0 30px;
+    color: #065e61;
+    width: 100%;
+}
+
+.advancedSearch {
+    box-sizing: border-box;
+    display: flex;
+    flex: 2;
+    height: 50px;
+    background-color: #0a7275;
+    border-radius: 30px;
+    border: #eee dashed 2px;
+    align-items: center;
+    margin: 0 20px;
+    cursor: pointer;
+    align-self: center;
+
+    transition: all .2s;
+}
+
+.advancedSearch:hover {
+    background-color: #065e61;
+    font-size: 22px;
+    padding-left: 30px;
+}
+
+.advancedSearch:active .advancedFields {
+    display: block;
+    position: relative;
+}
+
+.advancedSearchText {
+    color: #eee;
+    width: 100%;
+    text-align: center;
+    margin-right: 6px;
+}
+
+.advancedFields {
+    display: none;
+    position: absolute;
+    z-index: 1;
+}
+
+/* ADVANCED SEARCH */
+.advancedForm,
+.advancedFormSmallScreen {
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    margin: 0 50px;
+    margin-bottom: 50px;
+    padding: 6px;
+    border: 1px solid black;
+    border-radius: 20px;
+    background-color: #075f64;
+    height: 120px;
+}
+
+.searchCriteriaAdvancedForm,
+.searchCriteriaAdvancedInput {
+    display: flex;
+    color: #eee;
+    font-size: 26px;
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+}
+
+.searchCriteriaAdvancedForm>p {
+    font-weight: bold;
+}
+
+.searchCriteriaAdvancedInput {
+    display: flex;
+    align-items: center;
+}
+
+.searchCriteriaAdvancedInput>input[type='text'] {
+    box-sizing: border-box;
+    height: 30px;
+    margin-right: 6px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.advancedIdInput {
+    flex: 1;
+    width: 50px;
+}
+
+.advancedLocationInput,
+.advancedDateInput,
+.advancedTargetInput,
+.advancedAttackInput {
+    flex: 2;
+}
+
+.advancedID {
+    flex: 1;
+}
+
+.advancedLocation,
+.advancedDate,
+.advancedTarget,
+.advancedAttack {
+    flex: 2;
+}
+
+.submitAdvancedInput {
+    border: 2px solid black;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+.submitAdvancedInput,
+.advancedFiller {
+    flex: 1;
+}
+
+/* LIST OF RECORDS */
+
+.changePage {
+    cursor: pointer;
+}
+
+@media screen and (max-width:1200px) {
+
+    .attackTypeForm div,
+    .targetTypeForm div,
+    .weaponTypeForm div {
+        flex-direction: column;
+        padding: 0 0 10px 0;
+    }
+}
+
+@media screen and (max-width:999px) {
+    .web-app .statisticsFormGrid {
+        grid-template-areas: "statisticsFormHeading statisticsFormHeading statisticsFormHeading statisticsFormHeading"
+            "firstRow1 firstRow1 firstRow1 firstRow1"
+            "firstRow2 firstRow2 firstRow2 firstRow2"
+            "attackTypeForm attackTypeForm targetTypeForm targetTypeForm"
+            "weaponTypeForm weaponTypeForm damageForm damageForm"
+            "regionForm regionForm countryForm countryForm"
+            "cityForm cityForm cityForm cityForm"
+            "targTypeSelect targTypeSelect targSubtypeSelect targSubtypeSelect"
+            "weaponTypeSelect weaponTypeSelect weaponSubtypeSelect weaponSubtypeSelect"
+
+            "specificParagraph specificParagraph specificParagraph specificParagraph"
+            "specificTargetName specificTargetName specificTargetNat specificTargetNat"
+            "specificGroup specificGroup specificGroup specificGroup"
+
+            "fourthRow fourthRow fourthRow fourthRow"
+            "button-1 button-1 button-2 button-2"
+            "statistici-buton statistici-buton statistici-buton statistici-buton";
+    }
+
+    .attackTypeForm div,
+    .targetTypeForm div,
+    .weaponTypeForm div,
+    .damageForm div {
+        font-size: 16px;
+    }
+
+    .fourthRow #label1 {
+        font-size: 20px;
+    }
+
+
+    .dataForm1,
+    .firstRow2 input {
+        width: 100px;
+    }
+
+    .slideContainer div span {
+        left: 50px;
+    }
+
+    .dateForm label {
+        display: block;
+    }
+}
+
+@media screen and (max-width:700px) {
+    .web-app .statisticsFormGrid {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto auto auto auto auto auto;
+        grid-template-areas: "statisticsFormHeading"
+            "firstRow1"
+            "firstRow2"
+            "attackTypeForm"
+            "targetTypeForm"
+            "weaponTypeForm"
+            "damageForm"
+            "regionForm"
+            "countryForm"
+            "cityForm"
+            "targTypeSelect"
+            "targSubtypeSelect"
+            "weaponTypeSelect"
+            "weaponSubtypeSelect"
+
+            "specificParagraph"
+            "specificTargetName"
+            "specificTargetNat"
+            "specificGroup"
+
+            "fourthRow"
+            "button-1"
+            "button-2"
+            "statistici-buton";
+        box-sizing: border-box;
+        border: 1px solid black;
+        padding: 10px;
+        font-size: 12px;
+        width: 100%;
+
+        overflow-y: scroll;
+    }
+
+    .attackTypeForm div,
+    .targetTypeForm div,
+    .weaponTypeForm div {
+        flex-direction: row;
+    }
+
+    .fourthRow #label1 {
+        font-size: 16px;
+    }
+}
+
+#submitButton3.statistics-2d-button.submit-button-drawings-page {
+    margin: 12px auto 40px;
+}
+
+.smallAdvancedForm {
+    height: 500px;
+}

@@ -1,0 +1,184 @@
+<div class="grid-container-result">
+    <div class="title-stat">
+        <h2>Statistics result</h2>
+    </div>
+    <div class="fields">
+        <div class="container-fields">
+            <ul>
+                <li>Start date</li>
+                <li>End date</li>
+                <li>Region</li>
+                <li>Country</li>
+                <li>Max number of terrorrists</li>
+                <li>Max number of deaths</li>
+                <li>Max number of wounded</li>
+                <li>Attack type</li>
+                <li>Target type</li>
+                <li>Weapon type</li>
+                <li>Amount of damage</li>
+                <li>Successful attack</li>
+                <li>Extended over 24h</li>
+                <li>Suicide</li>
+
+            </ul>
+
+        </div>
+    </div>
+    <div class="values">
+        <div class="container-values">
+            <ul>
+                <li>{{dateStart}}</li>
+                <li>{{dateFinal}}</li>
+                <li>{{region}}</li>
+                <li>{{country}}</li>
+                <li>{{terrCount}}</li>
+                <li>{{killsCount}}</li>
+                <li>{{woundedCount}}</li>
+                <li>{{attackType}}</li>
+                <li>{{targType}}</li>
+                <li>{{weaponType}}</li>
+                <li>{{damage}}</li>
+                <li>{{success}}</li>
+                <li>{{extended}}</li>
+                <li>{{suicide}}</li>
+            </ul>
+
+        </div>
+    </div>
+    <div class="details details-1" id="countriesList">
+    </div>
+
+    <div class="piee-1">
+        <div class="pie-1"></div>
+        <div class="export export-hide csv-button-left" onclick="downloadCsv('countries')">
+            <span class="button-link1">CSV</span>
+        </div>
+    </div>
+
+    <div class="attack-rate bars">
+        <h4>Attack-rate</h4>
+        <div class="attack-bar-border">
+            <div id="myBar" class="attack-bar">
+                <p>0%</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="damage-made bars">
+        <h4>Damage-made</h4>
+        <div class="damage-bar-border">
+            <div id="myBar2" class="damage-bar">
+                <p>0%</p>
+            </div>
+            <div id="myBar2-2" class="damage-bar-2">
+                <p>0%</p>
+            </div>
+            <div id="myBar2-3" class="damage-bar-3">
+                <p>0%</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="extended24 bars">
+        <h4>Rate extented over 24h</h4>
+        <div class="extended-bar-border">
+            <div id="myBar3" class="extended-bar">
+                <p>0%</p>
+            </div>
+        </div>
+        <div class='submitButton2 export-hide'>
+            <button class="button-get-all" onclick="move()">Get rates</button>
+            <span class='span1'></span>
+            <span class='span2'></span>
+            <span class='span3'></span>
+            <span class='span4'></span>
+        </div>
+    </div>
+
+    <div class="piee-2">
+        <div class="pie-2"></div>
+        <div class="export export-hide csv-button-right" onclick="downloadCsv('attackTypes')">
+            <span class="button-link1">CSV</span>
+        </div>
+    </div>
+
+    <div class="details details-2">
+    </div>
+
+
+    <div class="piee-3">
+        <div class="pie-3"></div>
+        <div class="export export-hide csv-button-left" onclick="downloadCsv('targetTypes')">
+            <span class="button-link1">CSV</span>
+        </div>
+    </div>
+
+    <div class="details details-3">
+    </div>
+
+    <div class="piee-4">
+        <div class="pie-4"></div>
+        <div class="export export-hide csv-button-right" onclick="downloadCsv('weaponTypes')">
+            <span class="button-link1">CSV</span>
+        </div>
+    </div>
+    <div class="details details-4">
+    </div>
+
+    <div class="world-map">
+        <div class="world-map-element"></div>
+    </div>
+
+</div>
+
+<div class="google-maps-container">
+    <div class="google-maps">
+    </div>
+
+    <div class='submitButton2'>
+        <button class="button-view-markers" onclick="toggleMarkersVisibility()">Toggle Markers Visibility</button>
+        <span class='span1'></span>
+        <span class='span2'></span>
+        <span class='span3'></span>
+        <span class='span4'></span>
+    </div>
+</div>
+
+<div class="grid-container-result-buttons no-margin">
+    <div class="export export-hide button-1" onclick="downloadImageAs('svg', 'grid-container-result')">
+        <span class="button-link1">SVG</span>
+    </div>
+    <div class="export export-hide button-2" onclick="downloadImageAs('png', 'grid-container-result')">
+        <span class="button-link1">PNG</span>
+    </div>
+    <div class="export export-hide button-3" onclick="downloadImageAs('jpg', 'grid-container-result')">
+        <span class="button-link1">JPG</span>
+    </div>
+    <div class="export export-hide button-4" onclick="downloadCsv('allAttacks');">
+        <span class="button-link1">CSV</span>
+    </div>
+    <div class="export export-hide button-5" onclick="downloadImageAs('gif', 'grid-container-result')">
+        <span class="button-link1">GIF</span>
+    </div>
+    <div class="export export-hide button-6" onclick="downloadImageAs('bmp', 'grid-container-result')">
+        <span class="button-link1">BMP</span>
+    </div>
+
+    <section class='table submitForm'>
+        <div class='submitButton2 modified' onclick="navigateRoot('/statistics-results-2D')">
+            <input type='button' value='More statistics' class='submitButton'>
+            <span class='span1'></span>
+            <span class='span2'></span>
+            <span class='span3'></span>
+            <span class='span4'></span>
+        </div>
+
+        <div class='submitButton2 modified' onclick="navigateRoot('/statistics-drawings')">
+            <input type='button' value='View Filtered Attacks' class='submitButton'>
+            <span class='span1'></span>
+            <span class='span2'></span>
+            <span class='span3'></span>
+            <span class='span4'></span>
+        </div>
+    </section>
+</div>
