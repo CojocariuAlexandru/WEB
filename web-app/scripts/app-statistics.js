@@ -128,6 +128,7 @@ function sendStatisticsRequest() {
 
   httpPOST(URL_MICROSERVICE_ATTACKS + "/api/attacks/filters", filters, (result) => {
     parsed1 = JSON.parse(result.res);
+    newAttacks = true;
     navigateRoot('/statistics-results');
   }, (eroare) => {
     console.log(eroare);

@@ -50,7 +50,7 @@
 
     <div class="piee-1">
         <div class="pie-1"></div>
-        <div class="export csv-button-left" onclick="downloadCsv('countries')">
+        <div class="export export-hide csv-button-left" onclick="downloadCsv('countries')">
             <span class="button-link1">CSV</span>
         </div>
     </div>
@@ -86,7 +86,7 @@
                 <p>0%</p>
             </div>
         </div>
-        <div class='submitButton2'>
+        <div class='submitButton2 export-hide'>
             <button class="button-get-all" onclick="move()">Get rates</button>
             <span class='span1'></span>
             <span class='span2'></span>
@@ -97,7 +97,7 @@
 
     <div class="piee-2">
         <div class="pie-2"></div>
-        <div class="export csv-button-right" onclick="downloadCsv('attackTypes')">
+        <div class="export export-hide csv-button-right" onclick="downloadCsv('attackTypes')">
             <span class="button-link1">CSV</span>
         </div>
     </div>
@@ -108,7 +108,7 @@
 
     <div class="piee-3">
         <div class="pie-3"></div>
-        <div class="export csv-button-left" onclick="downloadCsv('targetTypes')">
+        <div class="export export-hide csv-button-left" onclick="downloadCsv('targetTypes')">
             <span class="button-link1">CSV</span>
         </div>
     </div>
@@ -118,7 +118,7 @@
 
     <div class="piee-4">
         <div class="pie-4"></div>
-        <div class="export csv-button-right" onclick="downloadCsv('weaponTypes')">
+        <div class="export export-hide csv-button-right" onclick="downloadCsv('weaponTypes')">
             <span class="button-link1">CSV</span>
         </div>
     </div>
@@ -136,7 +136,7 @@
     </div>
 
     <div class='submitButton2'>
-        <button class="button-view-markers" onclick="toggleMarkersVisibility()">Show markers</button>
+        <button class="button-view-markers" onclick="toggleMarkersVisibility()">Toggle Markers Visibility</button>
         <span class='span1'></span>
         <span class='span2'></span>
         <span class='span3'></span>
@@ -145,22 +145,22 @@
 </div>
 
 <div class="grid-container-result-buttons no-margin">
-    <div class="export button-1" onclick="downloadImageAs('svg', 'grid-container-result')">
+    <div class="export export-hide button-1" onclick="downloadImageAs('svg', 'grid-container-result')">
         <span class="button-link1">SVG</span>
     </div>
-    <div class="export button-2" onclick="downloadImageAs('png', 'grid-container-result')">
+    <div class="export export-hide button-2" onclick="downloadImageAs('png', 'grid-container-result')">
         <span class="button-link1">PNG</span>
     </div>
-    <div class="export button-3" onclick="downloadImageAs('jpg', 'grid-container-result')">
+    <div class="export export-hide button-3" onclick="downloadImageAs('jpg', 'grid-container-result')">
         <span class="button-link1">JPG</span>
     </div>
-    <div class="export button-4" onclick="downloadCsv('allAttacks');">
+    <div class="export export-hide button-4" onclick="downloadCsv('allAttacks');">
         <span class="button-link1">CSV</span>
     </div>
-    <div class="export button-5" onclick="downloadImageAs('gif', 'grid-container-result')">
+    <div class="export export-hide button-5" onclick="downloadImageAs('gif', 'grid-container-result')">
         <span class="button-link1">GIF</span>
     </div>
-    <div class="export button-6" onclick="downloadImageAs('bmp', 'grid-container-result')">
+    <div class="export export-hide button-6" onclick="downloadImageAs('bmp', 'grid-container-result')">
         <span class="button-link1">BMP</span>
     </div>
 
