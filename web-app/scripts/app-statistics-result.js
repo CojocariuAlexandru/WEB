@@ -242,6 +242,11 @@ function addPiechart() {
         };
         var chart = new google.visualization.PieChart(piechartDivision);
         chart.draw(data, options);
+
+        let hiddenButton = document.querySelector('.csv-button-hidden');
+        if (hiddenButton != null) {
+            hiddenButton.className = "export export-hide csv-button-left";
+        }
     }
 }
 

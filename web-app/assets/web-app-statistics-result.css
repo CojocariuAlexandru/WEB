@@ -301,6 +301,10 @@
 
 /* BUTTON-1 BUTTON-2 BUTTON-3 */
 
+.web-app .csv-button-hidden {
+  visibility: hidden;
+}
+
 .export {
   text-align: center;
   margin: 40px auto;

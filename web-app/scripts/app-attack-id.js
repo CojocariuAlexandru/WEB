@@ -118,10 +118,12 @@ function areYouSure() {
         let currentAttackID = currentURL.split("/"); //get current attack ID - currentAttackID[5]
 
         httpDELETE(URL_MICROSERVICE_ATTACKS + "/api/attacks/" + currentAttackID[5], (result) => {
-            navigateRoot('');
+            showSuccess('Attack removed successfully!', 2000, () => {
+                navigateRoot('/attacks');
+            });
         }, (error) => {
             //ALERT
-            console.log(error);
+            showError('Error! ' + error.res, 2000);
         });
     }
 }
@@ -157,8 +159,7 @@ function showWiki() {
                 window.open(wikiURL);
             })
             .catch(function (error) {
-                console.log(error);
+                showError('Error! ' + error.res, 2000);
             });
     }
-
 }

@@ -103,10 +103,12 @@ function generateAttackInsertObject() {
         number2 = id_result[0]['id'];
         nume = '/attacks/';
         number = nume.concat(number2);
-        navigateRoot(number);
+
+        showSuccess('Attack inserted successfully!', 2000, () => {
+            navigateRoot(number);
+        });
     }, (error) => {
         //ALERT
-        console.log(error);
+        showError('Error! ' + error.res, 2000);
     });
-
 }

@@ -131,7 +131,7 @@ function sendStatisticsRequest() {
     newAttacks = true;
     navigateRoot('/statistics-results');
   }, (eroare) => {
-    console.log(eroare);
+    showError('Error! ' + error.res, 2000);
   });
 
   mainContent.innerHTML = getLoaderHTML();

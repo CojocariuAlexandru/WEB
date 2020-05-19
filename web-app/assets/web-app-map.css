@@ -33,10 +33,12 @@
 }
 
 h1 {
-    width: 100%;
     grid-area: mapVisualizationHeader;
 }
 
+.mapVisualizationHeader {
+    width: 100%;
+}
 
 .mapPageViewButton {
     grid-area: mapPageView;

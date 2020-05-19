@@ -39,6 +39,7 @@ function attackUpdateIdPageInit(node, id) {
 
     }, (err) => {
         // cod in caz de eroare
+        showError('Error! ' + error.res, 2000);
     });
 }
 
@@ -140,6 +141,6 @@ function generateAttackUpdateObject() {
         navigateRoot('/attacks/' + currentAttackID[5]);
     }, (error) => {
         //ALERT
-        console.log(error);
+        showError('Error! ' + error.res, 2000);
     });
 }

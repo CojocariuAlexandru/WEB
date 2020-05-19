@@ -10,17 +10,21 @@ function usersDashboardInit(node) {
         compiledUsersDashboardTemplate = Handlebars.compile(loadPage(node.template));
         mainContent.innerHTML = compiledUsersDashboardTemplate(users);
     }, (err) => {
-        console.log(err);
+        showError('Error! ' + error.res, 2000);
     });
 }
 
 function removeUser(rowIndex) {
-    httpDELETE(URL_MICROSERVICE_USERS + '/api/users/' + users[rowIndex].id, (response) => {
-        users.splice(rowIndex, 1);
-        mainContent.innerHTML = compiledUsersDashboardTemplate(users);
-    }, (err) => {
-        console.log(err);
-    });
+    let result = confirm("Are you sure?");
+    if (result == true) {
+        httpDELETE(URL_MICROSERVICE_USERS + '/api/users/' + users[rowIndex].id, (response) => {
+            users.splice(rowIndex, 1);
+            mainContent.innerHTML = compiledUsersDashboardTemplate(users);
+            showSuccess('User removed successfully!', 2000);
+        }, (err) => {
+            showError('Error! ' + err.res, 2000);
+        });
+    }
 }
 
 function toggleUserAdmin(rowIndex, value) {
@@ -31,8 +35,9 @@ function toggleUserAdmin(rowIndex, value) {
             }), (result) => {
                 users[rowIndex].admin = value;
                 mainContent.innerHTML = compiledUsersDashboardTemplate(users);
+                showSuccess('User updated successfully!');
             }, (err) => {
-
+                showError('Error! ' + err.res, 2000);
             });
     }
 }

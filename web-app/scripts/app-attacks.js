@@ -9,7 +9,7 @@ function attacksPageInit(node) {
             previewAttacks = JSON.parse(response.res);
             displayPreviewAttacks(node, previewAttacks);
         }, (error) => {
-            console.log(error);
+            showError('Error! ' + error.res, 2000);
         });
     } else {
         displayPreviewAttacks(node, previewAttacks);

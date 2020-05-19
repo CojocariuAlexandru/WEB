@@ -18,7 +18,7 @@ function mapPageInit(node) {
         parsed = JSON.parse(result.res);
         displayAttacksOnMap(parsed);
     }, (error) => {
-        console.log(error);
+        showError('Error! ' + error.res, 2000);
     });
 
     generate(regions, ".regionForm", "Region of the attack", "allRegions",  `<input list='allRegions' id='allRegionsInput' onchange=populate('allRegionsInput','.countryForm') >`);
@@ -68,7 +68,7 @@ function sendMapVisualizationRequest() {
             displayAttacksOnMap(parsed);
         }, 1000);
     }, (err) => {
-        console.log(err);
+        showError('Error! ' + error.res, 2000);
     });
 }
 

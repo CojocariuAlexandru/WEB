@@ -15,6 +15,10 @@ h1 {
     color: #065e61;
 }
 
+.admin-panel-wrapper .admin-panel-header {
+    margin-top: 24px;
+}
+
 .admin-panel-body-wrapper {
     display: flex;
     flex-direction: row;

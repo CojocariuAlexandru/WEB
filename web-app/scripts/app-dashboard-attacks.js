@@ -38,9 +38,10 @@ function dashboardPageAttacksDelete(index) {
         httpDELETE(URL_MICROSERVICE_ATTACKS + "/api/attacks/" + dashboardAttacks[index].id, (result) => {
             dashboardAttacks.splice(index, 1);
             displayAttacksDashboard(dashboardAttacks, page);
+            showSuccess('Attack removed successfully!', 2000);
         }, (error) => {
             //ALERT
-            console.log(error);
+            showError('Error! ' + error.res, 2000);
         });
     }
 }
@@ -52,7 +53,7 @@ function loadAttacksDashboardPage(newPage, onPage) {
         displayAttacksDashboard(pageAttacks, newPage);
         page = newPage;
     }, (err) => {
-        console.log(err);
+        showError('Error! ' + error.res, 2000);
     })
 }
 
