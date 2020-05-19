@@ -272,7 +272,7 @@ function addPiechart() {
         if (hiddenButton != null) {
             hiddenButton.className = "export export-hide csv-button-left";
         }
-    }
+    }  
 }
 
 function addPiechart2() {
