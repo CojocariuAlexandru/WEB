@@ -14,27 +14,276 @@
     </header>
     <section role="doc-toc">
         <h2>
-            Cuprinsul raportului
+            Cuprins
         </h2>
         <ol>
             <li>Introducere</li>
-            <li>Viziunea asupra arhitecturii proiectului final</li>
-            <li>Functionalitatile aplicatiei</li>
-            <li>Interactiunea cu utilizatorul</li>
-            <li>Membrii echipei</li>
+            <li>Pagină de prezentare</li>
+            <li>Înregistrare și autentificare</li>
+            <li>Pagină principală</li>
+            <li>Formularul de statistici</li>
+            <li>Vizualizare statistici și exportul acestora</li>
+            <li>Vizualizare atacuri participante la statistică</li>
+            <li>Pagina unui atac</li>
+            <li>Harta atacurilor</li>
+            <li>Pagină de atacuri</li>
+            <li>Admin</li>
+            <li>Paginile de actualizare și adăugare a unui atac</li>
             <li>Concluzie</li>
-        </ol>
+      </ol>
     </section>
     <section role="doc-introduction">
         <h2>
             1. Introducere
         </h2>
         <p>
-            TeVi este o aplicatie ce permite vizualizarea de statistici despre atacuri teroriste
+            Acest raport conține un ghid de utilizare a aplicației Tevi,
+            realizată de către studenții Albert Ramona Georgiana, Cojocariu Alexandru și Oloieri Alexandru,
+            în timpul celui de-al doilea semestru al anului universitar 2019-2020,
+            Facultatea de Informatică Iași.
+        </p>
+        <p>
+            Această aplicație este "user-friendly" și folosirea sa nu necesită o pregătire în prealabil.
+            Cu toate acestea, acest ghid va ajuta utilizatorul să descopere multitudinea de opțiuni puse 
+            la dispoziție și va îmbunătăți experiența acestuia.
         </p>
     </section>
+    <section role="doc-part">
+        <h2>
+            2. Pagină de prezentare
+        </h2>
+        <p>
+            Pagina de prezentare, după cum spune și titlul, introduce funcționalitățile puse la dispoziție ale aplicației
+            (vizualizarea hărții cu atacuri, realizarea și exportarea statisticilor), 
+            precum și echipa noastră (câte o fotografie, un citat după care ne îndrumăm, contactele noastre). 
+            Aceasta are un design plăcut, fiind primul contact cu utilizatorul.
+        </p>
+        <p>
+            Această pagină este de asemenea și portalul către aplicația propriu-zisă. 
+        </p>
+    </section>
+    <section role="doc-part">
+        <h2>
+            3. Înregistrare și autentificare
+        </h2>
+        <p>
+            Sus există un meniu, prin care putem naviga în această pagină.
+            Implicit va apărea posibilitatea de autentificare, dar în caz că nu aveți un cont, puteți accesa 
+            "SignUp" pentru înregistrare.
+        </p>
+        <p>
+            Înregisrarea se va face pe baza unui nume de utilizator și a unei parole. În caz că numele 
+            utilizatorului este deja luat, veți fi informat acest lucru și va trebui să alegeți altul.
+            Parolele trebuie să coincidă.
+        </p>
+        <p>
+            După ce v-ați înregistrat, veți fi redirecționat către autentificare unde veți completă
+            numele de utilizator și parolă dumneavoastră.
+        </p>
+
+    </section>
+    <section role="doc-part">
+        <h2>
+            4. Pagină principală
+        </h2>
+        <p>
+            Această pagină este alcătuită din mai multe elemente. În primul rând, puteți observă în stânga 
+            meniul prin care puteți naviga prin toate funcționalitățile aplicației. În cele ce urmează 
+            vom prezenta pașii de utilizare a fiecărei pagini în parte.
+        </p>
+        <p>
+            Sus există un header, cu numele dumneavoastră de utilizator și posibilitatea de a ieșire din cont 
+            prin apăsarea butonului logout.
+        </p>
+        <p>
+            Pe această pagină sunt prezente trei carduri, care, prin apăsare,  va vor redirecta la aceleași pagini 
+            la care ați fi fost redirectati și prin meniul din stânga. Acestea sunt puse pentru a adaugă
+            informații legate de fiecare funcționalitate a aplicației. 
+        </p>
+    </section>
+
+    <section role="doc-part">
+        <h2>
+            5. Formularul de statistici
+        </h2>
+        <p>
+            În acest formular puteți preciza toate informațiile pe baza cărora se va face statistica 
+            dumneavoastră. Acesta este contruit pentru a fi cât mai intuitiv și ușor de folosit. 
+            De exemplu, la alegerea regiunii, noi vă vom îndruma prin completare automată, iar odată 
+            selectată aceasta, veți fi îndrumați în a completă o țară din această regiune.
+        </p>
+        <p>
+            Sus puteți preciza din ce interval de timp doriți să extragem atacurile cu care vom 
+            face statistice. De asemenea, puteți preciza gravitatea atacurilor, prin tragerea de buton 
+            pentru numărul maxim de atacatori, victime sau răniți. Pentru ușurință puteți marca 
+            tipurile de atac folosite, armele folosite, țintă atacului, 
+            precum și pagumele ce au survenit în urma atacului. În plus, puteți alege dacă atacul a fost
+            unul realizat cu succes, dacă a fost o sinucidere, sau dacă a depășit 24 de ore prin 
+            marcarea checkbox-urilor din partea de jos.
+        </p>
+        <p>
+            În partea de jos, apăsând butonul "More details", vi se va înlocui pagină cu una în care 
+            puteți preciza mai multe detalii mai fine, precum orașul, numele grupului terorist,
+            naționalitatea și numele țintei atacului, subtipui armei folosite etc. Completarea acestei
+            pagini necesită o acuratețe a datelor introduse deoarece pentru un nume scris greșit,
+            nu vom găși atacuri care să corespundă. Recomandăm căutarea datelor în prealabil în motorul
+            de căutare Google pentru precizarea lor cu strictețe.
+        </p>
+        <p>
+            După ce terminați de completat toate câmpurile pe pe care vrei să le specificați (absolut 
+            toate pot fi lăsate necompletate) apăsăți butonul "Submit" și așteptați că aplicația 
+            să vă genereze statisticile dorite.
+        </p>
+        
+
+    </section>
+
+    <section role="doc-part">
+        <h2>
+            5. Vizualizare statistici și exportul acestora
+        </h2>
+        <p>
+            În partea de sus a paginii, aveți toate datele cu care s-au făcut statisticile. Atunci când
+            le veți exporta, acestea vor fi de mare folos pentru a vă reaminti în ce condiții ați primit aceste statistici.
+        </p>
+        <p>
+            În această pagină puteți vizualiza patru "piecharts" pentru a vizualiza procentul țărilor atacate, 
+            armelor folosite, tipurilor țintei, precum și a atacului. Sub fiecare dintre acestea există un buton "CSV"
+            prin care puteți downloada în format CSV aceste date. În partea de jos a paginii există butoane
+            pentru majoritatea tipurile de export (SVG, PNG, JPG, GIF, BMP). Butonul CVS de jos va exporta atacurile
+            utilizate din baza de date pentru a vă oferi posibilitatea de a o importa într-un program Python
+            și a realiza propriile statistici.  
+        </p>
+        <p>
+            Pentru a avea o experiență interactivă, trebuie să apasti pe butoanele "Get rates" și "Show markers"
+            pentru a vedea câte atacuri au avut succes, procentul daunelor cauzate, precum și atacurile pe harta.
+            În stânga și în dreapta butonului "Show markers", aveți 2 butoane "Export map as PNG” și 
+            „Export map as JPG” prin care veți putea exportă harta în ce mod doriți.
+        </p>
+        <p>
+            În partea de jos, există un buton "More statistics" care vă va duce la o pagină cu mai multe statistici
+            2D. Și din această pagină puteți face exportul în același mod. Butonul "View Filtered Attacks" vă
+            va redirecta la o pagină în care veți putea afla mai multe detalii despre fiecare atac în parte
+            utilizat pentru această statistică.
+        </p>
+        
+
+    </section>
+    <section role="doc-part">
+        <h2>
+            6. Vizualizare atacuri participante la statistică
+        </h2>
+        <p>
+            În această pagină gășiți un tabel cu toate atacurile folosite pentru a realiza statisticile 
+            vizualizate anterior. Prin introducerea unui id în bara de search puteți găsi rapid un atac
+            pentru care doriți să aflați mai multe informații. În caz că nu cunoașteți id-ul atacului, 
+            prin apăsarea butonului "Advanced search", vi se va deschide un fomrular mai complex, care prin
+            completare și apăsarea butonului "Send", va filtra atacurile. De asemenea, puteți apasă pe câmpurile
+            din header-ul tabelului pentru a le sorta în funcție de fiecare în parte.
+            Prin apăsarea unei înregistrări din tabel, veți fi trimis pe pagina atacului respectiv.
+        </p>
+    </section>
+
+    <section role="doc-part">
+        <h2>
+            7. Pagina unui atac
+        </h2>
+        <p>
+            Această pagină, va prezenta toate dataliile unui atac, detalii ce nu pot face parte dintr-o
+            statistică, precum rezumatul atacului, motivele acestuia, detalii despre arme, citatele unor
+            oameni ce au avut un rol în atacul respectiv etc. Nu se omit nici detaliile punctuale,
+            precum locația, numărul victimelor, a teroriștilor, a răniților. Veți vedea în această pagină
+            doar datele cunoscute despre atacul respectiv.
+        </p>
+        <p>
+            În dreapta sus, puteți vizualiza locația atacului (puteți apropia harta sau îndepărta,
+            după preferințe). De asemenea, la secțiunea "Weapon details", veți găsi un buton "WIKI".
+            Prin apăsarea acestuia, vi se va deschide o nouă pagină cu detaliile de pe Wikipedia în legătură
+            cu armele folosite (nu veți părăsi pagina curentă).
+        </p>
+    </section>
+
+
+    <section role="doc-part">
+        <h2>
+            8. Harta atacurilor
+        </h2>
+        <p>
+            Dacă apăsăm butonul "Map" din meniul din dreapta, ajungem pe pagina hărții. În partea de jos, 
+            puteți completa un mic formular pe baza căruia se vor afișa atacurile pe hartă (este o parte
+            din fomularul complex de la statistici). Prin apăsarea butonului "Submit" veți vizualiza pe 
+            hartă locațiile tuturor atacurilor găsite ce respectă formularul completat.
+            Tot în partea de jos, există două butoane „Export map as PNG” și 
+            „Export map as JPG” prin care veți putea exporta harta în ce mod doriți.
+        </p>
+    </section>
+
+
+    <section role="doc-part">
+        <h2>
+            9. Pagină de atacuri
+        </h2>
+        <p>
+            Această pagină poate fi accesată din meniu -> Attacks. Ea conține, într-o formă paginată, 
+            toate atacurile din baza noastră de date. Pentru fiecare card puteți vizualiza locația sa 
+            pe harta, precum și câteva date pentru a vă fi ușor să identificați un atac.
+        </p>
+        <p>
+           În partea de sus, în dreapta, există o bară de Search prin care puteți caută un atac cu 
+           un anumit id. Odată apăsat pe un asemenea card, veți fi redirecționat la "Pagina unui atac".
+           Ghidul acestei pagini îl găsiți la punctul 7.Pagina unui atac.
+        </p>
+    </section>
+
+    <section role="doc-part">
+        <h2>
+            10. Admin
+        </h2>
+        <p>
+            A fi admin înseamnă a avea permisiunea de a efectua operații ce schimbă starea serverului.
+            Pentru a deveni unul, este nevoie ca un admin să seteze această opțiune pentru dumneavoastră.
+         </p>
+ 
+         <p>
+             Odată intrați în contul dumneavoastră de admin, veți observa că în meniu a apărut o nouă opțiune,
+             și a nume "Admin P.". Prin apăsarea acestei opțiuni veți fi redirectat la o pagină
+             de selectare a modulului pe care vreți să-l administrați (atacurile sau utilizatorii).
+          </p>
+          <p>
+              "Attacks dashboard" vă va duce către o pagină cu toate atacurile, aflate într-o prezentare paginată
+              (câte 50 de atacuri pe pagină). Dacă apăsați pe un atac din listă, veți ajunge pe pagina unui atac
+              care pe lângă datele cunoscute de la punctul 7. al acestui ghid de utilizare, veți observa și 
+              două butoane în partea de jos, "Update" și "Delete". Prin apăsarea butonului "Delete" veți 
+              fi întrebat dacă sunteți sigur că vreți să ștergeți de tot acel atac, iar prin acceptare puteți
+              realiza această acțiune cu succes. Pagina de actualizare va fi prezentată în cele ce urmează.
+         </p>
+         <p>
+             "Users dashboard" vă va duce către o pagină cu toți utilizatorii aplicației.
+             Din această pagină puteți face un utilizator să fie admin, sau îl puteți șterge apăsând butonul "x",
+             din partea dreapta (apare prin "hover"-ul unei înregistrări din tabel).
+        </p>
+        
+    </section>
+    <section role="doc-part">
+        <h2>
+            11. Paginile de actualizare și adăugare a unui atac
+        </h2>
+        <p>
+            Aceste pagini sunt de asemenea intuitive și ușor de folosit. Pagina de actualizare a unui atac
+            va fi completată cu datele deja existente ale acestuia, toate câmpurile fiind deschise la schimbare.
+            Odată ce ați actualizat câmpurile dorite, prin apăsarea butonului "Update", veți fi redirecționat
+            la pagina atacului respectiv, cu schimbările efectuate.
+         </p>
+         <p>
+             Pagina de adăugarea a unui atac, va fi similară cu cea de actualizare doar că nu va fi completată în
+             prealabil cu nimic. Odată ce ați completat toate compurile cunoscute și apăsăți butonul "Insert",
+             veți fi redirecționat la pagina atacului respectiv să vedeți cum arată.
+          </p>
+    </section>
+
+    
     <section typeof="sa:AuthorsList">
-        <h2>5. Membrii echipei</h2>
+        <h2>12. Membrii echipei</h2>
         <ul>
             <li typeof="sa:ContributorRole" property="schema:author">
                 <span typeof="schema:Person">
@@ -76,7 +325,12 @@
         </ul>
     </section>
     <section role="doc-conclusion">
-        <h2>6. Concluzie</h2>
+        <h2>13. Concluzie</h2>
+        <p>
+            În concluzie, aplicația Tevi este una "user-friendly", iar acest ghid de utilizare vine în 
+            ajutorul celora care nu înțeleg viziunea noastră asupra acestei aplicații sau celor care 
+            doresc să exploreze fiecare optțune în parte.
+        </p>
     </section>
 </body>
 
