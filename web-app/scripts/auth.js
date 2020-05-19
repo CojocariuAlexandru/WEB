@@ -61,7 +61,7 @@ function signInUser(username, pwd, onSuccess, onError) {
         username: username,
         password: pwd
     };
-    
+
     httpPOST(URL_MICROSERVICE_USERS + '/api/login', JSON.stringify(loginObj), (res) => {
         onSuccess(res);
     }, (err) => {

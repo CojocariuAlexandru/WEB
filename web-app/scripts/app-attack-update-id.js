@@ -4,12 +4,15 @@ function attackUpdateIdPageInit(node, id) {
         // cod in caz de success
         let parsed = JSON.parse(res.res)[0];
         let compiledTemplate = Handlebars.compile(loadPage(node.template));
-        if (parsed.succes == "0")
+        if (parsed.succes == "0") {
             parsed.succes = "";
-        if (parsed.extended == "0")
+        }
+        if (parsed.extended == "0") {
             parsed.extended = "";
-        if (parsed.suicide == "0")
+        }
+        if (parsed.suicide == "0") {
             parsed.suicide = "";
+        }
         mainContent.innerHTML = compiledTemplate(parsed);
 
         generateUpdate(regions, parsed.region, ".update-region", "Region", "allRegions", `<input list='allRegions'
@@ -60,8 +63,9 @@ function generateUpdate(listOfValues, selected, selectClass, name, id, input) {
     let values = Object.keys(listOfValues);
     divElement.innerHTML = divElement.innerHTML + input;
     let index = 0;
-    for (index = 0; index < values.length; index++)
+    for (index = 0; index < values.length; index++) {
         optionChoose.innerHTML = optionChoose.innerHTML + `<option value="${values[index]}">`;
+    }
 
     divElement.innerHTML = divElement.innerHTML + '</datalist>';
     divElement.appendChild(optionChoose);
@@ -130,15 +134,18 @@ function generateAttackUpdateObject() {
         sCite2: `${scite2Update.value}`.trim(),
         sCite3: `${scite3Update.value}`.trim()
     };
-    if (filters["date"] == "")
+    if (filters["date"] == "") {
         filters["date"] = "0000-00-00"
+    }
     filters = JSON.stringify(filters);
 
     let currentURL = window.location.href; //get current URL
     let currentAttackID = currentURL.split("/"); //get current attack ID - currentAttackID[5]
 
     httpPUT(URL_MICROSERVICE_ATTACKS + "/api/attacks/" + currentAttackID[5], filters, (result) => {
-        navigateRoot('/attacks/' + currentAttackID[5]);
+        showSuccess('Attack information updated successfully!', 2000, () => {
+            navigateRoot('/attacks/' + currentAttackID[5]);
+        });
     }, (error) => {
         //ALERT
         showError('Error! ' + error.res, 2000);

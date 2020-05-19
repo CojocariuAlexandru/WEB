@@ -494,11 +494,11 @@ input[type="checkbox"]:checked+label::before {
 
 
 
-.booleene{
+.booleene {
     display: flex;
     flex-direction: row;
 }
 
-.label{
-    margin-left:10px;
+.label {
+    margin-left: 10px;
 }

@@ -374,7 +374,7 @@ function showAdvancedForm(windowWidth) {
             </div>
             <input type='text' id='advancedAttackInput' class='advancedAttackInput'>
             <input type='text' id='advancedTargetInput' class='advancedTargetInput'>
-            <input type='button' id='submitAdvancedInput' class='submitAdvancedInput' value='Send' onclick='showRecordsByWidth()'>
+            <input type='button' id='submitAdvancedInput' class='submitAdvancedInput' value='Search' onclick='showRecordsByWidth()'>
         </div>
         `;
     } else {

@@ -263,6 +263,10 @@ input.searchText {
     font-size: 20px;
 }
 
+.submitAdvancedInput:hover {
+    cursor: pointer;
+}
+
 .submitAdvancedInput,
 .advancedFiller {
     flex: 1;
