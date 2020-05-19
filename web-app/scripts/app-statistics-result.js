@@ -272,7 +272,11 @@ function addPiechart() {
         if (hiddenButton != null) {
             hiddenButton.className = "export export-hide csv-button-left";
         }
-    }
+    }  
+
+    var imgUri = piechartDivision.getImageURI();
+        // do something with the image URI, like:
+        window.open(imgUri);
 }
 
 function addPiechart2() {

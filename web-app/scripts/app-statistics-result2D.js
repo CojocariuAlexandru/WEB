@@ -19,6 +19,7 @@ function initStatisticsResult2D(node) {
 function drawAllCharts() {
     let headingStatistics2D;
     windowWidth = window.innerWidth;
+    addSuccessRate();
     if (windowWidth <= 520) {
         windowWidth = windowWidth + 160;
     }
@@ -447,6 +448,7 @@ function toggleCSVList() {
 }
 
 function goBackToMainStatisticsPage() {
+    parsed1 = parsed1Copy;
     mainContent.innerHTML = getLoaderHTML();
     setTimeout(() => {
         navigateRoot('/statistics-results');
