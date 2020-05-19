@@ -11,8 +11,7 @@
     "details-2 details-2 details-2 pie-2 pie-2 pie-2"
     "pie-3 pie-3 pie-3 details-3 details-3 details-3"
     "details-4 details-4 details-4 pie-4 pie-4 pie-4"
-    "world-map world-map world-map world-map world-map world-map"
-    "google-map google-map google-map google-map google-map google-map";
+    "world-map world-map world-map world-map world-map world-map";
   width: 100%;
   margin-bottom: 40px;
 }
@@ -480,8 +479,7 @@
       "pie-3 pie-3 pie-3 pie-3 pie-3 pie-3"
       "details-4 details-4 details-4 details-4 details-4 details-4"
       "pie-4 pie-4 pie-4 pie-4 pie-4 pie-4"
-      "world-map world-map world-map world-map world-map world-map"
-      "google-map google-map google-map google-map google-map google-map";
+      "world-map world-map world-map world-map world-map world-map";
   }
 
   .grid-container-result-buttons {
@@ -563,8 +561,7 @@
       "pie-3 pie-3 pie-3 pie-3 pie-3 pie-3"
       "details-4 details-4 details-4 details-4 details-4 details-4"
       "pie-4 pie-4 pie-4 pie-4 pie-4 pie-4"
-      "world-map world-map world-map world-map world-map world-map"
-      "google-map google-map google-map google-map google-map google-map";
+      "world-map world-map world-map world-map world-map world-map";
   }
 
   .fields .container-fields {

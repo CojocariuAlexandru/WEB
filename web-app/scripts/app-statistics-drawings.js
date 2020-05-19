@@ -353,7 +353,7 @@ function showAdvancedForm(windowWidth) {
     advancedForm.setAttribute('id', 'advancedForm');
     advancedForm.setAttribute('class', 'advancedForm');
 
-    if(windowWidth >= 1000){
+    if (windowWidth >= 1000) {
         advancedForm.innerHTML =
             `
         <div id = 'searchCriteriaAdvancedForm' class = 'searchCriteriaAdvancedForm'>
@@ -377,11 +377,10 @@ function showAdvancedForm(windowWidth) {
             <input type='button' id='submitAdvancedInput' class='submitAdvancedInput' value='Send' onclick='showRecordsByWidth()'>
         </div>
         `;
-    }
-    else{
+    } else {
         console.log('here');
         advancedForm.innerHTML =
-        `
+            `
             <p id='advancedID' class='advancedID'>       ID          </p>
             <input type='text' id='advancedIdInput' class='advancedIdInput'>
 
@@ -411,7 +410,7 @@ function showAdvancedForm(windowWidth) {
         advancedForm.style.fontWeight = 'bold';
     }
     if (advancedFormOn == 0) {
-        
+
         listOfAttacksPage.insertBefore(advancedForm, listOfAttacksPage.children[3]);
         advancedFormOn = 1;
     } else {
@@ -429,24 +428,23 @@ function showRecordsByInput() {
     let attackValue = -1;
     let targetValue = -1;
     let idForm;
-    let locationForm; 
+    let locationForm;
     let dateStartForm;
-    let dateFinalForm; 
+    let dateFinalForm;
     let attackForm;
     let targetForm;
 
-    if(advancedFormOn == 1){
+    if (advancedFormOn == 1) {
         idForm = document.querySelector('#advancedIdInput');
-        }
-        else{
-            idForm = document.querySelector('#searchText');
-        }
-    
+    } else {
+        idForm = document.querySelector('#searchText');
+    }
+
     if (`${idForm.value}`) {
         idValue = `${idForm.value}`;
     }
 
-    if(advancedFormOn == 1 && enteredMainForm == 0){
+    if (advancedFormOn == 1 && enteredMainForm == 0) {
         locationForm = document.querySelector('#advancedLocationInput');
         if (`${locationForm.value}`) {
             locationValue = `${locationForm.value}`;
@@ -488,8 +486,8 @@ function showRecordsByInput() {
                 enteredMainForm == 1 ||
                 (dateStartTime.getTime() <= timeOnParticularRecord.getTime() &&
                     dateFinalTime.getTime() >= timeOnParticularRecord.getTime() ||
-                dateStartValue == -1 ||
-                dateFinalValue == -1
+                    dateStartValue == -1 ||
+                    dateFinalValue == -1
                 )
             )
         ) {
@@ -500,8 +498,8 @@ function showRecordsByInput() {
     parsed1 = parsed1Aux;
 }
 
-function basicFormSearch(){
-    if(event.keyCode == 13){
+function basicFormSearch() {
+    if (event.keyCode == 13) {
         enteredMainForm = 1;
         showRecordsByInput();
         showRecordsByWidth();
