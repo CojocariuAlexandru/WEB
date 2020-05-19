@@ -32,7 +32,8 @@ function sendStatisticsRequest() {
 
   let dateStartInput = document.querySelector('#dateInputStart');
   let dateFinalInput = document.querySelector('#dateInputFinal');
-  let successInput = document.querySelector('#succesInput');
+  let successInput = document.querySelector('#successInput');
+  let successInputNO = document.querySelector('#successInputNO');
   let knownInput = document.querySelector('#knownInput');
   let terroristNumberInput = document.querySelector('#rangeTerr');
   let deathsNumberInput = document.querySelector('#rangeDeaths');
@@ -53,6 +54,10 @@ function sendStatisticsRequest() {
   let targetNatFormInputMORE = document.querySelector('#allTargetNationalitiesInput');
   let groupFormInputMORE = document.querySelector('#allGroupsInput');
   let suicideFormInput = document.querySelector('#suicideInput');
+  let suicideFormInputNO = document.querySelector('#suicideInputNO');
+  let extendedInput = document.querySelector('#extendedInput');
+  let extendedInputNO = document.querySelector('#extendedInputNO');
+
 
   let weaponsChecked = [];
   let attacksChecked = [];
@@ -102,6 +107,25 @@ function sendStatisticsRequest() {
     finalTargetToSend = targetsChecked;
   }
 
+  let suicideValue = "";
+  let successValue = "";
+  let extendedValue = "";
+
+  if (successInput.checked)
+    successValue = successValue.concat("true");
+  if (successInputNO.checked)
+    successValue = successValue.concat("false");
+
+  if (extendedInput.checked)
+    extendedValue = extendedValue.concat("true");
+  if (extendedInputNO.checked)
+    extendedValue = extendedValue.concat("false");
+
+  if (suicideFormInput.checked)
+    suicideValue = suicideValue.concat("true");
+  if (suicideFormInputNO.checked)
+    suicideValue = suicideValue.concat("false");
+
   filters = {
     dateStart: `${dateStartInput.value}`,
     dateFinal: `${dateFinalInput.value}`,
@@ -120,9 +144,9 @@ function sendStatisticsRequest() {
     propExtent: `${damagesChecked}`,
     region: `${regionFormInput.value}`,
     country: `${countryFormInput.value}`,
-    success: `${successInput.checked}`,
-    extended: `${extendedInput.checked}`,
-    suicide: `${suicideFormInput.checked}`
+    success: successValue,
+    extended: extendedValue,
+    suicide: suicideValue
   };
   filters = JSON.stringify(filters);
 

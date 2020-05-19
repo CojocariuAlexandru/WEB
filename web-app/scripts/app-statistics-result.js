@@ -27,6 +27,7 @@ function getFilters() {
     let resultFilters = {};
     let oldFilters = filters;
     filters = JSON.parse(filters);
+    // console.log(filters);
     if (filters["dateStart"] == "") {
         resultFilters["dateStart"] = "01/01/1970";
     } else {
@@ -52,17 +53,33 @@ function getFilters() {
     resultFilters["killsCount"] = filters["killsCount"];
     resultFilters["woundedCount"] = filters["woundedCount"];
 
-    resultFilters["success"] = filters["success"];
-    resultFilters["extended"] = filters["extended"];
-    resultFilters["suicide"] = filters["suicide"];
+    if (filters["success"]=="" || filters["success"]=="truefalse")
+        resultFilters["success"] = "Yes/No";
+    else
+         resultFilters["success"]=filters["success"];
+
+    if (filters["extended"]=="" || filters["extended"]=="truefalse")
+        resultFilters["extended"] = "Yes/No";
+    else
+        resultFilters["extended"]=filters["extended"];
+
+    if (filters["suicide"]=="" || filters["suicide"]=="truefalse")
+        resultFilters["suicide"] = "Yes/No";
+    else
+        resultFilters["suicide"]=filters["suicide"];
 
     resultFilters["attackType"] = attackTypes[1][0];
     resultFilters["targType"] = targTypes[1][0];
     resultFilters["weaponType"] = weaponTypes[1][0];
 
-    if (damages.length > 2)
-        resultFilters["damage"] = damages[2][0];
-    else
+    console.log(damages);
+
+    if (damages.length > 1){
+        if (damages[1][0]!="")
+            resultFilters["damage"] = damages[1][0];
+        else resultFilters["damage"] = "Unknown";
+    }
+    else 
         resultFilters["damage"] = "Unknown";
 
     filters = oldFilters;
@@ -396,12 +413,12 @@ function addColumnChart() {
 function getAttacksRate() {
     let nrSuccess = 0;
     for (attack in parsed1) {
-        if (parsed1[attack]["extended"] == "1") {
+        if (parsed1[attack]["success"] == "1") {
             nrSuccess++;
         }
     }
     nrSuccess = nrSuccess * 100;
-    return nrSuccess / parsed1.length;
+    return Math.floor(nrSuccess / parsed1.length);
 }
 
 function getExtendRate() {
@@ -412,7 +429,7 @@ function getExtendRate() {
         }
     }
     nrExtended = nrExtended * 100;
-    return nrExtended / parsed1.length;
+    return Math.floor(nrExtended / parsed1.length);
 }
 
 function getDamageMade() {
