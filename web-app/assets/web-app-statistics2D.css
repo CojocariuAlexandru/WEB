@@ -48,8 +48,7 @@
 
 .optionsCSV {
     background-color: #065c5f;
-    width: 185px;
-
+    width: 100%;
 }
 
 .optionsCSV>span {
@@ -82,4 +81,16 @@
 
 .dropdownWrapper:hover .optionsCSV.four-options {
     top: -117px;
+}
+
+.dropdownWrapper:hover .optionsCSV.three-options {
+    top: -88px;
+}
+
+.dropdownWrapper:hover .optionsCSV.two-options {
+    top: -59px;
+}
+
+.dropdownWrapper:hover .optionsCSV.one-options {
+    top: -30px;
 }

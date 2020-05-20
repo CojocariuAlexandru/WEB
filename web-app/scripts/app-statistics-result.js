@@ -173,12 +173,6 @@ function statisticsResultsPageInit(node) {
         weaponTypes = resultArray[4];
         damages = resultArray[5];
 
-        // sort(countries);
-        // sort(attackTypes);
-        // sort(targTypes);
-        // sort(regions);
-        // sort(weaponTypes);
-        // sort(damages);
         resultFilters = getFilters();
     }
 
@@ -877,3 +871,4 @@ function downloadSVGorPNG(pieChart, type) {
         });
     });
 }
+

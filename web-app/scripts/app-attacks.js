@@ -21,7 +21,7 @@ function displayPreviewAttacks(node, attacks) {
     mainContent.innerHTML = compiledTemplate(attacks);
 
     initAttacksPageEvents();
-    // initMaps(attacks);
+    initMaps(attacks);
 }
 
 function initAttacksPageEvents() {
@@ -45,8 +45,8 @@ function initMaps(attacks) {
 
     for (let i = 0; i < count; ++i) {
         let pos = {
-            lat: parseInt(attacks[i]['latitude']),
-            lng: parseInt(attacks[i]['longitude'])
+            lat: parseFloat(attacks[i]['latitude']),
+            lng: parseFloat(attacks[i]['longitude'])
         };
 
         let map = new google.maps.Map(cards[i].children[0], {

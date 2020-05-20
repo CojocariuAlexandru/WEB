@@ -6,10 +6,19 @@ var frequencyOfAttacks;
 var frequencyOfWeaponType;
 var windowWidth;
 var toggleCSV = 0;
+var objSVG2dPlots = {};
 
 function initStatisticsResult2D(node) {
     parsed1Copy = parsed1;
     mainContent.innerHTML = loadPage(node.template);
+
+    sort(countries);
+    sort(attackTypes);
+    sort(targTypes);
+    sort(regions);
+    sort(weaponTypes);
+    sort(damages);
+
     createMatrices();
     getFrequencies();
     window.addEventListener('resize', drawAllCharts);
@@ -17,47 +26,137 @@ function initStatisticsResult2D(node) {
     document.querySelector('#scroll-to').scrollIntoView();
 }
 
+function removeDownloadSvgButton(chartType) {
+    let toQuery = '.svg-' + chartType + '-button';
+    let doc = document.querySelector(toQuery);
+    if (doc != null) {
+        console.log(toQuery);
+        doc.remove();
+    }
+}
+
+function digitToStr(dig) {
+    if (dig < 0 || dig > 6) {
+        return 'null';
+    }
+    if (dig == 1) {
+        return 'one;'
+    } else if (dig == 2) {
+        return 'two';
+    } else if (dig == 3) {
+        return 'three';
+    } else if (dig == 4) {
+        return 'four';
+    } else if (dig == 5) {
+        return 'five';
+    }
+    return 'six';
+}
+
 function drawAllCharts() {
     let headingStatistics2D;
     windowWidth = window.innerWidth;
+
+    let added = 0;
+
     addSuccessRate();
     if (windowWidth <= 520) {
         windowWidth = windowWidth + 160;
     }
     if (countries.length > 5) {
+        objSVG2dPlots.countries = [
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            []
+        ];
         addCountryPreferences();
+        ++added;
     } else {
         headingStatistics2D = document.querySelector('#headerCountries');
         headingStatistics2D.remove();
+        removeDownloadSvgButton('countries');
     }
 
     if (regions.length > 5) {
-
+        objSVG2dPlots.regions = [
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            []
+        ];
         addRegionsPreferences();
+        ++added;
     } else {
         headingStatistics2D = document.querySelector('#headerRegions');
         headingStatistics2D.remove();
+        removeDownloadSvgButton('regions');
     }
 
     if (targTypes.length > 5) {
+        objSVG2dPlots.attackTargets = [
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            []
+        ];
         addTargetPreferences();
+        ++added;
     } else {
         headingStatistics2D = document.querySelector('#headerTargets');
         headingStatistics2D.remove();
+        removeDownloadSvgButton('attack-targets');
     }
 
     if (attackTypes.length > 5) {
+        objSVG2dPlots.attackMethods = [
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            []
+        ];
         addAttackPreferences();
+        ++added;
     } else {
         headingStatistics2D = document.querySelector('#headerAttacks');
         headingStatistics2D.remove();
+        removeDownloadSvgButton('attack-methods');
     }
 
     if (weaponTypes.length > 5) {
+        objSVG2dPlots.attackWeapons = [
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            []
+        ];
         addWeaponTypePreferences();
+        ++added;
     } else {
         headingStatistics2D = document.querySelector('#headerWeapons');
         headingStatistics2D.remove();
+        removeDownloadSvgButton('weapons');
+    }
+
+    let strClass = digitToStr(added);
+    let obj = document.querySelector('.statistics-2d-page-csv-options');
+    if (obj != null) {
+        obj.className = 'optionsCSV statistics-2d-page-csv-options ' + strClass + '-options';
     }
 }
 
@@ -255,9 +354,17 @@ function addCountryPreferences() {
     let data;
     let countryPreferencesDocument = document.querySelector('.plotCountry');
 
+    objSVG2dPlots.countries[6] = [countries[1][0], countries[2][0], countries[3][0], countries[4][0], countries[5][0]];
     data = [];
     data.push(['Year', countries[1][0], countries[2][0], countries[3][0], countries[4][0], countries[5][0]]);
     for (i = 1970; i <= 2025; i++) {
+        objSVG2dPlots.countries[0].push(frequencyOfCountries[countries[1][0]][i]);
+        objSVG2dPlots.countries[1].push(frequencyOfCountries[countries[2][0]][i]);
+        objSVG2dPlots.countries[2].push(frequencyOfCountries[countries[3][0]][i]);
+        objSVG2dPlots.countries[3].push(frequencyOfCountries[countries[4][0]][i]);
+        objSVG2dPlots.countries[4].push(frequencyOfCountries[countries[5][0]][i]);
+        objSVG2dPlots.countries[5].push(i);
+
         data.push([i.toString(), frequencyOfCountries[countries[1][0]][i], frequencyOfCountries[countries[2][0]][i], frequencyOfCountries[countries[3][0]][i], frequencyOfCountries[countries[4][0]][i], frequencyOfCountries[countries[5][0]][i]]);
     }
     google.charts.load('current', {
@@ -454,4 +561,55 @@ function goBackToMainStatisticsPage() {
     setTimeout(() => {
         navigateRoot('/statistics-results');
     }, 100);
+}
+
+// https://plotly.com/javascript/line-charts/
+function downloadSVG2D(fileName, objProp, plotName) {
+    if (objSVG2dPlots[objProp] == null) {
+        return;
+    }
+
+    let trace1 = {
+        x: objSVG2dPlots[objProp][5],
+        y: objSVG2dPlots[objProp][0],
+        mode: 'lines',
+        name: objSVG2dPlots[objProp][6][0]
+    };
+    let trace2 = {
+        x: objSVG2dPlots[objProp][5],
+        y: objSVG2dPlots[objProp][1],
+        mode: 'lines',
+        name: objSVG2dPlots[objProp][6][1]
+    };
+    let trace3 = {
+        x: objSVG2dPlots[objProp][5],
+        y: objSVG2dPlots[objProp][2],
+        mode: 'lines',
+        name: objSVG2dPlots[objProp][6][2]
+    };
+    let trace4 = {
+        x: objSVG2dPlots[objProp][5],
+        y: objSVG2dPlots[objProp][3],
+        mode: 'lines',
+        name: objSVG2dPlots[objProp][6][3]
+    };
+    let trace5 = {
+        x: objSVG2dPlots[objProp][5],
+        y: objSVG2dPlots[objProp][4],
+        mode: 'lines',
+        name: objSVG2dPlots[objProp][6][4]
+    };
+
+    let data = [trace1, trace2, trace3, trace4, trace5];
+    let layout = {
+        title: plotName
+    };
+
+    let el = document.createElement('div');
+    Plotly.newPlot(el, data, layout).then(function (gd) {
+        Plotly.downloadImage(gd, {
+            format: 'svg',
+            filename: fileName
+        });
+    });
 }
