@@ -20,11 +20,18 @@
             <div class='dropdownWrapper'>
                 <div class="optionsCSV statistics-2d-page-csv-options">
                     <!-- five-options -->
-                    <span class='svg-countries-button' onclick="downloadSVG2D('country-2d', 'countries', 'Top 5 attacked countries');">Countries</span>
-                    <span class='svg-regions-button' onclick="downloadSVG2D('region-2d', 'regions');">Regions</span>
-                    <span class='svg-attack-targets-button' onclick="downloadSVG2D('target-2d', 'attackTargets');">Attack target</span>
-                    <span class='svg-attack-methods-button' onclick="downloadSVG2D('attack-2d', 'attackMethods');">Attack method</span>
-                    <span class='svg-weapons-button' onclick="downloadSVG2D('weapon-2d', 'attackWeapons');">Weapons</span>
+                    <span class='svg-countries-button'
+                        onclick="downloadSVG2D('country-2d', 'countries', 'Top 5 attacked countries');">Countries</span>
+                    <span class='svg-regions-button'
+                        onclick="downloadSVG2D('region-2d', 'regions', 'Top 5 attacked regions');">Regions</span>
+                    <span class='svg-attack-targets-button'
+                        onclick="downloadSVG2D('target-2d', 'attackTargets', 'Top 5 attack targets');">Attack
+                        target</span>
+                    <span class='svg-attack-methods-button'
+                        onclick="downloadSVG2D('attack-2d', 'attackMethods', 'Top 5 attack methods');">Attack
+                        method</span>
+                    <span class='svg-weapons-button'
+                        onclick="downloadSVG2D('weapon-2d', 'attackWeapons', 'Top 5 weapons used');">Weapons</span>
                 </div>
                 <div class="button-link1">&#8593; SVG &#8593;</div>
             </div>
@@ -32,9 +39,6 @@
         <div class="export button-2" onclick="downloadImageAs('png', 'plots2D')">
             <span class="button-link1">PNG</span>
         </div>
-        <!-- <div class="export button-3" onclick="downloadImageAs('jpg', 'plots2D')">
-            <span class="button-link1">JPG</span>
-        </div> -->
         <div class="export button-4">
             <div class='dropdownWrapper'>
                 <div class="optionsCSV five-options">
@@ -48,12 +52,6 @@
                 <div class="button-link1">&#8593; CSV &#8593;</div>
             </div>
         </div>
-        <!-- <div class="export button-5" onclick="downloadPdf()">
-            <span class="button-link1">PDF</span>
-        </div>
-        <div class="export button-6" onclick="downloadImageAs('bmp', 'plots2D')">
-            <span class="button-link1">BMP</span>
-        </div> -->
     </div>
 
     <section class='table submitForm'>
