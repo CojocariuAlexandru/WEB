@@ -153,12 +153,18 @@ function sendStatisticsRequest() {
   httpPOST(URL_MICROSERVICE_ATTACKS + "/api/attacks/filters", filters, (result) => {
     parsed1 = JSON.parse(result.res);
     newAttacks = true;
+
     navigateRoot('/statistics-results');
   }, (eroare) => {
     showError('Error! ' + error.res, 2000);
   });
 
   mainContent.innerHTML = getLoaderHTML();
+
+  var script = document.createElement("script");
+  script.setAttribute("type", "text/javascript");
+  script.setAttribute("src", "https://cdn.plot.ly/plotly-latest.min.js");
+  document.getElementsByTagName("body")[0].appendChild(script);
 }
 
 function generateWeapons() {

@@ -15,6 +15,8 @@ var markersVisible;
 
 var newAttacks = true;
 
+var svgObjectArrays = {}
+
 function fillField(filters1, name) {
     if (filters1[name] == "") {
         return "All";
@@ -118,6 +120,12 @@ function constructParagraf(countries, name, title, exclude) {
     elem.appendChild(list);
 }
 
+function removeStrFromArrOfArr() {
+    for (let i = 0; i < svgObjectArrays.weaponTypes[0].length; ++i) {
+        svgObjectArrays.weaponTypes[0][i] = svgObjectArrays.weaponTypes[0][i].replace("(not to include vehicle-borne explosives, i.e., car or truck bombs)", "");
+    }
+}
+
 function statisticsResultsPageInit(node) {
     if (parsed1.length == 0) {
         mainContent.innerHTML = '<div class="attackDetailText2">  <p> No attacks found </p> </div>'
@@ -128,6 +136,22 @@ function statisticsResultsPageInit(node) {
         newAttacks = false;
 
         let resultArray = [countries, attackTypes, targTypes, regions, weaponTypes, damages];
+        svgObjectArrays.countries = [
+            [],
+            []
+        ];
+        svgObjectArrays.attackTypes = [
+            [],
+            []
+        ];
+        svgObjectArrays.targTypes = [
+            [],
+            []
+        ];
+        svgObjectArrays.weaponTypes = [
+            [],
+            []
+        ];
 
         dateFrequency = new Array(2030).fill(0);
 
@@ -138,7 +162,9 @@ function statisticsResultsPageInit(node) {
             ['region', 'Most frequently attacked regions', 'region'],
             ['weaponType', 'Most frequently used weapons', 'weaponType', 3],
             ['damages', 'The most commonly used weapons', 'propExtent']
-        ], resultArray);
+        ], resultArray, ['countries', 'attackTypes', 'targTypes', 'weaponTypes']);
+
+        removeStrFromArrOfArr();
 
         countries = resultArray[0];
         attackTypes = resultArray[1];
@@ -147,32 +173,53 @@ function statisticsResultsPageInit(node) {
         weaponTypes = resultArray[4];
         damages = resultArray[5];
 
-        sort(countries);
-        sort(attackTypes);
-        sort(targTypes);
-        sort(regions);
-        sort(weaponTypes);
-        sort(damages);
-
         resultFilters = getFilters();
     }
 
     let compiledTemplate = Handlebars.compile(loadPage(node.template));
     mainContent.innerHTML = compiledTemplate(resultFilters);
 
-    addPiechart();
-    addPiechart2();
-    addPiechart3();
-    addPiechart4();
+    // addPiechart();
+    // addPiechart2();
+    // addPiechart3();
+    // addPiechart4();
 
-    addColumnChart();
+    setTimeout(() => {
+        addPiechart();
+        constructParagraf(countries, ".details-1", "The most frequently attacked countries", "Country");
+    }, 200);
+    setTimeout(() => {
+        addPiechart2();
+        constructParagraf(attackTypes, ".details-2", "The most frequent types of attack", "AttackType");
+    }, 500);
+    setTimeout(() => {
+        addPiechart4();
+        constructParagraf(weaponTypes, ".details-4", "The most commonly used weapons", "weaponType");
+        addPiechart3();
+        constructParagraf(targTypes, ".details-3", "The most attacked targets", "TargetType");
+        addColumnChart();
+    }, 1000);
 
-    constructParagraf(countries, ".details-1", "The most frequently attacked countries", "Country");
-    constructParagraf(attackTypes, ".details-2", "The most frequent types of attack", "AttackType");
-    constructParagraf(targTypes, ".details-3", "The most attacked targets", "TargetType");
-    constructParagraf(weaponTypes, ".details-4", "The most commonly used weapons", "weaponType");
+    // setTimeout(() => {
+    //     addPiecharts();
+    //     constructParagraf(countries, ".details-1", "The most frequently attacked countries", "Country");
+    //     constructParagraf(attackTypes, ".details-2", "The most frequent types of attack", "AttackType");
+    //     constructParagraf(targTypes, ".details-3", "The most attacked targets", "TargetType");
+    //     constructParagraf(weaponTypes, ".details-4", "The most commonly used weapons", "weaponType");
+    // }, 50);
+}
 
+function initMap() {
     initWorldMap();
+
+    let buttonInit = document.querySelector('.map-button-init');
+    if (buttonInit != null) {
+        buttonInit.parentElement.removeChild(buttonInit);
+    }
+    let buttonToggle = document.querySelector('.map-button-hidden');
+    if (buttonToggle != null) {
+        buttonToggle.className = 'button-view-markers';
+    }
 }
 
 function initWorldMap() {
@@ -183,6 +230,8 @@ function initWorldMap() {
             lat: 30,
             lng: 0
         },
+        streetviewControl: false,
+        fullscreenControl: false,
         scrollwheel: false,
         zoom: 2,
         styles: getMapNightModeStyle()
@@ -205,7 +254,7 @@ function toggleMarkersVisibility() {
     ...
 ]
 */
-function computeDataArrs(dataArrArg, resultArrs) {
+function computeDataArrs(dataArrArg, resultArrs, svgObjectProperties) {
     let dataMap = [];
     for (let i = 0; i < dataArrArg.length; ++i) {
         resultArrs[i] = [
@@ -231,11 +280,22 @@ function computeDataArrs(dataArrArg, resultArrs) {
     }
 
     for (let i = 0; i < dataMap.length; ++i) {
-        for (let mapObj in dataMap[i]) {
-            resultArrs[i].push([mapObj, dataMap[i][mapObj]]);
+        let id = dataArrArg[i][3],
+            mapO;
+        if (id == undefined) {
+            for (let mapObj in dataMap[i]) {
+                resultArrs[i].push([mapObj, dataMap[i][mapObj]]);
+            }
+        } else {
+            for (let mapObj in dataMap[i]) {
+                mapO = dataMap[i][mapObj];
+                resultArrs[i].push([mapObj, mapO]);
+                svgObjectArrays[svgObjectProperties[id]][0].push(mapObj);
+                svgObjectArrays[svgObjectProperties[id]][1].push(mapO);
+            }
         }
-        if (dataArrArg[i][3] != undefined) {
-            numberFields[dataArrArg[i][3]] = parsed1.length;
+        if (id != undefined) {
+            numberFields[id] = parsed1.length;
         }
     }
 }
@@ -244,6 +304,50 @@ function sort(arrayOfArrays) {
     arrayOfArrays.sort((a, b) => {
         a[1] > b[1];
     });
+}
+
+function addPiecharts() {
+    let piechartDivision1 = document.querySelector('.pie-1');
+    let piechartDivision2 = document.querySelector('.pie-2');
+    let piechartDivision3 = document.querySelector('.pie-3');
+    let piechartDivision4 = document.querySelector('.pie-4');
+
+    google.charts.load('current', {
+        'packages': ['corechart']
+    });
+    google.charts.setOnLoadCallback(drawCharts);
+
+    function drawCharts() {
+        var data = google.visualization.arrayToDataTable(countries);
+        var options = {
+            'fontSize': 10,
+            'colors': ['#054a4d', '#065e61', '#0da3a8', '#09865d', '#062a61'],
+            'width': '100%',
+            'height': 300,
+            'is3D': true,
+            'backgroundColor': 'transparent',
+            'margin': '0 auto'
+        };
+
+        var chart = new google.visualization.PieChart(piechartDivision1);
+        chart.draw(data, options);
+        let hiddenButton = document.querySelector('.csv-button-hidden');
+        if (hiddenButton != null) {
+            hiddenButton.className = "export export-hide csv-button-left";
+        }
+
+        data = google.visualization.arrayToDataTable(attackTypes);
+        chart = new google.visualization.PieChart(piechartDivision2);
+        chart.draw(data, options);
+
+        data = google.visualization.arrayToDataTable(targTypes);
+        chart = new google.visualization.PieChart(piechartDivision3);
+        chart.draw(data, options);
+
+        data = google.visualization.arrayToDataTable(weaponTypes);
+        chart = new google.visualization.PieChart(piechartDivision4);
+        chart.draw(data, options);
+    }
 }
 
 function addPiechart() {
@@ -256,7 +360,6 @@ function addPiechart() {
     function drawChart() {
         var data = google.visualization.arrayToDataTable(countries);
         var options = {
-            // 'title' : 'Most frequently attacked',
             'fontSize': 10,
             'colors': ['#054a4d', '#065e61', '#0da3a8', '#09865d', '#062a61'],
             'width': '100%',
@@ -272,7 +375,7 @@ function addPiechart() {
         if (hiddenButton != null) {
             hiddenButton.className = "export export-hide csv-button-left";
         }
-    }  
+    }
 }
 
 function addPiechart2() {
@@ -285,7 +388,6 @@ function addPiechart2() {
     function drawChart() {
         var data = google.visualization.arrayToDataTable(attackTypes);
         var options = {
-            // 'title' : 'Most used attack',
             'fontSize': 10,
             'colors': ['#054a4d', '#065e61', '#0da3a8', '#09865d', '#062a61'],
             'width': '100%',
@@ -301,7 +403,6 @@ function addPiechart2() {
 
 function addPiechart3() {
     let piechartDivision = document.querySelector('.pie-3');
-
     google.charts.load('current', {
         'packages': ['corechart']
     });
@@ -310,7 +411,6 @@ function addPiechart3() {
     function drawChart() {
         var data = google.visualization.arrayToDataTable(targTypes);
         var options = {
-            // 'title' : 'Most used attack',
             'fontSize': 10,
             'colors': ['#054a4d', '#065e61', '#0da3a8', '#09865d', '#062a61'],
             'width': '100%',
@@ -335,7 +435,6 @@ function addPiechart4() {
     function drawChart() {
         var data = google.visualization.arrayToDataTable(weaponTypes);
         var options = {
-            // 'title' : 'Most used attack',
             'fontSize': 10,
             'colors': ['#054a4d', '#065e61', '#0da3a8', '#09865d', '#062a61'],
             'width': '100%',
@@ -596,11 +695,14 @@ function roundTo3Decimal(num) {
 }
 
 function downloadMapAsImage(imageType) {
+    if (map == null) {
+        return;
+    }
     let zoom = map.getZoom();
     let lat = roundTo5Decimal(map.getCenter().lat());
     let lon = roundTo5Decimal(map.getCenter().lng());
 
-    let url = `https://maps.googleapis.com/maps/api/staticmap?format=${imageType}&center=${lat},${lon}&zoom=${zoom}&size=1800x800&scale=4`;
+    let url = 'https://maps.googleapis.com/maps/api/staticmap?format=' + imageType + '&center=' + lat + ',' + lon + '&zoom=' + zoom + '&size=1800x800&scale=4';
 
     // https://stackoverflow.com/questions/2906427/how-to-get-all-visible-markers-on-current-zoom-level
     if (markersArray.length > 0) {
@@ -609,14 +711,13 @@ function downloadMapAsImage(imageType) {
         url += '&markers=color:blue';
         for (let i = 0; i < markersArray.length && url.length < 8050; ++i) {
             if (bounds.contains(markersArray[i].getPosition())) {
-                url += '|';
-                url += `|${roundTo3Decimal(markersArray[i].getPosition().lat())},${roundTo3Decimal(markersArray[i].getPosition().lng())}`;
+                url += '|' + roundTo3Decimal(markersArray[i].getPosition().lat()) + ',' + roundTo3Decimal(markersArray[i].getPosition().lng());
             }
         }
     }
     url += '&key=AIzaSyArmUBaQ5YHtD4pd1omfn4m6i4wlVkmsTA';
 
-    saveAs(url, `map.${imageType}`);
+    saveAs(url, 'map.' + imageType);
 }
 
 function createCSV() {
@@ -742,28 +843,32 @@ function downloadCsv(name) {
     link.click();
 }
 
-function downloadSVG(){
-    let piechart = document.querySelector('svg:first-child');
-    var serializer = new XMLSerializer();
-    var source = serializer.serializeToString(piechart);
-
-    if(!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)){
-        source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
+function downloadSVGorPNG(pieChart, type) {
+    if (type != 'svg' && type != 'png'){
+        return;
     }
-    if(!source.match(/^<svg[^>]+"http\:\/\/www\.w3\.org\/1999\/xlink"/)){
-        source = source.replace(/^<svg/, '<svg xmlns:xlink="http://www.w3.org/1999/xlink"');
-    }
-    source = '<?xml version="1.0" standalone="no"?>\r\n' + source;
+    
+    var data = [{
+        values: svgObjectArrays[pieChart][1],
+        labels: svgObjectArrays[pieChart][0],
+        type: 'pie',
+        textinfo: "label+percent",
+        textposition: "outside",
+        automargin: true
+    }];
 
-    var svgContent = "data:image/svg+xml;charset=utf-8,"+encodeURIComponent(source);
+    var layout = {
+        height: 700,
+        width: 900,
+        showLegend: false
+    };
 
-    var encodedUri = encodeURI(svgContent);
-    window.open(encodedUri);
-    var encodedUri = encodeURI(svgContent);
-    var link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "attacksSVG.svg");
-    document.body.appendChild(link); // Required for FF
-
-    link.click();
+    let el = document.createElement('div');
+    Plotly.newPlot(el, data, layout).then(function (gd) {
+        Plotly.downloadImage(gd, {
+            format: type,
+            filename: pieChart
+        });
+    });
 }
+

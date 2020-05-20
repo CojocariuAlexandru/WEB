@@ -110,7 +110,7 @@ function switchLoginSignup() {
         signupComponent.style.display = 'none';
     }
     login = !login;
-    document.querySelector('#empty').scrollIntoView();
+    document.querySelector('.presentation-empty').scrollIntoView();
 }
 
 function signUp() {

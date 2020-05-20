@@ -1,0 +1,163 @@
+swagger: '2.0'
+info:
+  description: This is the TeVi API
+  version: 1.0.0
+  title: TeVi API
+  # put the contact info for your development or API team
+  contact:
+    email: albert.ramona99@gmail.com
+
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+# tags are used for organizing operations
+tags:
+- name: users
+  description: Operations performed by the microservice handling the users
+
+paths:
+  /api/users/{userId}:
+    delete:
+      tags:
+        - users
+      summary: Deletes an user from the database based on his id.
+      parameters:
+        - in: header
+          name: Authorization
+          description: Authorization key for having required privileges
+          type: string
+          required: true
+        - in: path
+          name: userId
+          description: User's id
+          type: integer
+          required: true
+          
+
+
+
+      responses:
+        200:
+          description: OK
+        204:
+          description: No content
+        400:
+          description: Bad Request
+        404:
+          description: The user does not exist
+
+    patch:
+      tags:
+        - users
+      summary: Updates privileges of one user
+      parameters:
+        - in: header
+          name: Authorization
+          description: Authorization key for having required privileges
+          required: true
+          type: string
+        - in: body
+          name: Privilege info
+          description: The privileges to be set
+          required: true
+          schema:
+            $ref: '#/definitions/UserPatchInfo'
+        - in: path
+          name: userId
+          description: User's id
+          type: integer
+          required: true
+      responses:
+        200:
+          description: OK
+        400:
+          description: Bad Request
+        404:
+          description: Not found
+  /api/users:
+    get:
+      tags:
+        - users
+      summary: Gets all the users from the database
+      parameters:
+        - in: header
+          name: Authorization
+          description: Authorization key for having required privileges
+          type: string
+          required: true
+
+      responses:
+        200:
+          description: OK
+  
+  /api/login:
+    post:
+      tags:
+        - users
+      summary: Makes a request to login using some credidentials
+      parameters:
+        - in : body
+          name : LoginInfo
+          description: Credidentials used to login into an account
+          required: true
+          schema:
+            $ref: '#/definitions/LoginInfo'
+      consumes:
+        - application/json
+      produces:
+        - text
+      responses:
+        200:
+          description: OK
+        400:
+          description: Verification input not valid
+          
+  /api/register:
+    post:
+      tags:
+        - users
+      summary: Makes a request to register using some credidentials
+      parameters:
+        - in : body
+          name : RegisterInfo
+          description: Credidentials used to register into an account
+          required: true
+          schema:
+            $ref: '#/definitions/LoginInfo'
+      responses:
+        200:
+          description: OK
+        400:
+          description: Verification input not valid
+          
+    
+definitions:
+  UserPatchInfo:
+    type: object
+    required:
+    - admin
+    properties:
+      admin:
+        type: boolean
+        example: true
+      
+  LoginInfo:
+    type: object
+    required:
+    - username
+    - password
+    properties:
+      username:
+        type: string
+        example: BEMmibui
+      password:
+        type: string
+        example: password123
+
+
+# Added by API Auto Mocking Plugin
+host: tevi-users-microservice.herokuapp.com
+basePath: /
+schemes:
+ - https

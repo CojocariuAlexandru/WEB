@@ -16,33 +16,41 @@
     </div>
 
     <div class="grid-container-result-buttons">
-        <div class="export button-1" onclick="downloadImageAs('svg', 'plots2D')">
-            <span class="button-link1">SVG</span>
+        <div class="export button-1">
+            <div class='dropdownWrapper'>
+                <div class="optionsCSV statistics-2d-page-csv-options">
+                    <!-- five-options -->
+                    <span class='svg-countries-button'
+                        onclick="downloadSVG2D('country-2d', 'countries', 'Top 5 attacked countries');">Countries</span>
+                    <span class='svg-regions-button'
+                        onclick="downloadSVG2D('region-2d', 'regions', 'Top 5 attacked regions');">Regions</span>
+                    <span class='svg-attack-targets-button'
+                        onclick="downloadSVG2D('target-2d', 'attackTargets', 'Top 5 attack targets');">Attack
+                        target</span>
+                    <span class='svg-attack-methods-button'
+                        onclick="downloadSVG2D('attack-2d', 'attackMethods', 'Top 5 attack methods');">Attack
+                        method</span>
+                    <span class='svg-weapons-button'
+                        onclick="downloadSVG2D('weapon-2d', 'attackWeapons', 'Top 5 weapons used');">Weapons</span>
+                </div>
+                <div class="button-link1">&#8593; SVG &#8593;</div>
+            </div>
         </div>
         <div class="export button-2" onclick="downloadImageAs('png', 'plots2D')">
             <span class="button-link1">PNG</span>
         </div>
-        <div class="export button-3" onclick="downloadImageAs('jpg', 'plots2D')">
-            <span class="button-link1">JPG</span>
-        </div>
         <div class="export button-4">
-            <!-- <span href="" class="button-link1">CSV</span> -->
             <div class='dropdownWrapper'>
-                <div class="button-link1" onclick="toggleCSVList();">&#8595 CSV &#8595</div>
-                <div class="optionsCSV">
+                <div class="optionsCSV five-options">
+                    <!-- five-options -->
                     <span onclick="downloadCsv2D('country');">Countries</span>
                     <span onclick="downloadCsv2D('region');">Regions</span>
                     <span onclick="downloadCsv2D('target');">Attack target</span>
                     <span onclick="downloadCsv2D('attack');">Attack method</span>
                     <span onclick="downloadCsv2D('weapon');">Weapons</span>
                 </div>
+                <div class="button-link1">&#8593; CSV &#8593;</div>
             </div>
-        </div>
-        <div class="export button-5" onclick="downloadPdf()">
-            <span class="button-link1">PDF</span>
-        </div>
-        <div class="export button-6" onclick="downloadImageAs('bmp', 'plots2D')">
-            <span class="button-link1">BMP</span>
         </div>
     </div>
 

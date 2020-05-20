@@ -173,7 +173,36 @@ const allowedRedirectCallbacks = {
     'get-statistics': fillInTheFormAndSubmitIt
 };
 
-function fillInTheFormAndSubmitIt() {}
+function fillInTheFormAndSubmitIt() {
+    filters = JSON.stringify({
+        "dateStart": "",
+        "dateFinal": "",
+        "terrCount": "12500",
+        "killsCount": "1000",
+        "woundedCount": "5000",
+        "city": "",
+        "weaponType": "",
+        "weaponSubtype": "",
+        "attackType": "",
+        "targType": "",
+        "targSubtype": "",
+        "targetName": "",
+        "targetNat": "",
+        "groupName": "",
+        "propExtent": "",
+        "region": "North America",
+        "country": "",
+        "success": "true",
+        "extended": "",
+        "suicide": ""
+    });
+
+    httpPOST(URL_MICROSERVICE_ATTACKS + "/api/attacks/filters", filters, (result) => {
+        parsed1 = JSON.parse(result.res);
+        newAttacks = true;
+        navigateRoot('/statistics-results');
+    }, (eroare) => {});
+}
 
 // ------------------ Routing logic -------------------------
 
