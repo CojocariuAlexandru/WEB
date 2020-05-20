@@ -159,16 +159,25 @@
     <div class="export export-hide button-1">
         <div class='dropdownWrapper'>
             <div class="optionsCSV"> <!-- four-options -->
-                <span onclick="downloadSVG('targTypes')">Countries</span>
-                <span onclick="downloadSVG('attackTypes')">Attack method</span>
-                <span onclick="downloadSVG('targTypes')">Attack target</span>
-                <span onclick="downloadSVG('weaponTypes')">Weapons</span>
+                <span onclick="downloadSVGorPNG('countries', 'svg')">Countries</span>
+                <span onclick="downloadSVGorPNG('attackTypes', 'svg')">Attack method</span>
+                <span onclick="downloadSVGorPNG('targTypes', 'svg')">Attack target</span>
+                <span onclick="downloadSVGorPNG('weaponTypes', 'svg')">Weapons</span>
             </div>
             <div class="button-link1" onclick="toggleCSVList();">&#8593; SVG &#8593;</div>
         </div>
     </div>
-    <div class="export export-hide button-2" onclick="downloadImageAs('png', 'grid-container-result')">
-        <span class="button-link1">PNG</span>
+    <div class="export export-hide button-2">
+        <div class='dropdownWrapper'>
+            <div class="optionsCSV"> <!-- four-options -->
+                <span onclick="downloadImageAs('png', 'grid-container-result')">Page</span>
+                <span onclick="downloadSVGorPNG('countries', 'png')">Countries</span>
+                <span onclick="downloadSVGorPNG('attackTypes', 'png')">Attack method</span>
+                <span onclick="downloadSVGorPNG('targTypes', 'png')">Attack target</span>
+                <span onclick="downloadSVGorPNG('weaponTypes', 'png')">Weapons</span>
+            </div>
+            <div class="button-link1" onclick="toggleCSVList();">&#8593; PNG &#8593;</div>
+        </div>
     </div>
     <div class="export export-hide button-3" onclick="downloadImageAs('jpg', 'grid-container-result')">
         <span class="button-link1">JPG</span>

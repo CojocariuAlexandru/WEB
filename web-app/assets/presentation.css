@@ -7,7 +7,7 @@ body .presentation {
     font-size: 10px;
 }
 
-body .presentation .empty {
+body .presentation .presentation-empty {
     height: 60px;
     width: 100%;
 }

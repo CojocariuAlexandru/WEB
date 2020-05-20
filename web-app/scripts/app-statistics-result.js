@@ -849,7 +849,11 @@ function downloadCsv(name) {
     link.click();
 }
 
-function downloadSVG(pieChart) {
+function downloadSVGorPNG(pieChart, type) {
+    if (type != 'svg' && type != 'png'){
+        return;
+    }
+    
     var data = [{
         values: svgObjectArrays[pieChart][1],
         labels: svgObjectArrays[pieChart][0],
@@ -868,7 +872,7 @@ function downloadSVG(pieChart) {
     let el = document.createElement('div');
     Plotly.newPlot(el, data, layout).then(function (gd) {
         Plotly.downloadImage(gd, {
-            format: 'svg',
+            format: type,
             filename: pieChart
         });
     });
