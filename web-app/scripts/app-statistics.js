@@ -27,7 +27,7 @@ var filters;
 
 function sendStatisticsRequest() {
   let weaponList = ['Biological', 'Chemical', 'Explosives', 'Fake Weapons', 'Firearms', 'Incendiary', 'Melee', 'Radiological', 'Sabotage Equipment', 'Vehicle (not to include vehicle-borne explosives, i.e., car or truck bombs)', 'Unknown', 'Other'];
-  let attackList = ['Armed Assault', 'Assasination', 'Bombing/Explosion', 'Facility/Infrastructure Attack', 'Hijacking', 'Hostage Taking (Kidnapping)', 'Unarmed Assault', 'Unknown'];
+  let attackList = ['Armed Assault', 'Assassination', 'Bombing/Explosion', 'Facility/Infrastructure Attack', 'Hijacking', 'Hostage Taking (Kidnapping)', 'Unarmed Assault', 'Unknown'];
   let targetList = ['Airports & Aircraft', 'Business', 'Educational institution', 'Government (General)', 'Military', 'Police', '', 'Other'];
 
   let dateStartInput = document.querySelector('#dateInputStart');
@@ -186,7 +186,7 @@ function generateAttacks() {
 
   let weaponFormTitle = document.createElement('div');
   weaponFormTitle.id = 'attacksForm';
-  let weaponList = ['Armed Assault', 'Assasination', 'Bombing', 'Facility Attack', 'Hijacking', 'Hostage Taking', 'Unarmed', 'Unknown'];
+  let weaponList = ['Armed Assault', 'Assassination', 'Bombing', 'Facility Attack', 'Hijacking', 'Hostage Taking', 'Unarmed', 'Unknown'];
   weaponFormTitle.innerHTML = ``;
   let index = 0;
   for (index = 0; index < weaponList.length; index++) {
