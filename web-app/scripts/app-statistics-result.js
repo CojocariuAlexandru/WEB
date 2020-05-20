@@ -173,32 +173,59 @@ function statisticsResultsPageInit(node) {
         weaponTypes = resultArray[4];
         damages = resultArray[5];
 
-        sort(countries);
-        sort(attackTypes);
-        sort(targTypes);
-        sort(regions);
-        sort(weaponTypes);
-        sort(damages);
-
+        // sort(countries);
+        // sort(attackTypes);
+        // sort(targTypes);
+        // sort(regions);
+        // sort(weaponTypes);
+        // sort(damages);
         resultFilters = getFilters();
     }
 
     let compiledTemplate = Handlebars.compile(loadPage(node.template));
     mainContent.innerHTML = compiledTemplate(resultFilters);
 
-    addPiechart();
-    addPiechart2();
-    addPiechart3();
-    addPiechart4();
+    // addPiechart();
+    // addPiechart2();
+    // addPiechart3();
+    // addPiechart4();
 
-    addColumnChart();
+    setTimeout(() => {
+        addPiechart();
+        constructParagraf(countries, ".details-1", "The most frequently attacked countries", "Country");
+    }, 200);
+    setTimeout(() => {
+        addPiechart2();
+        constructParagraf(attackTypes, ".details-2", "The most frequent types of attack", "AttackType");
+    }, 500);
+    setTimeout(() => {
+        addPiechart4();
+        constructParagraf(weaponTypes, ".details-4", "The most commonly used weapons", "weaponType");
+        addPiechart3();
+        constructParagraf(targTypes, ".details-3", "The most attacked targets", "TargetType");
+        addColumnChart();
+    }, 1000);
 
-    constructParagraf(countries, ".details-1", "The most frequently attacked countries", "Country");
-    constructParagraf(attackTypes, ".details-2", "The most frequent types of attack", "AttackType");
-    constructParagraf(targTypes, ".details-3", "The most attacked targets", "TargetType");
-    constructParagraf(weaponTypes, ".details-4", "The most commonly used weapons", "weaponType");
+    // setTimeout(() => {
+    //     addPiecharts();
+    //     constructParagraf(countries, ".details-1", "The most frequently attacked countries", "Country");
+    //     constructParagraf(attackTypes, ".details-2", "The most frequent types of attack", "AttackType");
+    //     constructParagraf(targTypes, ".details-3", "The most attacked targets", "TargetType");
+    //     constructParagraf(weaponTypes, ".details-4", "The most commonly used weapons", "weaponType");
+    // }, 50);
+}
 
+function initMap() {
     initWorldMap();
+
+    let buttonInit = document.querySelector('.map-button-init');
+    if (buttonInit != null) {
+        buttonInit.parentElement.removeChild(buttonInit);
+    }
+    let buttonToggle = document.querySelector('.map-button-hidden');
+    if (buttonToggle != null) {
+        buttonToggle.className = 'button-view-markers';
+    }
 }
 
 function initWorldMap() {
@@ -209,6 +236,8 @@ function initWorldMap() {
             lat: 30,
             lng: 0
         },
+        streetviewControl: false,
+        fullscreenControl: false,
         scrollwheel: false,
         zoom: 2,
         styles: getMapNightModeStyle()
@@ -283,6 +312,50 @@ function sort(arrayOfArrays) {
     });
 }
 
+function addPiecharts() {
+    let piechartDivision1 = document.querySelector('.pie-1');
+    let piechartDivision2 = document.querySelector('.pie-2');
+    let piechartDivision3 = document.querySelector('.pie-3');
+    let piechartDivision4 = document.querySelector('.pie-4');
+
+    google.charts.load('current', {
+        'packages': ['corechart']
+    });
+    google.charts.setOnLoadCallback(drawCharts);
+
+    function drawCharts() {
+        var data = google.visualization.arrayToDataTable(countries);
+        var options = {
+            'fontSize': 10,
+            'colors': ['#054a4d', '#065e61', '#0da3a8', '#09865d', '#062a61'],
+            'width': '100%',
+            'height': 300,
+            'is3D': true,
+            'backgroundColor': 'transparent',
+            'margin': '0 auto'
+        };
+
+        var chart = new google.visualization.PieChart(piechartDivision1);
+        chart.draw(data, options);
+        let hiddenButton = document.querySelector('.csv-button-hidden');
+        if (hiddenButton != null) {
+            hiddenButton.className = "export export-hide csv-button-left";
+        }
+
+        data = google.visualization.arrayToDataTable(attackTypes);
+        chart = new google.visualization.PieChart(piechartDivision2);
+        chart.draw(data, options);
+
+        data = google.visualization.arrayToDataTable(targTypes);
+        chart = new google.visualization.PieChart(piechartDivision3);
+        chart.draw(data, options);
+
+        data = google.visualization.arrayToDataTable(weaponTypes);
+        chart = new google.visualization.PieChart(piechartDivision4);
+        chart.draw(data, options);
+    }
+}
+
 function addPiechart() {
     let piechartDivision = document.querySelector('.pie-1');
     google.charts.load('current', {
@@ -293,7 +366,6 @@ function addPiechart() {
     function drawChart() {
         var data = google.visualization.arrayToDataTable(countries);
         var options = {
-            // 'title' : 'Most frequently attacked',
             'fontSize': 10,
             'colors': ['#054a4d', '#065e61', '#0da3a8', '#09865d', '#062a61'],
             'width': '100%',
@@ -322,7 +394,6 @@ function addPiechart2() {
     function drawChart() {
         var data = google.visualization.arrayToDataTable(attackTypes);
         var options = {
-            // 'title' : 'Most used attack',
             'fontSize': 10,
             'colors': ['#054a4d', '#065e61', '#0da3a8', '#09865d', '#062a61'],
             'width': '100%',
@@ -338,7 +409,6 @@ function addPiechart2() {
 
 function addPiechart3() {
     let piechartDivision = document.querySelector('.pie-3');
-
     google.charts.load('current', {
         'packages': ['corechart']
     });
@@ -347,7 +417,6 @@ function addPiechart3() {
     function drawChart() {
         var data = google.visualization.arrayToDataTable(targTypes);
         var options = {
-            // 'title' : 'Most used attack',
             'fontSize': 10,
             'colors': ['#054a4d', '#065e61', '#0da3a8', '#09865d', '#062a61'],
             'width': '100%',
@@ -372,7 +441,6 @@ function addPiechart4() {
     function drawChart() {
         var data = google.visualization.arrayToDataTable(weaponTypes);
         var options = {
-            // 'title' : 'Most used attack',
             'fontSize': 10,
             'colors': ['#054a4d', '#065e61', '#0da3a8', '#09865d', '#062a61'],
             'width': '100%',
@@ -633,11 +701,14 @@ function roundTo3Decimal(num) {
 }
 
 function downloadMapAsImage(imageType) {
+    if (map == null) {
+        return;
+    }
     let zoom = map.getZoom();
     let lat = roundTo5Decimal(map.getCenter().lat());
     let lon = roundTo5Decimal(map.getCenter().lng());
 
-    let url = `https://maps.googleapis.com/maps/api/staticmap?format=${imageType}&center=${lat},${lon}&zoom=${zoom}&size=1800x800&scale=4`;
+    let url = 'https://maps.googleapis.com/maps/api/staticmap?format=' + imageType + '&center=' + lat + ',' + lon + '&zoom=' + zoom + '&size=1800x800&scale=4';
 
     // https://stackoverflow.com/questions/2906427/how-to-get-all-visible-markers-on-current-zoom-level
     if (markersArray.length > 0) {
@@ -646,14 +717,13 @@ function downloadMapAsImage(imageType) {
         url += '&markers=color:blue';
         for (let i = 0; i < markersArray.length && url.length < 8050; ++i) {
             if (bounds.contains(markersArray[i].getPosition())) {
-                url += '|';
-                url += `|${roundTo3Decimal(markersArray[i].getPosition().lat())},${roundTo3Decimal(markersArray[i].getPosition().lng())}`;
+                url += '|' + roundTo3Decimal(markersArray[i].getPosition().lat()) + ',' + roundTo3Decimal(markersArray[i].getPosition().lng());
             }
         }
     }
     url += '&key=AIzaSyArmUBaQ5YHtD4pd1omfn4m6i4wlVkmsTA';
 
-    saveAs(url, `map.${imageType}`);
+    saveAs(url, 'map.' + imageType);
 }
 
 function createCSV() {

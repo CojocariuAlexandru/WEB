@@ -46,6 +46,10 @@ h1 {
     grid-area: mapDownloadDiv;
 }
 
+.web-app .main-wrapper .map-button-hidden {
+    display: none;
+}
+
 .web-app .main-wrapper .mapPageGrid .map-download-div .export-map-right {
     margin-left: 16px;
 }

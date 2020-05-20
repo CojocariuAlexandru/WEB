@@ -238,12 +238,17 @@ function checkRedirect() {
     }
 
     localStorage.setItem('Token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFsZXgiLCJhZG1pbiI6MSwiaWF0IjoxNTg5MDYzNjY2LCJleHAiOjE2MjUwNjM2NjZ9.M5CxztXtSH70s-6x5FHCo2qgOfwpkyV8NSx0z-s6-3k');
-    setWebAppTemplateAsSite(() => {
-        navigateRoot('/' + redirectPage);
 
-        if (functionCallback != null) {
+    if (functionCallback != null) {
+        setWebAppTemplateAsSite(() => {
             functionCallback();
-        }
-    });
+            navigateRoot('/home');
+        });
+    } else {
+        setWebAppTemplateAsSite(() => {
+            navigateRoot('/' + redirectPage);
+        });
+    }
+
     return true;
 }
