@@ -373,6 +373,13 @@ input.searchText {
         overflow-y: scroll;
     }
 
+    
+.booleene h4{
+    font-size:14px;
+    margin: auto;
+
+}
+
     .attackTypeForm div,
     .targetTypeForm div,
     .weaponTypeForm div {
