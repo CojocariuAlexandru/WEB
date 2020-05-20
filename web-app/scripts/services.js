@@ -7,6 +7,7 @@ const URL_MICROSERVICE_USERS = "https://tevi-users-microservice.herokuapp.com";
 const URL_MICROSERVICE_ATTACKS = "http://localhost:8001";
 // const URL_MICROSERVICE_USERS = "http://localhost:8002";
 
+// https://www.w3schools.com/xml/ajax_intro.asp
 function httpRequest(url, httpVerb, body, res, err) {
     let xmlhttp = new XMLHttpRequest();
     xmlhttp.open(httpVerb, url);

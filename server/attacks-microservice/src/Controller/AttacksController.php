@@ -1,4 +1,6 @@
 <?php
+// https://dzone.com/articles/develop-a-rest-api-in-php
+// In dezvoltarea acestui serviciului s-a pornit dupa exemplul de aici
 
 namespace Src\Controller;
 

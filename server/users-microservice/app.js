@@ -9,6 +9,7 @@ function setCorsOrigin(req, res) {
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
 }
 
+// https://stackoverflow.com/questions/6968448/where-is-body-in-a-nodejs-http-get-response
 http.createServer(
     function (req, res) {
         setCorsOrigin(req, res);

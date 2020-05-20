@@ -686,6 +686,7 @@ function downloadImageAs(imageType, className) {
     }
 }
 
+// https://stackoverflow.com/questions/11832914/round-to-at-most-2-decimal-places-only-if-necessary
 function roundTo5Decimal(num) {
     return Math.round((num + Number.EPSILON) * 100000) / 100000;
 }
@@ -694,6 +695,7 @@ function roundTo3Decimal(num) {
     return Math.round((num + Number.EPSILON) * 1000) / 1000;
 }
 
+// https://developers.google.com/maps/documentation/maps-static/intro
 function downloadMapAsImage(imageType) {
     if (map == null) {
         return;
@@ -843,6 +845,7 @@ function downloadCsv(name) {
     link.click();
 }
 
+// https://plotly.com/javascript/pie-charts/
 function downloadSVGorPNG(pieChart, type) {
     if (type != 'svg' && type != 'png'){
         return;

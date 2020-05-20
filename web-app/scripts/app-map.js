@@ -90,7 +90,9 @@ function shuffleArray(array) {
 
 // https://stackoverflow.com/questions/1544739/google-maps-api-v3-how-to-remove-all-markers
 function displayAttacksOnMap(attacks) {
-    for (let i = 0; i < attacks.length; ++i) {
+    shuffleArray(attacks);
+    let count = Math.min(15000, attacks.length);
+    for (let i = 0; i < count; ++i) {
         let pos = {
             lat: parseFloat(attacks[i].latitude),
             lng: parseFloat(attacks[i].longitude)
