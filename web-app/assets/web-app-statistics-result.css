@@ -21,7 +21,7 @@
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: auto auto auto auto auto auto auto auto auto auto auto;
   grid-template-areas:
-    "button-1 button-2 button-3 button-4 button-5 button-6"
+    "button-1 button-1 button-2 button-2 button-4 button-4"
     "table table table table table table";
   width: 100%;
   margin-bottom: 40px;
@@ -503,8 +503,7 @@
   }
 
   .grid-container-result-buttons {
-    grid-template-areas: "button-1 button-1 button-2 button-2 button-3 button-3"
-      "button-4 button-4 button-5 button-5 button-6 button-6"
+    grid-template-areas: "button-1 button-1 button-2 button-2 button-4 button-4"
       "table table table table table table";
   }
 

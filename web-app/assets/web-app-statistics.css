@@ -502,3 +502,9 @@ input[type="checkbox"]:checked+label::before {
 .label {
     margin-left: 10px;
 }
+
+.booleene h4{
+    font-size:22px;
+    margin: auto;
+
+}
