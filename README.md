@@ -1,9 +1,20 @@
 # TeVi
 This is our project for "Web technologies" course.
+
 ## Live Demo
-http://tevi.xyz/app
+https://tevi-web-app.herokuapp.com/app
+
+## Documentation
+
+### Reports
+https://cojocariualexandru.github.io/WEB/documentation/index.html
+
+### Diagrams
+The png files from this directory: https://github.com/CojocariuAlexandru/WEB/tree/master/documentation
+
 ## Faculty
 Faculty of Computer Science Iași, "Alexandru Ioan Cuza" University
+
 ## Members/Contributors
 Albert Ramona-Georgiana, IIA2
 Cojocariu Alexandru, IIA2
